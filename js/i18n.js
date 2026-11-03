@@ -5,7 +5,7 @@ const fmt = (v, sep) => String(Math.round(v * 10) / 10).replace('.', sep);
 
 export const UI = {
   de: {
-    learn: 'Lernen', cards: 'Karten',
+    learn: 'Lernen', cards: 'Karten', topics: 'Themen', menu: 'Themen anzeigen',
     due: 'fällig', new: 'neu', total: 'Karten', learned: 'gelernt',
     todayTitle: 'Heute',
     start: 'Lernen starten', cram: 'Alle üben', cramHint: 'zufällige Reihenfolge, ohne Zeitplan',
@@ -48,7 +48,7 @@ export const UI = {
     loadError: 'Die Kartendateien konnten nicht geladen werden. Öffne die Seite über einen lokalen Server (siehe README), nicht direkt als Datei.',
   },
   ja: {
-    learn: '學習', cards: '卡片',
+    learn: '學習', cards: '卡片', topics: '主題', menu: '顯示主題',
     due: '到期', new: '新卡', total: '張卡片', learned: '已學',
     todayTitle: '今天',
     start: '開始學習', cram: '全部練習', cramHint: '隨機順序，不影響排程',

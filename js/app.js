@@ -13,7 +13,7 @@ const ICON = {
   trash: '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M10 11v6M14 11v6M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-12M9 7V4h6v3"/></svg>',
 };
 
-const state = { lang: 'de', topic: 'nominalisierung', view: 'learn', sessions: {}, loadError: false, flash: '' };
+const state = { lang: 'de', topic: 'nominalisierung', view: 'learn', sessions: {}, loadError: false, flash: '', menuOpen: false };
 
 const t = () => UI[state.lang];
 const settings = () => store.getSettings();
@@ -38,6 +38,21 @@ function go(lang, topic, view) {
   location.hash = `#/${lang}/${topic}/${view}`;
 }
 window.addEventListener('hashchange', () => { parseHash(); try { localStorage.setItem('gk.route', location.hash); } catch {} render(); });
+
+// ---------- mobile topic menu ----------
+
+const mobileQuery = window.matchMedia('(max-width: 760px)');
+
+function setMenu(open) {
+  state.menuOpen = open && mobileQuery.matches;
+  document.body.classList.toggle('menu-open', state.menuOpen);
+  $('#btn-menu')?.setAttribute('aria-expanded', String(state.menuOpen));
+  const scrim = $('.scrim');
+  if (scrim) scrim.hidden = !state.menuOpen;
+  // Closed drawer must not be reachable with Tab on mobile.
+  $('#sidebar')?.toggleAttribute('inert', mobileQuery.matches && !state.menuOpen);
+}
+mobileQuery.addEventListener('change', () => setMenu(false));
 
 // ---------- counts ----------
 
@@ -108,17 +123,32 @@ function render() {
   document.documentElement.lang = L.htmlLang;
   document.body.dataset.lang = state.lang;
   document.body.classList.toggle('no-furigana', !settings().furigana);
-  document.title = `${L.topics.find((x) => x.id === state.topic)?.label} · Grammatik Kanpeki`;
+  const topicLabel = L.topics.find((x) => x.id === state.topic)?.label;
+  document.title = `${topicLabel} · ${state.lang === 'ja' ? 'グラマティック完璧' : 'Grammatik Kanpeki'}`;
+  const brand = $('#brand');
+  brand.href = `#/${state.lang}/${L.topics[0].id}/learn`;
+  brand.innerHTML = state.lang === 'ja'
+    ? '<span lang="ja">グラマティック</span><span class="brand-2" lang="ja">完璧</span>'
+    : '<span lang="de">Grammatik</span> <span class="brand-2" lang="de">Kanpeki</span>';
+  setMenu(state.menuOpen);
 
   for (const b of document.querySelectorAll('[data-lang-switch]')) b.setAttribute('aria-selected', b.dataset.langSwitch === state.lang);
-  $('#btn-data').textContent = t().importExport;
+  $('#btn-data .btn-label').textContent = t().importExport;
+  $('#btn-data').setAttribute('aria-label', t().importExport);
+  $('#btn-data').title = t().importExport;
   $('#btn-settings').title = t().settings;
   $('#btn-settings').setAttribute('aria-label', t().settings);
 
-  $('#topic-tabs').innerHTML = `
-    <div class="tabs" role="tablist">
-      ${L.topics.map((tp) => `<button role="tab" class="tab" data-topic="${tp.id}" aria-selected="${tp.id === state.topic}">${esc(tp.label)}<span class="badge">${counts(state.lang, tp.id).total}</span></button>`).join('')}
-    </div>
+  $('#sidebar').innerHTML = `
+    <div class="side-title">${t().topics}</div>
+    <nav class="side-nav" aria-label="${esc(t().topics)}">
+      ${L.topics.map((tp) => `<button class="side-item" data-topic="${tp.id}" ${tp.id === state.topic ? 'aria-current="page"' : ''}>
+        <span>${esc(tp.label)}</span><span class="badge">${counts(state.lang, tp.id).total}</span></button>`).join('')}
+    </nav>`;
+  $('#btn-menu').setAttribute('aria-label', t().menu);
+
+  $('#content-head').innerHTML = `
+    <h1>${esc(topicLabel)}</h1>
     <div class="seg" role="tablist">
       <button role="tab" data-view="learn" aria-selected="${state.view === 'learn'}">${t().learn}</button>
       <button role="tab" data-view="cards" aria-selected="${state.view === 'cards'}">${t().cards}</button>
@@ -451,7 +481,13 @@ document.addEventListener('click', (e) => {
     const lang = el.dataset.langSwitch;
     return go(lang, LANGS[lang].topics[0].id, 'learn');
   }
-  if (el.dataset.topic) return go(state.lang, el.dataset.topic, state.view);
+  if (el.dataset.topic) { setMenu(false); return go(state.lang, el.dataset.topic, state.view); }
+  if (a === 'toggle-menu') {
+    setMenu(!state.menuOpen);
+    if (state.menuOpen) $('.side-item[aria-current]')?.focus();
+    return;
+  }
+  if (a === 'close-menu') return setMenu(false);
   if (el.dataset.view) return go(state.lang, state.topic, el.dataset.view);
   if (el.dataset.grade) return grade(el.dataset.grade);
   if (el.dataset.explain) { store.setSettings({ explainLang: el.dataset.explain }); return render(); }
@@ -518,6 +554,7 @@ document.addEventListener('toggle', (e) => {
 }, true);
 
 document.addEventListener('keydown', (e) => {
+  if (state.menuOpen && e.key === 'Escape') { setMenu(false); $('#btn-menu').focus(); return; }
   const s = session();
   if (!s || state.view !== 'learn' || !s.current || document.querySelector('dialog[open]')) return;
   if (s.phase === 'answer') {
