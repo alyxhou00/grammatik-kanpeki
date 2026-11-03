@@ -2,12 +2,12 @@ import * as store from './store.js';
 import { answer, preview, DEFAULTS, dayStartMs, isNew, isLearning, isReviewDue, learningDueToday } from './srs.js';
 import { checkAnswer } from './check.js';
 import { UI } from './i18n.js';
-import { LANGS, RENDERERS } from './topics.js';
-import { esc, loc, isRomaji, romajiToHiragana } from './text.js';
+import { LANGS, RENDERERS, vocabId, vocabCardFrom } from './topics.js';
+import { esc, loc, isRomaji, romajiToHiragana, rubyHTML, toKana, toSurface } from './text.js';
 
 const $ = (sel, el = document) => el.querySelector(sel);
 const GRADES = ['again', 'hard', 'good', 'easy'];
-const SUGGEST = { correct: 'good', acceptable: 'hard', close: 'hard', mistake: 'again', wrong: 'again', empty: 'again' };
+const SUGGEST = { correct: 'good', acceptable: 'hard', close: 'hard', mistake: 'again', wrong: 'again', empty: 'again', flip: 'good' };
 
 const ICON = {
   trash: '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M10 11v6M14 11v6M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-12M9 7V4h6v3"/></svg>',
@@ -53,6 +53,97 @@ function setMenu(open) {
   $('#sidebar')?.toggleAttribute('inert', mobileQuery.matches && !state.menuOpen);
 }
 mobileQuery.addEventListener('change', () => setMenu(false));
+
+// ---------- word popup (hover a word in a Japanese sentence → save it to the word list) ----------
+
+let popWord = null; // the .word element the popup belongs to
+let popHideTimer = null;
+const pop = () => $('#word-pop');
+
+function markSavedWords() {
+  for (const el of document.querySelectorAll('.word[data-word]')) {
+    const w = JSON.parse(el.dataset.word);
+    el.classList.toggle('saved', !!store.getCard(vocabId(w.lemma)));
+  }
+}
+
+function renderPop(w) {
+  const T = UI.ja;
+  const saved = !!store.getCard(vocabId(w.lemma));
+  const reading = toKana(w.lemma);
+  pop().innerHTML = `
+    <div class="pop-word" lang="ja">${rubyHTML(w.lemma)}</div>
+    ${reading !== toSurface(w.lemma) ? `<div class="pop-reading" lang="ja">${esc(reading)}</div>` : ''}
+    <div class="pop-meaning">${esc(w.meaning)}</div>
+    ${w.pos ? `<span class="group-chip">${esc(w.pos)}</span>` : ''}
+    <div class="pop-actions">
+      ${saved
+        ? `<span class="pop-saved">✓ ${T.inWordList}</span><button type="button" class="link" data-action="vocab-remove">${T.remove}</button>`
+        : `<button type="button" class="btn primary small" data-action="vocab-add">＋ ${T.addToWordList}</button>`}
+    </div>`;
+}
+
+function showPop(el) {
+  clearTimeout(popHideTimer);
+  const box = pop();
+  if (popWord === el && !box.hidden) return;
+  popWord?.classList.remove('active');
+  popWord = el;
+  el.classList.add('active');
+  renderPop(JSON.parse(el.dataset.word));
+  box.hidden = false;
+  const r = el.getBoundingClientRect();
+  const w = box.offsetWidth;
+  const h = box.offsetHeight;
+  const left = Math.min(Math.max(8, r.left + r.width / 2 - w / 2), innerWidth - w - 8);
+  const below = r.bottom + 8 + h <= innerHeight;
+  box.style.left = `${left + scrollX}px`;
+  box.style.top = `${(below ? r.bottom + 8 : r.top - h - 8) + scrollY}px`;
+}
+
+function hidePop() {
+  clearTimeout(popHideTimer);
+  const box = pop();
+  if (box) box.hidden = true;
+  popWord?.classList.remove('active');
+  popWord = null;
+}
+const hidePopSoon = () => { clearTimeout(popHideTimer); popHideTimer = setTimeout(hidePop, 300); };
+
+function toggleSavedWord(add) {
+  if (!popWord) return;
+  const w = JSON.parse(popWord.dataset.word);
+  if (add) {
+    const source = store.getCard(popWord.closest('[data-card]')?.dataset.card);
+    store.saveCard(vocabCardFrom(w, source));
+  } else {
+    store.deleteCard(vocabId(w.lemma));
+  }
+  renderPop(w);
+  markSavedWords();
+  renderSidebar(); // update the word-list count without re-rendering the card
+}
+
+const canHover = window.matchMedia('(hover: hover) and (pointer: fine)');
+document.addEventListener('mouseover', (e) => {
+  if (!canHover.matches) return;
+  const w = e.target.closest('.word[data-word]');
+  if (w) showPop(w);
+  else if (e.target.closest('#word-pop')) clearTimeout(popHideTimer);
+});
+document.addEventListener('mouseout', (e) => {
+  if (!canHover.matches || !popWord) return;
+  const to = e.relatedTarget;
+  if (to && (to.closest?.('#word-pop') || to.closest?.('.word') === popWord)) return;
+  if (e.target.closest('.word[data-word], #word-pop')) hidePopSoon();
+});
+document.addEventListener('focusin', (e) => {
+  const w = e.target.closest('.word[data-word]');
+  if (w) showPop(w);
+  else if (popWord && !e.target.closest('#word-pop')) hidePop();
+});
+window.addEventListener('resize', hidePop);
+window.addEventListener('scroll', () => { if (popWord && !canHover.matches) hidePop(); }, { passive: true });
 
 // ---------- counts ----------
 
@@ -118,7 +209,21 @@ function mixIn(reviews, news) {
 
 // ---------- render ----------
 
+function renderSidebar() {
+  const L = LANGS[state.lang];
+  const groups = [...new Set(L.topics.map((tp) => tp.group))];
+  $('#sidebar').innerHTML = groups.map((g) => `
+    <div class="side-group">
+      <div class="side-title">${esc(t().groups[g])}</div>
+      <nav class="side-nav" aria-label="${esc(t().groups[g])}">
+        ${L.topics.filter((tp) => tp.group === g).map((tp) => `<button class="side-item" data-topic="${tp.id}" ${tp.id === state.topic ? 'aria-current="page"' : ''}>
+          <span>${esc(tp.label)}</span><span class="badge">${counts(state.lang, tp.id).total}</span></button>`).join('')}
+      </nav>
+    </div>`).join('');
+}
+
 function render() {
+  hidePop();
   const L = LANGS[state.lang];
   document.documentElement.lang = L.htmlLang;
   document.body.dataset.lang = state.lang;
@@ -139,12 +244,7 @@ function render() {
   $('#btn-settings').title = t().settings;
   $('#btn-settings').setAttribute('aria-label', t().settings);
 
-  $('#sidebar').innerHTML = `
-    <div class="side-title">${t().topics}</div>
-    <nav class="side-nav" aria-label="${esc(t().topics)}">
-      ${L.topics.map((tp) => `<button class="side-item" data-topic="${tp.id}" ${tp.id === state.topic ? 'aria-current="page"' : ''}>
-        <span>${esc(tp.label)}</span><span class="badge">${counts(state.lang, tp.id).total}</span></button>`).join('')}
-    </nav>`;
+  renderSidebar();
   $('#btn-menu').setAttribute('aria-label', t().menu);
 
   $('#content-head').innerHTML = `
@@ -165,6 +265,7 @@ function render() {
   } else {
     main.innerHTML = banner + renderOverview();
   }
+  markSavedWords();
 }
 
 function renderOverview() {
@@ -183,7 +284,7 @@ function renderOverview() {
       <button class="btn primary big" data-action="start" ${any ? '' : 'disabled'}>${T.start}</button>
       <button class="btn" data-action="cram" ${c.total ? '' : 'disabled'}>${T.cram}</button>
     </div>
-    <p class="hint">${any ? `${T.cram}: ${T.cramHint}` : T.nothingToday}</p>
+    <p class="hint">${!c.total && state.topic === 'vocab' ? T.vocabEmpty : any ? `${T.cram}: ${T.cramHint}` : T.nothingToday}</p>
   </section>`;
 }
 
@@ -216,7 +317,11 @@ function renderSession() {
   const remaining = s.mode === 'cram' ? s.queue.length : s.queue.length + topicLearning().length;
   const R = renderer();
   const c = ctx();
-  const body = s.phase === 'answer'
+  const body = s.phase === 'answer' && R.flip
+    ? `<div class="form-actions flip-actions">
+        <button type="button" class="btn primary big" data-action="reveal" id="reveal-btn">${T.showAnswer}</button>
+      </div>`
+    : s.phase === 'answer'
     ? `<form id="answer-form" class="answer-form" autocomplete="off">
         ${R.input(card, c)}
         <div class="form-actions">
@@ -249,9 +354,9 @@ function renderReveal(card, c) {
   const iv = (g) => (!ivs ? '' : ivs[g].kind === 'min' ? T.mins(ivs[g].value) : T.days(ivs[g].value));
   const canSave = ['close', 'wrong'].includes(r.verdict) && s.input.trim();
   return `
-    <div class="verdict v-${r.verdict}" role="status">
+    ${r.verdict === 'flip' ? '' : `<div class="verdict v-${r.verdict}" role="status">
       <strong>${T.verdict[r.verdict]}</strong>${note ? `<p lang="${R.noteLang}">${esc(note)}</p>` : ''}
-    </div>
+    </div>`}
     <div class="back">${R.back(card, r, s.input, c)}</div>
     ${canSave ? `<div class="save-alt">
         <span>${T.saveAs}</span>
@@ -273,6 +378,7 @@ function afterSessionRender() {
   if (s.phase === 'answer') {
     const input = $('#answer');
     if (input) { input.value = s.input; input.focus(); updateKanaPreview(); }
+    else $('#reveal-btn')?.focus({ preventScroll: true });
   } else {
     $('.grade.suggested')?.focus({ preventScroll: true });
   }
@@ -348,7 +454,7 @@ function submitAnswer(reveal = false) {
   const s = session();
   const card = store.getCard(s.current);
   s.input = $('#answer')?.value ?? '';
-  s.result = checkAnswer(card, reveal ? '' : s.input);
+  s.result = renderer().flip ? { verdict: 'flip' } : checkAnswer(card, reveal ? '' : s.input);
   s.phase = 'revealed';
   state.flash = '';
   render();
@@ -474,9 +580,13 @@ function openSettings() {
 // ---------- events ----------
 
 document.addEventListener('click', (e) => {
+  const word = e.target.closest('.word[data-word]');
+  if (word) return showPop(word); // tap on touch screens
+  if (popWord && !e.target.closest('#word-pop')) hidePop();
   const el = e.target.closest('[data-action],[data-grade],[data-explain],[data-topic],[data-view],[data-lang-switch]');
   if (!el) return;
   const a = el.dataset.action;
+  if (a === 'vocab-add' || a === 'vocab-remove') return toggleSavedWord(a === 'vocab-add');
   if (el.dataset.langSwitch) {
     const lang = el.dataset.langSwitch;
     return go(lang, LANGS[lang].topics[0].id, 'learn');
@@ -555,8 +665,16 @@ document.addEventListener('toggle', (e) => {
 
 document.addEventListener('keydown', (e) => {
   if (state.menuOpen && e.key === 'Escape') { setMenu(false); $('#btn-menu').focus(); return; }
+  if (popWord && e.key === 'Escape') { const w = popWord; hidePop(); w.focus(); return; }
+  const word = e.target.closest?.('.word[data-word]');
+  if (word && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); showPop(word); return; }
+  if (word || e.target.closest?.('#word-pop')) return;
   const s = session();
   if (!s || state.view !== 'learn' || !s.current || document.querySelector('dialog[open]')) return;
+  if (s.phase === 'answer' && renderer().flip) {
+    if ((e.key === 'Enter' || e.key === ' ') && !e.repeat) { e.preventDefault(); submitAnswer(true); }
+    return;
+  }
   if (s.phase === 'answer') {
     if (e.target.id === 'answer' && e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();

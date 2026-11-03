@@ -5,6 +5,8 @@ An Anki-style grammar trainer for German and Japanese that runs in the browser.
 - **Deutsch → Nominalisierung** (C1): you see a sentence in Verbalstil and type the Nominalstil.
 - **日本語 → 動詞變化** (N5, explained in Traditional Chinese): you see the dictionary form (with furigana), the target form, a Japanese sentence with a blank, and its full Chinese translation. You type the conjugated verb in kana, kanji, or romaji.
 
+- **日本語 → 我的單字本**: in a Japanese sentence, hover a word (tap on a phone) to see its reading and meaning and save it to your word list. The word list is its own deck of classic flip cards: see the word, recall the meaning, then grade yourself.
+
 Answers are checked automatically against three lists: **correct**, **correct but not ideal** (with a note on why), and **typical mistakes** (with targeted feedback). After checking, you grade yourself (Again / Hard / Good / Easy, or keys 1–4). If your answer is right but not in the list yet, you can save it as a new accepted or "not ideal" answer.
 
 ## Scheduling
@@ -83,6 +85,16 @@ The full JSON Schema is in [`schema/cards.schema.json`](schema/cards.schema.json
 ```
 
 Japanese cards use `prompt.verb`, `prompt.meaning`, `prompt.formLabel`, `prompt.sentence` (with `___` as the blank) and `prompt.translation["zh-Hant"]`, plus `meta.verbClass` (`godan`, `kami-ichidan`, `shimo-ichidan`, `irregular`) and `meta.form`.
+
+`prompt.words` lists the hoverable words of the sentence, in order:
+
+```json
+{ "text": "{歩|ある}いた", "lemma": "{歩|ある}く", "meaning": "走路", "pos": "動詞" }
+```
+
+`text` is the word exactly as written in the sentence; `lemma` is the dictionary form that gets saved (leave it out when it equals `text`). Saved words become cards with `"topic": "vocab"` (`prompt.word`, `prompt.pos`, `prompt.example`, and the meaning in `answer.accepted`), so they are exported and imported like any other card.
+
+Check the bundled data with `node tests/data.test.mjs`: it makes sure every word is found in its sentence, every kanji has furigana, and every answer list is judged as intended.
 
 **Furigana markup:** `{漢字|かんじ}`, for example `{食|た}べる`. The same string gives the ruby display, the kanji spelling, and the kana reading, so an answer typed as either `食べない` or `たべない` (or `tabenai`) counts.
 

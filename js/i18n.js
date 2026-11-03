@@ -6,6 +6,11 @@ const fmt = (v, sep) => String(Math.round(v * 10) / 10).replace('.', sep);
 export const UI = {
   de: {
     learn: 'Lernen', cards: 'Karten', topics: 'Themen', menu: 'Themen anzeigen',
+    groups: { grammar: 'Grammatik', vocab: 'Wortschatz' },
+    vocabFront: 'Wort', vocabPeek: 'Mit der Maus über das Wort fahren, um die Lesung zu sehen.',
+    meaning: 'Bedeutung', example: 'Beispiel', showAnswer: 'Antwort zeigen',
+    vocabEmpty: 'Die Wortliste ist noch leer.',
+    addToWordList: 'Zur Wortliste', inWordList: 'In der Wortliste', remove: 'Entfernen',
     due: 'fällig', new: 'neu', total: 'Karten', learned: 'gelernt',
     todayTitle: 'Heute',
     start: 'Lernen starten', cram: 'Alle üben', cramHint: 'zufällige Reihenfolge, ohne Zeitplan',
@@ -49,6 +54,11 @@ export const UI = {
   },
   ja: {
     learn: '學習', cards: '卡片', topics: '主題', menu: '顯示主題',
+    groups: { grammar: '文法', vocab: '單字' },
+    vocabFront: '單字', vocabPeek: '想不起讀音的話，把滑鼠移到單字上可以偷看。',
+    meaning: '意思', example: '例句', showAnswer: '顯示答案',
+    vocabEmpty: '單字本還是空的。在「動詞變化」的句子裡，把滑鼠移到不認識的單字上（手機請點一下），就可以把它加入單字本。',
+    addToWordList: '加入單字本', inWordList: '已在單字本', remove: '移除',
     due: '到期', new: '新卡', total: '張卡片', learned: '已學',
     todayTitle: '今天',
     start: '開始學習', cram: '全部練習', cramHint: '隨機順序，不影響排程',

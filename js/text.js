@@ -35,13 +35,43 @@ export function rubyHTML(s) {
 
 export const BLANK = '___';
 
-/** Sentence with ___ replaced by a blank box, or by the (furigana) answer. */
-export function sentenceHTML(sentence, fill = null) {
-  const parts = String(sentence ?? '').split(BLANK);
+/**
+ * Split a sentence into plain text and known words. `words[i].text` is the word exactly as it is
+ * written in the sentence (with furigana markup); words are matched left to right.
+ */
+export function wordSegments(sentence, words = []) {
+  sentence = String(sentence ?? '');
+  const out = [];
+  let pos = 0;
+  for (const w of words) {
+    const i = sentence.indexOf(w.text, pos);
+    if (i < 0) continue;
+    if (i > pos) out.push({ text: sentence.slice(pos, i) });
+    out.push({ text: w.text, word: w });
+    pos = i + w.text.length;
+  }
+  if (pos < sentence.length) out.push({ text: sentence.slice(pos) });
+  return out;
+}
+
+/** A hoverable word. The popup reads lemma / meaning / part of speech from data-word. */
+function wordSpan(w, inner) {
+  if (!w) return inner;
+  const data = { lemma: w.lemma || w.text, meaning: w.meaning, pos: w.pos };
+  return `<span class="word" tabindex="0" role="button" data-word="${esc(JSON.stringify(data))}">${inner}</span>`;
+}
+
+/**
+ * Sentence with ___ replaced by a blank box, or by the (furigana) answer.
+ * With `words`, known words become hoverable; `fillWord` makes the filled-in answer hoverable too.
+ */
+export function sentenceHTML(sentence, fill = null, words = [], fillWord = null) {
   const slot = fill == null
     ? '<span class="blank" aria-label="blank"></span>'
-    : `<span class="blank filled">${rubyHTML(fill)}</span>`;
-  return parts.map(rubyHTML).join(slot);
+    : wordSpan(fillWord, `<span class="blank filled">${rubyHTML(fill)}</span>`);
+  return wordSegments(sentence, words)
+    .map((seg) => (seg.word ? wordSpan(seg.word, rubyHTML(seg.text)) : seg.text.split(BLANK).map(rubyHTML).join(slot)))
+    .join('');
 }
 
 // ---------- Kana ----------

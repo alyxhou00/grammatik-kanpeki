@@ -133,6 +133,7 @@ export function validateCard(c) {
   if (!Array.isArray(c.answer?.accepted) || !c.answer.accepted.length) errs.push('answer.accepted must be a non-empty list');
   if (c.topic === 'nominalisierung' && !c.prompt?.verbalstil) errs.push('prompt.verbalstil missing');
   if (c.topic === 'verb-conjugation' && (!c.prompt?.verb || !c.prompt?.sentence)) errs.push('prompt.verb / prompt.sentence missing');
+  if (c.topic === 'vocab' && !c.prompt?.word) errs.push('prompt.word missing');
   return errs;
 }
 

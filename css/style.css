@@ -76,6 +76,7 @@ button { cursor: pointer; }
 .sidebar { position: sticky; top: 76px; align-self: start; }
 .side-title { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); padding: 0 12px 8px; }
 .side-nav { display: flex; flex-direction: column; gap: 2px; }
+.side-group + .side-group { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line); }
 .side-item {
   display: flex; align-items: center; justify-content: space-between; gap: 8px; width: 100%;
   border: 0; background: none; text-align: left; padding: 9px 12px; border-radius: 10px;
@@ -186,6 +187,34 @@ ruby rt { font-size: .5em; color: var(--muted); font-weight: 400; }
   vertical-align: baseline; height: 1.1em;
 }
 .blank.filled { height: auto; min-width: 0; padding: 0 .2em; color: var(--accent); font-weight: 700; background: var(--accent-soft); border-radius: 4px 4px 0 0; }
+
+/* hoverable words */
+.word { cursor: pointer; border-radius: 4px; text-decoration-line: none; text-underline-offset: .28em; text-decoration-thickness: 2px; }
+.word:hover, .word.active, .word:focus-visible { text-decoration-line: underline; text-decoration-color: var(--accent); outline: none; }
+.word.saved { text-decoration-line: underline; text-decoration-style: dotted; text-decoration-color: var(--muted); text-decoration-thickness: 1.5px; }
+.word.saved:hover, .word.saved.active { text-decoration-style: solid; text-decoration-color: var(--accent); }
+
+.word-pop {
+  position: absolute; z-index: 40; width: max-content; min-width: 180px; max-width: min(300px, calc(100vw - 16px));
+  background: var(--surface); color: var(--text); border: 1px solid var(--line); border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, .22); padding: 12px 14px;
+}
+.word-pop[hidden] { display: none; }
+.pop-word { font-size: 1.6rem; line-height: 1.7; font-weight: 600; }
+.pop-reading { color: var(--muted); font-size: .95rem; margin-top: -2px; }
+.pop-meaning { font-size: 1.05rem; margin: 4px 0 6px; }
+.pop-actions { display: flex; align-items: center; gap: 10px; margin-top: 10px; }
+.pop-saved { color: var(--ok); font-weight: 600; font-size: .9rem; }
+
+/* vocab flip cards */
+.vocab-word { font-size: 3rem; line-height: 1.7; font-weight: 600; text-align: center; margin: 8px 0 4px; }
+.vocab-word.peek rt { visibility: hidden; }
+.vocab-word.peek:hover rt { visibility: visible; }
+.vocab-reading { text-align: center; color: var(--muted); font-size: 1.2rem; }
+.card .front > .hint { text-align: center; }
+.flip-actions { justify-content: center; margin-top: 22px; }
+.explain .example { font-size: 1.2rem; line-height: 2; }
+.sum-word { font-size: 1.15rem; }
 
 /* reveal */
 .verdict { margin: 22px 0 16px; padding: 12px 16px; border-radius: 12px; border-left: 5px solid; }

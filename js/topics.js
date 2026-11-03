@@ -1,11 +1,50 @@
 // Languages, topics, and how each topic's cards are drawn.
-import { esc, loc, rubyHTML, sentenceHTML, isRomaji, romajiToHiragana } from './text.js';
+import { esc, loc, rubyHTML, sentenceHTML, isRomaji, romajiToHiragana, toSurface, toKana, BLANK } from './text.js';
 import { wordDiff } from './check.js';
 
+// `group` decides where a topic sits in the sidebar: grammar decks vs. the word list.
 export const LANGS = {
-  de: { label: 'Deutsch', htmlLang: 'de', topics: [{ id: 'nominalisierung', label: 'Nominalisierung' }] },
-  ja: { label: '日本語', htmlLang: 'zh-Hant', topics: [{ id: 'verb-conjugation', label: '動詞變化' }] },
+  de: { label: 'Deutsch', htmlLang: 'de', topics: [{ id: 'nominalisierung', label: 'Nominalisierung', group: 'grammar' }] },
+  ja: {
+    label: '日本語', htmlLang: 'zh-Hant',
+    topics: [
+      { id: 'verb-conjugation', label: '動詞變化', group: 'grammar' },
+      { id: 'vocab', label: '我的單字本', group: 'vocab' },
+    ],
+  },
 };
+
+// ---------- word list ----------
+
+export const vocabId = (lemma) => `ja-vocab-${toSurface(lemma)}`;
+
+/** The full example sentence of a conjugation card (blank filled with the model answer). */
+export function exampleOf(card) {
+  const p = card?.prompt;
+  if (!p?.sentence) return null;
+  return { text: p.sentence.replace(BLANK, card.answer.accepted[0]), translation: p.translation };
+}
+
+/** Build a vocab card from a hovered word and the sentence card it came from. */
+export function vocabCardFrom(word, sourceCard) {
+  const ex = exampleOf(sourceCard);
+  return {
+    id: vocabId(word.lemma),
+    language: 'ja',
+    topic: 'vocab',
+    source: sourceCard?.source || 'word-list',
+    level: sourceCard?.level,
+    tags: word.pos ? [word.pos] : [],
+    createdAt: new Date().toLocaleDateString('sv-SE'), // local YYYY-MM-DD
+    meta: { savedFrom: sourceCard?.id },
+    prompt: {
+      word: word.lemma,
+      pos: word.pos,
+      ...(ex ? { example: ex.text, exampleTranslation: ex.translation } : {}),
+    },
+    answer: { accepted: [word.meaning] },
+  };
+}
 
 const EXPLAIN_LANGS = [['de', 'DE'], ['en', 'EN'], ['zh-Hant', '中文']];
 
@@ -109,7 +148,12 @@ export const RENDERERS = {
           </div>
           ${form}
         </div>
-        <p class="prompt-sentence ja" lang="ja">${sentenceHTML(p.sentence, ctx.revealed ? card.answer.accepted[0] : null)}</p>
+        <p class="prompt-sentence ja" lang="ja" data-card="${esc(card.id)}">${sentenceHTML(
+          p.sentence,
+          ctx.revealed ? card.answer.accepted[0] : null,
+          p.words || [],
+          { text: p.verb, meaning: p.meaning, pos: '動詞' },
+        )}</p>
         <p class="translation">${esc(loc(p.translation, ['zh-Hant']))}</p>`;
     },
     input(card, ctx) {
@@ -133,6 +177,36 @@ export const RENDERERS = {
       const p = card.prompt;
       return `<div class="sum-main"><span lang="ja">${rubyHTML(p.verb)}</span> <span class="form-chip tiny" lang="ja">${esc(p.formLabel || '')}</span></div>
         <div class="sum-sub"><span lang="ja">${sentenceHTML(p.sentence, card.answer.accepted[0])}</span> <span class="muted">${esc(loc(p.translation, ['zh-Hant']))}</span></div>`;
+    },
+    noteLang: 'zh-Hant',
+  },
+
+  // Word list: a classic Anki flip card (see the word, recall the meaning, then grade yourself).
+  vocab: {
+    flip: true,
+    front(card, ctx) {
+      const p = card.prompt;
+      const reading = toKana(p.word);
+      return `<div class="eyebrow">${ctx.t.vocabFront}</div>
+        <div class="vocab-word${ctx.revealed ? '' : ' peek'}" lang="ja">${rubyHTML(p.word)}</div>
+        ${ctx.revealed && reading !== toSurface(p.word) ? `<div class="vocab-reading" lang="ja">${esc(reading)}</div>` : ''}
+        ${ctx.revealed ? '' : `<p class="hint">${ctx.t.vocabPeek}</p>`}`;
+    },
+    input() { return ''; },
+    back(card, result, input, ctx) {
+      const p = card.prompt;
+      const t = ctx.t;
+      return `
+        <div class="answer-row"><div class="label">${t.meaning}</div><p class="val big">${esc(card.answer.accepted.join('；'))}</p></div>
+        ${p.pos ? `<div class="chips"><span class="group-chip">${esc(p.pos)}</span></div>` : ''}
+        ${p.example ? `<section class="explain"><h4>${t.example}</h4>
+          <p class="example" lang="ja">${rubyHTML(p.example)}</p>
+          <p>${esc(loc(p.exampleTranslation, ['zh-Hant']))}</p></section>` : ''}`;
+    },
+    summary(card) {
+      const p = card.prompt;
+      return `<div class="sum-main"><span lang="ja" class="sum-word">${rubyHTML(p.word)}</span> ${p.pos ? `<span class="form-chip tiny">${esc(p.pos)}</span>` : ''}</div>
+        <div class="sum-sub">${esc(card.answer.accepted.join('；'))}</div>`;
     },
     noteLang: 'zh-Hant',
   },
