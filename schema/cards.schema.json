@@ -1,13 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "grammatik-kanpeki.cards.v1",
+  "$id": "grammatik-kanpeki.cards.v2",
   "title": "Grammatik Kanpeki card file",
-  "description": "A set of grammar cards. Used for the bundled data files and for import/export.",
+  "description": "A set of cards. Used for the bundled data files and for import/export. Version 1 files are still accepted and upgraded on load (see upgradeCard in js/store.js).",
   "type": "object",
   "required": ["format", "version", "cards"],
   "properties": {
     "format": { "const": "grammatik-kanpeki.cards" },
-    "version": { "const": 1 },
+    "version": { "enum": [1, 2] },
     "exportedAt": { "type": "string", "format": "date-time" },
     "cards": { "type": "array", "items": { "$ref": "#/$defs/card" } },
     "progress": {
@@ -40,20 +40,90 @@
         "note": { "$ref": "#/$defs/localized" }
       }
     },
+    "word": {
+      "description": "A hoverable word. Hovering shows its meaning; in a course with a word list it can be saved there.",
+      "type": "object",
+      "required": ["text", "meaning"],
+      "properties": {
+        "text": { "type": "string", "description": "The word exactly as written in the sentence (with furigana markup)." },
+        "lemma": { "type": "string", "description": "Dictionary form, if different from text (e.g. {歩|ある}く for {歩|ある}いた)." },
+        "meaning": { "type": "string", "description": "Meaning in the course's explanation language (zh-Hant for Japanese)." },
+        "pos": { "type": "string", "description": "Part of speech, e.g. 名詞, 動詞, い形容詞, 副詞." }
+      }
+    },
+    "promptCommon": {
+      "description": "Prompt fields every card type understands.",
+      "type": "object",
+      "properties": {
+        "translation": { "$ref": "#/$defs/localized", "description": "Translation of the sentence. Japanese shows zh-Hant right away; German hides each translation behind a click." },
+        "hint": { "$ref": "#/$defs/localized", "description": "Optional tip, hidden until clicked." },
+        "task": { "$ref": "#/$defs/localized", "description": "What to do, shown as a chip, e.g. ない形（否定）or Dativ Plural." },
+        "words": {
+          "description": "Hoverable words of the card's sentence (rewrite: source, cloze: sentence, flip: example), in order.",
+          "type": "array",
+          "items": { "$ref": "#/$defs/word" }
+        }
+      }
+    },
+    "rewritePrompt": {
+      "description": "Card type rewrite: rewrite the whole sentence (Nominalisierung, Partizipialkonstruktionen).",
+      "type": "object",
+      "required": ["source"],
+      "properties": {
+        "source": { "type": "string", "description": "The sentence to rewrite." }
+      }
+    },
+    "clozePrompt": {
+      "description": "Card type cloze: fill the blank (動詞變化, 助詞, Deklination, Verben mit Präpositionen, ...).",
+      "type": "object",
+      "required": ["sentence"],
+      "properties": {
+        "sentence": { "type": "string", "description": "Sentence with furigana markup; ___ marks the one blank to fill." },
+        "base": {
+          "description": "Optional word to start from, shown above the sentence (e.g. the dictionary form to conjugate).",
+          "type": "object",
+          "required": ["word"],
+          "properties": {
+            "word": { "type": "string", "description": "With furigana markup {漢字|かんじ}." },
+            "meaning": { "type": "string" },
+            "pos": { "type": "string", "description": "Part of speech, used when the filled-in answer is saved to the word list." }
+          }
+        }
+      }
+    },
+    "flipPrompt": {
+      "description": "Card type flip: see the word, recall the meaning, grade yourself (word list).",
+      "type": "object",
+      "required": ["word"],
+      "properties": {
+        "word": { "type": "string", "description": "The word (dictionary form) with furigana markup. Shown on the front." },
+        "pos": { "type": "string" },
+        "example": { "type": "string", "description": "Example sentence with furigana markup (where the word was saved from)." },
+        "exampleTranslation": { "$ref": "#/$defs/localized" }
+      }
+    },
     "card": {
       "type": "object",
       "required": ["id", "language", "topic", "source", "prompt", "answer"],
       "properties": {
         "id": { "type": "string", "minLength": 1, "description": "Unique and stable. Import merges by id." },
         "language": { "enum": ["de", "ja"] },
-        "topic": { "type": "string", "examples": ["nominalisierung", "verb-conjugation", "vocab"] },
+        "topic": {
+          "type": "string",
+          "description": "Topic id from js/topics.js. Use the most specific topic (n-deklination, not deklination); parent decks include their sub-topics.",
+          "examples": ["nominalisierung", "partizipialkonstruktionen", "deklination", "n-deklination", "verben-mit-praepositionen", "verb-conjugation", "adjective-conjugation", "particles", "counters", "vocab"]
+        },
+        "type": { "enum": ["rewrite", "cloze", "flip"], "description": "Optional. Normally the card type comes from the topic; set it only to draw this card differently." },
         "source": { "type": "string", "description": "Where the card came from, e.g. \"demo\", a book title, a URL." },
         "level": { "type": "string", "examples": ["C1", "N5"] },
         "tags": { "type": "array", "items": { "type": "string" } },
         "createdAt": { "type": "string" },
         "prompt": {
-          "description": "Fields shown on the front of the card. Shape depends on the topic.",
-          "type": "object"
+          "description": "Fields shown on the front. Which ones are required depends on the card type.",
+          "allOf": [
+            { "$ref": "#/$defs/promptCommon" },
+            { "anyOf": [{ "$ref": "#/$defs/rewritePrompt" }, { "$ref": "#/$defs/clozePrompt" }, { "$ref": "#/$defs/flipPrompt" }] }
+          ]
         },
         "answer": {
           "description": "What the learner types, and how it is judged.",
@@ -61,7 +131,7 @@
           "required": ["accepted"],
           "properties": {
             "accepted": {
-              "description": "Fully correct answers. The first one is the model answer.",
+              "description": "Fully correct answers. The first one is the model answer. For flip cards, the meaning.",
               "type": "array", "minItems": 1, "items": { "type": "string" }
             },
             "acceptable": {
@@ -74,84 +144,16 @@
             }
           }
         },
-        "explanation": { "$ref": "#/$defs/localized" },
-        "meta": { "type": "object", "description": "Topic-specific facets for filtering (e.g. verbClass, form)." }
+        "explanation": { "$ref": "#/$defs/localized", "description": "Shown after answering, with a tab per language the card has." },
+        "meta": {
+          "type": "object",
+          "description": "Facets for filtering. Values the topic names in its `facets` show as chips, e.g. verbClass (godan, kami-ichidan, shimo-ichidan, irregular), adjClass (i, na), form (nai, te, ...), savedFrom (word list)."
+        }
       },
       "allOf": [
-        {
-          "if": { "properties": { "topic": { "const": "nominalisierung" } } },
-          "then": {
-            "properties": {
-              "prompt": {
-                "type": "object",
-                "required": ["verbalstil"],
-                "properties": {
-                  "verbalstil": { "type": "string", "description": "The sentence in Verbalstil, shown to the learner." },
-                  "hint": { "type": "string", "description": "Optional tip, hidden until clicked." },
-                  "translation": { "$ref": "#/$defs/localized", "description": "Optional en / zh-Hant translation, hidden until clicked." }
-                }
-              }
-            }
-          }
-        },
-        {
-          "if": { "properties": { "topic": { "const": "vocab" } } },
-          "then": {
-            "properties": {
-              "prompt": {
-                "type": "object",
-                "required": ["word"],
-                "properties": {
-                  "word": { "type": "string", "description": "The word (dictionary form) with furigana markup. Shown on the front." },
-                  "pos": { "type": "string" },
-                  "example": { "type": "string", "description": "Example sentence with furigana markup (where the word was saved from)." },
-                  "exampleTranslation": { "$ref": "#/$defs/localized" }
-                }
-              },
-              "answer": { "description": "accepted[0] is the meaning, shown on the back. Vocab cards are self-graded flip cards." },
-              "meta": { "type": "object", "properties": { "savedFrom": { "type": "string", "description": "id of the sentence card the word was saved from." } } }
-            }
-          }
-        },
-        {
-          "if": { "properties": { "topic": { "const": "verb-conjugation" } } },
-          "then": {
-            "properties": {
-              "prompt": {
-                "type": "object",
-                "required": ["verb", "meaning", "sentence", "translation"],
-                "properties": {
-                  "verb": { "type": "string", "description": "Dictionary form, furigana markup {漢字|かんじ}." },
-                  "meaning": { "type": "string", "description": "Meaning of the verb in Traditional Chinese." },
-                  "formLabel": { "type": "string", "description": "Name of the target form, e.g. ない形（否定）." },
-                  "sentence": { "type": "string", "description": "Japanese sentence with furigana markup; ___ marks the blank to fill." },
-                  "translation": { "$ref": "#/$defs/localized", "description": "Full translation of the sentence (zh-Hant)." },
-                  "words": {
-                    "description": "Hoverable words in the sentence, in order. Each can be saved to the word list.",
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "required": ["text", "meaning"],
-                      "properties": {
-                        "text": { "type": "string", "description": "The word exactly as written in the sentence (with furigana markup)." },
-                        "lemma": { "type": "string", "description": "Dictionary form, if different from text (e.g. {歩|ある}く for {歩|ある}いた)." },
-                        "meaning": { "type": "string", "description": "Meaning in Traditional Chinese." },
-                        "pos": { "type": "string", "description": "Part of speech, e.g. 名詞, 動詞, い形容詞, 副詞." }
-                      }
-                    }
-                  }
-                }
-              },
-              "meta": {
-                "type": "object",
-                "properties": {
-                  "verbClass": { "enum": ["godan", "kami-ichidan", "shimo-ichidan", "irregular"] },
-                  "form": { "type": "string", "examples": ["nai", "nakatta", "te", "ta", "masu", "mashita", "masen", "tai", "teiru", "volitional", "mashou"] }
-                }
-              }
-            }
-          }
-        }
+        { "if": { "required": ["type"], "properties": { "type": { "const": "rewrite" } } }, "then": { "properties": { "prompt": { "$ref": "#/$defs/rewritePrompt" } } } },
+        { "if": { "required": ["type"], "properties": { "type": { "const": "cloze" } } }, "then": { "properties": { "prompt": { "$ref": "#/$defs/clozePrompt" } } } },
+        { "if": { "required": ["type"], "properties": { "type": { "const": "flip" } } }, "then": { "properties": { "prompt": { "$ref": "#/$defs/flipPrompt" } } } }
       ]
     },
     "reviewState": {

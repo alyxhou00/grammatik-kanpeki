@@ -1,8 +1,9 @@
 // Card library (bundled files + imported cards), progress and settings in localStorage.
 import { dayIndex, normalize, DEFAULTS } from './srs.js';
+import { LANGS, LANG_IDS, CARD_TYPES, topicOf, typeOf, deckIds } from './topics.js';
 
 export const FORMAT = 'grammatik-kanpeki.cards';
-export const VERSION = 1;
+export const VERSION = 2;
 
 const K = {
   user: 'gk.userCards.v1',
@@ -19,19 +20,58 @@ function write(key, val) {
   try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) { console.warn('storage failed', e); }
 }
 
+/**
+ * Bring a card from an older file version up to the current one. Version 1 had topic-specific
+ * prompt fields; version 2 uses the same fields per card type (see js/cardtypes.js):
+ *   prompt.verbalstil           → prompt.source
+ *   prompt.verb + prompt.meaning → prompt.base { word, meaning, pos: '動詞' }
+ *   prompt.formLabel            → prompt.task
+ * Cards that are already current are returned unchanged.
+ */
+export function upgradeCard(c) {
+  const p = c?.prompt;
+  if (!p || typeof p !== 'object' || !('verbalstil' in p || 'verb' in p || 'formLabel' in p)) return c;
+  const { verbalstil, verb, meaning, formLabel, ...rest } = p;
+  const prompt = { ...rest };
+  if (verbalstil !== undefined && prompt.source === undefined) prompt.source = verbalstil;
+  if (verb !== undefined && !prompt.base) prompt.base = { word: verb, ...(meaning ? { meaning } : {}), pos: '動詞' };
+  if (formLabel !== undefined && prompt.task === undefined) prompt.task = formLabel;
+  return { ...c, prompt };
+}
+
 const bundled = new Map();
 let userCards = read(K.user, {});
+{
+  // Cards saved by an older version of the app.
+  let changed = false;
+  for (const [id, c] of Object.entries(userCards)) {
+    const u = upgradeCard(c);
+    if (u !== c) { userCards[id] = u; changed = true; }
+  }
+  if (changed) write(K.user, userCards);
+}
 let hidden = new Set(read(K.hidden, []));
 let progress = read(K.progress, {});
 
-const DEFAULT_SETTINGS = { newPerDay: DEFAULTS.newPerDay, reviewsPerDay: DEFAULTS.reviewsPerDay, furigana: true, showForm: true, explainLang: 'de' };
-let settings = { ...DEFAULT_SETTINGS, ...read(K.settings, {}) };
+// theme: 'system' | 'light' | 'dark'. explainLang: preferred explanation language per course.
+// collapsed: sidebar topics whose sub-topics are folded away ("de/deklination").
+const DEFAULT_SETTINGS = {
+  newPerDay: DEFAULTS.newPerDay, reviewsPerDay: DEFAULTS.reviewsPerDay, furigana: true, showForm: true,
+  explainLang: { de: 'de', ja: 'zh-Hant' }, theme: 'system', collapsed: [],
+};
+function loadSettings() {
+  const saved = read(K.settings, {});
+  // Before courses had their own explanation language, one string applied to German.
+  if (typeof saved.explainLang === 'string') saved.explainLang = { ...DEFAULT_SETTINGS.explainLang, de: saved.explainLang };
+  return { ...DEFAULT_SETTINGS, ...saved, explainLang: { ...DEFAULT_SETTINGS.explainLang, ...saved.explainLang } };
+}
+let settings = loadSettings();
 
 export async function loadBundled() {
   const man = await fetch('data/manifest.json', { cache: 'no-cache' }).then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); });
   for (const file of man.files) {
     const data = await fetch(`data/${file}`, { cache: 'no-cache' }).then((r) => r.json());
-    for (const c of data.cards || []) bundled.set(c.id, c);
+    for (const c of data.cards || []) bundled.set(c.id, upgradeCard(c));
   }
 }
 
@@ -43,7 +83,11 @@ export function allCards() {
   return [...map.values()].filter((c) => !hidden.has(c.id));
 }
 
-export const cardsFor = (lang, topic) => allCards().filter((c) => c.language === lang && c.topic === topic);
+/** Cards of a deck: the topic and all its sub-topics. */
+export function cardsFor(lang, topic) {
+  const ids = new Set(deckIds(lang, topic));
+  return allCards().filter((c) => c.language === lang && ids.has(c.topic));
+}
 export const getCard = (id) => (hidden.has(id) ? null : userCards[id] || bundled.get(id) || null);
 
 export function saveCard(card) {
@@ -63,7 +107,8 @@ export function deleteCard(id) {
 }
 
 export function hiddenFor(lang, topic) {
-  return [...hidden].filter((id) => { const c = bundled.get(id); return c && c.language === lang && c.topic === topic; });
+  const ids = new Set(deckIds(lang, topic));
+  return [...hidden].filter((id) => { const c = bundled.get(id); return c && c.language === lang && ids.has(c.topic); });
 }
 export function restoreHidden(lang, topic) {
   for (const id of hiddenFor(lang, topic)) hidden.delete(id);
@@ -114,7 +159,7 @@ export function setSettings(patch) { settings = { ...settings, ...patch }; write
 // ---------- import / export ----------
 
 export function buildExport({ lang = null, topic = null, includeProgress = false } = {}) {
-  const cards = allCards().filter((c) => (!lang || c.language === lang) && (!topic || c.topic === topic));
+  const cards = topic ? cardsFor(lang, topic) : allCards().filter((c) => !lang || c.language === lang);
   const out = { format: FORMAT, version: VERSION, exportedAt: new Date().toISOString(), cards };
   if (includeProgress) {
     out.progress = {};
@@ -123,17 +168,24 @@ export function buildExport({ lang = null, topic = null, includeProgress = false
   return out;
 }
 
+/** Problems with a (current-version) card, as a list of messages. */
 export function validateCard(c) {
   const errs = [];
   if (!c || typeof c !== 'object') return ['not an object'];
   if (!c.id || typeof c.id !== 'string') errs.push('id missing');
-  if (!['de', 'ja'].includes(c.language)) errs.push('language must be "de" or "ja"');
+  if (!LANG_IDS.includes(c.language)) errs.push(`language must be one of ${LANG_IDS.map((x) => `"${x}"`).join(', ')}`);
   if (!c.topic) errs.push('topic missing');
+  else if (LANGS[c.language] && !topicOf(c.language, c.topic)) errs.push(`unknown topic "${c.topic}"`);
   if (!c.prompt || typeof c.prompt !== 'object') errs.push('prompt missing');
   if (!Array.isArray(c.answer?.accepted) || !c.answer.accepted.length) errs.push('answer.accepted must be a non-empty list');
-  if (c.topic === 'nominalisierung' && !c.prompt?.verbalstil) errs.push('prompt.verbalstil missing');
-  if (c.topic === 'verb-conjugation' && (!c.prompt?.verb || !c.prompt?.sentence)) errs.push('prompt.verb / prompt.sentence missing');
-  if (c.topic === 'vocab' && !c.prompt?.word) errs.push('prompt.word missing');
+  if (c.type !== undefined && !CARD_TYPES.includes(c.type)) errs.push(`type must be one of ${CARD_TYPES.join(', ')}`);
+  const type = typeOf(c);
+  const p = c.prompt || {};
+  if (type === 'rewrite' && !p.source) errs.push('prompt.source missing');
+  if (type === 'cloze' && !p.sentence) errs.push('prompt.sentence missing');
+  if (type === 'cloze' && p.sentence && String(p.sentence).split('___').length !== 2) errs.push('prompt.sentence needs exactly one ___');
+  if (type === 'flip' && !p.word) errs.push('prompt.word missing');
+  if (p.words !== undefined && !Array.isArray(p.words)) errs.push('prompt.words must be a list');
   return errs;
 }
 
@@ -145,7 +197,8 @@ export function parseImport(text, fileName = 'import') {
   if (!Array.isArray(list)) return { error: 'no "cards" list found' };
   const cards = [];
   const invalid = [];
-  list.forEach((c, i) => {
+  list.forEach((raw, i) => {
+    const c = upgradeCard(raw);
     const errs = validateCard(c);
     if (errs.length) invalid.push(`#${i + 1} ${c?.id ?? ''}: ${errs.join(', ')}`);
     else cards.push(c.source ? c : { ...c, source: `import:${fileName}` });

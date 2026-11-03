@@ -1,6 +1,6 @@
 {
   "format": "grammatik-kanpeki.cards",
-  "version": 1,
+  "version": 2,
   "cards": [
     {
       "id": "de-nom-demo-001",
@@ -11,7 +11,7 @@
       "tags": ["konditional", "bei"],
       "createdAt": "2026-11-03",
       "prompt": {
-        "verbalstil": "Wenn man die Maschine falsch bedient, kann sie beschädigt werden.",
+        "source": "Wenn man die Maschine falsch bedient, kann sie beschädigt werden.",
         "hint": "wenn (Bedingung) → bei + Dativ",
         "translation": {
           "en": "If you operate the machine incorrectly, it can be damaged.",
@@ -48,7 +48,7 @@
       "tags": ["temporal", "nach", "Passiv"],
       "createdAt": "2026-11-03",
       "prompt": {
-        "verbalstil": "Nachdem die Verträge unterzeichnet worden waren, begann die Zusammenarbeit.",
+        "source": "Nachdem die Verträge unterzeichnet worden waren, begann die Zusammenarbeit.",
         "hint": "nachdem → nach + Dativ",
         "translation": {
           "en": "After the contracts had been signed, the cooperation began.",
@@ -82,7 +82,7 @@
       "tags": ["kausal", "wegen", "aufgrund", "Genitiv"],
       "createdAt": "2026-11-03",
       "prompt": {
-        "verbalstil": "Weil die Kosten stark gestiegen sind, wurde das Projekt gestoppt.",
+        "source": "Weil die Kosten stark gestiegen sind, wurde das Projekt gestoppt.",
         "hint": "weil → wegen / aufgrund / infolge + Genitiv",
         "translation": {
           "en": "Because costs rose sharply, the project was stopped.",
@@ -126,7 +126,7 @@
       "tags": ["konzessiv", "trotz", "Genitiv"],
       "createdAt": "2026-11-03",
       "prompt": {
-        "verbalstil": "Obwohl er sich intensiv vorbereitet hatte, bestand er die Prüfung nicht.",
+        "source": "Obwohl er sich intensiv vorbereitet hatte, bestand er die Prüfung nicht.",
         "hint": "obwohl → trotz + Genitiv",
         "translation": {
           "en": "Although he had prepared intensively, he did not pass the exam.",
@@ -162,7 +162,7 @@
       "tags": ["final", "zu"],
       "createdAt": "2026-11-03",
       "prompt": {
-        "verbalstil": "Um die Qualität zu sichern, werden alle Produkte regelmäßig geprüft.",
+        "source": "Um die Qualität zu sichern, werden alle Produkte regelmäßig geprüft.",
         "hint": "um … zu → zu + Dativ (zur / zum)",
         "translation": {
           "en": "To ensure quality, all products are checked regularly.",
@@ -198,7 +198,7 @@
       "tags": ["temporal", "während", "Genitiv"],
       "createdAt": "2026-11-03",
       "prompt": {
-        "verbalstil": "Während die Bauarbeiten durchgeführt werden, bleibt die Straße gesperrt.",
+        "source": "Während die Bauarbeiten durchgeführt werden, bleibt die Straße gesperrt.",
         "hint": "während (Konjunktion) → während + Genitiv",
         "translation": {
           "en": "While the construction work is being carried out, the road remains closed.",
@@ -231,7 +231,7 @@
       "tags": ["final", "zu", "Passiv"],
       "createdAt": "2026-11-03",
       "prompt": {
-        "verbalstil": "Damit der Antrag bearbeitet werden kann, muss er rechtzeitig eingereicht werden.",
+        "source": "Damit der Antrag bearbeitet werden kann, muss er rechtzeitig eingereicht werden.",
         "hint": "damit → zu + Dativ (zur / zum)",
         "translation": {
           "en": "So that the application can be processed, it must be submitted on time.",
@@ -266,7 +266,7 @@
       "tags": ["temporal", "nach", "bei"],
       "createdAt": "2026-11-03",
       "prompt": {
-        "verbalstil": "Sobald die Ware eingetroffen ist, informieren wir Sie.",
+        "source": "Sobald die Ware eingetroffen ist, informieren wir Sie.",
         "hint": "sobald → nach / bei + Dativ",
         "translation": {
           "en": "As soon as the goods have arrived, we will let you know.",
@@ -305,7 +305,7 @@
       "tags": ["modal", "durch"],
       "createdAt": "2026-11-03",
       "prompt": {
-        "verbalstil": "Indem man regelmäßig Sport treibt, kann man Herz-Kreislauf-Erkrankungen vorbeugen.",
+        "source": "Indem man regelmäßig Sport treibt, kann man Herz-Kreislauf-Erkrankungen vorbeugen.",
         "hint": "indem → durch + Akkusativ",
         "translation": {
           "en": "By exercising regularly, you can prevent cardiovascular disease.",
@@ -343,7 +343,7 @@
       "tags": ["konditional", "bei"],
       "createdAt": "2026-11-03",
       "prompt": {
-        "verbalstil": "Falls es regnet, findet das Konzert in der Halle statt.",
+        "source": "Falls es regnet, findet das Konzert in der Halle statt.",
         "hint": "falls → bei + Dativ",
         "translation": {
           "en": "If it rains, the concert will be held in the hall.",
@@ -380,7 +380,7 @@
       "tags": ["dass-Satz", "Infinitivsatz", "Genitiv", "zu"],
       "createdAt": "2026-11-03",
       "prompt": {
-        "verbalstil": "Dass die Regierung beschlossen hat, die Steuern zu senken, wurde heftig kritisiert.",
+        "source": "Dass die Regierung beschlossen hat, die Steuern zu senken, wurde heftig kritisiert.",
         "hint": "dass-Satz → Nomen + Genitivattribut; Infinitivsatz → zu + Dativ",
         "translation": {
           "en": "The government's decision to cut taxes was heavily criticised.",
@@ -415,7 +415,7 @@
       "tags": ["temporal", "vor", "Funktionsverbgefüge"],
       "createdAt": "2026-11-03",
       "prompt": {
-        "verbalstil": "Bevor man das Gerät in Betrieb nimmt, sollte man die Bedienungsanleitung lesen.",
+        "source": "Bevor man das Gerät in Betrieb nimmt, sollte man die Bedienungsanleitung lesen.",
         "hint": "bevor → vor + Dativ",
         "translation": {
           "en": "Before you start using the device, you should read the manual.",

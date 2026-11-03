@@ -44,7 +44,7 @@ export function wordSegments(sentence, words = []) {
   const out = [];
   let pos = 0;
   for (const w of words) {
-    const i = sentence.indexOf(w.text, pos);
+    const i = findWord(sentence, w.text, pos);
     if (i < 0) continue;
     if (i > pos) out.push({ text: sentence.slice(pos, i) });
     out.push({ text: w.text, word: w });
@@ -52,6 +52,22 @@ export function wordSegments(sentence, words = []) {
   }
   if (pos < sentence.length) out.push({ text: sentence.slice(pos) });
   return out;
+}
+
+// Letters of space-separated scripts (German etc.). Japanese has no spaces, so it is matched anywhere.
+const SPACED = /[A-Za-zÀ-ɏ]/;
+
+/** Index of `word` in `s` from `from`, not inside a longer Latin-script word ("an" does not match in "Mann"). */
+function findWord(s, word, from) {
+  if (!word) return -1;
+  for (let i = s.indexOf(word, from); i >= 0; i = s.indexOf(word, i + 1)) {
+    const before = s[i - 1] || '';
+    const after = s[i + word.length] || '';
+    const cutsBefore = SPACED.test(word[0]) && SPACED.test(before);
+    const cutsAfter = SPACED.test(word[word.length - 1]) && SPACED.test(after);
+    if (!cutsBefore && !cutsAfter) return i;
+  }
+  return -1;
 }
 
 /** A hoverable word. The popup reads lemma / meaning / part of speech from data-word. */

@@ -2,7 +2,8 @@ import * as store from './store.js';
 import { answer, preview, DEFAULTS, dayStartMs, isNew, isLearning, isReviewDue, learningDueToday } from './srs.js';
 import { checkAnswer } from './check.js';
 import { UI } from './i18n.js';
-import { LANGS, RENDERERS, vocabId, vocabCardFrom } from './topics.js';
+import { LANGS, topicOf, ancestry, childrenOf, groupOf, labelsOf, facetsOf, vocabTopic } from './topics.js';
+import { rendererFor, vocabId, vocabCardFrom } from './cardtypes.js';
 import { esc, loc, isRomaji, romajiToHiragana, rubyHTML, toKana, toSurface } from './text.js';
 
 const $ = (sel, el = document) => el.querySelector(sel);
@@ -19,7 +20,7 @@ const t = () => UI[state.lang];
 const settings = () => store.getSettings();
 const key = () => `${state.lang}/${state.topic}`;
 const session = () => state.sessions[key()] || null;
-const renderer = () => RENDERERS[state.topic];
+const currentCard = () => { const s = session(); return s?.current ? store.getCard(s.current) : null; };
 const cfg = () => ({ ...DEFAULTS, newPerDay: settings().newPerDay, reviewsPerDay: settings().reviewsPerDay });
 let waitTimer = null;
 
@@ -29,8 +30,7 @@ function parseHash() {
   const [, lang, topic, view] = location.hash.split('/');
   if (LANGS[lang]) {
     state.lang = lang;
-    const topics = LANGS[lang].topics.map((x) => x.id);
-    state.topic = topics.includes(topic) ? topic : topics[0];
+    state.topic = topicOf(lang, topic) ? topic : LANGS[lang].topics[0].id;
     state.view = view === 'cards' ? 'cards' : 'learn';
   }
 }
@@ -63,24 +63,25 @@ const pop = () => $('#word-pop');
 function markSavedWords() {
   for (const el of document.querySelectorAll('.word[data-word]')) {
     const w = JSON.parse(el.dataset.word);
-    el.classList.toggle('saved', !!store.getCard(vocabId(w.lemma)));
+    el.classList.toggle('saved', !!store.getCard(vocabId(state.lang, w.lemma)));
   }
 }
 
 function renderPop(w) {
-  const T = UI.ja;
-  const saved = !!store.getCard(vocabId(w.lemma));
+  const T = t();
+  const lang = state.lang;
+  const saved = !!store.getCard(vocabId(lang, w.lemma));
   const reading = toKana(w.lemma);
+  // Words can be saved only in a course that has a word list.
+  const actions = !vocabTopic(lang) ? '' : saved
+    ? `<span class="pop-saved">✓ ${T.inWordList}</span><button type="button" class="link" data-action="vocab-remove">${T.remove}</button>`
+    : `<button type="button" class="btn primary small" data-action="vocab-add">＋ ${T.addToWordList}</button>`;
   pop().innerHTML = `
-    <div class="pop-word" lang="ja">${rubyHTML(w.lemma)}</div>
-    ${reading !== toSurface(w.lemma) ? `<div class="pop-reading" lang="ja">${esc(reading)}</div>` : ''}
-    <div class="pop-meaning">${esc(w.meaning)}</div>
+    <div class="pop-word" lang="${lang}">${rubyHTML(w.lemma)}</div>
+    ${reading !== toSurface(w.lemma) ? `<div class="pop-reading" lang="${lang}">${esc(reading)}</div>` : ''}
+    <div class="pop-meaning" lang="${LANGS[lang].noteLang}">${esc(w.meaning)}</div>
     ${w.pos ? `<span class="group-chip">${esc(w.pos)}</span>` : ''}
-    <div class="pop-actions">
-      ${saved
-        ? `<span class="pop-saved">✓ ${T.inWordList}</span><button type="button" class="link" data-action="vocab-remove">${T.remove}</button>`
-        : `<button type="button" class="btn primary small" data-action="vocab-add">＋ ${T.addToWordList}</button>`}
-    </div>`;
+    ${actions ? `<div class="pop-actions">${actions}</div>` : ''}`;
 }
 
 function showPop(el) {
@@ -115,9 +116,9 @@ function toggleSavedWord(add) {
   const w = JSON.parse(popWord.dataset.word);
   if (add) {
     const source = store.getCard(popWord.closest('[data-card]')?.dataset.card);
-    store.saveCard(vocabCardFrom(w, source));
+    store.saveCard(vocabCardFrom(w, source, state.lang));
   } else {
-    store.deleteCard(vocabId(w.lemma));
+    store.deleteCard(vocabId(state.lang, w.lemma));
   }
   renderPop(w);
   markSavedWords();
@@ -160,9 +161,11 @@ function counts(lang, topic) {
     else if (isReviewDue(p, now)) review++;
   }
   const S = settings();
-  const reviewLeft = Math.max(0, S.reviewsPerDay - store.dailyCount(lang, topic, 'review'));
+  // A deck's limits also cap its sub-decks: answers count for the card's topic and every parent.
+  const left = (limit, kind) => Math.min(...ancestry(lang, topic).map((tp) => Math.max(0, limit - store.dailyCount(lang, tp.id, kind))));
+  const reviewLeft = left(S.reviewsPerDay, 'review');
   const reviewToday = Math.min(review, reviewLeft);
-  const newLeft = Math.max(0, S.newPerDay - store.dailyCount(lang, topic, 'new'));
+  const newLeft = left(S.newPerDay, 'new');
   // As in Anki's v3 scheduler, the review limit also caps new cards.
   const newToday = Math.min(fresh, newLeft, Math.max(0, reviewLeft - reviewToday));
   return { total: cards.length, learn, review: reviewToday, fresh, newToday };
@@ -209,17 +212,75 @@ function mixIn(reviews, news) {
 
 // ---------- render ----------
 
+/** One topic in the sidebar, with its sub-topics below it (foldable). */
+function sideItem(tp) {
+  const lang = state.lang;
+  const kids = childrenOf(lang, tp.id);
+  const key = `${lang}/${tp.id}`;
+  // A folded topic still opens while one of its sub-topics is the current page.
+  const open = !settings().collapsed.includes(key) || ancestry(lang, state.topic).slice(1).some((x) => x.id === tp.id);
+  const T = t();
+  const caret = kids.length
+    ? `<button type="button" class="side-caret" data-toggle-topic="${tp.id}" aria-expanded="${open}" aria-label="${esc(open ? T.collapse : T.expand)}" title="${esc(open ? T.collapse : T.expand)}">
+        <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 4 4 4-4 4"/></svg></button>`
+    : '';
+  return `<div class="side-node${kids.length ? ' has-kids' : ''}">
+      <div class="side-row">
+        <button class="side-item" data-topic="${tp.id}" ${tp.id === state.topic ? 'aria-current="page"' : ''}>
+          <span class="side-label">${esc(tp.label)}</span><span class="badge">${counts(lang, tp.id).total}</span></button>
+        ${caret}
+      </div>
+      ${kids.length && open ? `<div class="side-kids" role="group">${kids.map(sideItem).join('')}</div>` : ''}
+    </div>`;
+}
+
 function renderSidebar() {
-  const L = LANGS[state.lang];
-  const groups = [...new Set(L.topics.map((tp) => tp.group))];
+  const roots = childrenOf(state.lang, null);
+  const groups = [...new Set(roots.map((tp) => groupOf(state.lang, tp.id)))];
   $('#sidebar').innerHTML = groups.map((g) => `
     <div class="side-group">
       <div class="side-title">${esc(t().groups[g])}</div>
       <nav class="side-nav" aria-label="${esc(t().groups[g])}">
-        ${L.topics.filter((tp) => tp.group === g).map((tp) => `<button class="side-item" data-topic="${tp.id}" ${tp.id === state.topic ? 'aria-current="page"' : ''}>
-          <span>${esc(tp.label)}</span><span class="badge">${counts(state.lang, tp.id).total}</span></button>`).join('')}
+        ${roots.filter((tp) => groupOf(state.lang, tp.id) === g).map(sideItem).join('')}
       </nav>
     </div>`).join('');
+}
+
+// ---------- language menu ----------
+
+function renderLangMenu() {
+  const cur = LANGS[state.lang];
+  $('#lang-btn').innerHTML = `<span class="lang-glyph" data-glyph="${state.lang}" lang="${state.lang}">${esc(cur.glyph)}</span>
+    <span class="lang-name" lang="${state.lang}">${esc(cur.label)}</span>
+    <svg class="chev" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m4 6 4 4 4-4"/></svg>`;
+  $('#lang-btn').setAttribute('aria-label', `${t().langMenu}: ${cur.label}`);
+  $('#lang-list').setAttribute('aria-label', t().langMenu);
+  $('#lang-list').innerHTML = Object.entries(LANGS).map(([id, L]) => `
+    <button type="button" role="menuitemradio" class="lang-opt" data-lang-switch="${id}" aria-checked="${id === state.lang}" tabindex="-1">
+      <span class="lang-glyph" data-glyph="${id}" lang="${id}">${esc(L.glyph)}</span>
+      <span class="lang-text"><span class="lang-opt-name" lang="${id}">${esc(L.label)}</span><span class="lang-tag" lang="${L.htmlLang}">${esc(L.tagline)}</span></span>
+      <svg class="check" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m3.5 8.5 3 3 6-7"/></svg>
+    </button>`).join('');
+}
+
+const langMenuOpen = () => !$('#lang-list').hidden;
+function setLangMenu(open, focus = 'current') {
+  const list = $('#lang-list');
+  list.hidden = !open;
+  $('#lang-btn').setAttribute('aria-expanded', String(open));
+  if (open) {
+    const items = [...list.querySelectorAll('.lang-opt')];
+    const cur = items.find((x) => x.getAttribute('aria-checked') === 'true') || items[0];
+    (focus === 'last' ? items.at(-1) : cur).focus();
+  }
+}
+
+// ---------- theme ----------
+
+function applyTheme() {
+  const theme = settings().theme;
+  if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme;
+  else delete document.documentElement.dataset.theme;
 }
 
 function render() {
@@ -228,8 +289,9 @@ function render() {
   document.documentElement.lang = L.htmlLang;
   document.body.dataset.lang = state.lang;
   document.body.classList.toggle('no-furigana', !settings().furigana);
-  const topicLabel = L.topics.find((x) => x.id === state.topic)?.label;
-  document.title = `${topicLabel} · ${state.lang === 'ja' ? 'グラマティック完璧' : 'Grammatik Kanpeki'}`;
+  const topicLabel = topicOf(state.lang, state.topic)?.label;
+  const parents = ancestry(state.lang, state.topic).slice(1).reverse();
+  document.title = `${topicLabel.replace(/\u00AD/g, '')} · ${state.lang === 'ja' ? 'グラマティック完璧' : 'Grammatik Kanpeki'}`;
   const brand = $('#brand');
   brand.href = `#/${state.lang}/${L.topics[0].id}/learn`;
   brand.innerHTML = state.lang === 'ja'
@@ -237,7 +299,7 @@ function render() {
     : '<span lang="de">Grammatik</span> <span class="brand-2" lang="de">Kanpeki</span>';
   setMenu(state.menuOpen);
 
-  for (const b of document.querySelectorAll('[data-lang-switch]')) b.setAttribute('aria-selected', b.dataset.langSwitch === state.lang);
+  renderLangMenu();
   $('#btn-data .btn-label').textContent = t().importExport;
   $('#btn-data').setAttribute('aria-label', t().importExport);
   $('#btn-data').title = t().importExport;
@@ -248,7 +310,10 @@ function render() {
   $('#btn-menu').setAttribute('aria-label', t().menu);
 
   $('#content-head').innerHTML = `
-    <h1>${esc(topicLabel)}</h1>
+    <div class="head-title">
+      ${parents.length ? `<nav class="crumbs">${parents.map((x) => `<button type="button" class="link" data-topic="${x.id}">${esc(x.label)}</button>`).join('<span aria-hidden="true">›</span>')}</nav>` : ''}
+      <h1>${esc(topicLabel)}</h1>
+    </div>
     <div class="seg" role="tablist">
       <button role="tab" data-view="learn" aria-selected="${state.view === 'learn'}">${t().learn}</button>
       <button role="tab" data-view="cards" aria-selected="${state.view === 'cards'}">${t().cards}</button>
@@ -284,13 +349,20 @@ function renderOverview() {
       <button class="btn primary big" data-action="start" ${any ? '' : 'disabled'}>${T.start}</button>
       <button class="btn" data-action="cram" ${c.total ? '' : 'disabled'}>${T.cram}</button>
     </div>
-    <p class="hint">${!c.total && state.topic === 'vocab' ? T.vocabEmpty : any ? `${T.cram}: ${T.cramHint}` : T.nothingToday}</p>
+    <p class="hint">${!c.total ? (state.topic === 'vocab' ? T.vocabEmpty : T.emptyTopic) : any ? `${T.cram}: ${T.cramHint}` : T.nothingToday}</p>
   </section>`;
 }
 
-function ctx(extra = {}) {
+/** What a card renderer needs; labels and facets come from the card's own topic (it may be a sub-topic). */
+function ctx(card, extra = {}) {
   const s = session();
-  return { t: t(), settings: settings(), aids: s?.aids || new Set(), revealed: s?.phase === 'revealed', ...extra };
+  const lang = card?.language || state.lang;
+  return {
+    t: UI[lang], settings: settings(), L: LANGS[lang],
+    labels: { ...UI[lang].labels, ...labelsOf(lang, card?.topic) },
+    facets: facetsOf(lang, card?.topic),
+    aids: s?.aids || new Set(), revealed: s?.phase === 'revealed', ...extra,
+  };
 }
 
 function renderSession() {
@@ -315,8 +387,9 @@ function renderSession() {
   }
   const card = store.getCard(s.current);
   const remaining = s.mode === 'cram' ? s.queue.length : s.queue.length + topicLearning().length;
-  const R = renderer();
-  const c = ctx();
+  const R = rendererFor(card);
+  const c = ctx(card);
+  const sub = card.topic !== state.topic ? topicOf(card.language, card.topic) : null;
   const body = s.phase === 'answer' && R.flip
     ? `<div class="form-actions flip-actions">
         <button type="button" class="btn primary big" data-action="reveal" id="reveal-btn">${T.showAnswer}</button>
@@ -325,7 +398,7 @@ function renderSession() {
     ? `<form id="answer-form" class="answer-form" autocomplete="off">
         ${R.input(card, c)}
         <div class="form-actions">
-          <span class="hint">${T.enterHint}</span>
+          <span class="hint">${R.multiline ? T.enterHint : T.enterHintLine}</span>
           <button type="button" class="btn ghost" data-action="reveal">${T.skip}</button>
           <button type="submit" class="btn primary">${T.check}</button>
         </div>
@@ -334,10 +407,11 @@ function renderSession() {
   return `<div class="session-bar">
       <span class="pill">${s.mode === 'cram' ? T.cram : T.learn}</span>
       <span class="muted">${remaining} ${T.remaining}</span>
+      ${sub ? `<span class="topic-chip">${esc(sub.label)}</span>` : ''}
       <button class="link" data-action="end">${T.end}</button>
     </div>
     <article class="panel card phase-${s.phase}">
-      <div class="front">${R.front(card, c)}</div>
+      <div class="front" data-card="${esc(card.id)}">${R.front(card, c)}</div>
       ${body}
     </article>`;
 }
@@ -346,18 +420,19 @@ function renderReveal(card, c) {
   const s = session();
   const T = t();
   const r = s.result;
-  const R = renderer();
+  const R = rendererFor(card);
+  const noteLang = LANGS[card.language].noteLang;
   const suggest = SUGGEST[r.verdict];
   const reason = r.verdict === 'close' ? T.closeReason[r.reason] : '';
-  const note = r.note ? loc(r.note, [R.noteLang]) : reason;
+  const note = r.note ? loc(r.note, [noteLang]) : reason;
   const ivs = s.mode === 'review' ? preview(store.getProgress(card.id), { cardId: card.id, cfg: cfg() }) : null;
   const iv = (g) => (!ivs ? '' : ivs[g].kind === 'min' ? T.mins(ivs[g].value) : T.days(ivs[g].value));
   const canSave = ['close', 'wrong'].includes(r.verdict) && s.input.trim();
   return `
     ${r.verdict === 'flip' ? '' : `<div class="verdict v-${r.verdict}" role="status">
-      <strong>${T.verdict[r.verdict]}</strong>${note ? `<p lang="${R.noteLang}">${esc(note)}</p>` : ''}
+      <strong>${T.verdict[r.verdict]}</strong>${note ? `<p lang="${noteLang}">${esc(note)}</p>` : ''}
     </div>`}
-    <div class="back">${R.back(card, r, s.input, c)}</div>
+    <div class="back" data-card="${esc(card.id)}">${R.back(card, r, s.input, c)}</div>
     ${canSave ? `<div class="save-alt">
         <span>${T.saveAs}</span>
         <button type="button" class="chip" data-action="save-accepted">${T.saveAccepted}</button>
@@ -412,7 +487,6 @@ function renderCardList() {
   const q = (state.search || '').trim().toLowerCase();
   const cards = store.cardsFor(state.lang, state.topic).filter((c) => !q || JSON.stringify(c).toLowerCase().includes(q));
   const fmt = new Intl.DateTimeFormat(state.lang === 'de' ? 'de-DE' : 'zh-TW', { month: '2-digit', day: '2-digit' });
-  const R = renderer();
   $('#card-count').textContent = cards.length;
   $('#card-list').innerHTML = cards.length
     ? cards.map((c) => {
@@ -420,7 +494,7 @@ function renderCardList() {
         const st = isNew(p) ? 'new' : isLearning(p) ? 'learn' : isReviewDue(p) ? 'due' : 'later';
         const label = st === 'later' ? T.status.on(fmt.format(new Date(dayStartMs(p.dueDay)))) : T.status[st];
         return `<li class="card-row">
-          <div class="sum">${R.summary(c, ctx())}</div>
+          <div class="sum">${rendererFor(c).summary(c, ctx(c))}${c.topic !== state.topic ? `<span class="topic-chip">${esc(topicOf(c.language, c.topic)?.label || c.topic)}</span>` : ''}</div>
           <div class="row-meta">
             <span class="status s-${st}">${esc(label)}</span>
             ${p?.leech ? `<span class="status s-leech">${T.leech}</span>` : ''}
@@ -454,7 +528,7 @@ function submitAnswer(reveal = false) {
   const s = session();
   const card = store.getCard(s.current);
   s.input = $('#answer')?.value ?? '';
-  s.result = renderer().flip ? { verdict: 'flip' } : checkAnswer(card, reveal ? '' : s.input);
+  s.result = rendererFor(card).flip ? { verdict: 'flip' } : checkAnswer(card, reveal ? '' : s.input);
   s.phase = 'revealed';
   state.flash = '';
   render();
@@ -465,8 +539,10 @@ function grade(g) {
   const id = s.current;
   if (s.mode === 'review') {
     const prev = store.getProgress(id);
-    if (isNew(prev)) store.bumpDaily(state.lang, state.topic, 'new');
-    else if (prev.type === 'review') store.bumpDaily(state.lang, state.topic, 'review');
+    const kind = isNew(prev) ? 'new' : prev.type === 'review' ? 'review' : null;
+    // Count the answer for the card's own topic and every parent deck, so parent limits cap sub-decks.
+    const card = store.getCard(id);
+    if (kind) for (const tp of ancestry(state.lang, card?.topic || state.topic)) store.bumpDaily(state.lang, tp.id, kind);
     const next = answer(prev, g, { cardId: id, cfg: cfg() });
     store.setProgress(id, next);
     s.queue = s.queue.filter((x) => x !== id);
@@ -499,7 +575,7 @@ function saveAlternative(kind) {
 
 function openDataDialog() {
   const T = t();
-  const n = (lang, topic) => store.allCards().filter((c) => (!lang || c.language === lang) && (!topic || c.topic === topic)).length;
+  const n = (lang, topic) => (topic ? store.cardsFor(lang, topic) : store.allCards().filter((c) => !lang || c.language === lang)).length;
   const dlg = $('#dlg-data');
   dlg.innerHTML = `<form method="dialog" class="dlg">
     <header><h2>${T.importExport}</h2><button class="icon-btn" value="close" aria-label="${T.close}">✕</button></header>
@@ -561,16 +637,36 @@ function doImport(overwrite) {
 function openSettings() {
   const T = t();
   const S = settings();
+  const L = LANGS[state.lang];
   const dlg = $('#dlg-settings');
+  const THEME_ICON = {
+    light: '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></g></svg>',
+    dark: '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"/></svg>',
+    system: '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></g></svg>',
+  };
+  const NAMES = { de: 'Deutsch', en: 'English', 'zh-Hant': '繁體中文' };
+  const explainOpts = L.explainLangs.map(([v]) => [v, NAMES[v] || v]);
   dlg.innerHTML = `<form method="dialog" class="dlg">
     <header><h2>${T.settings}</h2><button class="icon-btn" value="close" aria-label="${T.close}">✕</button></header>
     <section>
+      <h3>${T.appearance}</h3>
+      <div class="theme-pick" role="radiogroup" aria-label="${esc(T.appearance)}">
+        ${['light', 'dark', 'system'].map((v) => `<label class="theme-opt">
+          <input type="radio" name="theme" value="${v}" ${S.theme === v ? 'checked' : ''}>
+          <span>${THEME_ICON[v]}${esc(T.theme[v])}</span></label>`).join('')}
+      </div>
+    </section>
+    <section>
+      <h3>${T.studySettings}</h3>
       <label class="opt row">${T.newPerDay}<input type="number" min="0" max="9999" name="newPerDay" value="${S.newPerDay}"></label>
       <label class="opt row">${T.reviewsPerDay}<input type="number" min="0" max="9999" name="reviewsPerDay" value="${S.reviewsPerDay}"></label>
-      ${state.lang === 'de' ? `<label class="opt row">${T.explainLang}
-        <select name="explainLang">${[['de', 'Deutsch'], ['en', 'English'], ['zh-Hant', '繁體中文']].map(([v, l]) => `<option value="${v}" ${S.explainLang === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>` : `
-        <label class="opt"><input type="checkbox" name="furigana" ${S.furigana ? 'checked' : ''}> ${T.furigana}</label>
-        <label class="opt"><input type="checkbox" name="showForm" ${S.showForm ? 'checked' : ''}> ${T.showForm}</label>`}
+    </section>
+    <section>
+      <h3>${T.courseSettings}</h3>
+      ${explainOpts.length > 1 ? `<label class="opt row">${T.explainLang}
+        <select name="explainLang">${explainOpts.map(([v, l]) => `<option value="${v}" ${S.explainLang[state.lang] === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>` : ''}
+      ${state.lang === 'ja' ? `<label class="opt"><input type="checkbox" name="furigana" ${S.furigana ? 'checked' : ''}> ${T.furigana}</label>` : ''}
+      <label class="opt"><input type="checkbox" name="showForm" ${S.showForm ? 'checked' : ''}> ${T.showForm}</label>
     </section>
     <section><button type="button" class="btn danger" data-action="reset-progress">${T.resetProgress}</button></section>
   </form>`;
@@ -583,13 +679,27 @@ document.addEventListener('click', (e) => {
   const word = e.target.closest('.word[data-word]');
   if (word) return showPop(word); // tap on touch screens
   if (popWord && !e.target.closest('#word-pop')) hidePop();
-  const el = e.target.closest('[data-action],[data-grade],[data-explain],[data-topic],[data-view],[data-lang-switch]');
+  if (langMenuOpen() && !e.target.closest('.lang-menu')) setLangMenu(false);
+  const el = e.target.closest('[data-action],[data-grade],[data-explain],[data-topic],[data-toggle-topic],[data-view],[data-lang-switch]');
   if (!el) return;
   const a = el.dataset.action;
   if (a === 'vocab-add' || a === 'vocab-remove') return toggleSavedWord(a === 'vocab-add');
+  if (a === 'toggle-lang') return setLangMenu(!langMenuOpen());
   if (el.dataset.langSwitch) {
     const lang = el.dataset.langSwitch;
-    return go(lang, LANGS[lang].topics[0].id, 'learn');
+    setLangMenu(false);
+    $('#lang-btn').focus();
+    if (lang !== state.lang) go(lang, LANGS[lang].topics[0].id, 'learn');
+    return;
+  }
+  if (el.dataset.toggleTopic) {
+    const k = `${state.lang}/${el.dataset.toggleTopic}`;
+    const collapsed = settings().collapsed.filter((x) => x !== k);
+    if (el.getAttribute('aria-expanded') === 'true') collapsed.push(k);
+    store.setSettings({ collapsed });
+    renderSidebar();
+    $(`[data-toggle-topic="${el.dataset.toggleTopic}"]`)?.focus();
+    return;
   }
   if (el.dataset.topic) { setMenu(false); return go(state.lang, el.dataset.topic, state.view); }
   if (a === 'toggle-menu') {
@@ -600,7 +710,7 @@ document.addEventListener('click', (e) => {
   if (a === 'close-menu') return setMenu(false);
   if (el.dataset.view) return go(state.lang, state.topic, el.dataset.view);
   if (el.dataset.grade) return grade(el.dataset.grade);
-  if (el.dataset.explain) { store.setSettings({ explainLang: el.dataset.explain }); return render(); }
+  if (el.dataset.explain) { store.setSettings({ explainLang: { ...settings().explainLang, [state.lang]: el.dataset.explain } }); return render(); }
   switch (a) {
     case 'start': return startSession('review');
     case 'cram': return startSession('cram');
@@ -648,7 +758,8 @@ document.addEventListener('change', (e) => {
   if (el.id === 'import-file' && el.files[0]) return onImportFile(el.files[0]);
   if (el.closest('#dlg-settings')) {
     if (el.name === 'newPerDay' || el.name === 'reviewsPerDay') store.setSettings({ [el.name]: Math.max(0, parseInt(el.value, 10) || 0) });
-    if (el.name === 'explainLang') store.setSettings({ explainLang: el.value });
+    if (el.name === 'explainLang') store.setSettings({ explainLang: { ...settings().explainLang, [state.lang]: el.value } });
+    if (el.name === 'theme') { store.setSettings({ theme: el.value }); applyTheme(); }
     if (el.name === 'furigana' || el.name === 'showForm') store.setSettings({ [el.name]: el.checked });
     render();
   }
@@ -664,6 +775,18 @@ document.addEventListener('toggle', (e) => {
 }, true);
 
 document.addEventListener('keydown', (e) => {
+  if (e.target.closest?.('.lang-menu')) {
+    const items = [...document.querySelectorAll('.lang-opt')];
+    const i = items.indexOf(document.activeElement);
+    if (e.target.id === 'lang-btn' && (e.key === 'ArrowDown' || e.key === 'ArrowUp')) { e.preventDefault(); setLangMenu(true, e.key === 'ArrowUp' ? 'last' : 'current'); return; }
+    if (langMenuOpen()) {
+      if (e.key === 'Escape') { e.preventDefault(); setLangMenu(false); $('#lang-btn').focus(); return; }
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); items[(i + (e.key === 'ArrowDown' ? 1 : -1) + items.length) % items.length]?.focus(); return; }
+      if (e.key === 'Home' || e.key === 'End') { e.preventDefault(); (e.key === 'Home' ? items[0] : items.at(-1)).focus(); return; }
+      if (e.key === 'Tab') setLangMenu(false);
+    }
+    return;
+  }
   if (state.menuOpen && e.key === 'Escape') { setMenu(false); $('#btn-menu').focus(); return; }
   if (popWord && e.key === 'Escape') { const w = popWord; hidePop(); w.focus(); return; }
   const word = e.target.closest?.('.word[data-word]');
@@ -671,7 +794,7 @@ document.addEventListener('keydown', (e) => {
   if (word || e.target.closest?.('#word-pop')) return;
   const s = session();
   if (!s || state.view !== 'learn' || !s.current || document.querySelector('dialog[open]')) return;
-  if (s.phase === 'answer' && renderer().flip) {
+  if (s.phase === 'answer' && rendererFor(currentCard()).flip) {
     if ((e.key === 'Enter' || e.key === ' ') && !e.repeat) { e.preventDefault(); submitAnswer(true); }
     return;
   }
@@ -697,6 +820,7 @@ document.addEventListener('keydown', (e) => {
     history.replaceState(null, '', last || '#/de/nominalisierung/learn');
   }
   parseHash();
+  applyTheme();
   try { await store.loadBundled(); } catch (err) { console.error(err); state.loadError = true; }
   render();
 })();

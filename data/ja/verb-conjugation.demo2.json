@@ -1,6 +1,6 @@
 {
   "format": "grammatik-kanpeki.cards",
-  "version": 1,
+  "version": 2,
   "cards": [
     {
       "id": "ja-vc-demo2-001",
@@ -18,9 +18,8 @@
         "form": "masendeshita"
       },
       "prompt": {
-        "verb": "{勉強|べんきょう}する",
-        "meaning": "念書；學習",
-        "formLabel": "ませんでした形（禮貌・過去否定）",
+        "base": { "word": "{勉強|べんきょう}する", "meaning": "念書；學習", "pos": "動詞" },
+        "task": "ませんでした形（禮貌・過去否定）",
         "sentence": "{昨日|きのう}は{全然|ぜんぜん}___。",
         "translation": {
           "zh-Hant": "昨天完全沒有念書。"
@@ -75,9 +74,8 @@
         "form": "nagara"
       },
       "prompt": {
-        "verb": "{聞|き}く",
-        "meaning": "聽；問",
-        "formLabel": "ながら（一邊…一邊…）",
+        "base": { "word": "{聞|き}く", "meaning": "聽；問", "pos": "動詞" },
+        "task": "ながら（一邊…一邊…）",
         "sentence": "{音楽|おんがく}を___、{駅|えき}まで{歩|ある}いた。",
         "translation": {
           "zh-Hant": "一邊聽音樂，一邊走到車站。"
@@ -141,9 +139,8 @@
         "form": "ni-iku"
       },
       "prompt": {
-        "verb": "{買|か}う",
-        "meaning": "買",
-        "formLabel": "～に行く（去做…）",
+        "base": { "word": "{買|か}う", "meaning": "買", "pos": "動詞" },
+        "task": "～に行く（去做…）",
         "sentence": "スーパーへ{牛乳|ぎゅうにゅう}を___に{行|い}きます。",
         "translation": {
           "zh-Hant": "我要去超市買牛奶。"
@@ -198,9 +195,8 @@
         "form": "tekara"
       },
       "prompt": {
-        "verb": "{洗|あら}う",
-        "meaning": "洗",
-        "formLabel": "てから（做完…之後再…）",
+        "base": { "word": "{洗|あら}う", "meaning": "洗", "pos": "動詞" },
+        "task": "てから（做完…之後再…）",
         "sentence": "{手|て}を___から、ご{飯|はん}を{食|た}べます。",
         "translation": {
           "zh-Hant": "先洗手，再吃飯。"
@@ -255,9 +251,8 @@
         "form": "te-mo-ii"
       },
       "prompt": {
-        "verb": "{開|あ}ける",
-        "meaning": "打開",
-        "formLabel": "てもいい（可以…嗎）",
+        "base": { "word": "{開|あ}ける", "meaning": "打開", "pos": "動詞" },
+        "task": "てもいい（可以…嗎）",
         "sentence": "{窓|まど}を___もいいですか。",
         "translation": {
           "zh-Hant": "可以開窗戶嗎？"
@@ -306,9 +301,8 @@
         "form": "te-wa-ikenai"
       },
       "prompt": {
-        "verb": "{撮|と}る",
-        "meaning": "拍（照）",
-        "formLabel": "てはいけない（不可以…）",
+        "base": { "word": "{撮|と}る", "meaning": "拍（照）", "pos": "動詞" },
+        "task": "てはいけない（不可以…）",
         "sentence": "ここで{写真|しゃしん}を___はいけません。",
         "translation": {
           "zh-Hant": "這裡不可以拍照。"
@@ -363,9 +357,8 @@
         "form": "ta-koto-ga-aru"
       },
       "prompt": {
-        "verb": "{乗|の}る",
-        "meaning": "搭乘",
-        "formLabel": "たことがある（曾經…過）",
+        "base": { "word": "{乗|の}る", "meaning": "搭乘", "pos": "動詞" },
+        "task": "たことがある（曾經…過）",
         "sentence": "{新幹線|しんかんせん}に___ことがありますか。",
         "translation": {
           "zh-Hant": "你搭過新幹線嗎？"
@@ -420,9 +413,8 @@
         "form": "tari"
       },
       "prompt": {
-        "verb": "{読|よ}む",
-        "meaning": "讀；看（書）",
-        "formLabel": "たり（又…又…，列舉動作）",
+        "base": { "word": "{読|よ}む", "meaning": "讀；看（書）", "pos": "動詞" },
+        "task": "たり（又…又…，列舉動作）",
         "sentence": "{日曜日|にちようび}は{本|ほん}を___、テレビを{見|み}たりします。",
         "translation": {
           "zh-Hant": "星期天會看看書、看看電視。"
@@ -482,9 +474,8 @@
         "form": "ta-hou-ga-ii"
       },
       "prompt": {
-        "verb": "{休|やす}む",
-        "meaning": "休息；請假",
-        "formLabel": "たほうがいい（最好…）",
+        "base": { "word": "{休|やす}む", "meaning": "休息；請假", "pos": "動詞" },
+        "task": "たほうがいい（最好…）",
         "sentence": "{今日|きょう}は{家|いえ}で___ほうがいいですよ。",
         "translation": {
           "zh-Hant": "今天最好在家休息喔。"
@@ -543,9 +534,8 @@
         "form": "teiru"
       },
       "prompt": {
-        "verb": "{住|す}む",
-        "meaning": "住",
-        "formLabel": "ています形（狀態・禮貌）",
+        "base": { "word": "{住|す}む", "meaning": "住", "pos": "動詞" },
+        "task": "ています形（狀態・禮貌）",
         "sentence": "{姉|あね}は{東京|とうきょう}に___。",
         "translation": {
           "zh-Hant": "我姊姊住在東京。"
@@ -600,9 +590,8 @@
         "form": "teiru"
       },
       "prompt": {
-        "verb": "{知|し}る",
-        "meaning": "知道；認識",
-        "formLabel": "ています形（狀態・禮貌）",
+        "base": { "word": "{知|し}る", "meaning": "知道；認識", "pos": "動詞" },
+        "task": "ています形（狀態・禮貌）",
         "sentence": "あの{人|ひと}の{名前|なまえ}を___か。",
         "translation": {
           "zh-Hant": "你知道那個人的名字嗎？"
@@ -660,9 +649,8 @@
         "form": "nai"
       },
       "prompt": {
-        "verb": "{入|はい}る",
-        "meaning": "進入；（お風呂に入る）泡澡",
-        "formLabel": "ない形（否定）",
+        "base": { "word": "{入|はい}る", "meaning": "進入；（お風呂に入る）泡澡", "pos": "動詞" },
+        "task": "ない形（否定）",
         "sentence": "{今日|きょう}はお{風呂|ふろ}に___。",
         "translation": {
           "zh-Hant": "今天不泡澡。"
@@ -717,9 +705,8 @@
         "form": "masu"
       },
       "prompt": {
-        "verb": "{走|はし}る",
-        "meaning": "跑",
-        "formLabel": "ます形（禮貌）",
+        "base": { "word": "{走|はし}る", "meaning": "跑", "pos": "動詞" },
+        "task": "ます形（禮貌）",
         "sentence": "{毎朝|まいあさ}、{公園|こうえん}を___。",
         "translation": {
           "zh-Hant": "我每天早上在公園跑步。"
@@ -774,9 +761,8 @@
         "form": "volitional"
       },
       "prompt": {
-        "verb": "{作|つく}る",
-        "meaning": "做；製作",
-        "formLabel": "意向形（一起～吧）",
+        "base": { "word": "{作|つく}る", "meaning": "做；製作", "pos": "動詞" },
+        "task": "意向形（一起～吧）",
         "sentence": "{一緒|いっしょ}に{晩|ばん}ご{飯|はん}を___！",
         "translation": {
           "zh-Hant": "一起做晚餐吧！"
@@ -825,9 +811,8 @@
         "form": "mashou"
       },
       "prompt": {
-        "verb": "{会|あ}う",
-        "meaning": "見面",
-        "formLabel": "ましょう形（禮貌的「～吧」）",
+        "base": { "word": "{会|あ}う", "meaning": "見面", "pos": "動詞" },
+        "task": "ましょう形（禮貌的「～吧」）",
         "sentence": "じゃ、{三時|さんじ}に{駅|えき}で___。",
         "translation": {
           "zh-Hant": "那麼，三點在車站見吧。"
@@ -881,9 +866,8 @@
         "form": "tai"
       },
       "prompt": {
-        "verb": "{行|い}く",
-        "meaning": "去",
-        "formLabel": "たい形（想做）",
+        "base": { "word": "{行|い}く", "meaning": "去", "pos": "動詞" },
+        "task": "たい形（想做）",
         "sentence": "いつか{日本|にほん}へ___。",
         "translation": {
           "zh-Hant": "總有一天想去日本。"
@@ -938,9 +922,8 @@
         "form": "te"
       },
       "prompt": {
-        "verb": "{来|く}る",
-        "meaning": "來",
-        "formLabel": "て形 ＋ ください",
+        "base": { "word": "{来|く}る", "meaning": "來", "pos": "動詞" },
+        "task": "て形 ＋ ください",
         "sentence": "{明日|あした}は{八時|はちじ}に___ください。",
         "translation": {
           "zh-Hant": "明天請八點來。"
@@ -994,9 +977,8 @@
         "form": "potential"
       },
       "prompt": {
-        "verb": "{話|はな}す",
-        "meaning": "說；講",
-        "formLabel": "可能形（會、能夠）・禮貌",
+        "base": { "word": "{話|はな}す", "meaning": "說；講", "pos": "動詞" },
+        "task": "可能形（會、能夠）・禮貌",
         "sentence": "{日本語|にほんご}が{少|すこ}し___。",
         "translation": {
           "zh-Hant": "我會說一點日文。"
@@ -1055,9 +1037,8 @@
         "form": "nakatta"
       },
       "prompt": {
-        "verb": "{行|い}く",
-        "meaning": "去",
-        "formLabel": "なかった形（過去否定）",
+        "base": { "word": "{行|い}く", "meaning": "去", "pos": "動詞" },
+        "task": "なかった形（過去否定）",
         "sentence": "{昨日|きのう}は{雨|あめ}で、どこにも___。",
         "translation": {
           "zh-Hant": "昨天下雨，哪裡都沒去。"
@@ -1111,9 +1092,8 @@
         "form": "masen"
       },
       "prompt": {
-        "verb": "{見|み}る",
-        "meaning": "看",
-        "formLabel": "ません形（禮貌・否定）",
+        "base": { "word": "{見|み}る", "meaning": "看", "pos": "動詞" },
+        "task": "ません形（禮貌・否定）",
         "sentence": "{朝|あさ}はテレビを___。",
         "translation": {
           "zh-Hant": "我早上不看電視。"
@@ -1162,9 +1142,8 @@
         "form": "ta"
       },
       "prompt": {
-        "verb": "{掃除|そうじ}する",
-        "meaning": "打掃",
-        "formLabel": "た形（過去）",
+        "base": { "word": "{掃除|そうじ}する", "meaning": "打掃", "pos": "動詞" },
+        "task": "た形（過去）",
         "sentence": "{昨日|きのう}、{部屋|へや}を___。",
         "translation": {
           "zh-Hant": "昨天打掃了房間。"
@@ -1213,9 +1192,8 @@
         "form": "naide"
       },
       "prompt": {
-        "verb": "{吸|す}う",
-        "meaning": "吸",
-        "formLabel": "ないでください（請不要…）",
+        "base": { "word": "{吸|す}う", "meaning": "吸", "pos": "動詞" },
+        "task": "ないでください（請不要…）",
         "sentence": "ここでたばこを___ください。",
         "translation": {
           "zh-Hant": "請不要在這裡抽菸。"
@@ -1273,9 +1251,8 @@
         "form": "teiru"
       },
       "prompt": {
-        "verb": "{着|き}る",
-        "meaning": "穿（上半身的衣服）",
-        "formLabel": "ている形（穿著・狀態）",
+        "base": { "word": "{着|き}る", "meaning": "穿（上半身的衣服）", "pos": "動詞" },
+        "task": "ている形（穿著・狀態）",
         "sentence": "{田中|たなか}さんは{赤|あか}いセーターを___。",
         "translation": {
           "zh-Hant": "田中さん穿著紅色毛衣。"
@@ -1339,9 +1316,8 @@
         "form": "te"
       },
       "prompt": {
-        "verb": "{浴|あ}びる",
-        "meaning": "淋（浴）；沐浴",
-        "formLabel": "て形（然後…）",
+        "base": { "word": "{浴|あ}びる", "meaning": "淋（浴）；沐浴", "pos": "動詞" },
+        "task": "て形（然後…）",
         "sentence": "シャワーを___、{寝|ね}ます。",
         "translation": {
           "zh-Hant": "沖完澡，然後睡覺。"
