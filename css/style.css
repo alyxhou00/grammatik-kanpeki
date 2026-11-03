@@ -113,12 +113,13 @@ button { cursor: pointer; }
 
 /* ---------- overview ---------- */
 .overview h2, .done h2 { margin: 0 0 16px; font-size: 1.2rem; }
-.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
 .stat { background: var(--surface-2); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; }
 .stat .num { font-size: 2rem; font-weight: 700; line-height: 1.1; font-variant-numeric: tabular-nums; }
 .stat .lbl { color: var(--muted); font-size: .9rem; }
-.stat.due .num { color: var(--accent); }
-.stat.new .num { color: var(--ok); }
+.stat.new .num { color: var(--accent); }
+.stat.learn .num { color: var(--bad); }
+.stat.due .num { color: var(--ok); }
 .actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
 .overview .hint { margin: 14px 0 0; }
 .done { text-align: center; padding: 48px 28px; }
@@ -240,6 +241,8 @@ ins { background: var(--ok-soft); color: var(--ok); text-decoration: none; borde
 .status.s-new { background: var(--ok-soft); color: var(--ok); }
 .status.s-due { background: var(--accent-soft); color: var(--accent); }
 .status.s-later { color: var(--muted); }
+.status.s-learn { background: var(--bad-soft); color: var(--bad); }
+.status.s-leech { background: var(--warn-soft); color: var(--warn); }
 .src { color: var(--muted); }
 .empty { padding: 24px; text-align: center; color: var(--muted); }
 
@@ -270,7 +273,7 @@ dialog::backdrop { background: rgba(10, 12, 15, .45); }
   .panel { padding: 18px; }
   .prompt-sentence { font-size: 1.25rem; }
   .prompt-sentence.ja { font-size: 1.35rem; }
-  .stats { gap: 8px; }
+  .stats { gap: 8px; grid-template-columns: repeat(2, 1fr); }
   .stat { padding: 12px; }
   .stat .num { font-size: 1.6rem; }
   .answer-grid { grid-template-columns: 1fr; }

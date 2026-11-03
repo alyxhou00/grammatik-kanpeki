@@ -1,5 +1,5 @@
 import * as store from './store.js';
-import { schedule, preview, isDue } from './srs.js';
+import { answer, preview, DEFAULTS, dayStartMs, isNew, isLearning, isReviewDue, learningDueToday } from './srs.js';
 import { checkAnswer } from './check.js';
 import { UI } from './i18n.js';
 import { LANGS, RENDERERS } from './topics.js';
@@ -20,6 +20,8 @@ const settings = () => store.getSettings();
 const key = () => `${state.lang}/${state.topic}`;
 const session = () => state.sessions[key()] || null;
 const renderer = () => RENDERERS[state.topic];
+const cfg = () => ({ ...DEFAULTS, newPerDay: settings().newPerDay, reviewsPerDay: settings().reviewsPerDay });
+let waitTimer = null;
 
 // ---------- routing ----------
 
@@ -41,15 +43,62 @@ window.addEventListener('hashchange', () => { parseHash(); try { localStorage.se
 
 function counts(lang, topic) {
   const cards = store.cardsFor(lang, topic);
-  let due = 0;
+  const now = Date.now();
+  let learn = 0;
+  let review = 0;
   let fresh = 0;
   for (const c of cards) {
     const p = store.getProgress(c.id);
-    if (!p) fresh++;
-    else if (isDue(p)) due++;
+    if (isNew(p)) fresh++;
+    else if (isLearning(p)) { if (learningDueToday(p, now)) learn++; }
+    else if (isReviewDue(p, now)) review++;
   }
-  const newLeft = Math.max(0, settings().newPerDay - store.newIntroducedToday(lang, topic));
-  return { total: cards.length, due, fresh, newToday: Math.min(fresh, newLeft) };
+  const S = settings();
+  const reviewLeft = Math.max(0, S.reviewsPerDay - store.dailyCount(lang, topic, 'review'));
+  const reviewToday = Math.min(review, reviewLeft);
+  const newLeft = Math.max(0, S.newPerDay - store.dailyCount(lang, topic, 'new'));
+  // As in Anki's v3 scheduler, the review limit also caps new cards.
+  const newToday = Math.min(fresh, newLeft, Math.max(0, reviewLeft - reviewToday));
+  return { total: cards.length, learn, review: reviewToday, fresh, newToday };
+}
+
+/** Learning/relearning cards of this topic due before the day ends, soonest first. */
+function topicLearning() {
+  const now = Date.now();
+  return store.cardsFor(state.lang, state.topic)
+    .map((c) => ({ id: c.id, st: store.getProgress(c.id) }))
+    .filter((x) => learningDueToday(x.st, now))
+    .sort((a, b) => a.st.due - b.st.due);
+}
+
+/** Anki's order: due learning cards first, then the day's reviews/new cards, then learn ahead (20 min). */
+function pickNext(s) {
+  if (s.mode === 'cram') {
+    while (s.queue.length && !store.getCard(s.queue[0])) s.queue.shift();
+    return s.queue[0] || null;
+  }
+  const now = Date.now();
+  const learning = topicLearning();
+  if (learning[0] && learning[0].st.due <= now) return learning[0].id;
+  s.queue = s.queue.filter((id) => {
+    const st = store.getProgress(id);
+    return store.getCard(id) && (isNew(st) || isReviewDue(st, now));
+  });
+  if (s.queue.length) return s.queue[0];
+  if (learning[0] && learning[0].st.due <= now + DEFAULTS.learnAheadMins * 60000) return learning[0].id;
+  return null;
+}
+
+function mixIn(reviews, news) {
+  const out = [];
+  let r = 0;
+  news.forEach((n, i) => {
+    const upTo = Math.round(((i + 1) * reviews.length) / (news.length + 1));
+    while (r < upTo) out.push(reviews[r++]);
+    out.push(n);
+  });
+  while (r < reviews.length) out.push(reviews[r++]);
+  return out;
 }
 
 // ---------- render ----------
@@ -91,12 +140,13 @@ function render() {
 function renderOverview() {
   const c = counts(state.lang, state.topic);
   const T = t();
-  const any = c.due + c.newToday > 0;
+  const any = c.review + c.newToday + c.learn > 0;
   return `<section class="panel overview">
     <h2>${T.todayTitle}</h2>
     <div class="stats">
-      <div class="stat due"><span class="num">${c.due}</span><span class="lbl">${T.due}</span></div>
-      <div class="stat new"><span class="num">${c.newToday}</span><span class="lbl">${T.new}</span></div>
+      <div class="stat new"><span class="num">${c.newToday}</span><span class="lbl">${T.stat.new}</span></div>
+      <div class="stat learn"><span class="num">${c.learn}</span><span class="lbl">${T.stat.learn}</span></div>
+      <div class="stat due"><span class="num">${c.review}</span><span class="lbl">${T.stat.review}</span></div>
       <div class="stat total"><span class="num">${c.total}</span><span class="lbl">${T.total}</span></div>
     </div>
     <div class="actions">
@@ -115,13 +165,25 @@ function ctx(extra = {}) {
 function renderSession() {
   const s = session();
   const T = t();
-  while (s.queue.length && !store.getCard(s.queue[0])) s.queue.shift();
-  if (!s.queue.length) {
+  clearTimeout(waitTimer);
+  if (!s.current || !store.getCard(s.current)) s.current = pickNext(s);
+  if (!s.current) {
+    const next = s.mode === 'review' ? topicLearning()[0] : null;
+    if (next) {
+      // Nothing to show yet: wait until the next learning card enters the learn-ahead window.
+      const wakeAt = next.st.due - DEFAULTS.learnAheadMins * 60000;
+      waitTimer = setTimeout(render, Math.max(1000, wakeAt - Date.now() + 500));
+      const mins = Math.max(1, Math.ceil((next.st.due - Date.now()) / 60000));
+      return `<section class="panel done">
+        <h2>${T.waitTitle}</h2><p>${T.waitText(mins)}</p>
+        <button class="btn" data-action="end">${T.end}</button></section>`;
+    }
     return `<section class="panel done">
       <h2>${T.doneTitle}</h2><p>${T.doneText(s.reviewed)}</p>
       <button class="btn primary" data-action="end">${T.back}</button></section>`;
   }
-  const card = store.getCard(s.queue[0]);
+  const card = store.getCard(s.current);
+  const remaining = s.mode === 'cram' ? s.queue.length : s.queue.length + topicLearning().length;
   const R = renderer();
   const c = ctx();
   const body = s.phase === 'answer'
@@ -136,7 +198,7 @@ function renderSession() {
     : renderReveal(card, c);
   return `<div class="session-bar">
       <span class="pill">${s.mode === 'cram' ? T.cram : T.learn}</span>
-      <span class="muted">${s.queue.length} ${T.remaining}</span>
+      <span class="muted">${remaining} ${T.remaining}</span>
       <button class="link" data-action="end">${T.end}</button>
     </div>
     <article class="panel card phase-${s.phase}">
@@ -153,8 +215,8 @@ function renderReveal(card, c) {
   const suggest = SUGGEST[r.verdict];
   const reason = r.verdict === 'close' ? T.closeReason[r.reason] : '';
   const note = r.note ? loc(r.note, [R.noteLang]) : reason;
-  const ivs = s.mode === 'review' ? preview(store.getProgress(card.id)) : null;
-  const iv = (g) => (!ivs ? '' : ivs[g] === 0 ? T.now : T.days(ivs[g]));
+  const ivs = s.mode === 'review' ? preview(store.getProgress(card.id), { cardId: card.id, cfg: cfg() }) : null;
+  const iv = (g) => (!ivs ? '' : ivs[g].kind === 'min' ? T.mins(ivs[g].value) : T.days(ivs[g].value));
   const canSave = ['close', 'wrong'].includes(r.verdict) && s.input.trim();
   return `
     <div class="verdict v-${r.verdict}" role="status">
@@ -177,7 +239,7 @@ function renderReveal(card, c) {
 
 function afterSessionRender() {
   const s = session();
-  if (!s || !s.queue.length) return;
+  if (!s || !s.current) return;
   if (s.phase === 'answer') {
     const input = $('#answer');
     if (input) { input.value = s.input; input.focus(); updateKanaPreview(); }
@@ -219,12 +281,13 @@ function renderCardList() {
   $('#card-list').innerHTML = cards.length
     ? cards.map((c) => {
         const p = store.getProgress(c.id);
-        const st = !p ? 'new' : isDue(p) ? 'due' : 'later';
-        const label = st === 'new' ? T.status.new : st === 'due' ? T.status.due : T.status.on(fmt.format(new Date(p.due)));
+        const st = isNew(p) ? 'new' : isLearning(p) ? 'learn' : isReviewDue(p) ? 'due' : 'later';
+        const label = st === 'later' ? T.status.on(fmt.format(new Date(dayStartMs(p.dueDay)))) : T.status[st];
         return `<li class="card-row">
           <div class="sum">${R.summary(c, ctx())}</div>
           <div class="row-meta">
             <span class="status s-${st}">${esc(label)}</span>
+            ${p?.leech ? `<span class="status s-leech">${T.leech}</span>` : ''}
             <span class="src" title="${esc(c.id)}">${T.source}: ${esc(c.source)}</span>
             <button class="icon-btn" data-action="delete" data-id="${esc(c.id)}" title="${T.del}" aria-label="${T.del}">${ICON.trash}</button>
           </div></li>`;
@@ -238,21 +301,22 @@ function startSession(mode) {
   const cards = store.cardsFor(state.lang, state.topic);
   let queue;
   if (mode === 'review') {
-    const { newToday } = counts(state.lang, state.topic);
-    const due = cards.filter((c) => isDue(store.getProgress(c.id)))
-      .sort((a, b) => store.getProgress(a.id).due - store.getProgress(b.id).due);
-    const fresh = cards.filter((c) => !store.getProgress(c.id)).slice(0, newToday);
-    queue = [...due, ...fresh].map((c) => c.id);
+    const c = counts(state.lang, state.topic);
+    const due = cards.filter((x) => isReviewDue(store.getProgress(x.id)))
+      .sort((a, b) => store.getProgress(a.id).dueDay - store.getProgress(b.id).dueDay)
+      .slice(0, c.review).map((x) => x.id);
+    const fresh = cards.filter((x) => isNew(store.getProgress(x.id))).slice(0, c.newToday).map((x) => x.id);
+    queue = mixIn(due, fresh);
   } else {
     queue = cards.map((c) => c.id).sort(() => Math.random() - 0.5);
   }
-  state.sessions[key()] = { mode, queue, phase: 'answer', input: '', result: null, reviewed: 0, aids: new Set() };
+  state.sessions[key()] = { mode, queue, current: null, phase: 'answer', input: '', result: null, reviewed: 0, aids: new Set() };
   render();
 }
 
 function submitAnswer(reveal = false) {
   const s = session();
-  const card = store.getCard(s.queue[0]);
+  const card = store.getCard(s.current);
   s.input = $('#answer')?.value ?? '';
   s.result = checkAnswer(card, reveal ? '' : s.input);
   s.phase = 'revealed';
@@ -262,23 +326,29 @@ function submitAnswer(reveal = false) {
 
 function grade(g) {
   const s = session();
-  const id = s.queue[0];
+  const id = s.current;
   if (s.mode === 'review') {
     const prev = store.getProgress(id);
-    if (!prev) store.countNewIntroduced(state.lang, state.topic);
-    store.setProgress(id, schedule(prev, g));
+    if (isNew(prev)) store.bumpDaily(state.lang, state.topic, 'new');
+    else if (prev.type === 'review') store.bumpDaily(state.lang, state.topic, 'review');
+    const next = answer(prev, g, { cardId: id, cfg: cfg() });
+    store.setProgress(id, next);
+    s.queue = s.queue.filter((x) => x !== id);
+    if (next.type === 'review') s.reviewed++;
+  } else {
+    // "Alle üben": no scheduling; Again puts the card back three cards later.
+    s.queue.shift();
+    if (g === 'again') s.queue.splice(Math.min(3, s.queue.length), 0, id);
+    else s.reviewed++;
   }
-  s.queue.shift();
-  if (g === 'again') s.queue.splice(Math.min(3, s.queue.length), 0, id);
-  else s.reviewed++;
-  Object.assign(s, { phase: 'answer', input: '', result: null, aids: new Set() });
+  Object.assign(s, { current: null, phase: 'answer', input: '', result: null, aids: new Set() });
   state.flash = '';
   render();
 }
 
 function saveAlternative(kind) {
   const s = session();
-  const id = s.queue[0];
+  const id = s.current;
   let text = s.input.trim();
   if (state.lang === 'ja' && isRomaji(text)) text = romajiToHiragana(text);
   const note = $('#alt-note')?.value.trim();
@@ -359,7 +429,8 @@ function openSettings() {
   dlg.innerHTML = `<form method="dialog" class="dlg">
     <header><h2>${T.settings}</h2><button class="icon-btn" value="close" aria-label="${T.close}">✕</button></header>
     <section>
-      <label class="opt row">${T.newPerDay}<input type="number" min="0" max="500" name="newPerDay" value="${S.newPerDay}"></label>
+      <label class="opt row">${T.newPerDay}<input type="number" min="0" max="9999" name="newPerDay" value="${S.newPerDay}"></label>
+      <label class="opt row">${T.reviewsPerDay}<input type="number" min="0" max="9999" name="reviewsPerDay" value="${S.reviewsPerDay}"></label>
       ${state.lang === 'de' ? `<label class="opt row">${T.explainLang}
         <select name="explainLang">${[['de', 'Deutsch'], ['en', 'English'], ['zh-Hant', '繁體中文']].map(([v, l]) => `<option value="${v}" ${S.explainLang === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>` : `
         <label class="opt"><input type="checkbox" name="furigana" ${S.furigana ? 'checked' : ''}> ${T.furigana}</label>
@@ -430,7 +501,7 @@ document.addEventListener('change', (e) => {
   const el = e.target;
   if (el.id === 'import-file' && el.files[0]) return onImportFile(el.files[0]);
   if (el.closest('#dlg-settings')) {
-    if (el.name === 'newPerDay') store.setSettings({ newPerDay: Math.max(0, parseInt(el.value, 10) || 0) });
+    if (el.name === 'newPerDay' || el.name === 'reviewsPerDay') store.setSettings({ [el.name]: Math.max(0, parseInt(el.value, 10) || 0) });
     if (el.name === 'explainLang') store.setSettings({ explainLang: el.value });
     if (el.name === 'furigana' || el.name === 'showForm') store.setSettings({ [el.name]: el.checked });
     render();
@@ -448,7 +519,7 @@ document.addEventListener('toggle', (e) => {
 
 document.addEventListener('keydown', (e) => {
   const s = session();
-  if (!s || state.view !== 'learn' || !s.queue.length || document.querySelector('dialog[open]')) return;
+  if (!s || state.view !== 'learn' || !s.current || document.querySelector('dialog[open]')) return;
   if (s.phase === 'answer') {
     if (e.target.id === 'answer' && e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();

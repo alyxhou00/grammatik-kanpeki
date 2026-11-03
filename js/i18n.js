@@ -1,4 +1,8 @@
 // UI strings. The German page is in German, the Japanese page in Traditional Chinese.
+
+/** One decimal at most, e.g. 5.5 → "5,5", 10 → "10". */
+const fmt = (v, sep) => String(Math.round(v * 10) / 10).replace('.', sep);
+
 export const UI = {
   de: {
     learn: 'Lernen', cards: 'Karten',
@@ -15,7 +19,11 @@ export const UI = {
     },
     closeReason: { case: 'Achte auf die Groß- und Kleinschreibung.', near: 'Nur ein kleiner Unterschied – vergleiche mit der Musterlösung.' },
     grades: { again: 'Nochmal', hard: 'Schwer', good: 'Gut', easy: 'Leicht' },
-    now: 'gleich', days: (n) => (n >= 30 ? `${(n / 30).toFixed(1).replace('.', ',')} Mon.` : `${n} T`),
+    stat: { new: 'Neu', learn: 'Lernen', review: 'Wiederholen' },
+    mins: (m) => (m < 1 ? '<1 Min.' : m < 60 ? `${fmt(m, ',')} Min.` : `${fmt(m / 60, ',')} Std.`),
+    days: (n) => (n < 30 ? `${n} T` : n < 365 ? `${fmt(n / 30, ',')} Mon.` : `${fmt(n / 365, ',')} J.`),
+    leech: 'Leech', waitTitle: 'Kurz warten',
+    waitText: (m) => `Die nächste Karte in der Lernphase ist in ${m} Min. fällig.`,
     yourAnswer: 'Deine Antwort', model: 'Musterlösung', alsoCorrect: 'Ebenfalls richtig',
     okButNot: 'Korrekt, aber nicht ideal', explanation: 'Erklärung',
     saveAs: 'Meine Antwort speichern als', saveAccepted: 'richtig', saveAcceptable: 'korrekt, aber nicht ideal',
@@ -23,7 +31,7 @@ export const UI = {
     doneTitle: 'Geschafft!', doneText: (n) => `${n} Karte${n === 1 ? '' : 'n'} wiederholt.`, back: 'Zurück',
     verbalstil: 'Verbalstil', nominalstil: 'Nominalstil', tip: 'Tipp',
     placeholder: 'Nominalstil eingeben …',
-    search: 'Suchen …', status: { new: 'neu', due: 'fällig', on: (d) => `fällig am ${d}` },
+    search: 'Suchen …', status: { new: 'neu', learn: 'in Lernphase', due: 'fällig', on: (d) => `fällig am ${d}` },
     del: 'Löschen', confirmDel: 'Diese Karte löschen? (Gebündelte Karten lassen sich wiederherstellen.)',
     restore: (n) => `${n} gelöschte Karte${n === 1 ? '' : 'n'} wiederherstellen`,
     source: 'Quelle', emptyList: 'Keine Karten gefunden.',
@@ -34,7 +42,7 @@ export const UI = {
     importSummary: (p) => `${p.cards.length} gültige Karte(n): ${p.fresh} neu, ${p.existing} schon vorhanden.` + (p.invalid.length ? ` ${p.invalid.length} ungültig.` : '') + (p.progress ? ' Enthält Lernfortschritt.' : ''),
     importOverwrite: 'Importieren (vorhandene überschreiben)', importNew: 'Nur neue importieren',
     importDone: (r) => `Fertig: ${r.added} neu, ${r.updated} aktualisiert, ${r.skipped} übersprungen` + (r.progressCount ? `, Fortschritt für ${r.progressCount} Karte(n).` : '.'),
-    newPerDay: 'Neue Karten pro Tag (je Thema)', explainLang: 'Sprache der Erklärung',
+    newPerDay: 'Neue Karten pro Tag (je Thema)', reviewsPerDay: 'Max. Wiederholungen pro Tag', explainLang: 'Sprache der Erklärung',
     furigana: 'Furigana anzeigen', showForm: 'Zielform vor der Antwort anzeigen',
     resetProgress: 'Lernfortschritt dieses Themas zurücksetzen', confirmReset: 'Lernfortschritt dieses Themas wirklich löschen?',
     loadError: 'Die Kartendateien konnten nicht geladen werden. Öffne die Seite über einen lokalen Server (siehe README), nicht direkt als Datei.',
@@ -54,7 +62,11 @@ export const UI = {
     },
     closeReason: { case: '', near: '' },
     grades: { again: '重來', hard: '困難', good: '良好', easy: '簡單' },
-    now: '稍後', days: (n) => (n >= 30 ? `${(n / 30).toFixed(1)} 個月` : `${n} 天`),
+    stat: { new: '新卡片', learn: '學習中', review: '待複習' },
+    mins: (m) => (m < 1 ? '<1 分鐘' : m < 60 ? `${fmt(m, '.')} 分鐘` : `${fmt(m / 60, '.')} 小時`),
+    days: (n) => (n < 30 ? `${n} 天` : n < 365 ? `${fmt(n / 30, '.')} 個月` : `${fmt(n / 365, '.')} 年`),
+    leech: '難記卡（Leech）', waitTitle: '稍等一下',
+    waitText: (m) => `下一張學習中的卡片 ${m} 分鐘後到期。`,
     yourAnswer: '你的答案', model: '正確答案', alsoCorrect: '其他正確答案',
     okButNot: '正確，但不是最好的答案', explanation: '說明',
     saveAs: '把我的答案存成', saveAccepted: '正確', saveAcceptable: '正確，但不是最好',
@@ -66,7 +78,7 @@ export const UI = {
     },
     showFormBtn: '顯示要變成哪一種形',
     placeholder: '輸入動詞變化，例如 たべない／食べない／tabenai',
-    search: '搜尋…', status: { new: '新卡', due: '到期', on: (d) => `${d} 到期` },
+    search: '搜尋…', status: { new: '新卡', learn: '學習中', due: '到期', on: (d) => `${d} 到期` },
     del: '刪除', confirmDel: '要刪除這張卡片嗎？（內建卡片之後可以還原。）',
     restore: (n) => `還原 ${n} 張已刪除的卡片`,
     source: '來源', emptyList: '找不到卡片。',
@@ -77,7 +89,7 @@ export const UI = {
     importSummary: (p) => `${p.cards.length} 張有效卡片：${p.fresh} 張新卡，${p.existing} 張已存在。` + (p.invalid.length ? `${p.invalid.length} 張格式錯誤。` : '') + (p.progress ? '包含學習進度。' : ''),
     importOverwrite: '匯入（覆蓋已存在的）', importNew: '只匯入新卡',
     importDone: (r) => `完成：新增 ${r.added}、更新 ${r.updated}、略過 ${r.skipped}` + (r.progressCount ? `，匯入 ${r.progressCount} 張卡的進度。` : '。'),
-    newPerDay: '每天新卡數量（每個主題）', explainLang: '德文說明的語言',
+    newPerDay: '每天新卡數量（每個主題）', reviewsPerDay: '每天最多複習數量', explainLang: '德文說明的語言',
     furigana: '顯示振假名', showForm: '作答前顯示要變成哪一種形',
     resetProgress: '重設這個主題的學習進度', confirmReset: '確定要清除這個主題的學習進度嗎？',
     loadError: '無法載入卡片檔。請用本機伺服器開啟網頁（見 README），不要直接開檔案。',

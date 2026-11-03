@@ -1,5 +1,5 @@
 // Card library (bundled files + imported cards), progress and settings in localStorage.
-import { startOfDay } from './srs.js';
+import { dayIndex, normalize, DEFAULTS } from './srs.js';
 
 export const FORMAT = 'grammatik-kanpeki.cards';
 export const VERSION = 1;
@@ -24,7 +24,7 @@ let userCards = read(K.user, {});
 let hidden = new Set(read(K.hidden, []));
 let progress = read(K.progress, {});
 
-const DEFAULT_SETTINGS = { newPerDay: 20, furigana: true, showForm: true, explainLang: 'de' };
+const DEFAULT_SETTINGS = { newPerDay: DEFAULTS.newPerDay, reviewsPerDay: DEFAULTS.reviewsPerDay, furigana: true, showForm: true, explainLang: 'de' };
 let settings = { ...DEFAULT_SETTINGS, ...read(K.settings, {}) };
 
 export async function loadBundled() {
@@ -88,18 +88,21 @@ export function addAlternative(id, text, kind, note) {
 
 // ---------- progress ----------
 
-export const getProgress = (id) => progress[id] || null;
+export const getProgress = (id) => normalize(progress[id]);
 export function setProgress(id, state) { progress[id] = state; write(K.progress, progress); }
 export function resetProgress(ids) { for (const id of ids) delete progress[id]; write(K.progress, progress); }
 
-export function newIntroducedToday(lang, topic) {
+/** Cards answered today per topic: kind = 'new' (first answer) | 'review' (answers to review cards). */
+export function dailyCount(lang, topic, kind) {
   const d = read(K.daily, {});
-  return d.day === startOfDay() ? d[`${lang}/${topic}`] || 0 : 0;
+  return d.day === dayIndex() ? d[`${lang}/${topic}`]?.[kind] || 0 : 0;
 }
-export function countNewIntroduced(lang, topic) {
+export function bumpDaily(lang, topic, kind) {
   let d = read(K.daily, {});
-  if (d.day !== startOfDay()) d = { day: startOfDay() };
-  d[`${lang}/${topic}`] = (d[`${lang}/${topic}`] || 0) + 1;
+  if (d.day !== dayIndex()) d = { day: dayIndex() };
+  const k = `${lang}/${topic}`;
+  d[k] = { new: 0, review: 0, ...(typeof d[k] === 'object' ? d[k] : {}) };
+  d[k][kind] += 1;
   write(K.daily, d);
 }
 

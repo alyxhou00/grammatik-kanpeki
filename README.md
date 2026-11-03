@@ -5,7 +5,30 @@ An Anki-style grammar trainer for German and Japanese that runs in the browser.
 - **Deutsch → Nominalisierung** (C1): you see a sentence in Verbalstil and type the Nominalstil.
 - **日本語 → 動詞變化** (N5, explained in Traditional Chinese): you see the dictionary form (with furigana), the target form, a Japanese sentence with a blank, and its full Chinese translation. You type the conjugated verb in kana, kanji, or romaji.
 
-Answers are checked automatically against three lists: **correct**, **correct but not ideal** (with a note on why), and **typical mistakes** (with targeted feedback). After checking, you grade yourself (Again / Hard / Good / Easy, or keys 1–4), and a simple SM-2 scheduler decides when the card comes back. If your answer is right but not in the list yet, you can save it as a new accepted or "not ideal" answer.
+Answers are checked automatically against three lists: **correct**, **correct but not ideal** (with a note on why), and **typical mistakes** (with targeted feedback). After checking, you grade yourself (Again / Hard / Good / Easy, or keys 1–4). If your answer is right but not in the list yet, you can save it as a new accepted or "not ideal" answer.
+
+## Scheduling
+
+`js/srs.js` is a port of Anki's default scheduler (SM-2 based, with FSRS off), using Anki's default deck options:
+
+| Option | Value |
+| --- | --- |
+| Learning steps | 1m 10m |
+| Graduating interval / Easy interval | 1 day / 4 days |
+| Relearning steps | 10m |
+| Starting ease, Easy bonus, Hard interval | 2.50, 1.30, 1.20 |
+| New interval after a lapse, minimum interval | 0.00, 1 day |
+| Leech threshold | 8 lapses (the card is tagged, not suspended) |
+| New cards / max reviews per day | 20 / 200 (changeable in settings) |
+| Next day starts at, learn ahead limit | 4 AM, 20 minutes |
+
+Fuzz, late-review bonus, early reviews and the "at least one day longer" rules work as in Anki. Not ported: FSRS, the load balancer (it only picks which day inside the fuzz range), "easy days", and multi-day learning steps. "Alle üben / 全部練習" is a practice mode that does not change the schedule.
+
+Run the scheduler tests with:
+
+```bash
+node tests/srs.test.mjs
+```
 
 ## Run it
 
@@ -70,7 +93,7 @@ Japanese cards use `prompt.verb`, `prompt.meaning`, `prompt.formLabel`, `prompt.
 | `js/app.js` | Routing, views, events |
 | `js/topics.js` | Languages, topics, and how each topic's card is drawn |
 | `js/check.js` | Answer normalization, matching, word diff |
-| `js/srs.js` | Scheduler |
+| `js/srs.js` | Scheduler (port of Anki's SM-2 defaults) |
 | `js/store.js` | Card library, import/export, localStorage |
 | `js/text.js` | Escaping, furigana, romaji → hiragana |
 | `js/i18n.js` | UI strings (German page in German, Japanese page in Traditional Chinese) |
