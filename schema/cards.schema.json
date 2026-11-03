@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "grammatik-kanpeki.cards.v1",
+  "title": "Grammatik Kanpeki card file",
+  "description": "A set of grammar cards. Used for the bundled data files and for import/export.",
+  "type": "object",
+  "required": ["format", "version", "cards"],
+  "properties": {
+    "format": { "const": "grammatik-kanpeki.cards" },
+    "version": { "const": 1 },
+    "exportedAt": { "type": "string", "format": "date-time" },
+    "cards": { "type": "array", "items": { "$ref": "#/$defs/card" } },
+    "progress": {
+      "description": "Optional review state per card id (only in exports with progress).",
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/reviewState" }
+    }
+  },
+  "$defs": {
+    "localized": {
+      "description": "Plain string, or an object keyed by language code (de, en, zh-Hant).",
+      "oneOf": [
+        { "type": "string" },
+        {
+          "type": "object",
+          "properties": {
+            "de": { "type": "string" },
+            "en": { "type": "string" },
+            "zh-Hant": { "type": "string" }
+          },
+          "additionalProperties": { "type": "string" }
+        }
+      ]
+    },
+    "answerWithNote": {
+      "type": "object",
+      "required": ["text"],
+      "properties": {
+        "text": { "type": "string" },
+        "note": { "$ref": "#/$defs/localized" }
+      }
+    },
+    "card": {
+      "type": "object",
+      "required": ["id", "language", "topic", "source", "prompt", "answer"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "description": "Unique and stable. Import merges by id." },
+        "language": { "enum": ["de", "ja"] },
+        "topic": { "type": "string", "examples": ["nominalisierung", "verb-conjugation"] },
+        "source": { "type": "string", "description": "Where the card came from, e.g. \"demo\", a book title, a URL." },
+        "level": { "type": "string", "examples": ["C1", "N5"] },
+        "tags": { "type": "array", "items": { "type": "string" } },
+        "createdAt": { "type": "string" },
+        "prompt": {
+          "description": "Fields shown on the front of the card. Shape depends on the topic.",
+          "type": "object"
+        },
+        "answer": {
+          "description": "What the learner types, and how it is judged.",
+          "type": "object",
+          "required": ["accepted"],
+          "properties": {
+            "accepted": {
+              "description": "Fully correct answers. The first one is the model answer.",
+              "type": "array", "minItems": 1, "items": { "type": "string" }
+            },
+            "acceptable": {
+              "description": "Correct, but not so good (clumsy, colloquial, wrong register...). Each with a note why.",
+              "type": "array", "items": { "$ref": "#/$defs/answerWithNote" }
+            },
+            "mistakes": {
+              "description": "Typical wrong answers with targeted feedback.",
+              "type": "array", "items": { "$ref": "#/$defs/answerWithNote" }
+            }
+          }
+        },
+        "explanation": { "$ref": "#/$defs/localized" },
+        "meta": { "type": "object", "description": "Topic-specific facets for filtering (e.g. verbClass, form)." }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "topic": { "const": "nominalisierung" } } },
+          "then": {
+            "properties": {
+              "prompt": {
+                "type": "object",
+                "required": ["verbalstil"],
+                "properties": {
+                  "verbalstil": { "type": "string", "description": "The sentence in Verbalstil, shown to the learner." },
+                  "hint": { "type": "string", "description": "Optional tip, hidden until clicked." },
+                  "translation": { "$ref": "#/$defs/localized", "description": "Optional en / zh-Hant translation, hidden until clicked." }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "topic": { "const": "verb-conjugation" } } },
+          "then": {
+            "properties": {
+              "prompt": {
+                "type": "object",
+                "required": ["verb", "meaning", "sentence", "translation"],
+                "properties": {
+                  "verb": { "type": "string", "description": "Dictionary form, furigana markup {漢字|かんじ}." },
+                  "meaning": { "type": "string", "description": "Meaning of the verb in Traditional Chinese." },
+                  "formLabel": { "type": "string", "description": "Name of the target form, e.g. ない形（否定）." },
+                  "sentence": { "type": "string", "description": "Japanese sentence with furigana markup; ___ marks the blank to fill." },
+                  "translation": { "$ref": "#/$defs/localized", "description": "Full translation of the sentence (zh-Hant)." }
+                }
+              },
+              "meta": {
+                "type": "object",
+                "properties": {
+                  "verbClass": { "enum": ["godan", "kami-ichidan", "shimo-ichidan", "irregular"] },
+                  "form": { "type": "string", "examples": ["nai", "nakatta", "te", "ta", "masu", "mashita", "masen", "tai", "teiru", "volitional", "mashou"] }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "reviewState": {
+      "type": "object",
+      "properties": {
+        "reps": { "type": "integer" },
+        "interval": { "type": "number", "description": "Days." },
+        "ease": { "type": "number" },
+        "due": { "type": "number", "description": "Epoch milliseconds." },
+        "lapses": { "type": "integer" },
+        "last": { "type": "number" }
+      }
+    }
+  }
+}
