@@ -38,8 +38,11 @@ const clamp = (v, lo, hi) => Math.min(Math.max(v, lo), hi);
 // A "day" runs from dayStartHour to dayStartHour (local time), numbered consecutively.
 
 export function dayIndex(t = Date.now(), cfg = DEFAULTS) {
-  const d = new Date(t - cfg.dayStartHour * 3600 * 1000);
-  return Math.round(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / DAY_MS);
+  // Compare the local clock hour, not "t minus 4 hours": on the night summer time starts,
+  // 4 AM is only 3 hours after midnight.
+  const d = new Date(t);
+  const day = Math.round(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / DAY_MS);
+  return d.getHours() < cfg.dayStartHour ? day - 1 : day;
 }
 
 /** Local timestamp when the given day number begins. */
@@ -262,3 +265,35 @@ export const isNew = (st) => !st || st.type === 'new';
 export const isLearning = (st) => !!st && (st.type === 'learning' || st.type === 'relearning');
 export const isReviewDue = (st, now = Date.now(), cfg = DEFAULTS) => !!st && st.type === 'review' && st.dueDay <= dayIndex(now, cfg);
 export const learningDueToday = (st, now = Date.now(), cfg = DEFAULTS) => isLearning(st) && st.due < dayStartMs(dayIndex(now, cfg) + 1, cfg);
+
+/** Items for which isDemo is false first, then the demo ones; order inside each group is kept. */
+export function demoLast(items, isDemo) {
+  return [...items.filter((x) => !isDemo(x)), ...items.filter((x) => isDemo(x))];
+}
+
+/** Spread new cards evenly between reviews, as Anki does. */
+export function mixIn(reviews, news) {
+  const out = [];
+  let r = 0;
+  news.forEach((n, i) => {
+    const upTo = Math.round(((i + 1) * reviews.length) / (news.length + 1));
+    while (r < upTo) out.push(reviews[r++]);
+    out.push(n);
+  });
+  while (r < reviews.length) out.push(reviews[r++]);
+  return out;
+}
+
+/**
+ * The day's review queue. due: review cards, most overdue first; fresh: new cards in deck order.
+ * Real cards fill the daily limits first and are all shown before any demo card.
+ */
+export function reviewQueue(due, fresh, { reviewLimit, newLimit, isDemo = () => false }) {
+  const d = demoLast(due, isDemo).slice(0, reviewLimit);
+  const f = demoLast(fresh, isDemo).slice(0, newLimit);
+  const real = (x) => !isDemo(x);
+  return [
+    ...mixIn(d.filter(real), f.filter(real)),
+    ...mixIn(d.filter(isDemo), f.filter(isDemo)),
+  ];
+}

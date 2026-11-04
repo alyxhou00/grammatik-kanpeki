@@ -16,7 +16,11 @@
         "translation": {
           "en": "If you operate the machine incorrectly, it can be damaged.",
           "zh-Hant": "如果機器操作不當，可能會損壞。"
-        }
+        },
+        "words": [
+          { "text": "bedient", "lemma": "bedienen", "meaning": "ein Gerät oder eine Maschine benutzen und steuern", "pos": "Verb" },
+          { "text": "beschädigt", "lemma": "beschädigen", "meaning": "etwas teilweise kaputt machen", "pos": "Verb" }
+        ]
       },
       "answer": {
         "accepted": [
@@ -53,7 +57,12 @@
         "translation": {
           "en": "After the contracts had been signed, the cooperation began.",
           "zh-Hant": "合約簽署之後，雙方就開始合作了。"
-        }
+        },
+        "words": [
+          { "text": "Verträge", "lemma": "der Vertrag", "meaning": "schriftliche, rechtlich bindende Vereinbarung", "pos": "Nomen" },
+          { "text": "unterzeichnet", "lemma": "unterzeichnen", "meaning": "mit der eigenen Unterschrift versehen; unterschreiben", "pos": "Verb" },
+          { "text": "Zusammenarbeit", "lemma": "die Zusammenarbeit", "meaning": "gemeinsames Arbeiten an einer Sache", "pos": "Nomen" }
+        ]
       },
       "answer": {
         "accepted": [
@@ -87,7 +96,10 @@
         "translation": {
           "en": "Because costs rose sharply, the project was stopped.",
           "zh-Hant": "因為成本大幅上漲，專案被叫停了。"
-        }
+        },
+        "words": [
+          { "text": "gestiegen", "lemma": "steigen", "meaning": "höher werden, zunehmen (Preise, Kosten, Zahlen)", "pos": "Verb" }
+        ]
       },
       "answer": {
         "accepted": [
@@ -131,7 +143,11 @@
         "translation": {
           "en": "Although he had prepared intensively, he did not pass the exam.",
           "zh-Hant": "雖然他做了密集的準備，還是沒有通過考試。"
-        }
+        },
+        "words": [
+          { "text": "intensiv", "meaning": "gründlich und mit viel Einsatz", "pos": "Adjektiv" },
+          { "text": "bestand", "lemma": "bestehen", "meaning": "(eine Prüfung) mit Erfolg abschließen", "pos": "Verb" }
+        ]
       },
       "answer": {
         "accepted": [
@@ -167,7 +183,11 @@
         "translation": {
           "en": "To ensure quality, all products are checked regularly.",
           "zh-Hant": "為了確保品質，所有產品都會定期檢驗。"
-        }
+        },
+        "words": [
+          { "text": "sichern", "meaning": "dafür sorgen, dass etwas erhalten bleibt; gewährleisten", "pos": "Verb" },
+          { "text": "regelmäßig", "meaning": "in gleichen Abständen, immer wieder", "pos": "Adjektiv" }
+        ]
       },
       "answer": {
         "accepted": [
@@ -203,7 +223,12 @@
         "translation": {
           "en": "While the construction work is being carried out, the road remains closed.",
           "zh-Hant": "施工期間，這條路會持續封閉。"
-        }
+        },
+        "words": [
+          { "text": "Bauarbeiten", "lemma": "die Bauarbeiten", "meaning": "Arbeiten beim Bauen oder Reparieren (nur Plural)", "pos": "Nomen" },
+          { "text": "durchgeführt", "lemma": "durchführen", "meaning": "ausführen, in die Tat umsetzen", "pos": "Verb" },
+          { "text": "gesperrt", "lemma": "sperren", "meaning": "den Zugang oder die Durchfahrt nicht erlauben", "pos": "Verb" }
+        ]
       },
       "answer": {
         "accepted": [
@@ -236,7 +261,13 @@
         "translation": {
           "en": "So that the application can be processed, it must be submitted on time.",
           "zh-Hant": "為了讓申請能被受理，必須準時提交。"
-        }
+        },
+        "words": [
+          { "text": "Antrag", "lemma": "der Antrag", "meaning": "schriftliche Bitte an eine Behörde, z. B. um eine Genehmigung", "pos": "Nomen" },
+          { "text": "bearbeitet", "lemma": "bearbeiten", "meaning": "sich mit einer Sache befassen und sie erledigen", "pos": "Verb" },
+          { "text": "rechtzeitig", "meaning": "früh genug, nicht zu spät", "pos": "Adjektiv" },
+          { "text": "eingereicht", "lemma": "einreichen", "meaning": "ein Dokument offiziell abgeben", "pos": "Verb" }
+        ]
       },
       "answer": {
         "accepted": [
@@ -271,7 +302,11 @@
         "translation": {
           "en": "As soon as the goods have arrived, we will let you know.",
           "zh-Hant": "貨物一到，我們就會通知您。"
-        }
+        },
+        "words": [
+          { "text": "Ware", "lemma": "die Ware", "meaning": "Produkt, das gehandelt, gekauft oder verkauft wird", "pos": "Nomen" },
+          { "text": "eingetroffen", "lemma": "eintreffen", "meaning": "ankommen (Personen, Lieferungen, Nachrichten)", "pos": "Verb" }
+        ]
       },
       "answer": {
         "accepted": [
@@ -310,7 +345,11 @@
         "translation": {
           "en": "By exercising regularly, you can prevent cardiovascular disease.",
           "zh-Hant": "透過規律運動，可以預防心血管疾病。"
-        }
+        },
+        "words": [
+          { "text": "Herz-Kreislauf-Erkrankungen", "lemma": "die Herz-Kreislauf-Erkrankung", "meaning": "Krankheit des Herzens oder der Blutgefäße", "pos": "Nomen" },
+          { "text": "vorbeugen", "lemma": "einer Sache vorbeugen", "meaning": "im Voraus etwas tun, damit etwas Schlimmes nicht eintritt", "pos": "Verb" }
+        ]
       },
       "answer": {
         "accepted": [
@@ -385,7 +424,14 @@
         "translation": {
           "en": "The government's decision to cut taxes was heavily criticised.",
           "zh-Hant": "政府決定減稅一事，遭到強烈批評。"
-        }
+        },
+        "words": [
+          { "text": "Regierung", "lemma": "die Regierung", "meaning": "Gruppe von Personen, die einen Staat leitet", "pos": "Nomen" },
+          { "text": "beschlossen", "lemma": "beschließen", "meaning": "nach Überlegung offiziell entscheiden", "pos": "Verb" },
+          { "text": "senken", "meaning": "niedriger machen, reduzieren", "pos": "Verb" },
+          { "text": "heftig", "meaning": "sehr stark, mit großer Kraft", "pos": "Adjektiv" },
+          { "text": "kritisiert", "lemma": "kritisieren", "meaning": "sagen, was man an etwas schlecht findet", "pos": "Verb" }
+        ]
       },
       "answer": {
         "accepted": [
@@ -420,7 +466,12 @@
         "translation": {
           "en": "Before you start using the device, you should read the manual.",
           "zh-Hant": "開始使用這台設備之前，應該先閱讀使用說明書。"
-        }
+        },
+        "words": [
+          { "text": "Gerät", "lemma": "das Gerät", "meaning": "technischer Apparat, z. B. Maschine oder Werkzeug", "pos": "Nomen" },
+          { "text": "in Betrieb nimmt", "lemma": "etwas in Betrieb nehmen", "meaning": "anfangen, ein Gerät oder eine Anlage zu benutzen", "pos": "Wendung" },
+          { "text": "Bedienungsanleitung", "lemma": "die Bedienungsanleitung", "meaning": "Text, der erklärt, wie man ein Gerät benutzt", "pos": "Nomen" }
+        ]
       },
       "answer": {
         "accepted": [

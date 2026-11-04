@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { emptyValues, valuesFromCard, cardFromValues, formErrors, missingFurigana, makeId, USER_SOURCE } from '../js/cardform.js';
 import { validateCard } from '../js/store.js';
+import { LANGS } from '../js/topics.js';
 import { checkAnswer } from '../js/check.js';
 
 const today = '2026-11-04';
@@ -67,7 +68,7 @@ for (const file of manifest.files) {
     const { updatedAt, ...rest } = back;
     assert.equal(updatedAt, today);
     // Saving an unchanged card gives the same card. Plain-string notes and hints come back as { noteLang: text }.
-    const norm = (c) => JSON.parse(JSON.stringify(c, (k, x) => (['note', 'hint', 'task'].includes(k) && typeof x === 'string' ? { [card.language === 'ja' ? 'zh-Hant' : 'de']: x } : x)));
+    const norm = (c) => JSON.parse(JSON.stringify(c, (k, x) => (['note', 'hint', 'task'].includes(k) && typeof x === 'string' ? { [LANGS[card.language].noteLang]: x } : x)));
     assert.deepEqual(norm(rest), norm(card), card.id);
     roundTrips++;
   }

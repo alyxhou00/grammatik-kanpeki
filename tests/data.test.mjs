@@ -2,11 +2,12 @@
 // Run: node tests/data.test.mjs
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { validateCard, upgradeCard, VERSION } from '../js/store.js';
+import { validateCard, upgradeCard, VERSION, isDemoSource } from '../js/store.js';
 import { checkAnswer } from '../js/check.js';
 import { wordSegments, toSurface, toKana, BLANK } from '../js/text.js';
-import { LANGS, CARD_TYPES, topicOf, ancestry, deckIds, typeOf, labelsOf } from '../js/topics.js';
-import { sentenceOf } from '../js/cardtypes.js';
+import { LANGS, LANG_FIELDS, CARD_TYPES, topicOf, ancestry, deckIds, typeOf, labelsOf, facetsOf, vocabTopic } from '../js/topics.js';
+import { sentenceOf, vocabCardFrom } from '../js/cardtypes.js';
+import { UI } from '../js/i18n.js';
 
 const KANJI = /[一-鿿]/;
 const errors = [];
@@ -24,6 +25,34 @@ for (const [lang, L] of Object.entries(LANGS)) {
     if (!CARD_TYPES.includes(typeOf({ language: lang, topic: tp.id }))) fail(`${lang}/${tp.id}`, 'no card type');
   }
 }
+// ---------- every course offers the same things ----------
+
+{
+  const keysOf = (o, p = '') => Object.entries(o).flatMap(([k, v]) =>
+    v && typeof v === 'object' && !Array.isArray(v) ? keysOf(v, `${p}${k}.`) : [`${p}${k}`]).sort();
+  const [first, ...rest] = Object.keys(LANGS);
+  // facetLabels only names the facets a course's own topics use.
+  const uiKeys = (lang) => keysOf(UI[lang]).filter((k) => !k.startsWith('facetLabels.'));
+  for (const lang of rest) {
+    assert.deepEqual(keysOf(LANGS[lang]), keysOf(LANGS[first]), `${lang}: same course settings as ${first}`);
+    assert.deepEqual(uiKeys(lang), uiKeys(first), `${lang}: same UI strings as ${first}`);
+  }
+  for (const lang of Object.keys(LANGS)) {
+    // Every course sets every course field, with the right type, and nothing else.
+    for (const [field, type] of Object.entries(LANG_FIELDS)) {
+      assert.equal(typeof LANGS[lang][field], type, `${lang}: course field "${field}" is a ${type}`);
+      assert.ok(LANGS[lang][field] !== null, `${lang}: course field "${field}" is set`);
+    }
+    assert.deepEqual(Object.keys(LANGS[lang]).sort(), Object.keys(LANG_FIELDS).sort(), `${lang}: only the fields in LANG_FIELDS`);
+    for (const key of ['title', 'html']) assert.ok(LANGS[lang].brand[key], `${lang}: brand.${key}`);
+    assert.ok(UI[lang], `${lang}: UI strings`);
+    assert.equal(typeOf({ language: lang, topic: vocabTopic(lang)?.id }), 'flip', `${lang}: has a word list (flip topic "vocab")`);
+    for (const tp of LANGS[lang].topics) {
+      for (const key of Object.keys(facetsOf(lang, tp.id))) assert.ok(UI[lang].facetLabels[key], `${lang}/${tp.id}: facet "${key}" has a label`);
+    }
+  }
+}
+
 // Sub-topics inherit type and labels, and a parent deck includes its sub-topics.
 assert.deepEqual(deckIds('de', 'deklination'), ['deklination', 'n-deklination']);
 assert.equal(typeOf({ language: 'de', topic: 'n-deklination' }), 'cloze');
@@ -52,6 +81,11 @@ assert.deepEqual(ancestry('de', 'n-deklination').map((x) => x.id), ['n-deklinati
 assert.deepEqual(wordSegments('Der Mann wartet an der Tür.', [{ text: 'an' }]).filter((x) => x.word).map((x) => x.text), ['an']);
 assert.equal(wordSegments('Der Mann wartet.', [{ text: 'an' }]).filter((x) => x.word).length, 0);
 
+// ---------- demo sources (scheduled after the user's own cards) ----------
+
+for (const s of ['demo', 'demo2', 'demo3', 'demo10', 'demo-n5', 'demo2-b1', 'demo-b2-extra']) assert.ok(isDemoSource(s), `${s} is a demo source`);
+for (const s of ['', undefined, 'user', 'demographie', 'Demo', 'demo-', 'my-demo', 'demo n5', 'import:demo.json']) assert.ok(!isDemoSource(s), `${s} is not a demo source`);
+
 // ---------- bundled cards ----------
 
 const root = new URL('../data/', import.meta.url);
@@ -67,6 +101,7 @@ for (const file of manifest.files) {
     checked++;
     if (ids.has(c.id)) fail(c.id, 'duplicate id');
     ids.add(c.id);
+    if (/\.demo\d*\.json$/.test(file) && !isDemoSource(c.source)) fail(c.id, `card in a demo file needs a demo source, not "${c.source}"`);
     if (upgradeCard(c) !== c) fail(c.id, 'uses version 1 fields');
     for (const e of validateCard(c)) fail(c.id, e);
     if (!c.source) fail(c.id, 'source missing');
@@ -85,9 +120,14 @@ for (const file of manifest.files) {
     const found = wordSegments(sentence, words).filter((s) => s.word).length;
     if (found !== words.length) fail(c.id, `only ${found}/${words.length} words found in the sentence`);
     for (const w of words) if (!w.meaning || !w.pos) fail(c.id, `word without meaning/pos: ${w.text}`);
+    // Saving a word gives a valid word-list card in the same course.
+    for (const w of words) {
+      const saved = vocabCardFrom({ lemma: w.lemma || w.text, meaning: w.meaning, pos: w.pos }, c, c.language);
+      for (const e of validateCard(saved)) fail(c.id, `saved word "${w.text}": ${e}`);
+    }
 
-    // Japanese: every kanji has furigana.
-    if (c.language === 'ja') {
+    // Courses with furigana: every kanji has it.
+    if (LANGS[c.language].ruby) {
       const texts = [sentence, p.base?.word, ...c.answer.accepted, ...words.map((w) => w.lemma || w.text)].filter(Boolean);
       for (const x of texts) if (KANJI.test(toKana(x))) fail(c.id, `kanji without furigana: ${x}`);
     }

@@ -38,9 +38,8 @@ assert.equal(speech.pickVoice('ja-JP', 'haruka').voiceURI, 'haruka');
 assert.equal(speech.pickVoice('ja-JP', 'gone').voiceURI, 'nanami', 'a removed voice falls back to the best one');
 assert.equal(speech.canSpeak('fr-FR'), false);
 
-// Every course that reads aloud has a voice locale and a sane default speed.
+// Every course has a voice locale and a sane default speed.
 for (const [lang, L] of Object.entries(LANGS)) {
-  if (!L.speech) continue;
   assert.match(L.speech.locale, /^[a-z]{2}-[A-Z]{2}$/, lang);
   assert.ok(L.speech.rate > 0.3 && L.speech.rate <= 2, lang);
 }

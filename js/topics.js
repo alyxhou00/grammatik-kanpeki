@@ -1,4 +1,8 @@
-// Languages and topics. Pure data plus tree helpers: no DOM, so tests and the store can import it.
+// Languages and topics. Data plus tree helpers: no DOM, so tests, the store and the answer checker can import it.
+//
+// LANGS[lang] is everything that differs between courses; the rest of the code reads these fields
+// instead of asking which language it is. Every course sets every field (LANG_FIELDS, checked by
+// tests/data.test.mjs), so a new course is a new entry here plus its UI strings in js/i18n.js.
 //
 // A topic is a deck in the sidebar. Topics form a tree through `parent`; a parent deck studies its
 // own cards and the cards of every sub-topic (as in Anki). Each topic says which card type draws its
@@ -12,11 +16,32 @@
 //   type     'rewrite' | 'cloze' | 'flip' (inherited from the parent)
 //   labels   per-type labels, e.g. { source: 'Verbalstil', target: 'Nominalstil' } (merged with the parent's)
 //   facets   names for card.meta values, shown as chips on the back: { verbClass: { godan: '…' } }
-//
-// A course reads its sentences aloud when it sets `speech`: { locale (BCP 47, picks the voice), rate
-// (default speed; beginners get a slower one) }. See js/speech.js.
+
+import { normalizeDe, normalizeJa } from './text.js';
 
 export const CARD_TYPES = ['rewrite', 'cloze', 'flip'];
+
+/** The course fields and their types. */
+export const LANG_FIELDS = {
+  label: 'string', // name in the course menu
+  glyph: 'string', // badge in the course menu
+  tagline: 'string', // course menu subtitle
+  htmlLang: 'string', // <html lang> (the UI language)
+  noteLang: 'string', // language of answer notes, hints and tasks
+  translation: 'string', // 'aid': translations hidden behind a click | 'always': always shown
+  explainLangs: 'object', // explanation languages offered in the settings: [[code, label], …]
+  brand: 'object', // { title: plain text for <title>, html: markup for the header logo }
+  dateLocale: 'string', // Intl locale for dates in the card list
+  level: 'string', // placeholder for a card's level in the card form
+  normalize: 'function', // answer text → comparable form
+  nearMatch: 'boolean', // wrong case or a word or two off counts as "close", and the diff picks the nearest answer
+  ruby: 'boolean', // texts use furigana markup {漢字|かんじ}: answers match by surface or reading,
+  //                    the card form previews ruby and warns about kanji without it, and the furigana setting is shown
+  romajiInput: 'boolean', // typed romaji is read as hiragana (preview, shown answer, saved answers)
+  sentenceClass: 'string', // extra class on prompt sentences ('' for none)
+  speech: 'object', // read aloud (js/speech.js): { locale: BCP 47 tag that picks the voice, rate: default speed }
+  topics: 'object', // the decks, see above
+};
 
 export const LANGS = {
   de: {
@@ -24,9 +49,17 @@ export const LANGS = {
     glyph: 'de',
     tagline: 'auf Deutsch erklärt',
     htmlLang: 'de',
-    noteLang: 'de', // language of answer notes
-    translation: 'aid', // translations are hidden behind a click
+    noteLang: 'de',
+    translation: 'aid',
     explainLangs: [['de', 'DE'], ['en', 'EN'], ['zh-Hant', '中文']],
+    brand: { title: 'Grammatik Kanpeki', html: '<span lang="de">Grammatik</span> <span class="brand-2" lang="de">Kanpeki</span>' },
+    dateLocale: 'de-DE',
+    level: 'C1',
+    normalize: normalizeDe,
+    nearMatch: true,
+    ruby: false,
+    romajiInput: false,
+    sentenceClass: '',
     speech: { locale: 'de-DE', rate: 1 },
     topics: [
       {
@@ -44,6 +77,7 @@ export const LANGS = {
         id: 'verben-mit-praepositionen', label: 'Verben mit Präpositionen', type: 'cloze',
         labels: { placeholder: 'Präposition (und Artikel) eingeben …' },
       },
+      { id: 'vocab', label: 'Meine Wortliste', group: 'vocab', type: 'flip' },
     ],
   },
   ja: {
@@ -54,6 +88,14 @@ export const LANGS = {
     noteLang: 'zh-Hant',
     translation: 'always', // beginner: the Chinese translation is always shown
     explainLangs: [['zh-Hant', '中文'], ['en', 'EN'], ['de', 'DE']],
+    brand: { title: 'グラマティック完璧', html: '<span lang="ja">グラマティック</span><span class="brand-2" lang="ja">完璧</span>' },
+    dateLocale: 'zh-TW',
+    level: 'N5',
+    normalize: normalizeJa,
+    nearMatch: false,
+    ruby: true,
+    romajiInput: true,
+    sentenceClass: 'ja',
     speech: { locale: 'ja-JP', rate: 0.85 },
     topics: [
       {

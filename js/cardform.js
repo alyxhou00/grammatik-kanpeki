@@ -91,17 +91,17 @@ export function formErrors(values, lang) {
   return errs;
 }
 
-/** Japanese text with kanji but no furigana: it shows without readings, and kana answers are not recognized. */
+/** Text with kanji but no furigana (courses with `ruby`): it shows without readings, and kana answers are not recognized. */
 export function missingFurigana(values, lang) {
-  if (lang !== 'ja') return [];
+  if (!LANGS[lang].ruby) return [];
   const texts = [values.sentence, values.word, values.baseWord, values.example, ...lines(values.accepted)];
   return texts.filter((x) => x && KANJI.test(toKana(x)));
 }
 
-/** Japanese answers typed in romaji are stored as hiragana, the way the learner's own saved answers are. */
+/** Answers typed in romaji (courses with `romajiInput`) are stored as hiragana, the way the learner's own saved answers are. */
 const answerText = (s, lang) => {
   const v = String(s ?? '').trim();
-  return lang === 'ja' && isRomaji(v) ? romajiToHiragana(v) : v;
+  return LANGS[lang].romajiInput && isRomaji(v) ? romajiToHiragana(v) : v;
 };
 
 /** Answer rows with notes. A note the edited card had in other languages keeps those languages. */

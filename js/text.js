@@ -152,3 +152,24 @@ export function romajiToHiragana(input) {
   }
   return out;
 }
+
+// ---------- answer normalizers (a course picks one as LANGS[lang].normalize) ----------
+
+export function normalizeDe(s) {
+  return String(s ?? '')
+    .normalize('NFC')
+    .replace(/[„“”«»"]/g, '"')
+    .replace(/[‚‘’']/g, "'")
+    .replace(/[–—]/g, '-')
+    .replace(/\s+/g, ' ')
+    .replace(/\s+([,.;:!?])/g, '$1')
+    .trim()
+    .replace(/[.!?]+$/, '')
+    .trim();
+}
+
+export function normalizeJa(s) {
+  let t = String(s ?? '').normalize('NFKC').replace(/[\s。、．，！？!?.,「」]/g, '');
+  if (isRomaji(t)) t = romajiToHiragana(t);
+  return kataToHira(t);
+}

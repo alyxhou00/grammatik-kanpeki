@@ -1,5 +1,6 @@
 import * as store from './store.js';
-import { answer, preview, DEFAULTS, dayStartMs, isNew, isLearning, isReviewDue, learningDueToday } from './srs.js';
+import { answer, preview, DEFAULTS, dayIndex, dayStartMs, isNew, isLearning, isReviewDue, learningDueToday, reviewQueue, demoLast } from './srs.js';
+import { streaks, heatmap, countOn, langsOn, weekday } from './studylog.js';
 import { checkAnswer } from './check.js';
 import { UI } from './i18n.js';
 import { LANGS, topicOf, topicType, ancestry, childrenOf, groupOf, labelsOf, facetsOf, vocabTopic } from './topics.js';
@@ -16,6 +17,7 @@ const ICON = {
   edit: '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16v4ZM13.5 6.5l4 4"/></svg>',
   plus: '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M12 5v14M5 12h14"/></svg>',
   trash: '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M10 11v6M14 11v6M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-12M9 7V4h6v3"/></svg>',
+  flame: '<svg class="flame" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12.6 2.2c.4 3-1.1 4.7-2.6 6.3C8.5 10.1 7 11.7 7 14.3a5 5 0 0 0 10 0c0-1.6-.6-2.9-1.4-3.9-.2 1.2-.8 2-1.7 2.4.5-2.9-.2-6.9-1.3-10.6Z"/></svg>',
 };
 
 const state = { lang: 'de', topic: 'nominalisierung', view: 'learn', sessions: {}, loadError: false, flash: '', menuOpen: false };
@@ -89,7 +91,7 @@ function setMenu(open) {
 }
 mobileQuery.addEventListener('change', () => setMenu(false));
 
-// ---------- word popup (hover a word in a Japanese sentence → save it to the word list) ----------
+// ---------- word popup (hover a word in a sentence → save it to the course's word list) ----------
 
 let popWord = null; // the .word element the popup belongs to
 let popHideTimer = null;
@@ -166,6 +168,8 @@ document.addEventListener('mouseover', (e) => {
   const w = e.target.closest('.word[data-word]');
   if (w) showPop(w);
   else if (e.target.closest('#word-pop')) clearTimeout(popHideTimer);
+  const heat = e.target.closest('[data-heat-day]');
+  if (heat) showHeatDay(Number(heat.dataset.heatDay));
 });
 document.addEventListener('mouseout', (e) => {
   if (!canHover.matches || !popWord) return;
@@ -233,17 +237,6 @@ function pickNext(s) {
   return null;
 }
 
-function mixIn(reviews, news) {
-  const out = [];
-  let r = 0;
-  news.forEach((n, i) => {
-    const upTo = Math.round(((i + 1) * reviews.length) / (news.length + 1));
-    while (r < upTo) out.push(reviews[r++]);
-    out.push(n);
-  });
-  while (r < reviews.length) out.push(reviews[r++]);
-  return out;
-}
 
 // ---------- render ----------
 
@@ -310,6 +303,96 @@ function setLangMenu(open, focus = 'current') {
   }
 }
 
+// ---------- streak and heatmap (data in js/studylog.js) ----------
+
+/** The flame in the top bar: the current streak, lit once something was studied today. */
+function renderStreakBtn() {
+  const st = streaks(store.getStudyLog(), dayIndex());
+  const btn = $('#btn-streak');
+  const label = t().streak.button(st.current, st.studiedToday);
+  btn.classList.toggle('lit', st.studiedToday);
+  btn.innerHTML = `${ICON.flame}<span class="streak-num">${st.current}</span>`;
+  btn.title = label;
+  btn.setAttribute('aria-label', label);
+}
+
+const dayDate = (day) => new Date(day * 864e5); // format with timeZone: 'UTC'
+
+/** "Mi., 5. Nov. 2026: 12 Karten (Deutsch 8 · 日本語 4)" */
+function heatDayLine(day) {
+  const T = t();
+  const log = store.getStudyLog();
+  const date = new Intl.DateTimeFormat(T.locale, { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }).format(dayDate(day));
+  const langs = langsOn(log, day);
+  const split = langs.length > 1 ? langs.map(([l, n]) => `${LANGS[l]?.label || l} ${n}`).join(' · ') : '';
+  return T.streak.dayLine(date, T.streak.cards(countOn(log, day)), split);
+}
+
+function showHeatDay(day) {
+  const info = $('#heat-info');
+  if (!info) return;
+  info.textContent = heatDayLine(day);
+  for (const el of document.querySelectorAll('.hc.sel')) el.classList.remove('sel');
+  $(`.hc[data-heat-day="${day}"]`)?.classList.add('sel');
+}
+
+function openStats() {
+  const T = t();
+  const S = T.streak;
+  const log = store.getStudyLog();
+  const today = dayIndex();
+  const st = streaks(log, today);
+  const hm = heatmap(log, today, { weekStart: T.weekStart });
+  const monthFmt = new Intl.DateTimeFormat(T.locale, { month: 'short', timeZone: 'UTC' });
+  const wdFmt = new Intl.DateTimeFormat(T.locale, { weekday: 'short', timeZone: 'UTC' });
+  // A month label sits above the week that holds the 1st; skipped if it would run into the previous one.
+  let lastCol = -9;
+  const months = hm.weeks.map((col, w) => {
+    const first = col.find((c) => c && dayDate(c.day).getUTCDate() === 1);
+    if (!first || w - lastCol < 3) return '';
+    lastCol = w;
+    return `<span style="--col:${w}">${esc(monthFmt.format(dayDate(first.day)))}</span>`;
+  }).join('');
+  // Weekday labels on Monday, Wednesday and Friday, as on GitHub.
+  const rows = [...Array(7)].map((_, r) => {
+    const day = hm.first + r;
+    return `<span>${[1, 3, 5].includes(weekday(day)) ? esc(wdFmt.format(dayDate(day))) : ''}</span>`;
+  }).join('');
+  const cells = hm.weeks.map((col) => col.map((c) => (c
+    ? `<span class="hc l${c.level}${c.day === today ? ' sel' : ''}" data-heat-day="${c.day}" title="${esc(heatDayLine(c.day))}"></span>`
+    : '<span class="hc out"></span>')).join('')).join('');
+  const stat = (num, lbl, cls = '') => `<div class="stat ${cls}"><span class="num">${num}</span><span class="lbl">${esc(lbl)}</span></div>`;
+  const dlg = $('#dlg-stats');
+  dlg.innerHTML = `<form method="dialog" class="dlg dlg-stats">
+    <header><h2>${esc(S.title)}</h2><button class="icon-btn" value="close" aria-label="${esc(T.close)}">✕</button></header>
+    <section>
+      <div class="stats streak-stats">
+        ${stat(`${ICON.flame}${st.current}`, S.current, `streak${st.studiedToday ? ' lit' : ''}`)}
+        ${stat(st.longest, S.longest)}
+        ${stat(st.days, S.daysStudied)}
+        ${stat(countOn(log, today), S.today)}
+      </div>
+      ${st.studiedToday ? '' : `<p class="hint">${esc(st.current ? S.keepGoing : S.startToday)}</p>`}
+    </section>
+    <section>
+      <div class="heat-wrap" id="heat-wrap">
+        <div class="heat-months" aria-hidden="true">${months}</div>
+        <div class="heat-body">
+          <div class="heat-days" aria-hidden="true">${rows}</div>
+          <div class="heat-grid" role="img" aria-label="${esc(S.heatLabel(hm.days, hm.total))}">${cells}</div>
+        </div>
+      </div>
+      <div class="heat-foot">
+        <p class="heat-info" id="heat-info" aria-live="polite">${esc(heatDayLine(today))}</p>
+        <span class="heat-legend" aria-hidden="true">${esc(S.less)}${[0, 1, 2, 3, 4].map((l) => `<span class="hc l${l}"></span>`).join('')}${esc(S.more)}</span>
+      </div>
+    </section>
+    <p class="hint small-print">${esc(S.local)}</p>
+  </form>`;
+  dlg.showModal();
+  $('#heat-wrap').scrollLeft = $('#heat-wrap').scrollWidth; // newest weeks in view on narrow screens
+}
+
 // ---------- theme ----------
 
 function applyTheme() {
@@ -326,15 +409,14 @@ function render() {
   document.body.classList.toggle('no-furigana', !settings().furigana);
   const topicLabel = topicOf(state.lang, state.topic)?.label;
   const parents = ancestry(state.lang, state.topic).slice(1).reverse();
-  document.title = `${topicLabel.replace(/\u00AD/g, '')} · ${state.lang === 'ja' ? 'グラマティック完璧' : 'Grammatik Kanpeki'}`;
+  document.title = `${topicLabel.replace(/\u00AD/g, '')} · ${L.brand.title}`;
   const brand = $('#brand');
   brand.href = `#/${state.lang}/${L.topics[0].id}/learn`;
-  brand.innerHTML = state.lang === 'ja'
-    ? '<span lang="ja">グラマティック</span><span class="brand-2" lang="ja">完璧</span>'
-    : '<span lang="de">Grammatik</span> <span class="brand-2" lang="de">Kanpeki</span>';
+  brand.innerHTML = L.brand.html;
   setMenu(state.menuOpen);
 
   renderLangMenu();
+  renderStreakBtn();
   $('#btn-data .btn-label').textContent = t().importExport;
   $('#btn-data').setAttribute('aria-label', t().importExport);
   $('#btn-data').title = t().importExport;
@@ -388,7 +470,7 @@ function renderOverview() {
       <button class="btn" data-action="cram" ${c.total ? '' : 'disabled'}>${T.cram}</button>
       ${c.total ? '' : `<button class="btn primary" data-action="add-card">${esc(T.form.add)}</button>`}
     </div>
-    <p class="hint">${!c.total ? (state.topic === 'vocab' ? T.vocabEmpty : T.emptyTopic) : any ? `${T.cram}: ${T.cramHint}` : T.nothingToday}</p>
+    <p class="hint">${!c.total ? (groupOf(state.lang, state.topic) === 'vocab' ? T.vocabEmpty : T.emptyTopic) : any ? `${T.cram}: ${T.cramHint}` : T.nothingToday}</p>
   </section>`;
 }
 
@@ -420,8 +502,10 @@ function renderSession() {
         <h2>${T.waitTitle}</h2><p>${T.waitText(mins)}</p>
         <button class="btn" data-action="end">${T.end}</button></section>`;
     }
+    const st = streaks(store.getStudyLog(), dayIndex());
     return `<section class="panel done">
       <h2>${T.doneTitle}</h2><p>${T.doneText(s.reviewed)}</p>
+      ${st.studiedToday ? `<p class="done-streak">${ICON.flame}<span>${esc(T.streak.doneLine(st.current))}</span></p>` : ''}
       <button class="btn primary" data-action="end">${T.back}</button></section>`;
   }
   const card = store.getCard(s.current);
@@ -526,7 +610,7 @@ function renderCardList() {
   const T = t();
   const q = (state.search || '').trim().toLowerCase();
   const cards = store.cardsFor(state.lang, state.topic).filter((c) => !q || JSON.stringify(c).toLowerCase().includes(q));
-  const fmt = new Intl.DateTimeFormat(state.lang === 'de' ? 'de-DE' : 'zh-TW', { month: '2-digit', day: '2-digit' });
+  const fmt = new Intl.DateTimeFormat(LANGS[state.lang].dateLocale, { month: '2-digit', day: '2-digit' });
   $('#card-count').textContent = cards.length;
   $('#card-list').innerHTML = cards.length
     ? cards.map((c) => {
@@ -556,12 +640,11 @@ function startSession(mode) {
   if (mode === 'review') {
     const c = counts(state.lang, state.topic);
     const due = cards.filter((x) => isReviewDue(store.getProgress(x.id)))
-      .sort((a, b) => store.getProgress(a.id).dueDay - store.getProgress(b.id).dueDay)
-      .slice(0, c.review).map((x) => x.id);
-    const fresh = cards.filter((x) => isNew(store.getProgress(x.id))).slice(0, c.newToday).map((x) => x.id);
-    queue = mixIn(due, fresh);
+      .sort((a, b) => store.getProgress(a.id).dueDay - store.getProgress(b.id).dueDay);
+    const fresh = cards.filter((x) => isNew(store.getProgress(x.id)));
+    queue = reviewQueue(due, fresh, { reviewLimit: c.review, newLimit: c.newToday, isDemo: store.isDemo }).map((x) => x.id);
   } else {
-    queue = cards.map((c) => c.id).sort(() => Math.random() - 0.5);
+    queue = demoLast(cards.sort(() => Math.random() - 0.5), store.isDemo).map((c) => c.id);
   }
   state.sessions[key()] = { mode, queue, current: null, phase: 'answer', input: '', result: null, reviewed: 0, aids: new Set() };
   render();
@@ -581,6 +664,12 @@ function grade(g) {
   speech.stop();
   const s = session();
   const id = s.current;
+  // Every graded answer counts for the streak and the heatmap, in "Lernen" and in "Alle üben".
+  store.logAnswer({
+    lang: store.getCard(id)?.language || state.lang,
+    isNew: s.mode === 'review' && isNew(store.getProgress(id)),
+    again: g === 'again',
+  });
   if (s.mode === 'review') {
     const prev = store.getProgress(id);
     const kind = isNew(prev) ? 'new' : prev.type === 'review' ? 'review' : null;
@@ -606,7 +695,7 @@ function saveAlternative(kind) {
   const s = session();
   const id = s.current;
   let text = s.input.trim();
-  if (state.lang === 'ja' && isRomaji(text)) text = romajiToHiragana(text);
+  if (LANGS[state.lang].romajiInput && isRomaji(text)) text = romajiToHiragana(text);
   const note = $('#alt-note')?.value.trim();
   const card = store.addAlternative(id, text, kind, note);
   if (!card) return;
@@ -708,10 +797,10 @@ function openSettings() {
       <h3>${T.courseSettings}</h3>
       ${explainOpts.length > 1 ? `<label class="opt row">${T.explainLang}
         <select name="explainLang">${explainOpts.map(([v, l]) => `<option value="${v}" ${S.explainLang[state.lang] === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>` : ''}
-      ${state.lang === 'ja' ? `<label class="opt"><input type="checkbox" name="furigana" ${S.furigana ? 'checked' : ''}> ${T.furigana}</label>` : ''}
+      ${L.ruby ? `<label class="opt"><input type="checkbox" name="furigana" ${S.furigana ? 'checked' : ''}> ${T.furigana}</label>` : ''}
       <label class="opt"><input type="checkbox" name="showForm" ${S.showForm ? 'checked' : ''}> ${T.showForm}</label>
     </section>
-    ${L.speech ? speechSettingsHTML() : ''}
+    ${speechSettingsHTML()}
     <section><button type="button" class="btn danger" data-action="reset-progress">${T.resetProgress}</button></section>
   </form>`;
   if (!dlg.open) dlg.showModal();
@@ -779,7 +868,7 @@ function field(name, label, value, o = {}) {
     ? `<textarea ${attrs} rows="${o.rows}">${esc(value)}</textarea>`
     : `<input ${attrs} value="${esc(value)}">`;
   return `<label class="field"><span class="field-label">${esc(label)}</span>${control}
-    ${o.ruby ? `<span class="ruby-preview" lang="ja">${rubyPreview(value)}</span>` : ''}
+    ${o.ruby ? `<span class="ruby-preview" lang="${o.lang}">${rubyPreview(value)}</span>` : ''}
     ${o.help ? `<span class="field-help">${esc(o.help)}</span>` : ''}
     ${err ? `<span class="field-error">${esc(T[err])}</span>` : ''}</label>`;
 }
@@ -817,7 +906,6 @@ function renderCardForm() {
   const L = LANGS[lang];
   const type = topicType(lang, v.topic);
   const labels = { ...UI[lang].labels, ...labelsOf(lang, v.topic) };
-  const ja = lang === 'ja';
   const langs = formLangs(lang);
   const indent = (id) => '   '.repeat(ancestry(lang, id).length - 1);
   const topics = L.topics.map((tp) => `<option value="${tp.id}" ${tp.id === v.topic ? 'selected' : ''}>${indent(tp.id)}${esc(tp.label.replace(/­/g, ''))}</option>`).join('');
@@ -827,19 +915,19 @@ function renderCardForm() {
     front = field('source', labels.source, v.source, { rows: 3, lang, main: true })
       + field('task', T.task, v.task, { ph: T.taskPh, lang: L.noteLang });
   } else if (type === 'cloze') {
-    front = field('sentence', T.sentence, v.sentence, { rows: 2, lang, main: true, ruby: ja, help: T.sentenceHelp })
+    front = field('sentence', T.sentence, v.sentence, { rows: 2, lang, main: true, ruby: L.ruby, help: T.sentenceHelp })
       + `<div class="field-grid">
-          ${field('baseWord', T.baseWord, v.baseWord, { lang, ruby: ja })}
+          ${field('baseWord', T.baseWord, v.baseWord, { lang, ruby: L.ruby })}
           ${field('baseMeaning', T.baseMeaning, v.baseMeaning, { lang: L.noteLang })}
           ${field('basePos', T.pos, v.basePos, { lang: L.noteLang })}
         </div>`
       + field('task', T.task, v.task, { ph: T.taskPh, lang: L.noteLang });
   } else {
     front = `<div class="field-grid">
-        ${field('word', T.word, v.word, { lang, main: true, ruby: ja })}
+        ${field('word', T.word, v.word, { lang, main: true, ruby: L.ruby })}
         ${field('pos', T.pos, v.pos, { lang: L.noteLang })}
       </div>`
-      + field('example', T.example, v.example, { rows: 2, lang, ruby: ja });
+      + field('example', T.example, v.example, { rows: 2, lang, ruby: L.ruby });
   }
 
   const facetDefs = facetsOf(lang, v.topic);
@@ -862,7 +950,7 @@ function renderCardForm() {
       <section>
         <h3>${esc(T.answer)}</h3>
         ${field('accepted', type === 'flip' ? T.meanings : type === 'rewrite' ? labels.target : T.accepted, v.accepted, {
-          rows: type === 'rewrite' ? 3 : 2, lang: type === 'flip' ? L.noteLang : lang, ruby: ja && type !== 'flip',
+          rows: type === 'rewrite' ? 3 : 2, lang: type === 'flip' ? L.noteLang : lang, ruby: L.ruby && type !== 'flip',
           help: type === 'flip' ? T.meaningsHelp : T.acceptedHelp,
         })}
         ${answerRows('acceptable', T.acceptable)}
@@ -880,7 +968,7 @@ function renderCardForm() {
           <summary>${esc(T.more)}</summary>
           <div class="field-grid">
             ${facets}
-            ${field('level', T.level, v.level, { ph: ja ? 'N5' : 'C1' })}
+            ${field('level', T.level, v.level, { ph: L.level })}
             ${field('tags', T.tags, v.tags, { ph: T.tagsPh })}
           </div>
           ${field('cardSource', T.source, v.cardSource, { ph: T.sourcePh })}
@@ -989,6 +1077,8 @@ document.addEventListener('click', (e) => {
   if (word) return showPop(word); // tap on touch screens
   if (popWord && !e.target.closest('#word-pop')) hidePop();
   if (langMenuOpen() && !e.target.closest('.lang-menu')) setLangMenu(false);
+  const heat = e.target.closest('[data-heat-day]');
+  if (heat) return showHeatDay(Number(heat.dataset.heatDay)); // tap on touch screens
   const el = e.target.closest('[data-action],[data-grade],[data-explain],[data-topic],[data-toggle-topic],[data-view],[data-lang-switch]');
   if (!el) return;
   const a = el.dataset.action;
@@ -1047,6 +1137,7 @@ document.addEventListener('click', (e) => {
     case 'restore': store.restoreHidden(state.lang, state.topic); return render();
     case 'open-data': return openDataDialog();
     case 'open-settings': return openSettings();
+    case 'open-stats': return openStats();
     case 'do-export': return doExport();
     case 'import-overwrite': return doImport(true);
     case 'import-new': return doImport(false);
