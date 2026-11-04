@@ -22,9 +22,14 @@ globalThis.SpeechSynthesisUtterance = class { constructor(text) { this.text = te
 
 const speech = await import('../js/speech.js');
 
-// Furigana is read as kanji (the engine needs the word for its pitch accent); blanks are dropped.
-assert.equal(speech.speechText('{朝|あさ}ごはんはあまり{食|た}べない。'), '朝ごはんはあまり食べない。');
-assert.equal(speech.speechText('  Bei  ___ Bedienung '), 'Bei Bedienung');
+// Furigana is read as kanji (the engine needs the word for its pitch accent).
+assert.equal(speech.speechText('{朝|あさ}ごはんはあまり{食|た}べない。', 'ja-JP'), '朝ごはんはあまり食べない。');
+// A blank is a pause, never the answer; a pause at the start or before punctuation is dropped.
+assert.equal(speech.speechText('{私|わたし}は___{学生|がくせい}です。', 'ja-JP'), '私は、学生です。');
+assert.equal(speech.speechText('{朝|あさ}ごはんはあまり___。', 'ja-JP'), '朝ごはんはあまり。');
+assert.equal(speech.speechText('___{日本|にほん}{人|じん}です', 'ja-JP'), '日本人です');
+assert.equal(speech.speechText('  Er wartet ___ den Bus. ', 'de-DE'), 'Er wartet, den Bus.');
+assert.equal(speech.speechText('Ich helfe ___', 'de-DE'), 'Ich helfe');
 
 // Natural voices first; regions of the same language count ("de_CH" as Android writes it, too).
 assert.deepEqual(speech.voicesFor('ja-JP').map((v) => v.voiceURI), ['nanami', 'haruka']);

@@ -13,9 +13,21 @@ const synth = typeof window !== 'undefined' && 'speechSynthesis' in window ? win
 
 export const supported = () => !!synth;
 
-/** The text the engine gets: kanji spelling, no blank marker, single spaces. */
-export function speechText(s) {
-  return toSurface(s).replaceAll(BLANK, '').replace(/\s+/g, ' ').trim();
+// Comma-like marks that make the engine pause, per script.
+const GAP = { ja: '、', zh: '，' };
+
+/**
+ * The text the engine gets: kanji spelling and single spaces. A blank (___) becomes a comma, so it is
+ * heard as a short pause in one utterance (splitting the sentence would end each half with falling,
+ * sentence-final intonation). A gap at the start, or right before other punctuation, is dropped.
+ */
+export function speechText(s, locale = '') {
+  const gap = GAP[base(locale)] || ', ';
+  return toSurface(s).replaceAll(BLANK, gap)
+    .replace(/\s+/g, ' ').trim()
+    .replace(/\s+(?=[、，,])/g, '')
+    .replace(/^[、，,]\s*/, '')
+    .replace(/[、，,]\s*(?=[。．.!?！？、，,]|$)/g, '');
 }
 
 // Android reports "ja_JP"; everyone else "ja-JP".
@@ -51,7 +63,7 @@ let current = null; // keep a reference: Chrome drops callbacks of utterances th
  */
 export function speak(text, { locale, voiceURI, rate = 1, onEnd } = {}) {
   if (!synth) return false;
-  const say = speechText(text);
+  const say = speechText(text, locale);
   if (!say) return false;
   stop();
   const u = new SpeechSynthesisUtterance(say);

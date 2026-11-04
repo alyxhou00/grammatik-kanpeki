@@ -226,9 +226,10 @@ export const CARD_RENDERERS = {
         : '';
       const task = taskChip(card, ctx);
       // The filled-in answer is hoverable as the base word (e.g. 食べない → 食べる).
+      // Read aloud, the sentence has a pause for the blank until the answer is shown, then the answer in it.
       const fillWord = p.base?.meaning ? { text: p.base.word, meaning: p.base.meaning, pos: p.base.pos } : null;
       return `${base || task ? `<div class="cloze-head">${base}${task}</div>` : ''}
-        <p class="${sentenceClass(card)}" lang="${lang}">${sentenceHTML(p.sentence, ctx.revealed ? card.answer.accepted[0] : null, p.words || [], fillWord)}${ctx.revealed ? speakButton(ctx, p.sentence.replace(BLANK, card.answer.accepted[0]), lang, true) : ''}</p>
+        <p class="${sentenceClass(card)}" lang="${lang}">${sentenceHTML(p.sentence, ctx.revealed ? card.answer.accepted[0] : null, p.words || [], fillWord)}${speakButton(ctx, ctx.revealed ? p.sentence.replace(BLANK, card.answer.accepted[0]) : p.sentence, lang, true)}</p>
         ${aidsBlock(card, ctx)}`;
     },
     input: textInput,

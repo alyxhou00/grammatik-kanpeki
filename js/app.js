@@ -1061,6 +1061,11 @@ document.addEventListener('click', (e) => {
   }
 });
 
+// A speaker button must not take the focus away from the answer you are typing.
+document.addEventListener('mousedown', (e) => {
+  if (e.target.closest?.('.speak-btn')) e.preventDefault();
+});
+
 document.addEventListener('submit', (e) => {
   if (e.target.id === 'answer-form') { e.preventDefault(); submitAnswer(); }
   if (e.target.id === 'card-form') { e.preventDefault(); saveCardForm(); }
