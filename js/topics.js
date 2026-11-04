@@ -39,6 +39,7 @@ export const LANG_FIELDS = {
   //                    the card form previews ruby and warns about kanji without it, and the furigana setting is shown
   romajiInput: 'boolean', // typed romaji is read as hiragana (preview, shown answer, saved answers)
   sentenceClass: 'string', // extra class on prompt sentences ('' for none)
+  speech: 'object', // read aloud (js/speech.js): { locale: BCP 47 tag that picks the voice, rate: default speed }
   topics: 'object', // the decks, see above
 };
 
@@ -59,6 +60,7 @@ export const LANGS = {
     ruby: false,
     romajiInput: false,
     sentenceClass: '',
+    speech: { locale: 'de-DE', rate: 1 },
     topics: [
       {
         id: 'nominalisierung', label: 'Nominalisierung', type: 'rewrite',
@@ -94,6 +96,7 @@ export const LANGS = {
     ruby: true,
     romajiInput: true,
     sentenceClass: 'ja',
+    speech: { locale: 'ja-JP', rate: 0.85 },
     topics: [
       {
         id: 'verb-conjugation', label: '動詞變化', type: 'cloze',
