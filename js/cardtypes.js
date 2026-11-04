@@ -6,12 +6,13 @@
 //
 // Shared by every type: prompt.words (hoverable words), prompt.hint, prompt.translation, prompt.task,
 // card.explanation (tabs for each language it has) and chips for card.meta values named in the topic's facets.
+// Sentences and words get a speaker button when the browser has a voice for the course (ctx.speak).
 //
 // Each renderer gets a `ctx` built by app.js: { t, settings, aids, revealed, L (language config),
-// labels (topic labels merged with defaults), facets }.
+// labels (topic labels merged with defaults), facets, speak }.
 import { esc, loc, rubyHTML, sentenceHTML, isRomaji, romajiToHiragana, toSurface, toKana, shortHash, BLANK } from './text.js';
 import { wordDiff } from './check.js';
-import { typeOf } from './topics.js';
+import { LANGS, typeOf } from './topics.js';
 
 // ---------- word list ----------
 
@@ -77,6 +78,17 @@ export function vocabCardFrom(word, sourceCard, lang) {
 }
 
 // ---------- shared blocks ----------
+
+const SPEAKER = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5H4Z"/><path class="wave" d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></g></svg>';
+
+/**
+ * A button that reads `text` aloud (furigana markup is fine; app.js handles the click).
+ * `main` marks the card's sentence, which the R key plays. Nothing when the browser has no voice for the language.
+ */
+export function speakButton(ctx, text, lang, main = false) {
+  if (!ctx.speak || !text) return '';
+  return `<button type="button" class="speak-btn"${main ? ' data-speak-main' : ''} data-speak="${esc(text)}" data-speak-lang="${esc(lang)}" title="${esc(ctx.t.speak)}" aria-label="${esc(ctx.t.speak)}">${SPEAKER}</button>`;
+}
 
 const TR_LABEL = { de: 'DE', en: 'EN', 'zh-Hant': '中文', ja: '日本語' };
 
@@ -153,11 +165,11 @@ function taskChip(card, ctx) {
 
 const noteHTML = (note, lang) => (note ? `<p class="note" lang="${lang}">${esc(loc(note, [lang]))}</p>` : '');
 
-/** The learner's answer as typed (romaji also shown as kana for Japanese). */
+/** The learner's answer as typed (in a course with romaji input, romaji is also shown as kana). */
 function typedHTML(card, input) {
   const v = input.trim();
   if (!v) return '—';
-  if (card.language === 'ja' && isRomaji(v)) return `${esc(romajiToHiragana(v))} <span class="muted small">(${esc(v)})</span>`;
+  if (LANGS[card.language].romajiInput && isRomaji(v)) return `${esc(romajiToHiragana(v))} <span class="muted small">(${esc(v)})</span>`;
   return esc(v);
 }
 
@@ -169,9 +181,9 @@ function acceptableBlock(card, ctx) {
 }
 
 const textInput = (card, ctx) => `<input id="answer" lang="${card.language}" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="${esc(ctx.labels.placeholder)}">
-  ${card.language === 'ja' ? '<div id="kana-preview" class="kana-preview" lang="ja" aria-live="polite"></div>' : ''}`;
+  ${LANGS[card.language].romajiInput ? `<div id="kana-preview" class="kana-preview" lang="${card.language}" aria-live="polite"></div>` : ''}`;
 
-const sentenceClass = (card) => `prompt-sentence${card.language === 'ja' ? ' ja' : ''}`;
+const sentenceClass = (card) => `prompt-sentence${LANGS[card.language].sentenceClass ? ` ${LANGS[card.language].sentenceClass}` : ''}`;
 
 // ---------- types ----------
 
@@ -181,7 +193,7 @@ export const CARD_RENDERERS = {
     front(card, ctx) {
       const p = card.prompt;
       return `<div class="eyebrow">${esc(ctx.labels.source)}</div>
-        <p class="${sentenceClass(card)}" lang="${card.language}">${sentenceHTML(p.source, null, p.words || [])}</p>
+        <p class="${sentenceClass(card)}" lang="${card.language}">${sentenceHTML(p.source, null, p.words || [])}${speakButton(ctx, p.source, card.language, true)}</p>
         ${p.task ? `<div class="task-row">${taskChip(card, ctx)}</div>` : ''}
         ${aidsBlock(card, ctx)}`;
     },
@@ -209,9 +221,11 @@ export const CARD_RENDERERS = {
         model = mark ? joinTokens(d.theirs, (x) => (x.same ? esc(x.t) : `<ins>${esc(x.t)}</ins>`)) : rubyHTML(target);
       }
       const others = a.accepted.filter((x) => x !== target && x !== result.matched);
+      // The sentence to listen to: the model answer, or your own when it was right.
+      const say = speakButton(ctx, result.verdict === 'correct' ? input.trim() : target, lang);
       return `
-        <div class="answer-row"><div class="label">${t.yourAnswer}</div><p class="val mine v-${result.verdict}" lang="${lang}">${mine}</p></div>
-        ${model ? `<div class="answer-row"><div class="label">${t.model}</div><p class="val model" lang="${lang}">${model}</p></div>` : ''}
+        <div class="answer-row"><div class="label">${t.yourAnswer}</div><p class="val mine v-${result.verdict}" lang="${lang}">${mine}${model ? '' : say}</p></div>
+        ${model ? `<div class="answer-row"><div class="label">${t.model}</div><p class="val model" lang="${lang}">${model}${say}</p></div>` : ''}
         ${others.length ? `<div class="answer-row"><div class="label">${t.alsoCorrect}</div><ul class="alts" lang="${lang}">${others.map((x) => `<li>${rubyHTML(x)}</li>`).join('')}</ul></div>` : ''}
         ${acceptableBlock(card, ctx)}
         ${chipsBlock(card, ctx)}
@@ -230,15 +244,16 @@ export const CARD_RENDERERS = {
       const base = p.base?.word
         ? `<div class="base-block">
             <div class="eyebrow">${esc(ctx.labels.base)}</div>
-            <div class="base-word" lang="${lang}">${rubyHTML(p.base.word)}</div>
+            <div class="base-word" lang="${lang}">${rubyHTML(p.base.word)}${speakButton(ctx, p.base.word, lang)}</div>
             ${p.base.meaning ? `<div class="meaning" lang="${ctx.L.noteLang}">${esc(p.base.meaning)}</div>` : ''}
           </div>`
         : '';
       const task = taskChip(card, ctx);
       // The filled-in answer is hoverable as the base word (e.g. 食べない → 食べる).
+      // Read aloud, the sentence has a pause for the blank until the answer is shown, then the answer in it.
       const fillWord = p.base?.meaning ? { text: p.base.word, meaning: p.base.meaning, pos: p.base.pos } : null;
       return `${base || task ? `<div class="cloze-head">${base}${task}</div>` : ''}
-        <p class="${sentenceClass(card)}" lang="${lang}">${sentenceHTML(p.sentence, ctx.revealed ? card.answer.accepted[0] : null, p.words || [], fillWord)}</p>
+        <p class="${sentenceClass(card)}" lang="${lang}">${sentenceHTML(p.sentence, ctx.revealed ? card.answer.accepted[0] : null, p.words || [], fillWord)}${speakButton(ctx, ctx.revealed ? p.sentence.replace(BLANK, card.answer.accepted[0]) : p.sentence, lang, true)}</p>
         ${aidsBlock(card, ctx)}`;
     },
     input: textInput,
@@ -249,7 +264,7 @@ export const CARD_RENDERERS = {
       return `
         <div class="answer-grid">
           <div class="answer-row"><div class="label">${t.yourAnswer}</div><p class="val mine big v-${result.verdict}" lang="${lang}">${typedHTML(card, input)}</p></div>
-          <div class="answer-row"><div class="label">${t.model}</div><p class="val big" lang="${lang}">${a.accepted.map(rubyHTML).join('　／　')}</p></div>
+          <div class="answer-row"><div class="label">${t.model}</div><p class="val big" lang="${lang}">${a.accepted.map(rubyHTML).join('　／　')}${speakButton(ctx, a.accepted[0], lang)}</p></div>
         </div>
         ${acceptableBlock(card, ctx)}
         ${chipsBlock(card, ctx)}
@@ -272,7 +287,7 @@ export const CARD_RENDERERS = {
       const p = card.prompt;
       const reading = toKana(p.word);
       return `<div class="eyebrow">${ctx.t.vocabFront}</div>
-        <div class="vocab-word${ctx.revealed ? '' : ' peek'}" lang="${card.language}">${rubyHTML(p.word)}</div>
+        <div class="vocab-word${ctx.revealed ? '' : ' peek'}" lang="${card.language}">${rubyHTML(p.word)}${ctx.revealed ? speakButton(ctx, p.word, card.language, true) : ''}</div>
         ${ctx.revealed && reading !== toSurface(p.word) ? `<div class="vocab-reading" lang="${card.language}">${esc(reading)}</div>` : ''}
         ${ctx.homograph && p.example && !ctx.revealed ? `<p class="vocab-context" lang="${card.language}">${sentenceHTML(p.example)}</p>` : ''}
         ${ctx.revealed || reading === toSurface(p.word) ? '' : `<p class="hint">${ctx.t.vocabPeek}</p>`}`;
@@ -285,7 +300,7 @@ export const CARD_RENDERERS = {
         <div class="answer-row"><div class="label">${t.meaning}</div><p class="val big vocab-meaning" lang="${ctx.L.noteLang}">${esc(card.answer.accepted.join('；'))}</p></div>
         ${p.pos ? `<div class="chips"><span class="group-chip">${esc(p.pos)}</span></div>` : ''}
         ${p.example ? `<section class="explain"><h4>${t.example}</h4>
-          <p class="example" lang="${card.language}">${sentenceHTML(p.example, null, p.words || [])}</p>
+          <p class="example" lang="${card.language}">${sentenceHTML(p.example, null, p.words || [])}${speakButton(ctx, p.example, card.language)}</p>
           ${aidsBlock(card, ctx, { translation: p.exampleTranslation, hint: null })}</section>` : ''}
         ${explanationBlock(card, ctx)}`;
     },

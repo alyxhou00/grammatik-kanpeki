@@ -2,7 +2,7 @@
 // Run: node tests/srs.test.mjs
 // Expected values come from Anki's source (rslib/src/scheduler/states/*.rs) and its unit tests.
 import assert from 'node:assert/strict';
-import { answer, preview, fuzzBounds, leechThresholdMet, DEFAULTS, dayStartMs, dayIndex } from '../js/srs.js';
+import { answer, preview, fuzzBounds, leechThresholdMet, DEFAULTS, dayStartMs, dayIndex, demoLast, reviewQueue } from '../js/srs.js';
 
 const noFuzz = { ...DEFAULTS, fuzz: false };
 let passed = 0;
@@ -66,6 +66,24 @@ test('ease never drops below 1.3', () => {
 
 test('the day starts at 4 AM', () => {
   assert.equal(dayIndex(new Date(2026, 10, 4, 3, 59).getTime()) + 1, dayIndex(new Date(2026, 10, 4, 4, 0).getTime()));
+});
+
+// ---------- queue order: real cards before demo cards ----------
+// Ids starting with "d" stand for demo cards.
+const isDemoId = (id) => id.startsWith('d');
+
+test('demoLast keeps order inside each group', () => {
+  assert.deepEqual(demoLast(['d1', 'r1', 'd2', 'r2'], isDemoId), ['r1', 'r2', 'd1', 'd2']);
+});
+
+test('review queue: all real cards (reviews mixed with new) before any demo card', () => {
+  const q = reviewQueue(['d1', 'r1', 'r2'], ['dn1', 'rn1'], { reviewLimit: 10, newLimit: 10, isDemo: isDemoId });
+  assert.deepEqual(q, ['r1', 'rn1', 'r2', 'd1', 'dn1']);
+});
+
+test('daily limits are filled with real cards first', () => {
+  const q = reviewQueue(['d1', 'd2', 'r1'], ['dn1', 'dn2', 'rn1'], { reviewLimit: 2, newLimit: 1, isDemo: isDemoId });
+  assert.deepEqual(q, ['r1', 'rn1', 'd1']);
 });
 
 console.log(`\n${passed} passed`);

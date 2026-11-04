@@ -1,7 +1,8 @@
-// Card library (bundled files + imported cards), progress and settings in localStorage.
+// Card library (bundled files + imported cards), progress, study log and settings in localStorage.
 import { dayIndex, normalize, DEFAULTS } from './srs.js';
 import { LANGS, LANG_IDS, CARD_TYPES, topicOf, typeOf, deckIds } from './topics.js';
 import { AUTHORING_FORMAT, authoringSchema, checkSchema, cardsFromAuthoring } from './authoring.js';
+import { addAnswer, mergeLogs, onlyLang } from './studylog.js';
 
 export const FORMAT = 'grammatik-kanpeki.cards';
 export const VERSION = 2;
@@ -12,6 +13,7 @@ const K = {
   progress: 'gk.progress.v1',
   settings: 'gk.settings.v1',
   daily: 'gk.daily.v1',
+  log: 'gk.studylog.v1',
 };
 
 function read(key, fallback) {
@@ -53,18 +55,25 @@ let userCards = read(K.user, {});
 }
 let hidden = new Set(read(K.hidden, []));
 let progress = read(K.progress, {});
+let studyLog = read(K.log, {});
 
 // theme: 'system' | 'light' | 'dark'. explainLang: preferred explanation language per course.
 // collapsed: sidebar topics whose sub-topics are folded away ("de/deklination").
+// speech: per course { voice (voiceURI, '' = automatic), rate (unset = the course's default) }.
+// weekStart: first day of the week in the study history heatmap, 1 = Monday, 0 = Sunday.
 const DEFAULT_SETTINGS = {
   newPerDay: DEFAULTS.newPerDay, reviewsPerDay: DEFAULTS.reviewsPerDay, furigana: true, showForm: true,
-  explainLang: { de: 'de', ja: 'zh-Hant' }, theme: 'system', collapsed: [],
+  explainLang: { de: 'de', ja: 'zh-Hant' }, theme: 'system', collapsed: [], speech: {}, weekStart: 1,
 };
 function loadSettings() {
   const saved = read(K.settings, {});
   // Before courses had their own explanation language, one string applied to German.
   if (typeof saved.explainLang === 'string') saved.explainLang = { ...DEFAULT_SETTINGS.explainLang, de: saved.explainLang };
-  return { ...DEFAULT_SETTINGS, ...saved, explainLang: { ...DEFAULT_SETTINGS.explainLang, ...saved.explainLang } };
+  return {
+    ...DEFAULT_SETTINGS, ...saved,
+    explainLang: { ...DEFAULT_SETTINGS.explainLang, ...saved.explainLang },
+    speech: { ...saved.speech },
+  };
 }
 let settings = loadSettings();
 
@@ -90,6 +99,13 @@ export function cardsFor(lang, topic) {
   return allCards().filter((c) => c.language === lang && ids.has(c.topic));
 }
 export const getCard = (id) => (hidden.has(id) ? null : userCards[id] || bundled.get(id) || null);
+
+/** Demo sources: "demo", "demo2", "demo3", …, optionally with a suffix: "demo-n5", "demo2-b1". Not "demographie". */
+export const isDemoSource = (source) => /^demo\d*(-[\w-]+)?$/.test(source || '');
+
+/** A demo card ships with the app with a demo source. It stays one after the user edits it;
+ *  cards the user adds, imports or saves from a word list do not count, even if copied from a demo card. */
+export const isDemo = (card) => !!card && isDemoSource(bundled.get(card.id)?.source);
 
 export function saveCard(card) {
   userCards[card.id] = card;
@@ -152,6 +168,15 @@ export function bumpDaily(lang, topic, kind) {
   write(K.daily, d);
 }
 
+// ---------- study log (streak, heatmap; see js/studylog.js) ----------
+
+export const getStudyLog = () => studyLog;
+/** Count one graded answer for today's study day. */
+export function logAnswer({ lang, isNew = false, again = false, now = Date.now() }) {
+  studyLog = addAnswer(studyLog, { day: dayIndex(now), lang, isNew, again });
+  write(K.log, studyLog);
+}
+
 // ---------- settings ----------
 
 export const getSettings = () => settings;
@@ -165,6 +190,8 @@ export function buildExport({ lang = null, topic = null, includeProgress = false
   if (includeProgress) {
     out.progress = {};
     for (const c of cards) if (progress[c.id]) out.progress[c.id] = progress[c.id];
+    // The study log is per course, not per topic: an export of one topic carries its course's log.
+    out.studyLog = lang ? onlyLang(studyLog, lang) : studyLog;
   }
   return out;
 }
@@ -216,7 +243,7 @@ export function parseImport(text, fileName = 'import') {
     else cards.push(c.source ? c : { ...c, source: `import:${fileName}` });
   });
   const existing = cards.filter((c) => getCard(c.id) || bundled.has(c.id)).length;
-  return { cards, invalid, existing, fresh: cards.length - existing, progress: Array.isArray(data) ? null : data.progress || null };
+  return { cards, invalid, existing, fresh: cards.length - existing, progress: Array.isArray(data) ? null : data.progress || null, studyLog: Array.isArray(data) ? null : data.studyLog || null };
 }
 
 export function applyImport(parsed, { overwrite }) {
@@ -236,8 +263,16 @@ export function applyImport(parsed, { overwrite }) {
       if (parsed.cards.some((c) => c.id === id) && (overwrite || !progress[id])) { progress[id] = st; progressCount++; }
     }
   }
+  // Merging keeps the larger count per day, so the log is never lowered, with or without overwrite.
+  let logDays = 0;
+  if (parsed.studyLog) {
+    const m = mergeLogs(studyLog, parsed.studyLog);
+    studyLog = m.log;
+    logDays = m.days;
+  }
   write(K.user, userCards);
   write(K.hidden, [...hidden]);
   write(K.progress, progress);
-  return { added, updated, skipped, progressCount };
+  write(K.log, studyLog);
+  return { added, updated, skipped, progressCount, logDays };
 }

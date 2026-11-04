@@ -12,6 +12,17 @@ Topics can have sub-topics. As in Anki, a parent deck studies its own cards and 
 
 The language menu is at the top; light, dark, or system theme is in the settings.
 
+## Read aloud
+
+A speaker button next to a sentence or word reads it aloud, so you can hear the intonation (for Japanese, the pitch accent). It uses the browser's built-in speech (Web Speech API): no server and no account.
+
+- **Where:** the sentence and the model answer (Nominalisierung), the dictionary form, the sentence and the model answer (cloze cards: before you answer, the blank is read as a short pause, so the answer is not given away; after you answer, the sentence is read with the answer filled in), the word after flipping and its example (word list), and the word popup. **R** plays the card's sentence after answering.
+- **Settings → Vorlesen / 朗讀:** voice and speed per course. Japanese starts a bit slower (0.85×) than German (1×). "Automatic" picks the most natural voice it finds.
+- Furigana is read as written in kanji, not as kana, because the engine needs the word to pick its pitch accent (箸 and 橋 are both はし but sound different). The engine can still misread a kanji now and then; the furigana on screen is the reference.
+- **Voices depend on the browser and OS.** Edge has natural online voices (Nanami, Keita, Katja, Conrad), Chrome has "Google 日本語" and "Google Deutsch". Firefox and other Chromium-based apps only use the voices installed in the OS: on Windows, add Japanese or German under Settings → Time & language → Language & region → (language) → Speech. Without a voice for the course, the buttons stay hidden and the settings say why.
+
+A new course sets its voice with `speech: { locale, rate }` in `js/topics.js` (for example `{ locale: 'fr-FR', rate: 1 }`).
+
 ## Adding your own cards
 
 As in Anki, **Karte hinzufügen / 新增卡片** (next to Learn / Cards) opens a form for a new card in the current topic. The form follows the topic's card type: a sentence to rewrite, a sentence with a `___` blank, or a word for a flip card. Only the main text and at least one correct answer are required. Everything else is optional: a list of "correct but not ideal" answers and typical mistakes (each with a note), translations, a hint, the task chip, an explanation, the topic's facets (such as the verb class), level, tags, and source. After **Add** (or Ctrl+Enter) the form stays open for the next card and keeps the topic, tags, level, and source.
@@ -45,11 +56,21 @@ Run the scheduler tests with:
 node tests/srs.test.mjs
 ```
 
-The add / edit card form has its own tests (`node tests/cardform.test.mjs`). Among other things, every bundled card must come back unchanged after an edit that changes nothing.
+The add / edit card form has its own tests (`node tests/cardform.test.mjs`), and so does read-aloud (`node tests/speech.test.mjs`). Among other things, every bundled card must come back unchanged after an edit that changes nothing.
+
+## Streak and study history
+
+Every graded answer, in **Lernen / 學習** and in **Alle üben / 全部練習**, is counted for its study day (days start at 4 AM, as in the scheduler). The flame in the top bar shows the streak: the number of days in a row with at least one answer. It is grey until you have studied today; the streak only breaks after a whole day without studying.
+
+Clicking the flame opens **Lernverlauf / 學習紀錄**: current and longest streak, days studied, today's cards, and a GitHub-style heatmap of the last 12 months for both languages. Hover or tap a day to see its count per language. Weeks start on Monday; you can switch to Sunday in the settings ("Woche beginnt am / 每週的第一天"). Dates are written in the course's `dateLocale` (`js/topics.js`).
+
+The log keeps counts per day and language (`js/studylog.js`), not every single answer, so a year of history is only a few kilobytes. Check it with `node tests/studylog.test.mjs`.
 
 ## Run it
 
-It is a static site with no build step. It needs a local web server, because browsers block `fetch()` for pages opened straight from `file://`:
+The app works without a backend: it is a static site with no build step, and all your data stays in the browser. A backend for sync and premium features may come later as an optional add-on (see [`docs/reviews/2026-11-05-backend-optional-review.md`](docs/reviews/2026-11-05-backend-optional-review.md)).
+
+To run it locally you still need a simple web server, because browsers block `fetch()` for pages opened straight from `file://`:
 
 ```bash
 python -m http.server 8123
@@ -57,15 +78,37 @@ python -m http.server 8123
 
 Then open <http://localhost:8123>.
 
+### Trying a branch before it is merged
+
+Work in progress often lives in its own git worktree, a separate folder with one branch checked out (Claude Code puts them in `.claude/worktrees/<name>`). Because the app has no build step, you can try a branch by serving its folder. You don't need to merge it first. List the worktrees and their folders:
+
+```bash
+git worktree list
+```
+
+Serve the one you want on a port of its own, so it can run next to `main` on 8123:
+
+```bash
+cd D:/Code/GrammatikKanpeki/.claude/worktrees/<name>
+```
+
+```bash
+python -m http.server 8130
+```
+
+Then open <http://localhost:8130> in any browser. Use a different port for each worktree you run at the same time.
+
+**Your cards and progress are not there.** The browser keeps `localStorage` separately for each address, so `localhost:8130` starts empty, apart from the bundled cards. To try a branch with your own data, use **Import / Export** on `localhost:8123`: export all cards with "Lernfortschritt mitexportieren / 一併匯出學習進度" ticked, then import that file on the branch's port. What you do there doesn't change your data on 8123.
+
 ## Where data lives
 
 | What | Where |
 | --- | --- |
 | Bundled cards | `data/**.json`, listed in `data/manifest.json` |
 | Imported or edited cards | browser `localStorage` (they override bundled cards with the same `id`) |
-| Review progress, settings | browser `localStorage` |
+| Review progress, study history, settings | browser `localStorage` |
 
-**Import / Export** (top right) downloads or loads JSON in the same format as the bundled files. The export can include review progress. On import, cards are merged by `id`: you can choose to overwrite existing cards or add only new ones.
+**Import / Export** (top right) downloads or loads JSON in the same format as the bundled files. The export can include review progress and the study history (`studyLog`; for one course, only that course's days). On import, the study history is merged day by day, keeping the larger count, so importing the same file twice changes nothing. On import, cards are merged by `id`: you can choose to overwrite existing cards or add only new ones.
 
 ## Card format
 
@@ -180,13 +223,15 @@ A validator can't tell a wrong reading ({生|せい} where {生|なま} is meant
 | File | Role |
 | --- | --- |
 | `js/app.js` | Routing, views, events |
-| `js/topics.js` | Languages and the topic tree (pure data + helpers) |
+| `js/topics.js` | Course settings (`LANGS`) and the topic tree (no DOM) |
 | `js/cardtypes.js` | Card types: how `rewrite`, `cloze` and `flip` cards are drawn |
-| `js/check.js` | Answer normalization, matching, word diff |
+| `js/check.js` | Answer matching and word diff (uses the course's normalizer) |
 | `js/srs.js` | Scheduler (port of Anki's SM-2 defaults) |
 | `js/store.js` | Card library, import/export, localStorage |
+| `js/studylog.js` | Study history per day: streak, heatmap, merging (no DOM, no storage) |
 | `js/cardform.js` | Add / edit card form: form values ↔ card (no DOM) |
-| `js/text.js` | Escaping, furigana, romaji → hiragana |
+| `js/text.js` | Escaping, furigana, romaji → hiragana, answer normalizers |
+| `js/speech.js` | Read aloud: voice choice and playback through the Web Speech API |
 | `js/i18n.js` | UI strings (German page in German, Japanese page in Traditional Chinese) |
 | `js/cardcheck.js` | Content checks for one card (answer lists, words, facets, furigana), shared by tests and tools (no DOM) |
 | `js/authoring.js` | Authoring format: per-topic schema, schema check, authoring ↔ full cards (no DOM) |
@@ -194,4 +239,6 @@ A validator can't tell a wrong reading ({生|せい} where {生|なま} is meant
 
 To add a topic, add an entry to its language in `LANGS` in `js/topics.js`: `id`, `label`, a `type` or a `parent`, an `about` brief (what the exercise is and what makes a good card, in English), and optional `labels` and `facets`. The sidebar, the card form, the authoring schema, the LLM prompt and the validator all follow from that entry. Cards can then come from the form, an authoring file, or a data file listed in `data/manifest.json`. A topic with a new kind of exercise gets a new card type in `js/cardtypes.js` (and its prompt fields in `js/authoring.js`).
 
-Tests: `node tests/data.test.mjs`, `node tests/cardform.test.mjs`, `node tests/authoring.test.mjs`, `node tests/srs.test.mjs`.
+Everything that differs between courses is a field of `LANGS[lang]` (listed in `LANG_FIELDS`): how answers are normalized, whether near misses count as "close", romaji input, furigana, the read-aloud voice, the brand, the date locale and so on. The code reads these fields and never asks which language it is, so a new course is a new `LANGS` entry, its UI strings in `js/i18n.js` and its code in the `language` enum of `schema/cards.schema.json`; `tests/data.test.mjs` checks that every course sets every field and has the same UI strings.
+
+Tests: `node tests/data.test.mjs`, `node tests/cardform.test.mjs`, `node tests/authoring.test.mjs`, `node tests/srs.test.mjs`, `node tests/studylog.test.mjs`, `node tests/speech.test.mjs`.

@@ -66,8 +66,7 @@ export function authoringSchema(lang, topicId) {
 
   const word = obj({
     text: text(`The word exactly as it is written in the sentence${ruby ? ' (with the same furigana markup)' : ''}.`),
-    lemma: text('Dictionary form, only if it differs from text. This is what gets saved to the word list'
-      + (lang === 'de' ? ' (nouns with their article, e.g. "die Bedienung").' : '.')),
+    lemma: text('Dictionary form, only if it differs from text. This is what gets saved to the word list.'),
     meaning: str(`Meaning in ${note}, as short as possible.`),
     pos: str(`Part of speech in ${note}.`),
   }, ['text', 'meaning', 'pos']);
@@ -112,7 +111,7 @@ export function authoringSchema(lang, topicId) {
       accepted: list(str(`A meaning in ${note}.`), 'The meaning(s) of the word, the main one first.', { minItems: 1 }),
     }, ['accepted'])
     : obj({
-      accepted: list(text('A fully correct answer.'), `Every fully correct answer${type === 'rewrite' ? ` (${labels.target || 'the rewritten sentence'})` : ''}, the most natural one first. A typed answer counts as correct when it matches one of these${lang === 'de' ? ' (spacing, quotes and the final full stop do not matter; case does)' : ''}${ruby ? ' in kanji or in kana' : ''}.`, { minItems: 1 }),
+      accepted: list(text('A fully correct answer.'), `Every fully correct answer${type === 'rewrite' ? ` (${labels.target || 'the rewritten sentence'})` : ''}, the most natural one first. A typed answer counts as correct when it matches one of these${ruby ? ' in kanji or in kana' : ''}${L.nearMatch ? '; a near miss (wrong capitalisation, a word off) is only "almost right"' : ''}.`, { minItems: 1 }),
       acceptable: list(withNote('correct but not ideal'), 'Optional: answers that are correct but clumsy, too colloquial, or not what the task asks for. Each with a note why.'),
       mistakes: list(withNote('typical wrong'), 'Optional: typical wrong answers learners give, each with a note that explains the mistake. Must not match an accepted answer.'),
     }, ['accepted'], 'How a typed answer is judged.');
@@ -134,7 +133,7 @@ export function authoringSchema(lang, topicId) {
     answer,
     explanation: localized(L.explainLangs.map(([k]) => k), `Why the answer is what it is, shown after answering. ${note} first; other languages optional.`),
     meta,
-    level: str(`Level, e.g. ${lang === 'ja' ? 'N5 (JLPT)' : 'B2 or C1 (CEFR)'}.`),
+    level: str(`Level, e.g. ${L.level}.`),
     tags: list(str(), 'Optional keywords for search, e.g. the grammar point.'),
   }, ['prompt', 'answer'].concat(Object.keys(facets).length ? ['meta'] : []));
 
