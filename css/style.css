@@ -203,7 +203,7 @@ button { cursor: pointer; }
 
 /* ---------- session ---------- */
 .session-bar { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; font-size: .9rem; }
-.session-bar .link { margin-left: auto; }
+.session-bar .link:first-of-type { margin-left: auto; }
 .pill { background: var(--accent-soft); color: var(--accent); padding: 2px 10px; border-radius: 999px; font-weight: 600; font-size: .8rem; }
 .eyebrow { text-transform: uppercase; letter-spacing: .08em; font-size: .72rem; font-weight: 700; color: var(--muted); display: block; margin-bottom: 6px; }
 :lang(ja) .eyebrow, :lang(zh-Hant) .eyebrow, .eyebrow:lang(zh-Hant) { letter-spacing: .04em; }
@@ -380,6 +380,43 @@ dialog::backdrop { background: rgba(10, 12, 15, .45); }
 .import-result p { margin: 4px 0; }
 .import-result .actions { margin-top: 8px; }
 
+/* ---------- add / edit card ---------- */
+.head-actions { display: flex; align-items: center; gap: 8px; }
+.add-btn { display: inline-flex; align-items: center; gap: 6px; }
+.row-btns { display: inline-flex; gap: 2px; }
+dialog.dlg-wide { width: min(660px, calc(100vw - 32px)); }
+.card-form { display: flex; flex-direction: column; max-height: calc(100dvh - 48px); }
+.card-form .dlg-body { overflow-y: auto; overscroll-behavior: contain; }
+.card-form section { gap: 12px; }
+.card-form h3 { margin: 0; }
+.field { display: flex; flex-direction: column; gap: 4px; width: 100%; min-width: 0; }
+.field-label { font-weight: 600; font-size: .88rem; }
+.field input, .field textarea, .field select, .ans-row input {
+  width: 100%; border: 1.5px solid var(--line); background: var(--bg); border-radius: 10px; padding: 8px 12px; resize: vertical;
+}
+.field textarea:lang(de) { font-family: var(--serif); font-size: 1.05rem; }
+.field input:focus, .field textarea:focus, .field select:focus, .ans-row input:focus { outline: none; border-color: var(--accent); background: var(--surface); }
+.field [aria-invalid="true"] { border-color: var(--bad); }
+.field-help { color: var(--muted); font-size: .82rem; }
+.field-error { color: var(--bad); font-size: .82rem; font-weight: 600; }
+.ruby-preview { font-size: 1.15rem; line-height: 1.9; }
+.ruby-preview:empty { display: none; }
+.field-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; width: 100%; }
+.form-more, .more-langs { width: 100%; }
+.form-more > summary, .more-langs > summary { cursor: pointer; color: var(--muted); font-weight: 600; font-size: .9rem; padding: 2px 0; }
+.form-more[open] > summary { margin-bottom: 8px; }
+.form-more > .field + .field, .form-more > .field-grid + .field, .more-langs > .field { margin-top: 10px; }
+.more-langs { margin-top: -4px; }
+.rows { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
+.ans-row { display: grid; grid-template-columns: 1fr 1fr auto; gap: 8px; width: 100%; align-items: center; }
+.card-form footer { border-top: 1px solid var(--line); padding: 12px 20px; display: flex; flex-direction: column; gap: 6px; }
+.form-buttons { display: flex; align-items: center; gap: 10px; }
+.form-buttons .hint { margin-right: auto; }
+.form-warn p, .form-status { margin: 0; font-size: .88rem; }
+.form-warn p { color: var(--warn); }
+.form-status.ok { color: var(--ok); font-weight: 600; }
+.form-status.error { color: var(--bad); font-weight: 600; }
+
 /* ---------- mobile: topics move into a drawer behind the ☰ button ---------- */
 @media (max-width: 760px) {
   .topbar .menu-btn { display: inline-grid; margin-left: -6px; }
@@ -409,6 +446,14 @@ dialog::backdrop { background: rgba(10, 12, 15, .45); }
   .top-actions { margin-left: 0; }
   .data-btn { padding: 6px 8px; border-color: transparent; }
   .data-btn .btn-label { display: none; }
+  .add-btn { padding: 6px 8px; }
+  .add-btn .add-label { display: none; }
+  .ans-row { grid-template-columns: 1fr auto; }
+  .ans-row [name="row-note"] { grid-column: 1; }
+  .ans-row .icon-btn { grid-column: 2; grid-row: 1; }
+  .form-buttons .hint { display: none; }
+  .form-buttons { justify-content: flex-end; }
+  .content-head { flex-wrap: wrap; }
   .content-head h1 { font-size: 1.2rem; }
   .base-block .base-word { font-size: 2rem; }
   .panel { padding: 18px; }

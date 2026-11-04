@@ -2,15 +2,18 @@ import * as store from './store.js';
 import { answer, preview, DEFAULTS, dayStartMs, isNew, isLearning, isReviewDue, learningDueToday } from './srs.js';
 import { checkAnswer } from './check.js';
 import { UI } from './i18n.js';
-import { LANGS, topicOf, ancestry, childrenOf, groupOf, labelsOf, facetsOf, vocabTopic } from './topics.js';
+import { LANGS, topicOf, topicType, ancestry, childrenOf, groupOf, labelsOf, facetsOf, vocabTopic } from './topics.js';
 import { rendererFor, vocabId, vocabCardFrom } from './cardtypes.js';
 import { esc, loc, isRomaji, romajiToHiragana, rubyHTML, toKana, toSurface } from './text.js';
+import { emptyValues, valuesFromCard, cardFromValues, formErrors, missingFurigana, formLangs, makeId, USER_SOURCE } from './cardform.js';
 
 const $ = (sel, el = document) => el.querySelector(sel);
 const GRADES = ['again', 'hard', 'good', 'easy'];
 const SUGGEST = { correct: 'good', acceptable: 'hard', close: 'hard', mistake: 'again', wrong: 'again', empty: 'again', flip: 'good' };
 
 const ICON = {
+  edit: '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16v4ZM13.5 6.5l4 4"/></svg>',
+  plus: '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M12 5v14M5 12h14"/></svg>',
   trash: '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M10 11v6M14 11v6M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-12M9 7V4h6v3"/></svg>',
 };
 
@@ -314,9 +317,12 @@ function render() {
       ${parents.length ? `<nav class="crumbs">${parents.map((x) => `<button type="button" class="link" data-topic="${x.id}">${esc(x.label)}</button>`).join('<span aria-hidden="true">›</span>')}</nav>` : ''}
       <h1>${esc(topicLabel)}</h1>
     </div>
-    <div class="seg" role="tablist">
-      <button role="tab" data-view="learn" aria-selected="${state.view === 'learn'}">${t().learn}</button>
-      <button role="tab" data-view="cards" aria-selected="${state.view === 'cards'}">${t().cards}</button>
+    <div class="head-actions">
+      <div class="seg" role="tablist">
+        <button role="tab" data-view="learn" aria-selected="${state.view === 'learn'}">${t().learn}</button>
+        <button role="tab" data-view="cards" aria-selected="${state.view === 'cards'}">${t().cards}</button>
+      </div>
+      <button type="button" class="btn small add-btn" data-action="add-card" title="${esc(t().form.add)}" aria-label="${esc(t().form.add)}">${ICON.plus}<span class="add-label">${esc(t().form.add)}</span></button>
     </div>`;
 
   const main = $('#view');
@@ -348,6 +354,7 @@ function renderOverview() {
     <div class="actions">
       <button class="btn primary big" data-action="start" ${any ? '' : 'disabled'}>${T.start}</button>
       <button class="btn" data-action="cram" ${c.total ? '' : 'disabled'}>${T.cram}</button>
+      ${c.total ? '' : `<button class="btn primary" data-action="add-card">${esc(T.form.add)}</button>`}
     </div>
     <p class="hint">${!c.total ? (state.topic === 'vocab' ? T.vocabEmpty : T.emptyTopic) : any ? `${T.cram}: ${T.cramHint}` : T.nothingToday}</p>
   </section>`;
@@ -408,6 +415,7 @@ function renderSession() {
       <span class="pill">${s.mode === 'cram' ? T.cram : T.learn}</span>
       <span class="muted">${remaining} ${T.remaining}</span>
       ${sub ? `<span class="topic-chip">${esc(sub.label)}</span>` : ''}
+      <button class="link" data-action="edit-card" data-id="${esc(card.id)}">${T.form.edit}</button>
       <button class="link" data-action="end">${T.end}</button>
     </div>
     <article class="panel card phase-${s.phase}">
@@ -498,8 +506,11 @@ function renderCardList() {
           <div class="row-meta">
             <span class="status s-${st}">${esc(label)}</span>
             ${p?.leech ? `<span class="status s-leech">${T.leech}</span>` : ''}
-            <span class="src" title="${esc(c.id)}">${T.source}: ${esc(c.source)}</span>
+            <span class="src" title="${esc(c.id)}">${T.source}: ${esc(c.source === USER_SOURCE ? T.sourceUser : c.source)}</span>
+            <span class="row-btns">
+            <button class="icon-btn" data-action="edit-card" data-id="${esc(c.id)}" title="${T.form.edit}" aria-label="${T.form.edit}">${ICON.edit}</button>
             <button class="icon-btn" data-action="delete" data-id="${esc(c.id)}" title="${T.del}" aria-label="${T.del}">${ICON.trash}</button>
+            </span>
           </div></li>`;
       }).join('')
     : `<li class="empty">${T.emptyList}</li>`;
@@ -644,8 +655,7 @@ function openSettings() {
     dark: '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"/></svg>',
     system: '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></g></svg>',
   };
-  const NAMES = { de: 'Deutsch', en: 'English', 'zh-Hant': '繁體中文' };
-  const explainOpts = L.explainLangs.map(([v]) => [v, NAMES[v] || v]);
+  const explainOpts = L.explainLangs.map(([v]) => [v, LANG_NAMES[v] || v]);
   dlg.innerHTML = `<form method="dialog" class="dlg">
     <header><h2>${T.settings}</h2><button class="icon-btn" value="close" aria-label="${T.close}">✕</button></header>
     <section>
@@ -673,6 +683,243 @@ function openSettings() {
   dlg.showModal();
 }
 
+// ---------- add / edit card (like Anki's "Add" window) ----------
+
+const LANG_NAMES = { de: 'Deutsch', en: 'English', 'zh-Hant': '繁體中文' };
+
+// The open form: { id (card being edited, or null), lang, values, errors, status: { kind, text } }.
+let cardForm = null;
+
+function openCardForm(id = null) {
+  const card = id ? store.getCard(id) : null;
+  if (id && !card) return;
+  const lang = card?.language || state.lang;
+  cardForm = { id, lang, values: card ? valuesFromCard(card) : emptyValues(lang, state.topic), errors: {}, status: null };
+  renderCardForm();
+  const dlg = $('#dlg-card');
+  if (!dlg.open) dlg.showModal();
+  focusCardField();
+}
+
+function focusCardField(name) {
+  const f = $('#card-form');
+  const el = name ? f.querySelector(`[name="${name}"]`) : f.querySelector('[data-main]');
+  el?.focus();
+}
+
+/** Only worth showing once the text has furigana markup. */
+const rubyPreview = (v) => (String(v).includes('{') ? String(v).split('\n').map(rubyHTML).join('　／　') : '');
+
+/** One labelled input. */
+function field(name, label, value, o = {}) {
+  const T = t().form;
+  const err = cardForm.errors[name];
+  const attrs = `name="${name}" ${o.lang ? `lang="${o.lang}"` : ''} ${o.ph ? `placeholder="${esc(o.ph)}"` : ''} ${o.main ? 'data-main' : ''} ${o.ruby ? 'data-ruby' : ''} ${err ? 'aria-invalid="true"' : ''} autocomplete="off" spellcheck="false"`;
+  const control = o.rows
+    ? `<textarea ${attrs} rows="${o.rows}">${esc(value)}</textarea>`
+    : `<input ${attrs} value="${esc(value)}">`;
+  return `<label class="field"><span class="field-label">${esc(label)}</span>${control}
+    ${o.ruby ? `<span class="ruby-preview" lang="ja">${rubyPreview(value)}</span>` : ''}
+    ${o.help ? `<span class="field-help">${esc(o.help)}</span>` : ''}
+    ${err ? `<span class="field-error">${esc(T[err])}</span>` : ''}</label>`;
+}
+
+/** A localized value: the first language is shown, the others sit behind "other languages". */
+function locFields(prefix, label, langs, values, o = {}) {
+  const [first, ...rest] = langs;
+  const one = (k) => field(`${prefix}.${k}`, `${label} · ${LANG_NAMES[k] || k}`, values[k] || '', { ...o, lang: k });
+  return `${one(first)}
+    ${rest.length ? `<details class="more-langs" ${rest.some((k) => values[k]) ? 'open' : ''}>
+      <summary>${esc(t().form.otherLangs)}</summary>${rest.map(one).join('')}</details>` : ''}`;
+}
+
+/** Answers with a note (correct but not ideal / typical mistakes). */
+function answerRows(list, label) {
+  const T = t().form;
+  const rows = cardForm.values[list];
+  const lang = cardForm.lang;
+  const noteLang = LANGS[lang].noteLang;
+  return `<details class="form-more" ${rows.length ? 'open' : ''}>
+    <summary>${esc(label)} <span class="muted">(${rows.filter((r) => r.text).length})</span></summary>
+    <div class="rows" data-list="${list}">
+      ${rows.map((r, i) => `<div class="ans-row">
+        <input name="row-text" lang="${lang}" value="${esc(r.text)}" placeholder="${esc(T.rowText)}" aria-label="${esc(T.rowText)}" autocomplete="off" spellcheck="false">
+        <input name="row-note" lang="${noteLang}" value="${esc(r.note)}" placeholder="${esc(T.rowNote)}" aria-label="${esc(T.rowNote)}" autocomplete="off">
+        <button type="button" class="icon-btn" data-action="remove-row" data-list="${list}" data-index="${i}" title="${esc(T.removeRow)}" aria-label="${esc(T.removeRow)}">✕</button>
+      </div>`).join('')}
+      <button type="button" class="link" data-action="add-row" data-list="${list}">＋ ${esc(T.addRow)}</button>
+    </div></details>`;
+}
+
+function renderCardForm() {
+  const T = t().form;
+  const { lang, values: v } = cardForm;
+  const L = LANGS[lang];
+  const type = topicType(lang, v.topic);
+  const labels = { ...UI[lang].labels, ...labelsOf(lang, v.topic) };
+  const ja = lang === 'ja';
+  const langs = formLangs(lang);
+  const indent = (id) => '   '.repeat(ancestry(lang, id).length - 1);
+  const topics = L.topics.map((tp) => `<option value="${tp.id}" ${tp.id === v.topic ? 'selected' : ''}>${indent(tp.id)}${esc(tp.label.replace(/­/g, ''))}</option>`).join('');
+
+  let front;
+  if (type === 'rewrite') {
+    front = field('source', labels.source, v.source, { rows: 3, lang, main: true })
+      + field('task', T.task, v.task, { ph: T.taskPh, lang: L.noteLang });
+  } else if (type === 'cloze') {
+    front = field('sentence', T.sentence, v.sentence, { rows: 2, lang, main: true, ruby: ja, help: T.sentenceHelp })
+      + `<div class="field-grid">
+          ${field('baseWord', T.baseWord, v.baseWord, { lang, ruby: ja })}
+          ${field('baseMeaning', T.baseMeaning, v.baseMeaning, { lang: L.noteLang })}
+          ${field('basePos', T.pos, v.basePos, { lang: L.noteLang })}
+        </div>`
+      + field('task', T.task, v.task, { ph: T.taskPh, lang: L.noteLang });
+  } else {
+    front = `<div class="field-grid">
+        ${field('word', T.word, v.word, { lang, main: true, ruby: ja })}
+        ${field('pos', T.pos, v.pos, { lang: L.noteLang })}
+      </div>`
+      + field('example', T.example, v.example, { rows: 2, lang, ruby: ja });
+  }
+
+  const facetDefs = facetsOf(lang, v.topic);
+  const facets = Object.entries(facetDefs).map(([key, names]) => `<label class="field"><span class="field-label">${esc(UI[lang].facetLabels[key] || key)}</span>
+      <select name="meta.${key}"><option value="">${T.facetNone}</option>${Object.entries(names).map(([val, name]) => `<option value="${esc(val)}" ${v.meta[key] === val ? 'selected' : ''}>${esc(name)}</option>`).join('')}</select></label>`).join('');
+  const hasMore = v.level || v.tags || v.cardSource || Object.keys(facetDefs).some((k) => v.meta[k]);
+  const st = cardForm.status;
+
+  $('#dlg-card').innerHTML = `<form id="card-form" class="dlg card-form" novalidate>
+    <header><h2>${esc(cardForm.id ? T.editTitle : T.newTitle)}</h2>
+      <button type="button" class="icon-btn" data-action="close-card-form" aria-label="${esc(t().close)}">✕</button></header>
+    <div class="dlg-body">
+      <section>
+        <label class="field"><span class="field-label">${esc(T.topic)}</span><select name="topic">${topics}</select></label>
+      </section>
+      <section>
+        <h3>${esc(T.front)}</h3>
+        ${front}
+      </section>
+      <section>
+        <h3>${esc(T.answer)}</h3>
+        ${field('accepted', type === 'flip' ? T.meanings : type === 'rewrite' ? labels.target : T.accepted, v.accepted, {
+          rows: type === 'rewrite' ? 3 : 2, lang: type === 'flip' ? L.noteLang : lang, ruby: ja && type !== 'flip',
+          help: type === 'flip' ? T.meaningsHelp : T.acceptedHelp,
+        })}
+        ${answerRows('acceptable', T.acceptable)}
+        ${type === 'flip' ? '' : answerRows('mistakes', T.mistakes)}
+      </section>
+      <section>
+        <h3>${esc(T.helps)}</h3>
+        ${locFields('tr', type === 'flip' ? T.exampleTranslation : T.translation, langs.translation, v.translation)}
+        ${type === 'flip' ? '' : field('hint', T.hint, v.hint, { lang: L.noteLang })}
+        <details class="form-more" ${Object.values(v.explanation).some(Boolean) ? 'open' : ''}>
+          <summary>${esc(T.explanation)}</summary>
+          ${locFields('ex', t().explanation, langs.explanation, v.explanation, { rows: 3 })}
+        </details>
+        <details class="form-more" ${hasMore ? 'open' : ''}>
+          <summary>${esc(T.more)}</summary>
+          <div class="field-grid">
+            ${facets}
+            ${field('level', T.level, v.level, { ph: ja ? 'N5' : 'C1' })}
+            ${field('tags', T.tags, v.tags, { ph: T.tagsPh })}
+          </div>
+          ${field('cardSource', T.source, v.cardSource, { ph: T.sourcePh })}
+        </details>
+      </section>
+    </div>
+    <footer>
+      <div id="form-warn" class="form-warn" aria-live="polite">${warningsHTML(v)}</div>
+      ${st ? `<p class="form-status ${st.kind}" role="status">${esc(st.text)}</p>` : ''}
+      <div class="form-buttons">
+        <span class="hint">${esc(T.keyHint)}</span>
+        <button type="button" class="btn" data-action="close-card-form">${esc(T.cancel)}</button>
+        <button type="submit" class="btn primary">${esc(cardForm.id ? T.saveBtn : T.addBtn)}</button>
+      </div>
+    </footer>
+  </form>`;
+}
+
+/** The form's current values (rows and localized fields included). */
+function gatherValues() {
+  const f = $('#card-form');
+  const prev = cardForm.values;
+  const v = { ...prev, translation: { ...prev.translation }, explanation: { ...prev.explanation }, meta: { ...prev.meta } };
+  const maps = { tr: 'translation', ex: 'explanation', meta: 'meta' };
+  for (const el of f.elements) {
+    if (!el.name || el.name.startsWith('row-')) continue;
+    const [k, sub] = el.name.split('.');
+    if (sub) v[maps[k]][sub] = el.value;
+    else v[k] = el.value;
+  }
+  for (const box of f.querySelectorAll('.rows[data-list]')) {
+    v[box.dataset.list] = [...box.querySelectorAll('.ans-row')].map((r) => ({
+      text: r.querySelector('[name="row-text"]').value, note: r.querySelector('[name="row-note"]').value,
+    }));
+  }
+  return v;
+}
+
+/** The text a card is recognized by: its sentence, or its word. */
+const mainText = (c) => toSurface(c.prompt?.source || c.prompt?.sentence || c.prompt?.word || '').trim();
+
+/** Hints that do not block saving: a card with the same text exists, kanji without furigana. */
+function warningsHTML(v) {
+  const T = t().form;
+  const lang = cardForm.lang;
+  const type = topicType(lang, v.topic);
+  const own = toSurface(type === 'rewrite' ? v.source : type === 'cloze' ? v.sentence : v.word).trim();
+  const out = [];
+  if (own && store.allCards().some((c) => c.language === lang && c.id !== cardForm.id && mainText(c) === own)) out.push(T.dup);
+  const noFuri = missingFurigana(v, lang);
+  if (noFuri.length) out.push(T.furigana(noFuri));
+  return out.map((x) => `<p lang="${LANGS[lang].noteLang}">${esc(x)}</p>`).join('');
+}
+
+function saveCardForm() {
+  const T = t().form;
+  const v = gatherValues();
+  const lang = cardForm.lang;
+  cardForm.values = v;
+  cardForm.errors = formErrors(v, lang);
+  const firstError = Object.keys(cardForm.errors)[0];
+  if (firstError) {
+    cardForm.status = { kind: 'error', text: T.fixErrors };
+    renderCardForm();
+    return focusCardField(firstError);
+  }
+  const existing = cardForm.id ? store.getCard(cardForm.id) : null;
+  const card = cardFromValues(v, { lang, existing, newId: (l, tp) => makeId(l, tp, (id) => !!store.getCard(id)) });
+  const problems = store.validateCard(card);
+  if (problems.length) {
+    cardForm.status = { kind: 'error', text: problems.join(' · ') };
+    return renderCardForm();
+  }
+  store.saveCard(card);
+  // A card being answered right now is judged again with its new answers.
+  const s = session();
+  if (s?.current === card.id && s.phase === 'revealed' && s.result?.verdict !== 'flip') s.result = checkAnswer(card, s.input);
+  if (existing) {
+    $('#dlg-card').close();
+    cardForm = null;
+    render();
+    return;
+  }
+  // As in Anki, the window stays open for the next card; topic, tags, level, source and facets are kept.
+  const keep = { topic: v.topic, level: v.level, tags: v.tags, cardSource: v.cardSource, meta: v.meta };
+  cardForm = { id: null, lang, values: { ...emptyValues(lang, v.topic), ...keep }, errors: {}, status: { kind: 'ok', text: T.added } };
+  render();
+  renderCardForm();
+  focusCardField();
+}
+
+/** Re-draw the form with what was typed (topic changed, a row added or removed). */
+function redrawCardForm(change) {
+  cardForm.values = gatherValues();
+  change?.(cardForm.values);
+  cardForm.status = null;
+  renderCardForm();
+}
+
 // ---------- events ----------
 
 document.addEventListener('click', (e) => {
@@ -684,6 +931,14 @@ document.addEventListener('click', (e) => {
   if (!el) return;
   const a = el.dataset.action;
   if (a === 'vocab-add' || a === 'vocab-remove') return toggleSavedWord(a === 'vocab-add');
+  if (a === 'add-card') { setMenu(false); return openCardForm(); }
+  if (a === 'edit-card') return openCardForm(el.dataset.id);
+  if (a === 'close-card-form') { $('#dlg-card').close(); return; }
+  if (a === 'add-row') {
+    redrawCardForm((v) => v[el.dataset.list].push({ text: '', note: '' }));
+    return [...document.querySelectorAll(`.rows[data-list="${el.dataset.list}"] [name="row-text"]`)].at(-1)?.focus();
+  }
+  if (a === 'remove-row') return redrawCardForm((v) => v[el.dataset.list].splice(Number(el.dataset.index), 1));
   if (a === 'toggle-lang') return setLangMenu(!langMenuOpen());
   if (el.dataset.langSwitch) {
     const lang = el.dataset.langSwitch;
@@ -746,16 +1001,30 @@ document.addEventListener('click', (e) => {
 
 document.addEventListener('submit', (e) => {
   if (e.target.id === 'answer-form') { e.preventDefault(); submitAnswer(); }
+  if (e.target.id === 'card-form') { e.preventDefault(); saveCardForm(); }
 });
 
 document.addEventListener('input', (e) => {
   if (e.target.id === 'answer') { const s = session(); if (s) s.input = e.target.value; updateKanaPreview(); }
   if (e.target.id === 'card-search') { state.search = e.target.value; renderCardList(); }
+  if (e.target.closest?.('#card-form')) {
+    if (e.target.dataset.ruby !== undefined) e.target.parentElement.querySelector('.ruby-preview').innerHTML = rubyPreview(e.target.value);
+    if (e.target.getAttribute('aria-invalid')) {
+      e.target.removeAttribute('aria-invalid');
+      e.target.parentElement.querySelector('.field-error')?.remove();
+      delete cardForm.errors[e.target.name];
+    }
+    $('#form-warn').innerHTML = warningsHTML(gatherValues());
+  }
 });
 
 document.addEventListener('change', (e) => {
   const el = e.target;
   if (el.id === 'import-file' && el.files[0]) return onImportFile(el.files[0]);
+  if (el.name === 'topic' && el.closest('#card-form')) {
+    redrawCardForm();
+    return $('#card-form [name="topic"]').focus();
+  }
   if (el.closest('#dlg-settings')) {
     if (el.name === 'newPerDay' || el.name === 'reviewsPerDay') store.setSettings({ [el.name]: Math.max(0, parseInt(el.value, 10) || 0) });
     if (el.name === 'explainLang') store.setSettings({ explainLang: { ...settings().explainLang, [state.lang]: el.value } });
@@ -775,6 +1044,12 @@ document.addEventListener('toggle', (e) => {
 }, true);
 
 document.addEventListener('keydown', (e) => {
+  if (e.target.closest?.('#card-form')) {
+    // Ctrl/Cmd+Enter saves, as in Anki. A plain Enter must not submit by accident (it also confirms IME input).
+    if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); saveCardForm(); }
+    else if (e.key === 'Enter' && e.target.tagName === 'INPUT') e.preventDefault();
+    return;
+  }
   if (e.target.closest?.('.lang-menu')) {
     const items = [...document.querySelectorAll('.lang-opt')];
     const i = items.indexOf(document.activeElement);

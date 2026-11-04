@@ -12,6 +12,14 @@ Topics can have sub-topics. As in Anki, a parent deck studies its own cards and 
 
 The language menu is at the top; light, dark, or system theme is in the settings.
 
+## Adding your own cards
+
+As in Anki, **Karte hinzufügen / 新增卡片** (next to Learn / Cards) opens a form for a new card in the current topic. The form follows the topic's card type: a sentence to rewrite, a sentence with a `___` blank, or a word for a flip card. Only the main text and at least one correct answer are required. Everything else is optional: a list of "correct but not ideal" answers and typical mistakes (each with a note), translations, a hint, the task chip, an explanation, the topic's facets (such as the verb class), level, tags, and source. After **Add** (or Ctrl+Enter) the form stays open for the next card and keeps the topic, tags, level, and source.
+
+The pencil icon in the card list, or **Bearbeiten / 編輯** while studying, opens the same form for an existing card. Fields the form does not show, such as `prompt.words`, are kept. Edited bundled cards are saved to `localStorage` like imported ones.
+
+For Japanese, write furigana as `{漢字|かんじ}`. The form shows a preview, and it warns when kanji have no furigana, because then a kana answer is not recognized. Answers typed in romaji are saved as hiragana. The form also warns when a card with the same sentence already exists.
+
 Answers are checked automatically against three lists: **correct**, **correct but not ideal** (with a note on why), and **typical mistakes** (with targeted feedback). After checking, you grade yourself (Again / Hard / Good / Easy, or keys 1–4). If your answer is right but not in the list yet, you can save it as a new accepted or "not ideal" answer.
 
 ## Scheduling
@@ -36,6 +44,8 @@ Run the scheduler tests with:
 ```bash
 node tests/srs.test.mjs
 ```
+
+The add / edit card form has its own tests (`node tests/cardform.test.mjs`). Among other things, every bundled card must come back unchanged after an edit that changes nothing.
 
 ## Run it
 
@@ -132,6 +142,7 @@ Check the bundled data with `node tests/data.test.mjs`: it makes sure every word
 | `js/check.js` | Answer normalization, matching, word diff |
 | `js/srs.js` | Scheduler (port of Anki's SM-2 defaults) |
 | `js/store.js` | Card library, import/export, localStorage |
+| `js/cardform.js` | Add / edit card form: form values ↔ card (no DOM) |
 | `js/text.js` | Escaping, furigana, romaji → hiragana |
 | `js/i18n.js` | UI strings (German page in German, Japanese page in Traditional Chinese) |
 
