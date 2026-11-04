@@ -11,7 +11,7 @@
 // labels (topic labels merged with defaults), facets }.
 import { esc, loc, rubyHTML, sentenceHTML, isRomaji, romajiToHiragana, toSurface, toKana, BLANK } from './text.js';
 import { wordDiff } from './check.js';
-import { typeOf } from './topics.js';
+import { LANGS, typeOf } from './topics.js';
 
 // ---------- word list ----------
 
@@ -131,11 +131,11 @@ function taskChip(card, ctx) {
 
 const noteHTML = (note, lang) => (note ? `<p class="note" lang="${lang}">${esc(loc(note, [lang]))}</p>` : '');
 
-/** The learner's answer as typed (romaji also shown as kana for Japanese). */
+/** The learner's answer as typed (in a course with romaji input, romaji is also shown as kana). */
 function typedHTML(card, input) {
   const v = input.trim();
   if (!v) return '—';
-  if (card.language === 'ja' && isRomaji(v)) return `${esc(romajiToHiragana(v))} <span class="muted small">(${esc(v)})</span>`;
+  if (LANGS[card.language].romajiInput && isRomaji(v)) return `${esc(romajiToHiragana(v))} <span class="muted small">(${esc(v)})</span>`;
   return esc(v);
 }
 
@@ -147,9 +147,9 @@ function acceptableBlock(card, ctx) {
 }
 
 const textInput = (card, ctx) => `<input id="answer" lang="${card.language}" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="${esc(ctx.labels.placeholder)}">
-  ${card.language === 'ja' ? '<div id="kana-preview" class="kana-preview" lang="ja" aria-live="polite"></div>' : ''}`;
+  ${LANGS[card.language].romajiInput ? `<div id="kana-preview" class="kana-preview" lang="${card.language}" aria-live="polite"></div>` : ''}`;
 
-const sentenceClass = (card) => `prompt-sentence${card.language === 'ja' ? ' ja' : ''}`;
+const sentenceClass = (card) => `prompt-sentence${LANGS[card.language].sentenceClass ? ` ${LANGS[card.language].sentenceClass}` : ''}`;
 
 // ---------- types ----------
 

@@ -1,29 +1,12 @@
-// Answer checking and word-level diff.
-import { toSurface, toKana, kataToHira, isRomaji, romajiToHiragana } from './text.js';
+// Answer checking and word-level diff. How answers are compared comes from the course
+// (LANGS[lang] in js/topics.js): `normalize`, `ruby` (match by surface or by reading) and `nearMatch`.
+import { toSurface, toKana } from './text.js';
+import { LANGS } from './topics.js';
 
-export function normalizeDe(s) {
-  return String(s ?? '')
-    .normalize('NFC')
-    .replace(/[„“”«»"]/g, '"')
-    .replace(/[‚‘’']/g, "'")
-    .replace(/[–—]/g, '-')
-    .replace(/\s+/g, ' ')
-    .replace(/\s+([,.;:!?])/g, '$1')
-    .trim()
-    .replace(/[.!?]+$/, '')
-    .trim();
+/** The forms of an answer text a typed answer may match (with furigana: the surface and the reading). */
+function forms(L, text) {
+  return L.ruby ? [L.normalize(toSurface(text)), L.normalize(toKana(text))] : [L.normalize(text)];
 }
-
-export function normalizeJa(s) {
-  let t = String(s ?? '').normalize('NFKC').replace(/[\s。、．，！？!?.,「」]/g, '');
-  if (isRomaji(t)) t = romajiToHiragana(t);
-  return kataToHira(t);
-}
-
-const forms = (card, text) =>
-  card.language === 'ja'
-    ? [normalizeJa(toSurface(text)), normalizeJa(toKana(text))]
-    : [normalizeDe(text)];
 
 /**
  * verdict: correct | acceptable | mistake | close | wrong | empty
@@ -34,18 +17,19 @@ export function checkAnswer(card, input) {
   const accepted = a.accepted || [];
   const acceptable = a.acceptable || [];
   const mistakes = a.mistakes || [];
-  const u = card.language === 'ja' ? normalizeJa(input) : normalizeDe(input);
-  const target = nearest(card, input, accepted);
+  const L = LANGS[card.language];
+  const u = L.normalize(input);
+  const target = nearest(L, input, accepted);
 
   if (!u) return { verdict: 'empty', target };
-  for (const t of accepted) if (forms(card, t).includes(u)) return { verdict: 'correct', matched: t, target: t };
-  for (const item of acceptable) if (forms(card, item.text).includes(u)) return { verdict: 'acceptable', matched: item.text, note: item.note, target };
-  for (const item of mistakes) if (forms(card, item.text).includes(u)) return { verdict: 'mistake', matched: item.text, note: item.note, target };
+  for (const t of accepted) if (forms(L, t).includes(u)) return { verdict: 'correct', matched: t, target: t };
+  for (const item of acceptable) if (forms(L, item.text).includes(u)) return { verdict: 'acceptable', matched: item.text, note: item.note, target };
+  for (const item of mistakes) if (forms(L, item.text).includes(u)) return { verdict: 'mistake', matched: item.text, note: item.note, target };
 
-  if (card.language === 'de') {
+  if (L.nearMatch) {
     const lower = u.toLowerCase();
-    for (const t of accepted) if (normalizeDe(t).toLowerCase() === lower) return { verdict: 'close', reason: 'case', target: t };
-    const tt = tokenize(normalizeDe(target));
+    for (const t of accepted) if (L.normalize(t).toLowerCase() === lower) return { verdict: 'close', reason: 'case', target: t };
+    const tt = tokenize(L.normalize(target));
     const ut = tokenize(u);
     const d = levenshtein(ut.map((x) => x.toLowerCase()), tt.map((x) => x.toLowerCase()));
     if (d <= 2 && d <= Math.ceil(tt.length * 0.2)) return { verdict: 'close', reason: 'near', target };
@@ -53,14 +37,15 @@ export function checkAnswer(card, input) {
   return { verdict: 'wrong', target };
 }
 
-function nearest(card, input, list) {
+/** The accepted answer closest to the input by words (only for courses with `nearMatch`; else the first). */
+function nearest(L, input, list) {
   if (!list.length) return '';
-  if (card.language === 'ja' || !input) return list[0];
-  const ut = tokenize(normalizeDe(input)).map((x) => x.toLowerCase());
+  if (!L.nearMatch || !input) return list[0];
+  const ut = tokenize(L.normalize(input)).map((x) => x.toLowerCase());
   let best = list[0];
   let bestD = Infinity;
   for (const t of list) {
-    const d = levenshtein(ut, tokenize(normalizeDe(t)).map((x) => x.toLowerCase()));
+    const d = levenshtein(ut, tokenize(L.normalize(t)).map((x) => x.toLowerCase()));
     if (d < bestD) { bestD = d; best = t; }
   }
   return best;

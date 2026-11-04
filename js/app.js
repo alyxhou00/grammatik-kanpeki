@@ -283,12 +283,10 @@ function render() {
   document.body.classList.toggle('no-furigana', !settings().furigana);
   const topicLabel = topicOf(state.lang, state.topic)?.label;
   const parents = ancestry(state.lang, state.topic).slice(1).reverse();
-  document.title = `${topicLabel.replace(/\u00AD/g, '')} · ${state.lang === 'ja' ? 'グラマティック完璧' : 'Grammatik Kanpeki'}`;
+  document.title = `${topicLabel.replace(/\u00AD/g, '')} · ${L.brand.title}`;
   const brand = $('#brand');
   brand.href = `#/${state.lang}/${L.topics[0].id}/learn`;
-  brand.innerHTML = state.lang === 'ja'
-    ? '<span lang="ja">グラマティック</span><span class="brand-2" lang="ja">完璧</span>'
-    : '<span lang="de">Grammatik</span> <span class="brand-2" lang="de">Kanpeki</span>';
+  brand.innerHTML = L.brand.html;
   setMenu(state.menuOpen);
 
   renderLangMenu();
@@ -483,7 +481,7 @@ function renderCardList() {
   const T = t();
   const q = (state.search || '').trim().toLowerCase();
   const cards = store.cardsFor(state.lang, state.topic).filter((c) => !q || JSON.stringify(c).toLowerCase().includes(q));
-  const fmt = new Intl.DateTimeFormat(state.lang === 'de' ? 'de-DE' : 'zh-TW', { month: '2-digit', day: '2-digit' });
+  const fmt = new Intl.DateTimeFormat(LANGS[state.lang].dateLocale, { month: '2-digit', day: '2-digit' });
   $('#card-count').textContent = cards.length;
   $('#card-list').innerHTML = cards.length
     ? cards.map((c) => {
@@ -561,7 +559,7 @@ function saveAlternative(kind) {
   const s = session();
   const id = s.current;
   let text = s.input.trim();
-  if (state.lang === 'ja' && isRomaji(text)) text = romajiToHiragana(text);
+  if (LANGS[state.lang].romajiInput && isRomaji(text)) text = romajiToHiragana(text);
   const note = $('#alt-note')?.value.trim();
   const card = store.addAlternative(id, text, kind, note);
   if (!card) return;
@@ -663,7 +661,7 @@ function openSettings() {
       <h3>${T.courseSettings}</h3>
       ${explainOpts.length > 1 ? `<label class="opt row">${T.explainLang}
         <select name="explainLang">${explainOpts.map(([v, l]) => `<option value="${v}" ${S.explainLang[state.lang] === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>` : ''}
-      ${state.lang === 'ja' ? `<label class="opt"><input type="checkbox" name="furigana" ${S.furigana ? 'checked' : ''}> ${T.furigana}</label>` : ''}
+      ${L.ruby ? `<label class="opt"><input type="checkbox" name="furigana" ${S.furigana ? 'checked' : ''}> ${T.furigana}</label>` : ''}
       <label class="opt"><input type="checkbox" name="showForm" ${S.showForm ? 'checked' : ''}> ${T.showForm}</label>
     </section>
     <section><button type="button" class="btn danger" data-action="reset-progress">${T.resetProgress}</button></section>
@@ -707,7 +705,7 @@ function field(name, label, value, o = {}) {
     ? `<textarea ${attrs} rows="${o.rows}">${esc(value)}</textarea>`
     : `<input ${attrs} value="${esc(value)}">`;
   return `<label class="field"><span class="field-label">${esc(label)}</span>${control}
-    ${o.ruby ? `<span class="ruby-preview" lang="ja">${rubyPreview(value)}</span>` : ''}
+    ${o.ruby ? `<span class="ruby-preview" lang="${o.lang}">${rubyPreview(value)}</span>` : ''}
     ${o.help ? `<span class="field-help">${esc(o.help)}</span>` : ''}
     ${err ? `<span class="field-error">${esc(T[err])}</span>` : ''}</label>`;
 }
@@ -745,7 +743,6 @@ function renderCardForm() {
   const L = LANGS[lang];
   const type = topicType(lang, v.topic);
   const labels = { ...UI[lang].labels, ...labelsOf(lang, v.topic) };
-  const ja = lang === 'ja';
   const langs = formLangs(lang);
   const indent = (id) => '   '.repeat(ancestry(lang, id).length - 1);
   const topics = L.topics.map((tp) => `<option value="${tp.id}" ${tp.id === v.topic ? 'selected' : ''}>${indent(tp.id)}${esc(tp.label.replace(/­/g, ''))}</option>`).join('');
@@ -755,19 +752,19 @@ function renderCardForm() {
     front = field('source', labels.source, v.source, { rows: 3, lang, main: true })
       + field('task', T.task, v.task, { ph: T.taskPh, lang: L.noteLang });
   } else if (type === 'cloze') {
-    front = field('sentence', T.sentence, v.sentence, { rows: 2, lang, main: true, ruby: ja, help: T.sentenceHelp })
+    front = field('sentence', T.sentence, v.sentence, { rows: 2, lang, main: true, ruby: L.ruby, help: T.sentenceHelp })
       + `<div class="field-grid">
-          ${field('baseWord', T.baseWord, v.baseWord, { lang, ruby: ja })}
+          ${field('baseWord', T.baseWord, v.baseWord, { lang, ruby: L.ruby })}
           ${field('baseMeaning', T.baseMeaning, v.baseMeaning, { lang: L.noteLang })}
           ${field('basePos', T.pos, v.basePos, { lang: L.noteLang })}
         </div>`
       + field('task', T.task, v.task, { ph: T.taskPh, lang: L.noteLang });
   } else {
     front = `<div class="field-grid">
-        ${field('word', T.word, v.word, { lang, main: true, ruby: ja })}
+        ${field('word', T.word, v.word, { lang, main: true, ruby: L.ruby })}
         ${field('pos', T.pos, v.pos, { lang: L.noteLang })}
       </div>`
-      + field('example', T.example, v.example, { rows: 2, lang, ruby: ja });
+      + field('example', T.example, v.example, { rows: 2, lang, ruby: L.ruby });
   }
 
   const facetDefs = facetsOf(lang, v.topic);
@@ -790,7 +787,7 @@ function renderCardForm() {
       <section>
         <h3>${esc(T.answer)}</h3>
         ${field('accepted', type === 'flip' ? T.meanings : type === 'rewrite' ? labels.target : T.accepted, v.accepted, {
-          rows: type === 'rewrite' ? 3 : 2, lang: type === 'flip' ? L.noteLang : lang, ruby: ja && type !== 'flip',
+          rows: type === 'rewrite' ? 3 : 2, lang: type === 'flip' ? L.noteLang : lang, ruby: L.ruby && type !== 'flip',
           help: type === 'flip' ? T.meaningsHelp : T.acceptedHelp,
         })}
         ${answerRows('acceptable', T.acceptable)}
@@ -808,7 +805,7 @@ function renderCardForm() {
           <summary>${esc(T.more)}</summary>
           <div class="field-grid">
             ${facets}
-            ${field('level', T.level, v.level, { ph: ja ? 'N5' : 'C1' })}
+            ${field('level', T.level, v.level, { ph: L.level })}
             ${field('tags', T.tags, v.tags, { ph: T.tagsPh })}
           </div>
           ${field('cardSource', T.source, v.cardSource, { ph: T.sourcePh })}

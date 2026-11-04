@@ -5,7 +5,7 @@ import fs from 'node:fs';
 import { validateCard, upgradeCard, VERSION, isDemoSource } from '../js/store.js';
 import { checkAnswer } from '../js/check.js';
 import { wordSegments, toSurface, toKana, BLANK } from '../js/text.js';
-import { LANGS, CARD_TYPES, topicOf, ancestry, deckIds, typeOf, labelsOf, facetsOf, vocabTopic } from '../js/topics.js';
+import { LANGS, LANG_FIELDS, CARD_TYPES, topicOf, ancestry, deckIds, typeOf, labelsOf, facetsOf, vocabTopic } from '../js/topics.js';
 import { sentenceOf, vocabCardFrom } from '../js/cardtypes.js';
 import { UI } from '../js/i18n.js';
 
@@ -34,10 +34,17 @@ for (const [lang, L] of Object.entries(LANGS)) {
   // facetLabels only names the facets a course's own topics use.
   const uiKeys = (lang) => keysOf(UI[lang]).filter((k) => !k.startsWith('facetLabels.'));
   for (const lang of rest) {
-    assert.deepEqual(Object.keys(LANGS[lang]).sort(), Object.keys(LANGS[first]).sort(), `${lang}: same course settings as ${first}`);
+    assert.deepEqual(keysOf(LANGS[lang]), keysOf(LANGS[first]), `${lang}: same course settings as ${first}`);
     assert.deepEqual(uiKeys(lang), uiKeys(first), `${lang}: same UI strings as ${first}`);
   }
   for (const lang of Object.keys(LANGS)) {
+    // Every course sets every course field, with the right type, and nothing else.
+    for (const [field, type] of Object.entries(LANG_FIELDS)) {
+      assert.equal(typeof LANGS[lang][field], type, `${lang}: course field "${field}" is a ${type}`);
+      assert.ok(LANGS[lang][field] !== null, `${lang}: course field "${field}" is set`);
+    }
+    assert.deepEqual(Object.keys(LANGS[lang]).sort(), Object.keys(LANG_FIELDS).sort(), `${lang}: only the fields in LANG_FIELDS`);
+    for (const key of ['title', 'html']) assert.ok(LANGS[lang].brand[key], `${lang}: brand.${key}`);
     assert.ok(UI[lang], `${lang}: UI strings`);
     assert.equal(typeOf({ language: lang, topic: vocabTopic(lang)?.id }), 'flip', `${lang}: has a word list (flip topic "vocab")`);
     for (const tp of LANGS[lang].topics) {
@@ -119,8 +126,8 @@ for (const file of manifest.files) {
       for (const e of validateCard(saved)) fail(c.id, `saved word "${w.text}": ${e}`);
     }
 
-    // Japanese: every kanji has furigana.
-    if (c.language === 'ja') {
+    // Courses with furigana: every kanji has it.
+    if (LANGS[c.language].ruby) {
       const texts = [sentence, p.base?.word, ...c.answer.accepted, ...words.map((w) => w.lemma || w.text)].filter(Boolean);
       for (const x of texts) if (KANJI.test(toKana(x))) fail(c.id, `kanji without furigana: ${x}`);
     }
