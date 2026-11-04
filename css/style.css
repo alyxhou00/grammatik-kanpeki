@@ -84,7 +84,7 @@ button { cursor: pointer; }
   font-size: .82rem; font-weight: 700; letter-spacing: -.02em;
 }
 .lang-glyph[data-glyph="de"] { background: var(--de-soft); color: var(--de); }
-.lang-glyph[data-glyph="ja"] { background: var(--ja-soft); color: var(--ja); font-size: .95rem; }
+.lang-glyph[data-glyph="ja"] { background: var(--ja-soft); color: var(--ja); }
 .lang-list {
   position: absolute; top: calc(100% + 8px); left: 0; z-index: 20; min-width: 240px;
   background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 6px;
@@ -98,7 +98,6 @@ button { cursor: pointer; }
 }
 .lang-opt:hover, .lang-opt:focus-visible { background: var(--surface-2); outline: none; }
 .lang-opt .lang-glyph { width: 36px; height: 36px; font-size: .95rem; }
-.lang-opt .lang-glyph[data-glyph="ja"] { font-size: 1.1rem; }
 .lang-text { display: flex; flex-direction: column; flex: 1; min-width: 0; line-height: 1.3; }
 .lang-opt-name { font-weight: 700; }
 .lang-tag { font-size: .8rem; color: var(--muted); }

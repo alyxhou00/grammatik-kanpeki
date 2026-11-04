@@ -18,7 +18,7 @@ export const CARD_TYPES = ['rewrite', 'cloze', 'flip'];
 export const LANGS = {
   de: {
     label: 'Deutsch',
-    glyph: 'De',
+    glyph: 'de',
     tagline: 'auf Deutsch erklärt',
     htmlLang: 'de',
     noteLang: 'de', // language of answer notes
@@ -44,7 +44,7 @@ export const LANGS = {
   },
   ja: {
     label: '日本語',
-    glyph: '日',
+    glyph: 'ja',
     tagline: '用繁體中文說明',
     htmlLang: 'zh-Hant',
     noteLang: 'zh-Hant',

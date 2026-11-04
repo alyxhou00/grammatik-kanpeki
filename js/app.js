@@ -250,14 +250,14 @@ function renderSidebar() {
 
 function renderLangMenu() {
   const cur = LANGS[state.lang];
-  $('#lang-btn').innerHTML = `<span class="lang-glyph" data-glyph="${state.lang}" lang="${state.lang}">${esc(cur.glyph)}</span>
+  $('#lang-btn').innerHTML = `<span class="lang-glyph" data-glyph="${state.lang}">${esc(cur.glyph)}</span>
     <span class="lang-name" lang="${state.lang}">${esc(cur.label)}</span>
     <svg class="chev" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m4 6 4 4 4-4"/></svg>`;
   $('#lang-btn').setAttribute('aria-label', `${t().langMenu}: ${cur.label}`);
   $('#lang-list').setAttribute('aria-label', t().langMenu);
   $('#lang-list').innerHTML = Object.entries(LANGS).map(([id, L]) => `
     <button type="button" role="menuitemradio" class="lang-opt" data-lang-switch="${id}" aria-checked="${id === state.lang}" tabindex="-1">
-      <span class="lang-glyph" data-glyph="${id}" lang="${id}">${esc(L.glyph)}</span>
+      <span class="lang-glyph" data-glyph="${id}">${esc(L.glyph)}</span>
       <span class="lang-text"><span class="lang-opt-name" lang="${id}">${esc(L.label)}</span><span class="lang-tag" lang="${L.htmlLang}">${esc(L.tagline)}</span></span>
       <svg class="check" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m3.5 8.5 3 3 6-7"/></svg>
     </button>`).join('');
