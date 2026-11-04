@@ -5,8 +5,9 @@ import fs from 'node:fs';
 import { validateCard, upgradeCard, VERSION, isDemoSource } from '../js/store.js';
 import { checkAnswer } from '../js/check.js';
 import { wordSegments, toSurface, toKana, BLANK } from '../js/text.js';
-import { LANGS, CARD_TYPES, topicOf, ancestry, deckIds, typeOf, labelsOf } from '../js/topics.js';
-import { sentenceOf } from '../js/cardtypes.js';
+import { LANGS, CARD_TYPES, topicOf, ancestry, deckIds, typeOf, labelsOf, facetsOf, vocabTopic } from '../js/topics.js';
+import { sentenceOf, vocabCardFrom } from '../js/cardtypes.js';
+import { UI } from '../js/i18n.js';
 
 const KANJI = /[一-鿿]/;
 const errors = [];
@@ -24,6 +25,27 @@ for (const [lang, L] of Object.entries(LANGS)) {
     if (!CARD_TYPES.includes(typeOf({ language: lang, topic: tp.id }))) fail(`${lang}/${tp.id}`, 'no card type');
   }
 }
+// ---------- every course offers the same things ----------
+
+{
+  const keysOf = (o, p = '') => Object.entries(o).flatMap(([k, v]) =>
+    v && typeof v === 'object' && !Array.isArray(v) ? keysOf(v, `${p}${k}.`) : [`${p}${k}`]).sort();
+  const [first, ...rest] = Object.keys(LANGS);
+  // facetLabels only names the facets a course's own topics use.
+  const uiKeys = (lang) => keysOf(UI[lang]).filter((k) => !k.startsWith('facetLabels.'));
+  for (const lang of rest) {
+    assert.deepEqual(Object.keys(LANGS[lang]).sort(), Object.keys(LANGS[first]).sort(), `${lang}: same course settings as ${first}`);
+    assert.deepEqual(uiKeys(lang), uiKeys(first), `${lang}: same UI strings as ${first}`);
+  }
+  for (const lang of Object.keys(LANGS)) {
+    assert.ok(UI[lang], `${lang}: UI strings`);
+    assert.equal(typeOf({ language: lang, topic: vocabTopic(lang)?.id }), 'flip', `${lang}: has a word list (flip topic "vocab")`);
+    for (const tp of LANGS[lang].topics) {
+      for (const key of Object.keys(facetsOf(lang, tp.id))) assert.ok(UI[lang].facetLabels[key], `${lang}/${tp.id}: facet "${key}" has a label`);
+    }
+  }
+}
+
 // Sub-topics inherit type and labels, and a parent deck includes its sub-topics.
 assert.deepEqual(deckIds('de', 'deklination'), ['deklination', 'n-deklination']);
 assert.equal(typeOf({ language: 'de', topic: 'n-deklination' }), 'cloze');
@@ -91,6 +113,11 @@ for (const file of manifest.files) {
     const found = wordSegments(sentence, words).filter((s) => s.word).length;
     if (found !== words.length) fail(c.id, `only ${found}/${words.length} words found in the sentence`);
     for (const w of words) if (!w.meaning || !w.pos) fail(c.id, `word without meaning/pos: ${w.text}`);
+    // Saving a word gives a valid word-list card in the same course.
+    for (const w of words) {
+      const saved = vocabCardFrom({ lemma: w.lemma || w.text, meaning: w.meaning, pos: w.pos }, c, c.language);
+      for (const e of validateCard(saved)) fail(c.id, `saved word "${w.text}": ${e}`);
+    }
 
     // Japanese: every kanji has furigana.
     if (c.language === 'ja') {

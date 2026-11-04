@@ -74,14 +74,16 @@ function aid(ctx, key, label, lang, text) {
     <summary>${esc(label)}</summary><div class="aid-body" lang="${lang}">${esc(text)}</div></details>`;
 }
 
-/** Translation and hint. Beginner languages show the main translation; the rest sit behind a click. */
-function aidsBlock(card, ctx) {
-  const p = card.prompt;
-  const tr = typeof p.translation === 'string' ? { [ctx.L.noteLang]: p.translation } : p.translation || {};
+/**
+ * Translation and hint. Beginner languages show the main translation; the rest sit behind a click.
+ * Defaults to the prompt's own; flip cards pass their example's translation instead.
+ */
+function aidsBlock(card, ctx, { translation = card.prompt.translation, hint = card.prompt.hint } = {}) {
+  const tr = typeof translation === 'string' ? { [ctx.L.noteLang]: translation } : translation || {};
   const shown = ctx.L.translation === 'always' && tr[ctx.L.noteLang] ? ctx.L.noteLang : null;
   const hidden = Object.keys(tr).filter((k) => k !== shown && k !== card.language && tr[k]);
   const aids = [
-    aid(ctx, 'hint', ctx.t.tip, ctx.L.noteLang, loc(p.hint, [ctx.L.noteLang])),
+    aid(ctx, 'hint', ctx.t.tip, ctx.L.noteLang, loc(hint, [ctx.L.noteLang])),
     ...hidden.map((k) => aid(ctx, `tr-${k}`, TR_LABEL[k] || k, k, tr[k])),
   ].join('');
   return `${shown ? `<p class="translation" lang="${shown}">${esc(tr[shown])}</p>` : ''}
@@ -257,17 +259,17 @@ export const CARD_RENDERERS = {
       const p = card.prompt;
       const t = ctx.t;
       return `
-        <div class="answer-row"><div class="label">${t.meaning}</div><p class="val big">${esc(card.answer.accepted.join('；'))}</p></div>
+        <div class="answer-row"><div class="label">${t.meaning}</div><p class="val big vocab-meaning" lang="${ctx.L.noteLang}">${esc(card.answer.accepted.join('；'))}</p></div>
         ${p.pos ? `<div class="chips"><span class="group-chip">${esc(p.pos)}</span></div>` : ''}
         ${p.example ? `<section class="explain"><h4>${t.example}</h4>
           <p class="example" lang="${card.language}">${sentenceHTML(p.example, null, p.words || [])}</p>
-          <p lang="${ctx.L.noteLang}">${esc(loc(p.exampleTranslation, [ctx.L.noteLang]))}</p></section>` : ''}
+          ${aidsBlock(card, ctx, { translation: p.exampleTranslation, hint: null })}</section>` : ''}
         ${explanationBlock(card, ctx)}`;
     },
-    summary(card) {
+    summary(card, ctx) {
       const p = card.prompt;
       return `<div class="sum-main"><span lang="${card.language}" class="sum-word">${rubyHTML(p.word)}</span> ${p.pos ? `<span class="form-chip tiny">${esc(p.pos)}</span>` : ''}</div>
-        <div class="sum-sub">${esc(card.answer.accepted.join('；'))}</div>`;
+        <div class="sum-sub" lang="${ctx.L.noteLang}">${esc(card.answer.accepted.join('；'))}</div>`;
     },
   },
 };
