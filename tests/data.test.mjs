@@ -2,7 +2,7 @@
 // Run: node tests/data.test.mjs
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { validateCard, upgradeCard, VERSION } from '../js/store.js';
+import { validateCard, upgradeCard, VERSION, isDemoSource } from '../js/store.js';
 import { checkAnswer } from '../js/check.js';
 import { wordSegments, toSurface, toKana, BLANK } from '../js/text.js';
 import { LANGS, CARD_TYPES, topicOf, ancestry, deckIds, typeOf, labelsOf } from '../js/topics.js';
@@ -52,6 +52,11 @@ assert.deepEqual(ancestry('de', 'n-deklination').map((x) => x.id), ['n-deklinati
 assert.deepEqual(wordSegments('Der Mann wartet an der Tür.', [{ text: 'an' }]).filter((x) => x.word).map((x) => x.text), ['an']);
 assert.equal(wordSegments('Der Mann wartet.', [{ text: 'an' }]).filter((x) => x.word).length, 0);
 
+// ---------- demo sources (scheduled after the user's own cards) ----------
+
+for (const s of ['demo', 'demo2', 'demo3', 'demo10', 'demo-n5', 'demo2-b1', 'demo-b2-extra']) assert.ok(isDemoSource(s), `${s} is a demo source`);
+for (const s of ['', undefined, 'user', 'demographie', 'Demo', 'demo-', 'my-demo', 'demo n5', 'import:demo.json']) assert.ok(!isDemoSource(s), `${s} is not a demo source`);
+
 // ---------- bundled cards ----------
 
 const root = new URL('../data/', import.meta.url);
@@ -67,6 +72,7 @@ for (const file of manifest.files) {
     checked++;
     if (ids.has(c.id)) fail(c.id, 'duplicate id');
     ids.add(c.id);
+    if (/\.demo\d*\.json$/.test(file) && !isDemoSource(c.source)) fail(c.id, `card in a demo file needs a demo source, not "${c.source}"`);
     if (upgradeCard(c) !== c) fail(c.id, 'uses version 1 fields');
     for (const e of validateCard(c)) fail(c.id, e);
     if (!c.source) fail(c.id, 'source missing');

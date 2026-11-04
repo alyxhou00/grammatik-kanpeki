@@ -1,5 +1,5 @@
 import * as store from './store.js';
-import { answer, preview, DEFAULTS, dayStartMs, isNew, isLearning, isReviewDue, learningDueToday } from './srs.js';
+import { answer, preview, DEFAULTS, dayStartMs, isNew, isLearning, isReviewDue, learningDueToday, reviewQueue, demoLast } from './srs.js';
 import { checkAnswer } from './check.js';
 import { UI } from './i18n.js';
 import { LANGS, topicOf, topicType, ancestry, childrenOf, groupOf, labelsOf, facetsOf, vocabTopic } from './topics.js';
@@ -201,17 +201,6 @@ function pickNext(s) {
   return null;
 }
 
-function mixIn(reviews, news) {
-  const out = [];
-  let r = 0;
-  news.forEach((n, i) => {
-    const upTo = Math.round(((i + 1) * reviews.length) / (news.length + 1));
-    while (r < upTo) out.push(reviews[r++]);
-    out.push(n);
-  });
-  while (r < reviews.length) out.push(reviews[r++]);
-  return out;
-}
 
 // ---------- render ----------
 
@@ -524,12 +513,11 @@ function startSession(mode) {
   if (mode === 'review') {
     const c = counts(state.lang, state.topic);
     const due = cards.filter((x) => isReviewDue(store.getProgress(x.id)))
-      .sort((a, b) => store.getProgress(a.id).dueDay - store.getProgress(b.id).dueDay)
-      .slice(0, c.review).map((x) => x.id);
-    const fresh = cards.filter((x) => isNew(store.getProgress(x.id))).slice(0, c.newToday).map((x) => x.id);
-    queue = mixIn(due, fresh);
+      .sort((a, b) => store.getProgress(a.id).dueDay - store.getProgress(b.id).dueDay);
+    const fresh = cards.filter((x) => isNew(store.getProgress(x.id)));
+    queue = reviewQueue(due, fresh, { reviewLimit: c.review, newLimit: c.newToday, isDemo: store.isDemo }).map((x) => x.id);
   } else {
-    queue = cards.map((c) => c.id).sort(() => Math.random() - 0.5);
+    queue = demoLast(cards.sort(() => Math.random() - 0.5), store.isDemo).map((c) => c.id);
   }
   state.sessions[key()] = { mode, queue, current: null, phase: 'answer', input: '', result: null, reviewed: 0, aids: new Set() };
   render();
