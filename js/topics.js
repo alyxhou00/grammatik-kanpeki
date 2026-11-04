@@ -40,6 +40,7 @@ export const LANGS = {
         id: 'verben-mit-praepositionen', label: 'Verben mit Präpositionen', type: 'cloze',
         labels: { placeholder: 'Präposition (und Artikel) eingeben …' },
       },
+      { id: 'vocab', label: 'Meine Wortliste', group: 'vocab', type: 'flip' },
     ],
   },
   ja: {

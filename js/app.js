@@ -57,7 +57,7 @@ function setMenu(open) {
 }
 mobileQuery.addEventListener('change', () => setMenu(false));
 
-// ---------- word popup (hover a word in a Japanese sentence → save it to the word list) ----------
+// ---------- word popup (hover a word in a sentence → save it to the course's word list) ----------
 
 let popWord = null; // the .word element the popup belongs to
 let popHideTimer = null;
@@ -356,7 +356,7 @@ function renderOverview() {
       <button class="btn" data-action="cram" ${c.total ? '' : 'disabled'}>${T.cram}</button>
       ${c.total ? '' : `<button class="btn primary" data-action="add-card">${esc(T.form.add)}</button>`}
     </div>
-    <p class="hint">${!c.total ? (state.topic === 'vocab' ? T.vocabEmpty : T.emptyTopic) : any ? `${T.cram}: ${T.cramHint}` : T.nothingToday}</p>
+    <p class="hint">${!c.total ? (groupOf(state.lang, state.topic) === 'vocab' ? T.vocabEmpty : T.emptyTopic) : any ? `${T.cram}: ${T.cramHint}` : T.nothingToday}</p>
   </section>`;
 }
 

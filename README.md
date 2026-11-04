@@ -4,7 +4,7 @@ An Anki-style grammar trainer for German and Japanese that runs in the browser.
 
 - **Deutsch → Nominalisierung** (C1): you see a sentence in Verbalstil and type the Nominalstil.
 - **日本語 → 動詞變化** (N5, explained in Traditional Chinese): you see the dictionary form (with furigana), the target form, a Japanese sentence with a blank, and its full Chinese translation. You type the conjugated verb in kana, kanji, or romaji.
-- **日本語 → 我的單字本**: in a sentence, hover a word (tap on a phone) to see its reading and meaning and save it to your word list. The word list is its own deck of classic flip cards: see the word, recall the meaning, then grade yourself.
+- **Word list (Deutsch → Meine Wortliste, 日本語 → 我的單字本)**: in a sentence, hover a word (tap on a phone) to see its meaning (and its reading, for Japanese) and save it to your word list. The word list is its own deck of classic flip cards: see the word, recall the meaning, then grade yourself. German words are saved in their dictionary form, nouns with their article (`die Bedienungsanleitung`), and explained in German.
 
 Topics that are set up but have no cards yet: Partizipialkonstruktionen, Deklination (with the sub-topic n-Deklination), Verben mit Präpositionen, 形容詞變化, 助詞, 數字・助數詞.
 
@@ -107,7 +107,7 @@ Each topic draws its cards with one of three card types (set in `js/topics.js`, 
 | --- | --- | --- | --- |
 | `rewrite` | Rewrite the whole sentence | `source` | Nominalisierung, Partizipialkonstruktionen |
 | `cloze` | Fill the blank `___` in the sentence | `sentence` (optional `base: { word, meaning, pos }`) | 動詞變化, 形容詞變化, 助詞, 數字・助數詞, Deklination, Verben mit Präpositionen |
-| `flip` | See the front, recall the back, grade yourself | `word` (optional `pos`, `example`, `exampleTranslation`) | 我的單字本 |
+| `flip` | See the front, recall the back, grade yourself | `word` (optional `pos`, `example`, `exampleTranslation`) | Meine Wortliste, 我的單字本 |
 
 Fields every type understands:
 
