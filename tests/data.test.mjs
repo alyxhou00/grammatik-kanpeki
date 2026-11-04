@@ -6,7 +6,7 @@ import { validateCard, upgradeCard, VERSION } from '../js/store.js';
 import { checkAnswer } from '../js/check.js';
 import { wordSegments, toSurface, toKana, BLANK } from '../js/text.js';
 import { LANGS, CARD_TYPES, topicOf, ancestry, deckIds, typeOf, labelsOf, facetsOf, vocabTopic } from '../js/topics.js';
-import { sentenceOf, vocabCardFrom } from '../js/cardtypes.js';
+import { sentenceOf, vocabCardFrom, vocabId, savedWordIn } from '../js/cardtypes.js';
 import { UI } from '../js/i18n.js';
 
 const KANJI = /[一-鿿]/;
@@ -68,6 +68,29 @@ assert.deepEqual(ancestry('de', 'n-deklination').map((x) => x.id), ['n-deklinati
   assert.equal('verbalstil' in de.prompt, false);
   assert.equal(upgradeCard(v2), v2, 'current cards are returned unchanged');
   assert.deepEqual(validateCard({ ...v2, topic: 'nope' }), ['unknown topic "nope"']);
+}
+
+// ---------- saved words: one card per sense ----------
+
+{
+  const bench = { lemma: 'die Bank', meaning: 'Sitzmöbel für mehrere Personen', pos: 'Nomen' };
+  const bank = { lemma: 'die Bank', meaning: 'Geldinstitut', pos: 'Nomen' };
+  const a = vocabCardFrom(bench, null, 'de');
+  const b = vocabCardFrom(bank, null, 'de');
+  assert.notEqual(a.id, b.id, 'two senses of one word get two cards');
+  assert.equal(vocabCardFrom({ ...bench, meaning: ' Sitzmöbel  für mehrere Personen ' }, null, 'de').id, a.id, 'same sense → same id (stable across devices)');
+  assert.equal(vocabId('ja', { lemma: '{方|かた}', meaning: '人（敬稱）' }), vocabId('ja', { lemma: '方', meaning: '人（敬稱）' }), 'furigana does not change the id');
+  assert.deepEqual(validateCard(a), []);
+  assert.equal(savedWordIn([a, b], bench), a);
+  assert.equal(savedWordIn([a, b], bank), b);
+  assert.equal(savedWordIn([a], bank), null, 'saving one sense does not mark the other as saved');
+  // A card from before senses existed (id from the spelling only, no meta.sense) is still found by its meaning.
+  const old = { ...a, id: 'de-vocab-die Bank', meta: { savedFrom: 'x' } };
+  assert.equal(savedWordIn([old], bench), old);
+  assert.equal(savedWordIn([old], bank), null);
+  // Editing the meaning of a saved card keeps it linked to the word it was saved from.
+  const edited = { ...a, answer: { accepted: ['Sitzbank'] } };
+  assert.equal(savedWordIn([edited], bench), edited);
 }
 
 // Latin-script words are not matched inside longer words.

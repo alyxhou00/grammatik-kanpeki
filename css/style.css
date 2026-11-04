@@ -275,6 +275,9 @@ ruby rt { font-size: .5em; color: var(--muted); font-weight: 400; }
 .vocab-word.peek rt { visibility: hidden; }
 .vocab-word.peek:hover rt { visibility: visible; }
 .vocab-reading { text-align: center; color: var(--muted); font-size: 1.2rem; }
+/* Shown on the front when the word list has another sense of the same word. */
+.vocab-context { text-align: center; color: var(--muted); font-size: 1.05rem; margin: 4px 0 0; }
+.vocab-context:lang(de) { font-family: var(--serif); }
 /* German entries are longer ("die Herz-Kreislauf-Erkrankung") and their meanings are paraphrases. */
 .vocab-word:lang(de) { font-family: var(--serif); font-size: 2.2rem; line-height: 1.3; margin: 16px 0 8px; overflow-wrap: break-word; hyphens: auto; }
 .answer-row .val.vocab-meaning:lang(de) { font-size: 1.25rem; line-height: 1.5; }

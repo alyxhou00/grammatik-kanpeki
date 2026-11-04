@@ -47,7 +47,7 @@
       "properties": {
         "text": { "type": "string", "description": "The word exactly as written in the sentence (with furigana markup)." },
         "lemma": { "type": "string", "description": "Dictionary form, if different from text (e.g. {歩|ある}く for {歩|ある}いた)." },
-        "meaning": { "type": "string", "description": "Meaning in the course's explanation language (zh-Hant for Japanese)." },
+        "meaning": { "type": "string", "description": "Meaning in the course's note language (de for German, zh-Hant for Japanese). Together with the lemma it identifies the sense that gets saved, so two meanings of one word become two cards." },
         "pos": { "type": "string", "description": "Part of speech, e.g. 名詞, 動詞, い形容詞, 副詞." }
       }
     },
@@ -147,7 +147,11 @@
         "explanation": { "$ref": "#/$defs/localized", "description": "Shown after answering, with a tab per language the card has." },
         "meta": {
           "type": "object",
-          "description": "Facets for filtering. Values the topic names in its `facets` show as chips, e.g. verbClass (godan, kami-ichidan, shimo-ichidan, irregular), adjClass (i, na), form (nai, te, ...), savedFrom (word list)."
+          "description": "Facets for filtering. Values the topic names in its `facets` show as chips, e.g. verbClass (godan, kami-ichidan, shimo-ichidan, irregular), adjClass (i, na), form (nai, te, ...).",
+          "properties": {
+            "savedFrom": { "type": "string", "description": "Word-list cards: id of the card the word was saved from." },
+            "sense": { "type": "string", "description": "Word-list cards: the saved sense, \"<word without furigana>|<meaning>\". Links the card to the hoverable word even after its meaning is edited." }
+          }
         }
       },
       "allOf": [

@@ -15,7 +15,36 @@ import { typeOf } from './topics.js';
 
 // ---------- word list ----------
 
-export const vocabId = (lang, lemma) => `${lang}-vocab-${toSurface(lemma)}`;
+// A saved word is one sense of a word: its dictionary form plus the meaning it had where it was saved.
+// "die Bank" (bench) and "die Bank" (bank), or 方 (かた / ほう), are separate cards.
+
+const clean = (s) => String(s ?? '').normalize('NFC').replace(/\s+/g, ' ').trim();
+
+/** Identity of a word sense, stored as card.meta.sense: "<surface>|<meaning>". */
+export const senseKey = (word) => `${clean(toSurface(word.lemma ?? word.text))}|${clean(word.meaning)}`;
+
+/** Short stable hash (FNV-1a, base 36), so the same sense gets the same id on every device. */
+function hash(s) {
+  let h = 0x811c9dc5;
+  for (const ch of s) h = Math.imul(h ^ ch.codePointAt(0), 0x01000193) >>> 0;
+  return h.toString(36);
+}
+
+/** Card id for a saved word sense, e.g. "de-vocab-die Bank-1x2y3z". */
+export const vocabId = (lang, word) => `${lang}-vocab-${clean(toSurface(word.lemma ?? word.text))}-${hash(senseKey(word))}`;
+
+/**
+ * The card in `cards` (the course's word list) that holds this word sense, or null.
+ * Matches the stored sense key; cards without one (saved before senses existed, or added by hand)
+ * match on the same word and a meaning among their answers.
+ */
+export function savedWordIn(cards, word) {
+  const key = senseKey(word);
+  const [surface, meaning] = [clean(toSurface(word.lemma ?? word.text)), clean(word.meaning)];
+  return cards.find((c) => c.meta?.sense === key)
+    || cards.find((c) => !c.meta?.sense && clean(toSurface(c.prompt?.word)) === surface && (c.answer?.accepted || []).some((m) => clean(m) === meaning))
+    || null;
+}
 
 /** The sentence a card's hoverable words live in (prompt.words are matched against it). */
 export function sentenceOf(card) {
@@ -37,14 +66,14 @@ export function exampleOf(card) {
 export function vocabCardFrom(word, sourceCard, lang) {
   const ex = sourceCard && sourceCard.topic !== 'vocab' ? exampleOf(sourceCard) : null;
   return {
-    id: vocabId(lang, word.lemma),
+    id: vocabId(lang, word),
     language: lang,
     topic: 'vocab',
     source: sourceCard?.source || 'word-list',
     level: sourceCard?.level,
     tags: word.pos ? [word.pos] : [],
     createdAt: new Date().toLocaleDateString('sv-SE'), // local YYYY-MM-DD
-    meta: { savedFrom: sourceCard?.id },
+    meta: { savedFrom: sourceCard?.id, sense: senseKey(word) },
     prompt: {
       word: word.lemma,
       pos: word.pos,
@@ -252,6 +281,7 @@ export const CARD_RENDERERS = {
       return `<div class="eyebrow">${ctx.t.vocabFront}</div>
         <div class="vocab-word${ctx.revealed ? '' : ' peek'}" lang="${card.language}">${rubyHTML(p.word)}</div>
         ${ctx.revealed && reading !== toSurface(p.word) ? `<div class="vocab-reading" lang="${card.language}">${esc(reading)}</div>` : ''}
+        ${ctx.homograph && p.example && !ctx.revealed ? `<p class="vocab-context" lang="${card.language}">${sentenceHTML(p.example)}</p>` : ''}
         ${ctx.revealed || reading === toSurface(p.word) ? '' : `<p class="hint">${ctx.t.vocabPeek}</p>`}`;
     },
     input() { return ''; },

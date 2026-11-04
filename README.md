@@ -124,7 +124,7 @@ Fields every type understands:
 { "text": "{歩|ある}いた", "lemma": "{歩|ある}く", "meaning": "走路", "pos": "動詞" }
 ```
 
-`text` is the word exactly as written in the sentence. `lemma` is the dictionary form that gets saved (leave it out when it equals `text`). In German sentences, a word is not matched inside a longer word. Saved words become cards with `"topic": "vocab"`, so they are exported and imported like any other card. Words can only be saved in a course that has a `vocab` topic. In the others, hovering shows the meaning only.
+`text` is the word exactly as written in the sentence. `lemma` is the dictionary form that gets saved (leave it out when it equals `text`). In German sentences, a word is not matched inside a longer word. Saved words become cards with `"topic": "vocab"`, so they are exported and imported like any other card. A saved card is one *sense* of a word: its dictionary form plus the meaning given in the sentence it came from. So `die Bank` "bench" and `die Bank` "bank" are two cards, and their front shows the example sentence so you can tell them apart. The card stores that sense in `meta.sense` (`"die Bank|Geldinstitut"`), and its id is built from it (`de-vocab-die Bank-<hash>`), so the same sense saved on two devices merges on import. A word card with no `meta.sense` (saved before senses existed, or added by hand) counts as saved when its word and one of its meanings match. Words can only be saved in a course that has a `vocab` topic. In the others, hovering shows the meaning only.
 
 **Version 1 files** (from before card types existed) still import. They are upgraded on load: `verbalstil` becomes `source`, `verb` and `meaning` become `base`, and `formLabel` becomes `task`.
 

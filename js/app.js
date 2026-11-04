@@ -3,7 +3,7 @@ import { answer, preview, DEFAULTS, dayStartMs, isNew, isLearning, isReviewDue, 
 import { checkAnswer } from './check.js';
 import { UI } from './i18n.js';
 import { LANGS, topicOf, topicType, ancestry, childrenOf, groupOf, labelsOf, facetsOf, vocabTopic } from './topics.js';
-import { rendererFor, vocabId, vocabCardFrom } from './cardtypes.js';
+import { rendererFor, savedWordIn, vocabCardFrom } from './cardtypes.js';
 import { esc, loc, isRomaji, romajiToHiragana, rubyHTML, toKana, toSurface } from './text.js';
 import { emptyValues, valuesFromCard, cardFromValues, formErrors, missingFurigana, formLangs, makeId, USER_SOURCE } from './cardform.js';
 
@@ -63,17 +63,21 @@ let popWord = null; // the .word element the popup belongs to
 let popHideTimer = null;
 const pop = () => $('#word-pop');
 
+/** The course's word-list cards, and the saved card for a word sense (or null). */
+const wordListCards = (lang) => (vocabTopic(lang) ? store.cardsFor(lang, vocabTopic(lang).id) : []);
+const savedWord = (lang, w) => savedWordIn(wordListCards(lang), w);
+
 function markSavedWords() {
+  const cards = wordListCards(state.lang);
   for (const el of document.querySelectorAll('.word[data-word]')) {
-    const w = JSON.parse(el.dataset.word);
-    el.classList.toggle('saved', !!store.getCard(vocabId(state.lang, w.lemma)));
+    el.classList.toggle('saved', !!savedWordIn(cards, JSON.parse(el.dataset.word)));
   }
 }
 
 function renderPop(w) {
   const T = t();
   const lang = state.lang;
-  const saved = !!store.getCard(vocabId(lang, w.lemma));
+  const saved = !!savedWord(lang, w);
   const reading = toKana(w.lemma);
   // Words can be saved only in a course that has a word list.
   const actions = !vocabTopic(lang) ? '' : saved
@@ -121,7 +125,8 @@ function toggleSavedWord(add) {
     const source = store.getCard(popWord.closest('[data-card]')?.dataset.card);
     store.saveCard(vocabCardFrom(w, source, state.lang));
   } else {
-    store.deleteCard(vocabId(state.lang, w.lemma));
+    const card = savedWord(state.lang, w);
+    if (card) store.deleteCard(card.id);
   }
   renderPop(w);
   markSavedWords();
@@ -368,6 +373,9 @@ function ctx(card, extra = {}) {
     t: UI[lang], settings: settings(), L: LANGS[lang],
     labels: { ...UI[lang].labels, ...labelsOf(lang, card?.topic) },
     facets: facetsOf(lang, card?.topic),
+    // Another card in the word list has the same word (another sense of it).
+    homograph: !!card?.prompt?.word && store.cardsFor(lang, card.topic)
+      .some((c) => c.id !== card.id && toSurface(c.prompt?.word) === toSurface(card.prompt.word)),
     aids: s?.aids || new Set(), revealed: s?.phase === 'revealed', ...extra,
   };
 }
