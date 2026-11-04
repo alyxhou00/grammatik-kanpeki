@@ -322,7 +322,7 @@ const dayDate = (day) => new Date(day * 864e5); // format with timeZone: 'UTC'
 function heatDayLine(day) {
   const T = t();
   const log = store.getStudyLog();
-  const date = new Intl.DateTimeFormat(T.locale, { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }).format(dayDate(day));
+  const date = new Intl.DateTimeFormat(LANGS[state.lang].dateLocale, { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }).format(dayDate(day));
   const langs = langsOn(log, day);
   const split = langs.length > 1 ? langs.map(([l, n]) => `${LANGS[l]?.label || l} ${n}`).join(' · ') : '';
   return T.streak.dayLine(date, T.streak.cards(countOn(log, day)), split);
@@ -342,9 +342,10 @@ function openStats() {
   const log = store.getStudyLog();
   const today = dayIndex();
   const st = streaks(log, today);
-  const hm = heatmap(log, today, { weekStart: T.weekStart });
-  const monthFmt = new Intl.DateTimeFormat(T.locale, { month: 'short', timeZone: 'UTC' });
-  const wdFmt = new Intl.DateTimeFormat(T.locale, { weekday: 'short', timeZone: 'UTC' });
+  const hm = heatmap(log, today, { weekStart: settings().weekStart });
+  const locale = LANGS[state.lang].dateLocale;
+  const monthFmt = new Intl.DateTimeFormat(locale, { month: 'short', timeZone: 'UTC' });
+  const wdFmt = new Intl.DateTimeFormat(locale, { weekday: 'short', timeZone: 'UTC' });
   // A month label sits above the week that holds the 1st; skipped if it would run into the previous one.
   let lastCol = -9;
   const months = hm.weeks.map((col, w) => {
@@ -792,6 +793,8 @@ function openSettings() {
       <h3>${T.studySettings}</h3>
       <label class="opt row">${T.newPerDay}<input type="number" min="0" max="9999" name="newPerDay" value="${S.newPerDay}"></label>
       <label class="opt row">${T.reviewsPerDay}<input type="number" min="0" max="9999" name="reviewsPerDay" value="${S.reviewsPerDay}"></label>
+      <label class="opt row">${T.weekStart}
+        <select name="weekStart">${[1, 0].map((d) => `<option value="${d}" ${S.weekStart === d ? 'selected' : ''}>${esc(T.weekdays[d])}</option>`).join('')}</select></label>
     </section>
     <section>
       <h3>${T.courseSettings}</h3>
@@ -1187,6 +1190,7 @@ document.addEventListener('change', (e) => {
     if (el.name === 'newPerDay' || el.name === 'reviewsPerDay') store.setSettings({ [el.name]: Math.max(0, parseInt(el.value, 10) || 0) });
     if (el.name === 'explainLang') store.setSettings({ explainLang: { ...settings().explainLang, [state.lang]: el.value } });
     if (el.name === 'theme') { store.setSettings({ theme: el.value }); applyTheme(); }
+    if (el.name === 'weekStart') store.setSettings({ weekStart: el.value === '0' ? 0 : 1 });
     if (el.name === 'furigana' || el.name === 'showForm') store.setSettings({ [el.name]: el.checked });
     if (el.name === 'speechVoice' || el.name === 'speechRate') {
       const own = { ...settings().speech[state.lang] };

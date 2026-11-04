@@ -59,9 +59,10 @@ let studyLog = read(K.log, {});
 // theme: 'system' | 'light' | 'dark'. explainLang: preferred explanation language per course.
 // collapsed: sidebar topics whose sub-topics are folded away ("de/deklination").
 // speech: per course { voice (voiceURI, '' = automatic), rate (unset = the course's default) }.
+// weekStart: first day of the week in the study history heatmap, 1 = Monday, 0 = Sunday.
 const DEFAULT_SETTINGS = {
   newPerDay: DEFAULTS.newPerDay, reviewsPerDay: DEFAULTS.reviewsPerDay, furigana: true, showForm: true,
-  explainLang: { de: 'de', ja: 'zh-Hant' }, theme: 'system', collapsed: [], speech: {},
+  explainLang: { de: 'de', ja: 'zh-Hant' }, theme: 'system', collapsed: [], speech: {}, weekStart: 1,
 };
 function loadSettings() {
   const saved = read(K.settings, {});

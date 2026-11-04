@@ -62,7 +62,7 @@ The add / edit card form has its own tests (`node tests/cardform.test.mjs`), and
 
 Every graded answer, in **Lernen / 學習** and in **Alle üben / 全部練習**, is counted for its study day (days start at 4 AM, as in the scheduler). The flame in the top bar shows the streak: the number of days in a row with at least one answer. It is grey until you have studied today; the streak only breaks after a whole day without studying.
 
-Clicking the flame opens **Lernverlauf / 學習紀錄**: current and longest streak, days studied, today's cards, and a GitHub-style heatmap of the last 12 months for both languages. Hover or tap a day to see its count per language. Weeks start on Monday on the German page and on Sunday on the Chinese one.
+Clicking the flame opens **Lernverlauf / 學習紀錄**: current and longest streak, days studied, today's cards, and a GitHub-style heatmap of the last 12 months for both languages. Hover or tap a day to see its count per language. Weeks start on Monday; you can switch to Sunday in the settings ("Woche beginnt am / 每週的第一天"). Dates are written in the course's `dateLocale` (`js/topics.js`).
 
 The log keeps counts per day and language (`js/studylog.js`), not every single answer, so a year of history is only a few kilobytes. Check it with `node tests/studylog.test.mjs`.
 

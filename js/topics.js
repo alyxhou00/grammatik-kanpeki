@@ -31,7 +31,7 @@ export const LANG_FIELDS = {
   translation: 'string', // 'aid': translations hidden behind a click | 'always': always shown
   explainLangs: 'object', // explanation languages offered in the settings: [[code, label], …]
   brand: 'object', // { title: plain text for <title>, html: markup for the header logo }
-  dateLocale: 'string', // Intl locale for dates in the card list
+  dateLocale: 'string', // Intl locale for dates (card list, study history)
   level: 'string', // placeholder for a card's level in the card form
   normalize: 'function', // answer text → comparable form
   nearMatch: 'boolean', // wrong case or a word or two off counts as "close", and the diff picks the nearest answer

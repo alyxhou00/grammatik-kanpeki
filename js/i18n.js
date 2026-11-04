@@ -61,10 +61,10 @@ export const UI = {
     furigana: 'Furigana anzeigen', showForm: 'Aufgabe (z. B. Zielform) vor der Antwort anzeigen',
     appearance: 'Darstellung', theme: { light: 'Hell', dark: 'Dunkel', system: 'System' },
     studySettings: 'Lernen', courseSettings: 'Deutsch',
+    weekStart: 'Woche beginnt am', weekdays: { 1: 'Montag', 0: 'Sonntag' },
     resetProgress: 'Lernfortschritt dieses Themas zurücksetzen', confirmReset: 'Lernfortschritt dieses Themas wirklich löschen?',
     loadError: 'Die Kartendateien konnten nicht geladen werden. Öffne die Seite über einen lokalen Server (siehe README), nicht direkt als Datei.',
     sourceUser: 'eigene Karte',
-    locale: 'de-DE', weekStart: 1,
     streak: {
       button: (n, today) => `Lernserie: ${n} ${n === 1 ? 'Tag' : 'Tage'}${today ? '' : ' – heute noch nicht gelernt'}`,
       title: 'Lernverlauf', current: 'Tage in Folge', longest: 'Längste Serie', daysStudied: 'Lerntage', today: 'Karten heute',
@@ -157,10 +157,10 @@ export const UI = {
     furigana: '顯示振假名', showForm: '作答前顯示題目要求（例如要變成哪一種形）',
     appearance: '外觀', theme: { light: '淺色', dark: '深色', system: '跟隨系統' },
     studySettings: '學習', courseSettings: '日文',
+    weekStart: '每週的第一天', weekdays: { 1: '星期一', 0: '星期日' },
     resetProgress: '重設這個主題的學習進度', confirmReset: '確定要清除這個主題的學習進度嗎？',
     loadError: '無法載入卡片檔。請用本機伺服器開啟網頁（見 README），不要直接開檔案。',
     sourceUser: '自己的卡片',
-    locale: 'zh-TW', weekStart: 0,
     streak: {
       button: (n, today) => `連續學習 ${n} 天${today ? '' : '（今天還沒學）'}`,
       title: '學習紀錄', current: '連續天數', longest: '最長連續', daysStudied: '學習天數', today: '今天的卡片',
