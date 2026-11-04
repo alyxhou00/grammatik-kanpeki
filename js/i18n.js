@@ -9,7 +9,7 @@ export const UI = {
     groups: { grammar: 'Grammatik', vocab: 'Wortschatz' },
     vocabFront: 'Wort', vocabPeek: 'Mit der Maus über das Wort fahren, um die Lesung zu sehen.',
     meaning: 'Bedeutung', example: 'Beispiel', showAnswer: 'Antwort zeigen',
-    vocabEmpty: 'Die Wortliste ist noch leer.',
+    vocabEmpty: 'Die Wortliste ist noch leer. Fahre in einem Übungssatz mit der Maus über ein unbekanntes Wort (auf dem Handy: antippen), um es zur Wortliste hinzuzufügen.',
     emptyTopic: 'Zu diesem Thema gibt es noch keine Karten. Mit „Karte hinzufügen“ kannst du eigene anlegen oder sie über „Import / Export“ laden.',
     langMenu: 'Sprache wählen',
     expand: 'Unterthemen zeigen', collapse: 'Unterthemen verbergen',

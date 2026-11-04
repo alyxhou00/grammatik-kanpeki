@@ -4,7 +4,7 @@ An Anki-style grammar trainer for German and Japanese that runs in the browser.
 
 - **Deutsch → Nominalisierung** (C1): you see a sentence in Verbalstil and type the Nominalstil.
 - **日本語 → 動詞變化** (N5, explained in Traditional Chinese): you see the dictionary form (with furigana), the target form, a Japanese sentence with a blank, and its full Chinese translation. You type the conjugated verb in kana, kanji, or romaji.
-- **日本語 → 我的單字本**: in a sentence, hover a word (tap on a phone) to see its reading and meaning and save it to your word list. The word list is its own deck of classic flip cards: see the word, recall the meaning, then grade yourself.
+- **Word list (Deutsch → Meine Wortliste, 日本語 → 我的單字本)**: in a sentence, hover a word (tap on a phone) to see its meaning (and its reading, for Japanese) and save it to your word list. The word list is its own deck of classic flip cards: see the word, recall the meaning, then grade yourself. German words are saved in their dictionary form, nouns with their article (`die Bedienungsanleitung`), and explained in German.
 
 Topics that are set up but have no cards yet: Partizipialkonstruktionen, Deklination (with the sub-topic n-Deklination), Verben mit Präpositionen, 形容詞變化, 助詞, 數字・助數詞.
 
@@ -107,7 +107,7 @@ Each topic draws its cards with one of three card types (set in `js/topics.js`, 
 | --- | --- | --- | --- |
 | `rewrite` | Rewrite the whole sentence | `source` | Nominalisierung, Partizipialkonstruktionen |
 | `cloze` | Fill the blank `___` in the sentence | `sentence` (optional `base: { word, meaning, pos }`) | 動詞變化, 形容詞變化, 助詞, 數字・助數詞, Deklination, Verben mit Präpositionen |
-| `flip` | See the front, recall the back, grade yourself | `word` (optional `pos`, `example`, `exampleTranslation`) | 我的單字本 |
+| `flip` | See the front, recall the back, grade yourself | `word` (optional `pos`, `example`, `exampleTranslation`) | Meine Wortliste, 我的單字本 |
 
 Fields every type understands:
 
@@ -137,13 +137,15 @@ Check the bundled data with `node tests/data.test.mjs`: it makes sure every word
 | File | Role |
 | --- | --- |
 | `js/app.js` | Routing, views, events |
-| `js/topics.js` | Languages and the topic tree (pure data + helpers) |
+| `js/topics.js` | Course settings (`LANGS`) and the topic tree (no DOM) |
 | `js/cardtypes.js` | Card types: how `rewrite`, `cloze` and `flip` cards are drawn |
-| `js/check.js` | Answer normalization, matching, word diff |
+| `js/check.js` | Answer matching and word diff (uses the course's normalizer) |
 | `js/srs.js` | Scheduler (port of Anki's SM-2 defaults) |
 | `js/store.js` | Card library, import/export, localStorage |
 | `js/cardform.js` | Add / edit card form: form values ↔ card (no DOM) |
-| `js/text.js` | Escaping, furigana, romaji → hiragana |
+| `js/text.js` | Escaping, furigana, romaji → hiragana, answer normalizers |
 | `js/i18n.js` | UI strings (German page in German, Japanese page in Traditional Chinese) |
 
 To add a topic, add a line to its language in `LANGS` in `js/topics.js` (`id`, `label`, a `type` or a `parent`, optional `labels` and `facets`), then add a data file to `data/manifest.json`. A topic with a new kind of exercise gets a new card type in `js/cardtypes.js`.
+
+Everything that differs between courses is a field of `LANGS[lang]` (listed in `LANG_FIELDS`): how answers are normalized, whether near misses count as "close", romaji input, furigana, the brand, the date locale and so on. The code reads these fields and never asks which language it is, so a new course is a new `LANGS` entry, its UI strings in `js/i18n.js` and its code in the `language` enum of `schema/cards.schema.json`; `tests/data.test.mjs` checks that every course sets every field and has the same UI strings.

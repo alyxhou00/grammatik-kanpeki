@@ -275,6 +275,10 @@ ruby rt { font-size: .5em; color: var(--muted); font-weight: 400; }
 .vocab-word.peek rt { visibility: hidden; }
 .vocab-word.peek:hover rt { visibility: visible; }
 .vocab-reading { text-align: center; color: var(--muted); font-size: 1.2rem; }
+/* German entries are longer ("die Herz-Kreislauf-Erkrankung") and their meanings are paraphrases. */
+.vocab-word:lang(de) { font-family: var(--serif); font-size: 2.2rem; line-height: 1.3; margin: 16px 0 8px; overflow-wrap: break-word; hyphens: auto; }
+.answer-row .val.vocab-meaning:lang(de) { font-size: 1.25rem; line-height: 1.5; }
+.pop-word:lang(de) { font-family: var(--serif); font-size: 1.3rem; line-height: 1.4; overflow-wrap: break-word; }
 .card .front > .hint { text-align: center; }
 .flip-actions { justify-content: center; margin-top: 22px; }
 .explain .example { font-size: 1.2rem; line-height: 2; }
