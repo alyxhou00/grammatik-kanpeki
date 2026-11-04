@@ -69,7 +69,7 @@ button { cursor: pointer; }
 }
 .brand { font-weight: 700; font-size: 1.1rem; text-decoration: none; color: var(--text); letter-spacing: -.01em; white-space: nowrap; }
 /* language menu */
-.lang-menu { position: relative; margin: 0 auto; }
+.lang-menu { position: relative; margin-right: auto; }
 .lang-btn {
   display: inline-flex; align-items: center; gap: 10px; padding: 5px 12px 5px 5px; border-radius: 999px;
   border: 1px solid var(--line); background: var(--surface-2); font-weight: 600;
@@ -86,12 +86,12 @@ button { cursor: pointer; }
 .lang-glyph[data-glyph="de"] { background: var(--de-soft); color: var(--de); }
 .lang-glyph[data-glyph="ja"] { background: var(--ja-soft); color: var(--ja); font-size: .95rem; }
 .lang-list {
-  position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); z-index: 20; min-width: 240px;
+  position: absolute; top: calc(100% + 8px); left: 0; z-index: 20; min-width: 240px;
   background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 6px;
   box-shadow: 0 16px 40px rgba(0, 0, 0, .18); animation: menu-in .14s ease-out;
 }
 .lang-list[hidden] { display: none; }
-@keyframes menu-in { from { opacity: 0; transform: translate(-50%, -4px); } }
+@keyframes menu-in { from { opacity: 0; transform: translateY(-4px); } }
 .lang-opt {
   display: flex; align-items: center; gap: 12px; width: 100%; border: 0; background: none; text-align: left;
   padding: 8px 10px; border-radius: 10px;
@@ -404,10 +404,9 @@ dialog::backdrop { background: rgba(10, 12, 15, .45); }
 @media (max-width: 640px) {
   .topbar { padding: 10px 12px; gap: 6px; }
   .brand { font-size: 1rem; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
-  .lang-menu { margin: 0 0 0 auto; }
+  .lang-menu { margin: 0 auto 0 0; }
   .lang-btn { gap: 6px; padding-right: 10px; }
-  .lang-list { left: auto; right: 0; transform: none; }
-  @keyframes menu-in { from { opacity: 0; transform: translateY(-4px); } }
+  .lang-list { left: auto; right: 0; }
   .top-actions { margin-left: 0; }
   .data-btn { padding: 6px 8px; border-color: transparent; }
   .data-btn .btn-label { display: none; }
