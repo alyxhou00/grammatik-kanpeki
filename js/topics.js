@@ -12,6 +12,9 @@
 //   type     'rewrite' | 'cloze' | 'flip' (inherited from the parent)
 //   labels   per-type labels, e.g. { source: 'Verbalstil', target: 'Nominalstil' } (merged with the parent's)
 //   facets   names for card.meta values, shown as chips on the back: { verbClass: { godan: '…' } }
+//
+// A course reads its sentences aloud when it sets `speech`: { locale (BCP 47, picks the voice), rate
+// (default speed; beginners get a slower one) }. See js/speech.js.
 
 export const CARD_TYPES = ['rewrite', 'cloze', 'flip'];
 
@@ -24,6 +27,7 @@ export const LANGS = {
     noteLang: 'de', // language of answer notes
     translation: 'aid', // translations are hidden behind a click
     explainLangs: [['de', 'DE'], ['en', 'EN'], ['zh-Hant', '中文']],
+    speech: { locale: 'de-DE', rate: 1 },
     topics: [
       {
         id: 'nominalisierung', label: 'Nominalisierung', type: 'rewrite',
@@ -50,6 +54,7 @@ export const LANGS = {
     noteLang: 'zh-Hant',
     translation: 'always', // beginner: the Chinese translation is always shown
     explainLangs: [['zh-Hant', '中文'], ['en', 'EN'], ['de', 'DE']],
+    speech: { locale: 'ja-JP', rate: 0.85 },
     topics: [
       {
         id: 'verb-conjugation', label: '動詞變化', type: 'cloze',

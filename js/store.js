@@ -55,15 +55,20 @@ let progress = read(K.progress, {});
 
 // theme: 'system' | 'light' | 'dark'. explainLang: preferred explanation language per course.
 // collapsed: sidebar topics whose sub-topics are folded away ("de/deklination").
+// speech: per course { voice (voiceURI, '' = automatic), rate (unset = the course's default) }.
 const DEFAULT_SETTINGS = {
   newPerDay: DEFAULTS.newPerDay, reviewsPerDay: DEFAULTS.reviewsPerDay, furigana: true, showForm: true,
-  explainLang: { de: 'de', ja: 'zh-Hant' }, theme: 'system', collapsed: [],
+  explainLang: { de: 'de', ja: 'zh-Hant' }, theme: 'system', collapsed: [], speech: {},
 };
 function loadSettings() {
   const saved = read(K.settings, {});
   // Before courses had their own explanation language, one string applied to German.
   if (typeof saved.explainLang === 'string') saved.explainLang = { ...DEFAULT_SETTINGS.explainLang, de: saved.explainLang };
-  return { ...DEFAULT_SETTINGS, ...saved, explainLang: { ...DEFAULT_SETTINGS.explainLang, ...saved.explainLang } };
+  return {
+    ...DEFAULT_SETTINGS, ...saved,
+    explainLang: { ...DEFAULT_SETTINGS.explainLang, ...saved.explainLang },
+    speech: { ...saved.speech },
+  };
 }
 let settings = loadSettings();
 

@@ -3,7 +3,8 @@ import { answer, preview, DEFAULTS, dayStartMs, isNew, isLearning, isReviewDue, 
 import { checkAnswer } from './check.js';
 import { UI } from './i18n.js';
 import { LANGS, topicOf, topicType, ancestry, childrenOf, groupOf, labelsOf, facetsOf, vocabTopic } from './topics.js';
-import { rendererFor, vocabId, vocabCardFrom } from './cardtypes.js';
+import { rendererFor, vocabId, vocabCardFrom, speakButton } from './cardtypes.js';
+import * as speech from './speech.js';
 import { esc, loc, isRomaji, romajiToHiragana, rubyHTML, toKana, toSurface } from './text.js';
 import { emptyValues, valuesFromCard, cardFromValues, formErrors, missingFurigana, formLangs, makeId, USER_SOURCE } from './cardform.js';
 
@@ -26,6 +27,37 @@ const session = () => state.sessions[key()] || null;
 const currentCard = () => { const s = session(); return s?.current ? store.getCard(s.current) : null; };
 const cfg = () => ({ ...DEFAULTS, newPerDay: settings().newPerDay, reviewsPerDay: settings().reviewsPerDay });
 let waitTimer = null;
+
+// ---------- speech (read sentences aloud, see js/speech.js) ----------
+
+const speechLocale = (lang) => LANGS[lang]?.speech?.locale;
+const speechOn = (lang) => speech.canSpeak(speechLocale(lang));
+const speechOpts = (lang) => {
+  const own = settings().speech[lang] || {};
+  return { locale: speechLocale(lang), voiceURI: own.voice, rate: own.rate ?? LANGS[lang].speech.rate ?? 1 };
+};
+
+/** Play a [data-speak] button; pressing the one that is playing stops it. */
+function playSpeakButton(btn) {
+  const wasPlaying = btn.classList.contains('speaking');
+  speech.stop();
+  if (wasPlaying) return;
+  const lang = btn.dataset.speakLang;
+  btn.classList.add('speaking');
+  const ok = speech.speak(btn.dataset.speak, { ...speechOpts(lang), onEnd: () => btn.classList.remove('speaking') });
+  if (!ok) btn.classList.remove('speaking');
+}
+
+// Voices arrive after the page loads (and can change when the OS installs one): redraw if that
+// turns the speaker buttons on or off.
+let speechSeen = '';
+speech.onVoicesChanged(() => {
+  const now = Object.keys(LANGS).map((l) => `${l}:${speechOn(l)}`).join();
+  if ($('#dlg-settings')?.open) openSettings();
+  if (now === speechSeen) return;
+  speechSeen = now;
+  if (!document.querySelector('dialog[open]')) render();
+});
 
 // ---------- routing ----------
 
@@ -80,7 +112,7 @@ function renderPop(w) {
     ? `<span class="pop-saved">✓ ${T.inWordList}</span><button type="button" class="link" data-action="vocab-remove">${T.remove}</button>`
     : `<button type="button" class="btn primary small" data-action="vocab-add">＋ ${T.addToWordList}</button>`;
   pop().innerHTML = `
-    <div class="pop-word" lang="${lang}">${rubyHTML(w.lemma)}</div>
+    <div class="pop-word" lang="${lang}">${rubyHTML(w.lemma)}${speakButton({ t: T, speak: speechOn(lang) }, w.lemma, lang)}</div>
     ${reading !== toSurface(w.lemma) ? `<div class="pop-reading" lang="${lang}">${esc(reading)}</div>` : ''}
     <div class="pop-meaning" lang="${LANGS[lang].noteLang}">${esc(w.meaning)}</div>
     ${w.pos ? `<span class="group-chip">${esc(w.pos)}</span>` : ''}
@@ -368,7 +400,7 @@ function ctx(card, extra = {}) {
     t: UI[lang], settings: settings(), L: LANGS[lang],
     labels: { ...UI[lang].labels, ...labelsOf(lang, card?.topic) },
     facets: facetsOf(lang, card?.topic),
-    aids: s?.aids || new Set(), revealed: s?.phase === 'revealed', ...extra,
+    aids: s?.aids || new Set(), revealed: s?.phase === 'revealed', speak: speechOn(lang), ...extra,
   };
 }
 
@@ -452,7 +484,7 @@ function renderReveal(card, c) {
       ${GRADES.map((g, i) => `<button type="button" class="grade g-${g}${g === suggest ? ' suggested' : ''}" data-grade="${g}">
         <span class="key">${i + 1}</span><span class="name">${T.grades[g]}</span><span class="iv">${iv(g)}</span></button>`).join('')}
     </div>
-    <p class="hint center">${T.gradeHint}</p>`;
+    <p class="hint center">${T.gradeHint}${c.speak ? ` · ${T.speakKey}` : ''}</p>`;
 }
 
 function afterSessionRender() {
@@ -546,6 +578,7 @@ function submitAnswer(reveal = false) {
 }
 
 function grade(g) {
+  speech.stop();
   const s = session();
   const id = s.current;
   if (s.mode === 'review') {
@@ -678,9 +711,36 @@ function openSettings() {
       ${state.lang === 'ja' ? `<label class="opt"><input type="checkbox" name="furigana" ${S.furigana ? 'checked' : ''}> ${T.furigana}</label>` : ''}
       <label class="opt"><input type="checkbox" name="showForm" ${S.showForm ? 'checked' : ''}> ${T.showForm}</label>
     </section>
+    ${L.speech ? speechSettingsHTML() : ''}
     <section><button type="button" class="btn danger" data-action="reset-progress">${T.resetProgress}</button></section>
   </form>`;
-  dlg.showModal();
+  if (!dlg.open) dlg.showModal();
+}
+
+function speechSettingsHTML() {
+  const T = t();
+  const lang = state.lang;
+  const voices = speech.voicesFor(speechLocale(lang));
+  const head = `<section><h3>${T.speechTitle}</h3>`;
+  if (!speech.supported()) return `${head}<p class="hint">${esc(T.noSpeech)}</p></section>`;
+  if (!voices.length) return `${head}<p class="hint">${esc(T.noVoice)}</p></section>`;
+  const o = speechOpts(lang);
+  const chosen = voices.some((v) => v.voiceURI === o.voiceURI) ? o.voiceURI : '';
+  const rates = Object.keys(T.rates).map(Number).sort((a, b) => a - b);
+  // "Microsoft Nanami Online (Natural) - Japanese (Japan)" → "Microsoft Nanami Online (Natural)": the list is one
+  // language anyway. When it mixes regions (German from Germany, Austria, Switzerland), the locale tells them apart.
+  const regions = new Set(voices.map((v) => v.lang.replace('_', '-'))).size > 1;
+  const name = (v) => v.name.replace(/\s+-\s+[^-]+$/, '') + (regions ? ` · ${v.lang.replace('_', '-')}` : '');
+  return `${head}
+    <label class="opt row">${T.voice}
+      <select name="speechVoice">
+        <option value="" ${chosen ? '' : 'selected'}>${esc(T.voiceAuto)} (${esc(name(voices[0]))})</option>
+        ${voices.map((v) => `<option value="${esc(v.voiceURI)}" ${v.voiceURI === chosen ? 'selected' : ''}>${esc(name(v))}</option>`).join('')}
+      </select></label>
+    <label class="opt row">${T.rate}
+      <select name="speechRate">${rates.map((r) => `<option value="${r}" ${r === o.rate ? 'selected' : ''}>${esc(T.rates[r])} (${r}×)</option>`).join('')}</select></label>
+    <div class="speech-test"><button type="button" class="btn small" data-speak="${esc(T.speechSample)}" data-speak-lang="${lang}">${esc(T.testVoice)}</button></div>
+  </section>`;
 }
 
 // ---------- add / edit card (like Anki's "Add" window) ----------
@@ -923,6 +983,8 @@ function redrawCardForm(change) {
 // ---------- events ----------
 
 document.addEventListener('click', (e) => {
+  const speakBtn = e.target.closest('[data-speak]');
+  if (speakBtn) return playSpeakButton(speakBtn);
   const word = e.target.closest('.word[data-word]');
   if (word) return showPop(word); // tap on touch screens
   if (popWord && !e.target.closest('#word-pop')) hidePop();
@@ -969,7 +1031,7 @@ document.addEventListener('click', (e) => {
   switch (a) {
     case 'start': return startSession('review');
     case 'cram': return startSession('cram');
-    case 'end': delete state.sessions[key()]; return render();
+    case 'end': speech.stop(); delete state.sessions[key()]; return render();
     case 'reveal': return submitAnswer(true);
     case 'show-form': {
       const s = session();
@@ -1030,6 +1092,12 @@ document.addEventListener('change', (e) => {
     if (el.name === 'explainLang') store.setSettings({ explainLang: { ...settings().explainLang, [state.lang]: el.value } });
     if (el.name === 'theme') { store.setSettings({ theme: el.value }); applyTheme(); }
     if (el.name === 'furigana' || el.name === 'showForm') store.setSettings({ [el.name]: el.checked });
+    if (el.name === 'speechVoice' || el.name === 'speechRate') {
+      const own = { ...settings().speech[state.lang] };
+      if (el.name === 'speechVoice') own.voice = el.value;
+      else own.rate = Number(el.value);
+      store.setSettings({ speech: { ...settings().speech, [state.lang]: own } });
+    }
     render();
   }
 });
@@ -1081,6 +1149,11 @@ document.addEventListener('keydown', (e) => {
     return;
   }
   if (e.target.id === 'alt-note' || e.repeat) return;
+  if (e.key === 'r' || e.key === 'R') {
+    const btn = $('.card [data-speak-main]') || $('.card [data-speak]');
+    if (btn && !e.ctrlKey && !e.metaKey && !e.altKey) { e.preventDefault(); playSpeakButton(btn); }
+    return;
+  }
   const idx = ['1', '2', '3', '4'].indexOf(e.key);
   if (idx >= 0) { e.preventDefault(); grade(GRADES[idx]); }
   else if (e.key === 'Enter') { e.preventDefault(); grade($('.grade:focus')?.dataset.grade || SUGGEST[s.result.verdict]); }

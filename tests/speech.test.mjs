@@ -1,0 +1,53 @@
+// Read-aloud: what text the engine gets, and which voice "automatic" picks.
+// Run: node tests/speech.test.mjs
+import assert from 'node:assert/strict';
+import { LANGS } from '../js/topics.js';
+
+// A fake Web Speech API, installed before js/speech.js is loaded.
+const VOICES = [
+  { name: 'Microsoft Haruka - Japanese (Japan)', lang: 'ja-JP', voiceURI: 'haruka', localService: true },
+  { name: 'Microsoft Nanami Online (Natural) - Japanese (Japan)', lang: 'ja-JP', voiceURI: 'nanami', localService: false },
+  { name: 'Microsoft Hedda - German (Germany)', lang: 'de-DE', voiceURI: 'hedda', localService: true },
+  { name: 'Microsoft Karsten - German (Switzerland)', lang: 'de_CH', voiceURI: 'karsten', localService: true },
+];
+const spoken = [];
+globalThis.window = {
+  speechSynthesis: {
+    getVoices: () => VOICES,
+    speak: (u) => spoken.push(u),
+    cancel: () => {},
+  },
+};
+globalThis.SpeechSynthesisUtterance = class { constructor(text) { this.text = text; } };
+
+const speech = await import('../js/speech.js');
+
+// Furigana is read as kanji (the engine needs the word for its pitch accent); blanks are dropped.
+assert.equal(speech.speechText('{朝|あさ}ごはんはあまり{食|た}べない。'), '朝ごはんはあまり食べない。');
+assert.equal(speech.speechText('  Bei  ___ Bedienung '), 'Bei Bedienung');
+
+// Natural voices first; regions of the same language count ("de_CH" as Android writes it, too).
+assert.deepEqual(speech.voicesFor('ja-JP').map((v) => v.voiceURI), ['nanami', 'haruka']);
+assert.deepEqual(speech.voicesFor('de-DE').map((v) => v.voiceURI), ['hedda', 'karsten']);
+assert.equal(speech.pickVoice('ja-JP', 'haruka').voiceURI, 'haruka');
+assert.equal(speech.pickVoice('ja-JP', 'gone').voiceURI, 'nanami', 'a removed voice falls back to the best one');
+assert.equal(speech.canSpeak('fr-FR'), false);
+
+// Every course that reads aloud has a voice locale and a sane default speed.
+for (const [lang, L] of Object.entries(LANGS)) {
+  if (!L.speech) continue;
+  assert.match(L.speech.locale, /^[a-z]{2}-[A-Z]{2}$/, lang);
+  assert.ok(L.speech.rate > 0.3 && L.speech.rate <= 2, lang);
+}
+
+// speak() sets language, voice and speed, and reports the end once even when stopped.
+let ends = 0;
+assert.equal(speech.speak('{箸|はし}', { locale: 'ja-JP', rate: 0.85, onEnd: () => ends++ }), true);
+const u = spoken.at(-1);
+assert.deepEqual([u.text, u.lang, u.voice.voiceURI, u.rate], ['箸', 'ja-JP', 'nanami', 0.85]);
+speech.stop();
+u.onend();
+assert.equal(ends, 1);
+assert.equal(speech.speak('___', { locale: 'ja-JP' }), false, 'nothing to say');
+
+console.log('ok - speech: text, voice ranking, course config, speak/stop');
