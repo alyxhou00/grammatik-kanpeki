@@ -1,6 +1,7 @@
 // Card library (bundled files + imported cards), progress and settings in localStorage.
 import { dayIndex, normalize, DEFAULTS } from './srs.js';
 import { LANGS, LANG_IDS, CARD_TYPES, topicOf, typeOf, deckIds } from './topics.js';
+import { AUTHORING_FORMAT, authoringSchema, checkSchema, cardsFromAuthoring } from './authoring.js';
 
 export const FORMAT = 'grammatik-kanpeki.cards';
 export const VERSION = 2;
@@ -189,14 +190,25 @@ export function validateCard(c) {
   return errs;
 }
 
-/** Parse an import file. Accepts the full format or a bare array of cards. */
+/** Parse an import file. Accepts the full format, a bare array of cards, or an authoring file (js/authoring.js). */
 export function parseImport(text, fileName = 'import') {
   let data;
   try { data = JSON.parse(text); } catch (e) { return { error: `JSON: ${e.message}` }; }
-  const list = Array.isArray(data) ? data : data?.cards;
+  let list = Array.isArray(data) ? data : data?.cards;
   if (!Array.isArray(list)) return { error: 'no "cards" list found' };
   const cards = [];
   const invalid = [];
+  if (data.format === AUTHORING_FORMAT) {
+    if (!topicOf(data.language, data.topic)) return { error: `unknown topic "${data.language}/${data.topic}"` };
+    const schema = authoringSchema(data.language, data.topic).properties.cards.items;
+    const ok = [];
+    list.forEach((c, i) => {
+      const errs = checkSchema(schema, c);
+      if (errs.length) invalid.push(`#${i + 1}: ${errs.join('; ')}`);
+      else ok.push(c);
+    });
+    list = cardsFromAuthoring({ ...data, cards: ok, source: data.source || `import:${fileName}` });
+  }
   list.forEach((raw, i) => {
     const c = upgradeCard(raw);
     const errs = validateCard(c);

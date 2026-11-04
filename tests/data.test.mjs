@@ -3,13 +3,12 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { validateCard, upgradeCard, VERSION } from '../js/store.js';
-import { checkAnswer } from '../js/check.js';
-import { wordSegments, toSurface, toKana, BLANK } from '../js/text.js';
+import { cardProblems } from '../js/cardcheck.js';
+import { wordSegments } from '../js/text.js';
 import { LANGS, CARD_TYPES, topicOf, ancestry, deckIds, typeOf, labelsOf, facetsOf, vocabTopic } from '../js/topics.js';
-import { sentenceOf, vocabCardFrom, vocabId, savedWordIn } from '../js/cardtypes.js';
+import { vocabCardFrom, vocabId, savedWordIn } from '../js/cardtypes.js';
 import { UI } from '../js/i18n.js';
 
-const KANJI = /[一-鿿]/;
 const errors = [];
 const fail = (id, msg) => errors.push(`${id}: ${msg}`);
 
@@ -113,34 +112,9 @@ for (const file of manifest.files) {
     if (ids.has(c.id)) fail(c.id, 'duplicate id');
     ids.add(c.id);
     if (upgradeCard(c) !== c) fail(c.id, 'uses version 1 fields');
-    for (const e of validateCard(c)) fail(c.id, e);
     if (!c.source) fail(c.id, 'source missing');
-
-    // Every answer list is judged the way the card says.
-    for (const a of c.answer.accepted) if (checkAnswer(c, toSurface(a)).verdict !== 'correct') fail(c.id, `accepted not correct: ${a}`);
-    for (const a of c.answer.acceptable || []) if (checkAnswer(c, toSurface(a.text)).verdict !== 'acceptable') fail(c.id, `acceptable not matched: ${a.text}`);
-    for (const a of c.answer.mistakes || []) if (checkAnswer(c, toSurface(a.text)).verdict !== 'mistake') fail(c.id, `mistake not matched: ${a.text}`);
-
-    const p = c.prompt;
-    const sentence = sentenceOf(c) || '';
-    if (typeOf(c) === 'cloze' && sentence.split(BLANK).length !== 2) fail(c.id, 'sentence needs exactly one ___');
-
-    // Hoverable words (any card type): each must be found in the sentence, in order, with a meaning.
-    const words = p.words || [];
-    const found = wordSegments(sentence, words).filter((s) => s.word).length;
-    if (found !== words.length) fail(c.id, `only ${found}/${words.length} words found in the sentence`);
-    for (const w of words) if (!w.meaning || !w.pos) fail(c.id, `word without meaning/pos: ${w.text}`);
-    // Saving a word gives a valid word-list card in the same course.
-    for (const w of words) {
-      const saved = vocabCardFrom({ lemma: w.lemma || w.text, meaning: w.meaning, pos: w.pos }, c, c.language);
-      for (const e of validateCard(saved)) fail(c.id, `saved word "${w.text}": ${e}`);
-    }
-
-    // Japanese: every kanji has furigana.
-    if (c.language === 'ja') {
-      const texts = [sentence, p.base?.word, ...c.answer.accepted, ...words.map((w) => w.lemma || w.text)].filter(Boolean);
-      for (const x of texts) if (KANJI.test(toKana(x))) fail(c.id, `kanji without furigana: ${x}`);
-    }
+    // Answer lists, hoverable words, facet values, furigana: see js/cardcheck.js.
+    for (const e of cardProblems(c)) fail(c.id, e);
   }
 }
 

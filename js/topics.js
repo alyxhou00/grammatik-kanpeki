@@ -12,6 +12,8 @@
 //   type     'rewrite' | 'cloze' | 'flip' (inherited from the parent)
 //   labels   per-type labels, e.g. { source: 'Verbalstil', target: 'Nominalstil' } (merged with the parent's)
 //   facets   names for card.meta values, shown as chips on the back: { verbClass: { godan: '…' } }
+//   about    what the exercise is and what makes a good card (English). It goes into the authoring
+//            schema that people and LLMs write new cards from (tools/schema.mjs, js/authoring.js).
 
 export const CARD_TYPES = ['rewrite', 'cloze', 'flip'];
 
@@ -28,19 +30,31 @@ export const LANGS = {
       {
         id: 'nominalisierung', label: 'Nominalisierung', type: 'rewrite',
         labels: { source: 'Verbalstil', target: 'Nominalstil', placeholder: 'Nominalstil eingeben …' },
+        about: 'Rewrite a C1 sentence in Verbalstil (with a clause: wenn, weil, nachdem, obwohl, damit, indem …) into Nominalstil: one clause, the verb turned into a noun phrase (bei, wegen, nach, trotz, zur, durch …). accepted holds the most natural Nominalstil; acceptable holds correct but clumsier versions, e.g. with an unneeded article; mistakes holds typical wrong prepositions or case endings.',
       },
       {
         // \u00AD: soft hyphen, so the long word breaks well in the narrow sidebar.
         id: 'partizipialkonstruktionen', label: 'Partizipial\u00ADkonstruktionen', type: 'rewrite',
         labels: { source: 'Ausgangssatz', target: 'Umformung', placeholder: 'Umgeformten Satz eingeben …' },
+        about: 'Rewrite a C1 sentence with a relative clause into one with an extended participle attribute, or the other way round, as the task says. Example: "Die Maßnahmen, die im letzten Jahr beschlossen wurden, …" → "Die im letzten Jahr beschlossenen Maßnahmen …". Mistakes are typically wrong participle endings or Partizip I/II mixed up.',
       },
-      { id: 'deklination', label: 'Deklination', type: 'cloze', labels: { placeholder: 'Fehlende Form eingeben …' } },
-      { id: 'n-deklination', label: 'n-Deklination', parent: 'deklination' },
+      {
+        id: 'deklination', label: 'Deklination', type: 'cloze', labels: { placeholder: 'Fehlende Form eingeben …' },
+        about: 'Fill in one declined form (article, adjective ending, noun or pronoun) in a German sentence. The task names what to fill in, e.g. "Dativ Plural"; base can give the word in its dictionary form.',
+      },
+      {
+        id: 'n-deklination', label: 'n-Deklination', parent: 'deklination',
+        about: 'Fill in a masculine noun of the n-Deklination (der Kollege, der Student, der Name, das Herz …) in the right case, e.g. "Ich habe mit dem ___ gesprochen." → Kollegen. base gives the noun in the nominative.',
+      },
       {
         id: 'verben-mit-praepositionen', label: 'Verben mit Präpositionen', type: 'cloze',
         labels: { placeholder: 'Präposition (und Artikel) eingeben …' },
+        about: 'Fill in the preposition a verb, adjective or noun takes, with the article in the right case when it is part of the gap, e.g. "Sie interessiert sich ___ Kunst." → für. Accept both a contraction (am, zum) and its long form where both are fine.',
       },
-      { id: 'vocab', label: 'Meine Wortliste', group: 'vocab', type: 'flip' },
+      {
+        id: 'vocab', label: 'Meine Wortliste', group: 'vocab', type: 'flip',
+        about: 'Word list: one German word or phrase per card in its dictionary form (nouns with article, e.g. "die Bedienungsanleitung"; verbs with the object or preposition that belongs to them, e.g. "einer Sache vorbeugen"). accepted holds its meaning as a short German paraphrase; example is a sentence that uses it.',
+      },
     ],
   },
   ja: {
@@ -61,15 +75,26 @@ export const LANGS = {
             'shimo-ichidan': '下一段動詞（第二類）', irregular: '不規則動詞（第三類）',
           },
         },
+        about: 'Conjugate a JLPT N5 verb into the form the task names (ない形, て形, た形, ます形 …) to fill the blank in a short sentence. base is the dictionary form with its Chinese meaning; meta.verbClass is its class. Typical mistakes: the wrong verb class (食べらない), the wrong て-form sound change (飲みて instead of 飲んで).',
       },
       {
         id: 'adjective-conjugation', label: '形容詞變化', type: 'cloze',
         labels: { base: '辭書形', showTask: '顯示要變成哪一種形', placeholder: '輸入形容詞變化，例如 たかくない／高くない／takakunai' },
         facets: { adjClass: { i: 'い形容詞', na: 'な形容詞' } },
+        about: 'Conjugate a JLPT N5 adjective into the form the task names (negative, past, て-form, adverb …) to fill the blank. base is the dictionary form; meta.adjClass is "i" or "na". Typical mistakes: treating a な-adjective like an い-adjective (きれくない), いい → いくない instead of よくない.',
       },
-      { id: 'particles', label: '助詞', type: 'cloze', labels: { placeholder: '輸入助詞，例如 で／de' } },
-      { id: 'counters', label: '數字・助數詞', type: 'cloze', labels: { placeholder: '輸入讀音，例如 さんぼん／sanbon' } },
-      { id: 'vocab', label: '我的單字本', group: 'vocab', type: 'flip' },
+      {
+        id: 'particles', label: '助詞', type: 'cloze', labels: { placeholder: '輸入助詞，例如 で／de' },
+        about: 'Fill in one particle (は, が, を, に, で, へ, と, も, から, まで …) in a JLPT N5 sentence. If two particles are both right, put both in accepted, or the less natural one in acceptable with a note. Notes explain the difference in Traditional Chinese.',
+      },
+      {
+        id: 'counters', label: '數字・助數詞', type: 'cloze', labels: { placeholder: '輸入讀音，例如 さんぼん／sanbon' },
+        about: 'Fill in a number with its counter (本, 枚, 匹, 人, つ, 回 …) with the correct reading, e.g. {三本|さんぼん}. Mistakes are the regular-looking readings that are wrong (さんほん, いちほん).',
+      },
+      {
+        id: 'vocab', label: '我的單字本', group: 'vocab', type: 'flip',
+        about: 'Word list: one Japanese word per card in its dictionary form with furigana, e.g. {食|た}べる. accepted holds its meaning in Traditional Chinese; example is a JLPT N5 sentence that uses it, with exampleTranslation in Traditional Chinese.',
+      },
     ],
   },
 };
@@ -120,6 +145,9 @@ export function facetsOf(lang, id) {
 
 /** How a card is drawn and checked: its own `type`, else its topic's. */
 export const typeOf = (card) => card?.type || topicType(card?.language, card?.topic);
+
+/** Courses whose texts use furigana markup {漢字|かんじ} (a course's `ruby` flag, where it sets one). */
+export const usesRuby = (lang) => LANGS[lang]?.ruby ?? lang === 'ja';
 
 /** The language's word-list topic (a flip deck with id "vocab"), if it has one. */
 export const vocabTopic = (lang) => topicOf(lang, 'vocab');

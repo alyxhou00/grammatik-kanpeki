@@ -9,7 +9,7 @@
 //
 // Each renderer gets a `ctx` built by app.js: { t, settings, aids, revealed, L (language config),
 // labels (topic labels merged with defaults), facets }.
-import { esc, loc, rubyHTML, sentenceHTML, isRomaji, romajiToHiragana, toSurface, toKana, BLANK } from './text.js';
+import { esc, loc, rubyHTML, sentenceHTML, isRomaji, romajiToHiragana, toSurface, toKana, shortHash, BLANK } from './text.js';
 import { wordDiff } from './check.js';
 import { typeOf } from './topics.js';
 
@@ -23,15 +23,8 @@ const clean = (s) => String(s ?? '').normalize('NFC').replace(/\s+/g, ' ').trim(
 /** Identity of a word sense, stored as card.meta.sense: "<surface>|<meaning>". */
 export const senseKey = (word) => `${clean(toSurface(word.lemma ?? word.text))}|${clean(word.meaning)}`;
 
-/** Short stable hash (FNV-1a, base 36), so the same sense gets the same id on every device. */
-function hash(s) {
-  let h = 0x811c9dc5;
-  for (const ch of s) h = Math.imul(h ^ ch.codePointAt(0), 0x01000193) >>> 0;
-  return h.toString(36);
-}
-
-/** Card id for a saved word sense, e.g. "de-vocab-die Bank-1x2y3z". */
-export const vocabId = (lang, word) => `${lang}-vocab-${clean(toSurface(word.lemma ?? word.text))}-${hash(senseKey(word))}`;
+/** Card id for a saved word sense, e.g. "de-vocab-die Bank-1x2y3z" (the hash keeps it the same on every device). */
+export const vocabId = (lang, word) => `${lang}-vocab-${clean(toSurface(word.lemma ?? word.text))}-${shortHash(senseKey(word))}`;
 
 /**
  * The card in `cards` (the course's word list) that holds this word sense, or null.

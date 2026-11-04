@@ -4,6 +4,13 @@ export function esc(s) {
   return String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
 
+/** Short stable hash (FNV-1a, base 36) for ids that must come out the same on every device. */
+export function shortHash(s) {
+  let h = 0x811c9dc5;
+  for (const ch of String(s)) h = Math.imul(h ^ ch.codePointAt(0), 0x01000193) >>> 0;
+  return h.toString(36);
+}
+
 /** Pick a string from a localized value (string or {de, en, zh-Hant}). */
 export function loc(value, prefer = []) {
   if (value == null) return '';

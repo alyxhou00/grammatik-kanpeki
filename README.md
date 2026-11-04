@@ -128,9 +128,52 @@ Fields every type understands:
 
 **Version 1 files** (from before card types existed) still import. They are upgraded on load: `verbalstil` becomes `source`, `verb` and `meaning` become `base`, and `formLabel` becomes `task`.
 
-Check the bundled data with `node tests/data.test.mjs`: it makes sure every word is found in its sentence, every kanji has furigana, and every answer list is judged as intended.
+Check the bundled data with `node tests/data.test.mjs`: it makes sure every word is found in its sentence, every kanji has furigana, every facet value is one the topic knows, and every answer list is judged as intended.
 
 **Furigana markup:** `{漢字|かんじ}`, for example `{食|た}べる`. The same string gives the ruby display, the kanji spelling, and the kana reading, so an answer typed as either `食べない` or `たべない` (or `tabenai`) counts.
+
+## Writing cards with an LLM (or by hand)
+
+For new cards, write an **authoring file** instead of the full format. It names the course and topic once and holds only what an author decides: no ids, dates, course or topic on each card, and only the fields the topic's card type uses.
+
+```jsonc
+{
+  "format": "grammatik-kanpeki.authoring",
+  "language": "ja", "topic": "particles",
+  "source": "Claude, 2026-11",                  // optional
+  "cards": [
+    {
+      "prompt": { "sentence": "{図書館|としょかん}___{本|ほん}を{読|よ}みます。", "translation": { "zh-Hant": "在圖書館看書。" } },
+      "answer": { "accepted": ["で"], "mistakes": [{ "text": "に", "note": "做動作的地點要用で。" }] },
+      "level": "N5"
+    }
+  ]
+}
+```
+
+Each topic has its own JSON Schema for this, built from the topic's entry in `js/topics.js`. A new topic gets one without further work.
+
+```bash
+node tools/schema.mjs
+```
+
+lists the courses and topics.
+
+```bash
+node tools/schema.mjs ja particles --prompt --count 10
+```
+
+prints a prompt to paste into an LLM: the topic's brief (`about`), the rules, an existing card as an example, the sentences that already have cards, and the schema. `node tools/schema.mjs ja particles` prints the schema alone.
+
+```bash
+node tools/validate.mjs new-cards.json --out import.json
+```
+
+checks the answer against the schema and the same rules as the data tests (answer lists, hoverable words, facet values, furigana). It prints one line per problem with where it is, for example `✗ cards[4] "駅から家___歩いて十分です。": prompt.sentence: every kanji needs its reading …`, so you can paste the lines back to the LLM to fix. With `--out` it writes an importable card file once everything passes. It also checks exported card files.
+
+**Import / Export** in the app also takes authoring files directly. Cards that don't fit the schema are counted as invalid and left out. Generated cards get an id from their sentence and first answer, so importing the same file again updates the cards instead of doubling them.
+
+A validator can't tell a wrong reading ({生|せい} where {生|なま} is meant) or a weak model answer, so look over generated cards before you rely on them. The pencil icon in the card list opens them in the edit form.
 
 ## Code layout
 
@@ -145,5 +188,10 @@ Check the bundled data with `node tests/data.test.mjs`: it makes sure every word
 | `js/cardform.js` | Add / edit card form: form values ↔ card (no DOM) |
 | `js/text.js` | Escaping, furigana, romaji → hiragana |
 | `js/i18n.js` | UI strings (German page in German, Japanese page in Traditional Chinese) |
+| `js/cardcheck.js` | Content checks for one card (answer lists, words, facets, furigana), shared by tests and tools (no DOM) |
+| `js/authoring.js` | Authoring format: per-topic schema, schema check, authoring ↔ full cards (no DOM) |
+| `tools/schema.mjs`, `tools/validate.mjs` | Command-line: print a topic's schema or LLM prompt; check a card file |
 
-To add a topic, add a line to its language in `LANGS` in `js/topics.js` (`id`, `label`, a `type` or a `parent`, optional `labels` and `facets`), then add a data file to `data/manifest.json`. A topic with a new kind of exercise gets a new card type in `js/cardtypes.js`.
+To add a topic, add an entry to its language in `LANGS` in `js/topics.js`: `id`, `label`, a `type` or a `parent`, an `about` brief (what the exercise is and what makes a good card, in English), and optional `labels` and `facets`. The sidebar, the card form, the authoring schema, the LLM prompt and the validator all follow from that entry. Cards can then come from the form, an authoring file, or a data file listed in `data/manifest.json`. A topic with a new kind of exercise gets a new card type in `js/cardtypes.js` (and its prompt fields in `js/authoring.js`).
+
+Tests: `node tests/data.test.mjs`, `node tests/cardform.test.mjs`, `node tests/authoring.test.mjs`, `node tests/srs.test.mjs`.
