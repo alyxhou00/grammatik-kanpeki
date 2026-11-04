@@ -68,6 +68,28 @@ python -m http.server 8123
 
 Then open <http://localhost:8123>.
 
+### Trying a branch before it is merged
+
+Work in progress often lives in its own git worktree, a separate folder with one branch checked out (Claude Code puts them in `.claude/worktrees/<name>`). Because the app has no build step, you can try a branch by serving its folder. You don't need to merge it first. List the worktrees and their folders:
+
+```bash
+git worktree list
+```
+
+Serve the one you want on a port of its own, so it can run next to `main` on 8123:
+
+```bash
+cd D:/Code/GrammatikKanpeki/.claude/worktrees/<name>
+```
+
+```bash
+python -m http.server 8130
+```
+
+Then open <http://localhost:8130> in any browser. Use a different port for each worktree you run at the same time.
+
+**Your cards and progress are not there.** The browser keeps `localStorage` separately for each address, so `localhost:8130` starts empty, apart from the bundled cards. To try a branch with your own data, use **Import / Export** on `localhost:8123`: export all cards with "Lernfortschritt mitexportieren / 一併匯出學習進度" ticked, then import that file on the branch's port. What you do there doesn't change your data on 8123.
+
 ## Where data lives
 
 | What | Where |
