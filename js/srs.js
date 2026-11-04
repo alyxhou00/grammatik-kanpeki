@@ -38,8 +38,11 @@ const clamp = (v, lo, hi) => Math.min(Math.max(v, lo), hi);
 // A "day" runs from dayStartHour to dayStartHour (local time), numbered consecutively.
 
 export function dayIndex(t = Date.now(), cfg = DEFAULTS) {
-  const d = new Date(t - cfg.dayStartHour * 3600 * 1000);
-  return Math.round(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / DAY_MS);
+  // Compare the local clock hour, not "t minus 4 hours": on the night summer time starts,
+  // 4 AM is only 3 hours after midnight.
+  const d = new Date(t);
+  const day = Math.round(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / DAY_MS);
+  return d.getHours() < cfg.dayStartHour ? day - 1 : day;
 }
 
 /** Local timestamp when the given day number begins. */

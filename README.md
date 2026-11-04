@@ -47,9 +47,19 @@ node tests/srs.test.mjs
 
 The add / edit card form has its own tests (`node tests/cardform.test.mjs`). Among other things, every bundled card must come back unchanged after an edit that changes nothing.
 
+## Streak and study history
+
+Every graded answer, in **Lernen / 學習** and in **Alle üben / 全部練習**, is counted for its study day (days start at 4 AM, as in the scheduler). The flame in the top bar shows the streak: the number of days in a row with at least one answer. It is grey until you have studied today; the streak only breaks after a whole day without studying.
+
+Clicking the flame opens **Lernverlauf / 學習紀錄**: current and longest streak, days studied, today's cards, and a GitHub-style heatmap of the last 12 months for both languages. Hover or tap a day to see its count per language. Weeks start on Monday on the German page and on Sunday on the Chinese one.
+
+The log keeps counts per day and language (`js/studylog.js`), not every single answer, so a year of history is only a few kilobytes. Check it with `node tests/studylog.test.mjs`.
+
 ## Run it
 
-It is a static site with no build step. It needs a local web server, because browsers block `fetch()` for pages opened straight from `file://`:
+The app works without a backend: it is a static site with no build step, and all your data stays in the browser. A backend for sync and premium features may come later as an optional add-on (see [`docs/reviews/2026-11-05-backend-optional-review.md`](docs/reviews/2026-11-05-backend-optional-review.md)).
+
+To run it locally you still need a simple web server, because browsers block `fetch()` for pages opened straight from `file://`:
 
 ```bash
 python -m http.server 8123
@@ -63,9 +73,9 @@ Then open <http://localhost:8123>.
 | --- | --- |
 | Bundled cards | `data/**.json`, listed in `data/manifest.json` |
 | Imported or edited cards | browser `localStorage` (they override bundled cards with the same `id`) |
-| Review progress, settings | browser `localStorage` |
+| Review progress, study history, settings | browser `localStorage` |
 
-**Import / Export** (top right) downloads or loads JSON in the same format as the bundled files. The export can include review progress. On import, cards are merged by `id`: you can choose to overwrite existing cards or add only new ones.
+**Import / Export** (top right) downloads or loads JSON in the same format as the bundled files. The export can include review progress and the study history (`studyLog`; for one course, only that course's days). On import, the study history is merged day by day, keeping the larger count, so importing the same file twice changes nothing. On import, cards are merged by `id`: you can choose to overwrite existing cards or add only new ones.
 
 ## Card format
 
@@ -142,6 +152,7 @@ Check the bundled data with `node tests/data.test.mjs`: it makes sure every word
 | `js/check.js` | Answer matching and word diff (uses the course's normalizer) |
 | `js/srs.js` | Scheduler (port of Anki's SM-2 defaults) |
 | `js/store.js` | Card library, import/export, localStorage |
+| `js/studylog.js` | Study history per day: streak, heatmap, merging (no DOM, no storage) |
 | `js/cardform.js` | Add / edit card form: form values ↔ card (no DOM) |
 | `js/text.js` | Escaping, furigana, romaji → hiragana, answer normalizers |
 | `js/i18n.js` | UI strings (German page in German, Japanese page in Traditional Chinese) |

@@ -200,6 +200,42 @@ button { cursor: pointer; }
 .actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
 .overview .hint { margin: 14px 0 0; }
 .done { text-align: center; padding: 48px 28px; }
+.done-streak { display: flex; align-items: center; justify-content: center; gap: 6px; font-weight: 600; margin: 0 0 20px; }
+.done-streak .flame { color: var(--flame); }
+
+/* ---------- streak and heatmap ---------- */
+:root { --flame: #f76707; --hc: 11px; --hg: 3px; }
+.streak-btn { display: inline-flex; align-items: center; gap: 4px; font-variant-numeric: tabular-nums; color: var(--muted); }
+.streak-btn.lit { color: var(--text); }
+.streak-btn.lit .flame, .stat.streak.lit .num .flame { color: var(--flame); }
+.streak-btn .flame { opacity: .55; }
+.streak-btn.lit .flame { opacity: 1; }
+dialog#dlg-stats { width: min(840px, calc(100vw - 32px)); }
+.dlg-stats .streak-stats { width: 100%; margin: 0; }
+.stat.streak .num { display: inline-flex; align-items: center; gap: 4px; }
+.stat.streak .num .flame { width: 1.4rem; height: 1.4rem; color: var(--muted); }
+.dlg-stats .hint { margin: 0; }
+.heat-wrap { align-self: stretch; overflow-x: auto; padding-bottom: 4px; }
+.heat-months { position: relative; height: 1.3em; margin-left: 34px; font-size: .75rem; color: var(--muted); }
+.heat-months span { position: absolute; left: calc(var(--col) * (var(--hc) + var(--hg))); white-space: nowrap; }
+.heat-body { display: flex; gap: 6px; width: max-content; }
+.heat-days { display: grid; grid-template-rows: repeat(7, var(--hc)); gap: var(--hg); width: 28px; font-size: .7rem; line-height: var(--hc); color: var(--muted); }
+.heat-grid { display: grid; grid-template-rows: repeat(7, var(--hc)); grid-auto-columns: var(--hc); grid-auto-flow: column; gap: var(--hg); }
+.hc { display: inline-block; width: var(--hc); height: var(--hc); border-radius: 2px; background: var(--line); }
+.hc.l1 { background: color-mix(in srgb, var(--accent) 30%, var(--surface)); }
+.hc.l2 { background: color-mix(in srgb, var(--accent) 55%, var(--surface)); }
+.hc.l3 { background: color-mix(in srgb, var(--accent) 80%, var(--surface)); }
+.hc.l4 { background: var(--accent); }
+.hc.out { visibility: hidden; }
+.hc.sel { outline: 2px solid var(--text); outline-offset: 1px; }
+.heat-grid .hc { cursor: pointer; }
+.heat-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; width: 100%; }
+.heat-info { margin: 0; font-size: .9rem; font-variant-numeric: tabular-nums; }
+.heat-legend { display: inline-flex; align-items: center; gap: 3px; font-size: .75rem; color: var(--muted); }
+.heat-legend .hc { margin: 0 1px; }
+.heat-legend .hc:first-child { margin-left: 6px; }
+.heat-legend .hc:last-child { margin-right: 6px; }
+.small-print { padding: 12px 20px 16px; font-size: .8rem; }
 
 /* ---------- session ---------- */
 .session-bar { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; font-size: .9rem; }
@@ -448,8 +484,9 @@ dialog.dlg-wide { width: min(660px, calc(100vw - 32px)); }
   .lang-btn { gap: 6px; padding-right: 10px; }
   .lang-list { left: auto; right: 0; }
   .top-actions { margin-left: 0; }
-  .data-btn { padding: 6px 8px; border-color: transparent; }
+  .btn.data-btn, .btn.streak-btn { padding: 6px 6px; border-color: transparent; }
   .data-btn .btn-label { display: none; }
+  .top-actions { gap: 2px; }
   .add-btn { padding: 6px 8px; }
   .add-btn .add-label { display: none; }
   .ans-row { grid-template-columns: 1fr auto; }
@@ -475,6 +512,7 @@ dialog.dlg-wide { width: min(660px, calc(100vw - 32px)); }
 }
 @media (max-width: 400px) {
   .lang-btn .lang-name { display: none; }
+  .brand .brand-2 { display: none; } /* room for the streak: "Grammatik" / "グラマティック" */
 }
 @media (prefers-reduced-motion: reduce) {
   .lang-list { animation: none; }
