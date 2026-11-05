@@ -23,10 +23,20 @@ export function loc(value, prefer = []) {
 // ---------- Furigana ----------
 // Markup: {漢字|かんじ}. Example: "{食|た}べる" → <ruby>食<rt>た</rt></ruby>べる
 
+// {人|-} shows the kanji with no furigana on purpose. Only a cloze card's base word may use it, where
+// the counter's own reading would mislead: 1{人|-} is ひとり, not いちにん. Its reading is unknown,
+// so toKana keeps the kanji.
+
 const RUBY = /\{([^|{}]+)\|([^{}]+)\}/g;
+export const NO_READING = '-';
+const NO_READING_MARK = /\{[^|{}]+\|-\}/g;
 
 export const toSurface = (s) => String(s ?? '').replace(RUBY, '$1');
-export const toKana = (s) => String(s ?? '').replace(RUBY, '$2');
+export const toKana = (s) => String(s ?? '').replace(RUBY, (_, base, reading) => (reading === NO_READING ? base : reading));
+/** Whether the text uses the no-furigana mark {漢字|-}. */
+export const hasNoReading = (s) => new RegExp(NO_READING_MARK.source).test(String(s ?? ''));
+/** The text without its {漢字|-} parts: what is left must still have furigana on every kanji. */
+export const withoutNoReading = (s) => String(s ?? '').replace(NO_READING_MARK, '');
 
 export function rubyHTML(s) {
   s = String(s ?? '');
@@ -34,7 +44,7 @@ export function rubyHTML(s) {
   let last = 0;
   for (const m of s.matchAll(RUBY)) {
     out += esc(s.slice(last, m.index));
-    out += `<ruby>${esc(m[1])}<rt>${esc(m[2])}</rt></ruby>`;
+    out += m[2] === NO_READING ? esc(m[1]) : `<ruby>${esc(m[1])}<rt>${esc(m[2])}</rt></ruby>`;
     last = m.index + m[0].length;
   }
   return out + esc(s.slice(last));

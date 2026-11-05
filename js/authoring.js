@@ -22,8 +22,11 @@ const LANG_NAMES = { de: 'German', en: 'English', 'zh-Hant': 'Traditional Chines
 const nameOf = (code) => LANG_NAMES[code] || code;
 
 // Strings that may only contain kanji inside furigana markup {漢字|かんじ}.
-const RUBY_PATTERN = '^(?:\\{[^|{}]+\\|[^{}]+\\}|[^{}\\u4e00-\\u9fff\\u3005])*$';
+const RUBY_PATTERN = '^(?:\\{[^|{}]+\\|(?!-\\})[^{}]+\\}|[^{}\\u4e00-\\u9fff\\u3005])*$';
 const RUBY_RULE = 'every kanji needs its reading in furigana markup, e.g. {食|た}べる, {朝|あさ}ごはん';
+// A cloze card's base word may also mark a kanji as shown without furigana: 1{人|-} (read ひとり, not にん).
+const BASE_RUBY_PATTERN = '^(?:\\{[^|{}]+\\|[^{}]+\\}|[^{}\\u4e00-\\u9fff\\u3005])*$';
+const BASE_RUBY_RULE = `${RUBY_RULE}; or {漢字|-} to show it without furigana when its usual reading would mislead, e.g. 1{人|-} (ひとり)`;
 // Exactly one ___ (three underscores).
 const BLANK_PATTERN = '^(?:(?!___)[\\s\\S])*___(?:(?!___)[\\s\\S])*$';
 const BLANK_RULE = 'needs exactly one blank, written ___ (three underscores)';
@@ -98,7 +101,9 @@ export function authoringSchema(lang, topicId) {
         allOf: [{ pattern: BLANK_PATTERN, 'x-rule': BLANK_RULE }, ...(ruby ? [{ pattern: RUBY_PATTERN, 'x-rule': RUBY_RULE }] : [])],
       }),
       base: obj({
-        word: text(`The word to start from, in its dictionary form (${labels.base || 'base form'}).`),
+        word: ruby
+          ? str(`The word to start from, in its dictionary form (${labels.base || 'base form'}). Write every kanji with its reading: {漢字|かんじ}, or {漢字|-} for no furigana when the usual reading would mislead (1{人|-} is ひとり).`, { pattern: BASE_RUBY_PATTERN, 'x-rule': BASE_RUBY_RULE })
+          : text(`The word to start from, in its dictionary form (${labels.base || 'base form'}).`),
         meaning: str(`Its meaning in ${note}.`),
         pos: str(`Its part of speech in ${note}.`),
       }, ['word'], 'Optional: the word the answer is formed from, shown above the sentence.'),
