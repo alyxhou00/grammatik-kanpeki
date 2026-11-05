@@ -13,7 +13,7 @@
 //
 // Its JSON Schema is built from the topic's entry in js/topics.js (card type, facets, labels, about,
 // the course's languages), so adding or changing a topic needs nothing here. No DOM.
-import { LANGS, topicOf, topicType, facetsOf, labelsOf, inherited, usesRuby } from './topics.js';
+import { LANGS, topicOf, topicType, facetsOf, formsOf, labelsOf, inherited, usesRuby } from './topics.js';
 import { toSurface, shortHash } from './text.js';
 
 export const AUTHORING_FORMAT = 'grammatik-kanpeki.authoring';
@@ -47,6 +47,8 @@ export function authoringSchema(lang, topicId) {
   const type = topicType(lang, topicId);
   const labels = labelsOf(lang, topicId);
   const facets = facetsOf(lang, topicId);
+  const formNames = formsOf(lang, topicId);
+  const forms = Object.keys(formNames).length && type !== 'flip' ? formNames : null;
   const ruby = usesRuby(lang);
   const note = nameOf(L.noteLang);
   const course = nameOf(lang);
@@ -71,7 +73,9 @@ export function authoringSchema(lang, topicId) {
     pos: str(`Part of speech in ${note}.`),
   }, ['text', 'meaning', 'pos']);
   const words = (where) => list(word, `Optional: words in ${where} a learner may not know. They can hover them to see the meaning and save them to their word list. In the order they appear, each written exactly as in ${where}; a word is matched as a whole word only.`);
-  const task = str(`What to produce, shown as a chip, in ${note}${type === 'cloze' ? ', e.g. the target form or case' : ''}. Optional.`);
+  const task = forms
+    ? str(`Leave it out: it is filled in from meta.form (the topic's registry of labels), and any value given here is replaced.`)
+    : str(`What to produce, shown as a chip, in ${note}${type === 'cloze' ? ', e.g. the target form or case' : ''}. Optional.`);
   const hint = str(`A tip, hidden until clicked, in ${note}. Optional.`);
   const regs = Object.entries(L.registers);
   // Spread into a prompt's properties: nothing in a course without registers.
@@ -124,13 +128,17 @@ export function authoringSchema(lang, topicId) {
       mistakes: list(withNote('typical wrong'), 'Optional: typical wrong answers learners give, each with a note that explains the mistake. Must not match an accepted answer.'),
     }, ['accepted'], 'How a typed answer is judged.');
 
-  const meta = Object.keys(facets).length
+  // Facets name a card's classes; the form registry names the one form the card practises.
+  const metaKeys = { ...facets, ...(forms ? { form: formNames } : {}) };
+  const meta = Object.keys(metaKeys).length
     ? obj(
-      Object.fromEntries(Object.entries(facets).map(([k, names]) => [k, {
+      Object.fromEntries(Object.entries(metaKeys).map(([k, names]) => [k, {
         enum: Object.keys(names),
-        description: `One of: ${Object.entries(names).map(([v, n]) => `${v} (${n})`).join(', ')}.`,
+        description: k === 'form' && forms
+          ? `The form this card practises. Its label becomes the task shown to the learner. One of: ${Object.entries(names).map(([v, n]) => `${v} (${n})`).join(', ')}. If the right one is missing, do not invent a label: use the closest and say so in source.`
+          : `One of: ${Object.entries(names).map(([v, n]) => `${v} (${n})`).join(', ')}.`,
       }])),
-      Object.keys(facets),
+      Object.keys(metaKeys),
       'Classification of the card, shown as chips after answering.',
       { additionalProperties: { type: 'string' } },
     )
@@ -143,7 +151,7 @@ export function authoringSchema(lang, topicId) {
     meta,
     level: str(`Level, e.g. ${L.level}.`),
     tags: list(str(), 'Optional keywords for search, e.g. the grammar point.'),
-  }, ['prompt', 'answer'].concat(Object.keys(facets).length ? ['meta'] : []));
+  }, ['prompt', 'answer'].concat(Object.keys(metaKeys).length ? ['meta'] : []));
 
   return {
     $schema: 'https://json-schema.org/draft/2020-12/schema',
@@ -212,8 +220,12 @@ const mainText = (type, p) => (type === 'rewrite' ? p.source : type === 'cloze' 
 export function cardsFromAuthoring(file, { today = new Date().toLocaleDateString('sv-SE') } = {}) {
   const { language: lang, topic } = file;
   const type = topicType(lang, topic);
+  const forms = formsOf(lang, topic);
   const used = new Set();
   return file.cards.map((c) => {
+    // The registry decides the task: the author names the form, not its label.
+    const label = forms[c.meta?.form];
+    const prompt = label ? { ...c.prompt, task: label } : c.prompt;
     const base = `${lang}-${topic}-g${shortHash(`${toSurface(mainText(type, c.prompt))}|${toSurface(c.answer.accepted[0])}`)}`;
     let id = base;
     for (let n = 2; used.has(id); n++) id = `${base}-${n}`;
@@ -221,7 +233,7 @@ export function cardsFromAuthoring(file, { today = new Date().toLocaleDateString
     const card = {
       id, language: lang, topic, source: file.source || 'generated',
       level: c.level, tags: c.tags, createdAt: today, meta: c.meta,
-      prompt: c.prompt, answer: c.answer, explanation: c.explanation,
+      prompt, answer: c.answer, explanation: c.explanation,
     };
     return Object.fromEntries(Object.entries(card).filter(([, v]) => v !== undefined));
   });
@@ -235,6 +247,8 @@ export function toAuthoring(card) {
   const p = { ...card.prompt };
   for (const k of ['translation', 'exampleTranslation']) if (p[k] !== undefined) p[k] = asObj(p[k]);
   for (const k of ['task', 'hint']) if (p[k] !== undefined) p[k] = asStr(p[k]);
+  // A task that is just the registry's label is not written out: importing fills it in again.
+  if (p.task !== undefined && p.task === formsOf(card.language, card.topic)[card.meta?.form]) delete p.task;
   const rows = (xs) => xs?.map((x) => ({ text: x.text, note: asStr(x.note) || '' }));
   const answer = Object.fromEntries(Object.entries({
     accepted: card.answer.accepted, acceptable: rows(card.answer.acceptable), mistakes: rows(card.answer.mistakes),

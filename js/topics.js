@@ -16,6 +16,10 @@
 //   type     'rewrite' | 'cloze' | 'flip' (inherited from the parent)
 //   labels   per-type labels, e.g. { source: 'Verbalstil', target: 'Nominalstil' } (merged with the parent's)
 //   facets   names for card.meta values, shown as chips on the back: { verbClass: { godan: '…' } }
+//   forms    the topic's registry of task labels: { 'te-kudasai': 'てください（請…）' }. A card says which one it
+//            practises in meta.form, and its prompt.task must be exactly that label (js/cardcheck.js), so the
+//            same form is never written two ways. Authoring files give only meta.form: the task is filled in
+//            from here (js/authoring.js). Each id is one label: a pattern with two uses gets two ids.
 //   about    what the exercise is and what makes a good card (English). It goes into the authoring
 //            schema that people and LLMs write new cards from (tools/schema.mjs, js/authoring.js).
 
@@ -134,6 +138,21 @@ export const LANGS = {
             'shimo-ichidan': '下一段動詞（第二類）', irregular: '不規則動詞（第三類）',
           },
         },
+        // Label style: a form name (ない形) or, when a fixed ending follows the blank, the pattern in kana
+        // (てもいい); then a gloss in （）, with … for the part the sentence supplies. No register in the
+        // label: ます・ません・ました forms are polite by name, the rest get prompt.register.
+        forms: {
+          nai: 'ない形（否定）', masen: 'ません形（否定）',
+          nakatta: 'なかった形（過去否定）', masendeshita: 'ませんでした形（過去否定）',
+          masu: 'ます形', mashita: 'ました形（過去）', ta: 'た形（過去）',
+          te: 'て形（然後…）', 'te-kudasai': 'てください（請…）', naide: 'ないでください（請不要…）',
+          'teiru-progressive': 'ている形（正在）', 'teiru-state': 'ている形（狀態）',
+          tai: 'たい形（想做）', potential: '可能形（會、能夠）',
+          volitional: '意向形（一起…吧）', mashou: 'ましょう形（…吧）',
+          nagara: 'ながら（一邊…一邊…）', 'ni-iku': '～に行く（去做…）', tekara: 'てから（做完…之後再…）',
+          'te-mo-ii': 'てもいい（可以…嗎）', 'te-wa-ikenai': 'てはいけない（不可以…）',
+          'ta-koto-ga-aru': 'たことがある（曾經…過）', tari: 'たり（又…又…，列舉動作）', 'ta-hou-ga-ii': 'たほうがいい（最好…）',
+        },
         about: 'Conjugate a JLPT N5 verb into the form the task names (ない形, て形, た形, ます形 …) to fill the blank in a short sentence. When the blank could be filled in either register (食べない／食べません), prompt.register says which one; the other goes into acceptable with a note. base is the dictionary form with its Chinese meaning; meta.verbClass is its class. Typical mistakes: the wrong verb class (食べらない), the wrong て-form sound change (飲みて instead of 飲んで).',
       },
       {
@@ -200,6 +219,11 @@ export function labelsOf(lang, id) {
 }
 export function facetsOf(lang, id) {
   return Object.assign({}, ...ancestry(lang, id).reverse().map((tp) => tp.facets || {}));
+}
+
+/** The topic's registry of task labels, merged down the tree: { form id: label } (empty when it has none). */
+export function formsOf(lang, id) {
+  return Object.assign({}, ...ancestry(lang, id).reverse().map((tp) => tp.forms || {}));
 }
 
 /** How a card is drawn and checked: its own `type`, else its topic's. */

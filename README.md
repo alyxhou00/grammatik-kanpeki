@@ -170,11 +170,12 @@ Fields every type understands:
 
 - `prompt.translation`: Japanese shows the Chinese translation right away; German hides each translation behind a click.
 - `prompt.hint`: a tip, hidden until clicked.
-- `prompt.task`: the target as a chip, for example `ない形（否定）`.
+- `prompt.task`: the target as a chip, for example `ない形（否定）`. In a topic with a form registry (Japanese verb conjugation) it is always the label of the card's `meta.form`; see below.
 - `prompt.register`: which politeness the answer is in, shown as its own label beside the task (Japanese: `plain` 普通形, `polite` 禮貌). It is always visible, even while the task chip is hidden. Set it only when the blank could be filled in either register (食べない／食べません). Leave it out when the form in the blank looks the same in both (飲んで before ください). The answer in the other register goes into `acceptable` with a note. A course lists its registers in `registers` in `js/topics.js`. If it also sets `politeAnswer` (a regex for polite endings), the card check flags a card whose answers include a polite form but which has no `register`.
 - `prompt.words`: hoverable words.
 - `explanation`: shown after answering, with a tab for each language the card has.
 - `meta`: values that the topic names in its `facets` show as chips. One example is `verbClass` (`godan`, `kami-ichidan`, `shimo-ichidan`, `irregular`).
+- `meta.form`: in a topic with a `forms` registry, which form the card practises (`te-wa-ikenai`). The registry in `js/topics.js` gives each form id exactly one label, and the card's `prompt.task` must be that label, so the same form is never written two ways. `node tools/validate.mjs` reports a mismatch. Authoring files give only `meta.form`; the task is filled in on import. Label style: a form name (`ない形`) or, when a fixed ending follows the blank, the pattern in kana (`てもいい`); then one gloss in `（）` with `…` for what the sentence supplies; a leading `～` only for a bare suffix (`～に行く`). Politeness is not part of the label: it is `prompt.register`. A pattern with two uses gets two ids (`teiru-progressive`, `teiru-state`). To add a form, add it to `forms`, then use it on a card.
 
 `prompt.words` lists the hoverable words of the card's sentence, in order (rewrite: `source`, cloze: `sentence`, flip: `example`):
 
@@ -249,7 +250,7 @@ A validator can't tell a wrong reading ({生|せい} where {生|なま} is meant
 | `js/speech.js` | Read aloud: voice choice and playback through the Web Speech API |
 | `js/sources.js` | Card source codes → full names (`ktxc1kb` → Kontext C1 Kursbuch) |
 | `js/i18n.js` | UI strings (German page in German, Japanese page in Traditional Chinese) |
-| `js/cardcheck.js` | Content checks for one card (answer lists, words, facets, furigana), shared by tests and tools (no DOM) |
+| `js/cardcheck.js` | Content checks for one card (answer lists, words, facets, form labels, furigana), shared by tests and tools (no DOM) |
 | `js/authoring.js` | Authoring format: per-topic schema, schema check, authoring ↔ full cards (no DOM) |
 | `tools/schema.mjs`, `tools/validate.mjs` | Command-line: print a topic's schema or LLM prompt; check a card file |
 

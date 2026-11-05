@@ -73,11 +73,11 @@
       "createdAt": "2026-11-03",
       "meta": {
         "verbClass": "godan",
-        "form": "te"
+        "form": "te-kudasai"
       },
       "prompt": {
         "base": { "word": "{飲|の}む", "meaning": "喝；吃（藥）", "pos": "動詞" },
-        "task": "て形 ＋ ください",
+        "task": "てください（請…）",
         "sentence": "{薬|くすり}を___ください。",
         "translation": {
           "zh-Hant": "請吃藥。"
@@ -252,7 +252,7 @@
       "createdAt": "2026-11-03",
       "meta": {
         "verbClass": "irregular",
-        "form": "teiru"
+        "form": "teiru-progressive"
       },
       "prompt": {
         "base": { "word": "する", "meaning": "做", "pos": "動詞" },
@@ -540,11 +540,11 @@
       "createdAt": "2026-11-03",
       "meta": {
         "verbClass": "godan",
-        "form": "te"
+        "form": "te-kudasai"
       },
       "prompt": {
         "base": { "word": "{待|ま}つ", "meaning": "等", "pos": "動詞" },
-        "task": "て形 ＋ ください",
+        "task": "てください（請…）",
         "sentence": "ちょっと___ください。",
         "translation": {
           "zh-Hant": "請稍等一下。"
@@ -707,7 +707,7 @@
       },
       "prompt": {
         "base": { "word": "{遊|あそ}ぶ", "meaning": "玩", "pos": "動詞" },
-        "task": "意向形（一起～吧）",
+        "task": "意向形（一起…吧）",
         "register": "plain",
         "sentence": "{週末|しゅうまつ}、{公園|こうえん}で___！",
         "translation": {
@@ -755,7 +755,7 @@
       "createdAt": "2026-11-03",
       "meta": {
         "verbClass": "godan",
-        "form": "teiru"
+        "form": "teiru-progressive"
       },
       "prompt": {
         "base": { "word": "{読|よ}む", "meaning": "讀；看（書）", "pos": "動詞" },
@@ -877,7 +877,7 @@
       },
       "prompt": {
         "base": { "word": "{寝|ね}る", "meaning": "睡覺", "pos": "動詞" },
-        "task": "ましょう形（～吧）",
+        "task": "ましょう形（…吧）",
         "register": "polite",
         "sentence": "もう{遅|おそ}いから、___。",
         "translation": {
@@ -982,11 +982,11 @@
       "createdAt": "2026-11-03",
       "meta": {
         "verbClass": "godan",
-        "form": "te"
+        "form": "te-kudasai"
       },
       "prompt": {
         "base": { "word": "{聞|き}く", "meaning": "聽；問", "pos": "動詞" },
-        "task": "て形 ＋ ください",
+        "task": "てください（請…）",
         "sentence": "{先生|せんせい}の{話|はなし}をよく___ください。",
         "translation": {
           "zh-Hant": "請好好聽老師說話。"
