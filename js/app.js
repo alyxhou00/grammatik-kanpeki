@@ -1348,6 +1348,25 @@ document.addEventListener('click', (e) => {
   }
 });
 
+// Copying Japanese text gives the plain sentence, without the furigana readings.
+// The readings are hidden for a moment so the selection's text skips them but keeps its line breaks.
+document.addEventListener('copy', (e) => {
+  if (e.target.closest?.('input, textarea, [contenteditable]')) return;
+  const sel = document.getSelection();
+  if (!sel || sel.isCollapsed || !e.clipboardData) return;
+  const hasRuby = [...Array(sel.rangeCount).keys()].some((i) => {
+    const r = sel.getRangeAt(i);
+    const root = r.commonAncestorContainer;
+    return (root.nodeType === 1 ? root : root.parentElement)?.closest('ruby') || r.cloneContents().querySelector('rt');
+  });
+  if (!hasRuby) return;
+  document.documentElement.classList.add('copying-plain');
+  const text = sel.toString();
+  document.documentElement.classList.remove('copying-plain');
+  e.clipboardData.setData('text/plain', text);
+  e.preventDefault();
+});
+
 // A speaker button must not take the focus away from the answer you are typing.
 document.addEventListener('mousedown', (e) => {
   if (e.target.closest?.('.speak-btn')) e.preventDefault();

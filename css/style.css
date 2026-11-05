@@ -286,7 +286,9 @@ dialog#dlg-stats { width: min(840px, calc(100vw - 32px)); }
 }
 .register-chip.tiny { font-size: .72rem; padding: 0 6px; margin-right: 4px; vertical-align: middle; }
 .translation { font-size: 1.1rem; margin: 0 0 8px; color: var(--text); }
-ruby rt { font-size: .5em; color: var(--muted); font-weight: 400; }
+ruby rt { font-size: .5em; color: var(--muted); font-weight: 400; user-select: none; -webkit-user-select: none; }
+/* set for an instant while copying, so copied text leaves the readings out (see the copy handler in app.js) */
+.copying-plain rt, .copying-plain rp { display: none !important; }
 .no-furigana ruby rt { visibility: hidden; }
 .no-furigana ruby:hover rt { visibility: visible; }
 .blank {
