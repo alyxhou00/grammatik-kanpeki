@@ -163,7 +163,19 @@
           "word": "12",
           "meaning": "十二",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "{今日|きょう}",
+            "meaning": "今天",
+            "pos": "名詞"
+          },
+          {
+            "text": "{気温|きおん}",
+            "meaning": "氣溫",
+            "pos": "名詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -203,7 +215,14 @@
           "word": "40",
           "meaning": "四十",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "{熱|ねつ}",
+            "meaning": "發燒、體溫過高",
+            "pos": "名詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -249,7 +268,19 @@
           "word": "21",
           "meaning": "二十一",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "{今|いま}",
+            "meaning": "現在",
+            "pos": "名詞"
+          },
+          {
+            "text": "{気温|きおん}",
+            "meaning": "氣溫",
+            "pos": "名詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -290,7 +321,14 @@
           "word": "300",
           "meaning": "三百",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "ノート",
+            "meaning": "筆記本",
+            "pos": "名詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -331,7 +369,14 @@
           "word": "600",
           "meaning": "六百",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "{本|ほん}",
+            "meaning": "書",
+            "pos": "名詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -376,7 +421,14 @@
           "word": "800",
           "meaning": "八百",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "お{弁当|べんとう}",
+            "meaning": "便當",
+            "pos": "名詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -423,7 +475,14 @@
           "word": "3000",
           "meaning": "三千",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "シャツ",
+            "meaning": "襯衫",
+            "pos": "名詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -464,7 +523,14 @@
           "word": "8000",
           "meaning": "八千",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "{傘|かさ}",
+            "meaning": "傘",
+            "pos": "名詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -505,7 +571,14 @@
           "word": "1000",
           "meaning": "千",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "{時計|とけい}",
+            "meaning": "手錶、時鐘",
+            "pos": "名詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -551,7 +624,14 @@
           "word": "10000",
           "meaning": "一萬",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "ゲーム",
+            "meaning": "遊戲",
+            "pos": "名詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -591,7 +671,14 @@
           "word": "120000",
           "meaning": "十二萬",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "{自転車|じてんしゃ}",
+            "meaning": "腳踏車",
+            "pos": "名詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -631,7 +718,14 @@
           "word": "25000",
           "meaning": "兩萬五千",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "{財布|さいふ}",
+            "meaning": "錢包",
+            "pos": "名詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -671,7 +765,14 @@
           "word": "4つ",
           "meaning": "四個",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "{卵|たまご}",
+            "meaning": "蛋",
+            "pos": "名詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -715,7 +816,20 @@
           "word": "6つ",
           "meaning": "六個",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "りんご",
+            "meaning": "蘋果",
+            "pos": "名詞"
+          },
+          {
+            "text": "{買|か}いました",
+            "lemma": "{買|か}う",
+            "meaning": "買了",
+            "pos": "動詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -760,7 +874,19 @@
           "word": "10",
           "meaning": "十個",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "{指|ゆび}",
+            "meaning": "手指",
+            "pos": "名詞"
+          },
+          {
+            "text": "{全部|ぜんぶ}",
+            "meaning": "全部",
+            "pos": "名詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -844,7 +970,19 @@
           "word": "1{人|にん}",
           "meaning": "一個人",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "{教室|きょうしつ}",
+            "meaning": "教室",
+            "pos": "名詞"
+          },
+          {
+            "text": "{先生|せんせい}",
+            "meaning": "老師",
+            "pos": "名詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -884,7 +1022,19 @@
           "word": "2{人|にん}",
           "meaning": "兩個人",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "{教室|きょうしつ}",
+            "meaning": "教室",
+            "pos": "名詞"
+          },
+          {
+            "text": "{学生|がくせい}",
+            "meaning": "學生",
+            "pos": "名詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -924,7 +1074,14 @@
           "word": "4{人|にん}",
           "meaning": "四個人",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "{家族|かぞく}",
+            "meaning": "家人",
+            "pos": "名詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -968,7 +1125,19 @@
           "word": "7{人|にん}",
           "meaning": "七個人",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "クラス",
+            "meaning": "班級",
+            "pos": "名詞"
+          },
+          {
+            "text": "{男|おとこ}の{子|こ}",
+            "meaning": "男孩",
+            "pos": "名詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -1014,7 +1183,14 @@
           "word": "14{人|にん}",
           "meaning": "十四個人",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "クラス",
+            "meaning": "班級",
+            "pos": "名詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -1058,7 +1234,14 @@
           "word": "1{歳|さい}",
           "meaning": "一歲",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "{弟|おとうと}",
+            "meaning": "弟弟",
+            "pos": "名詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -1098,7 +1281,14 @@
           "word": "8{歳|さい}",
           "meaning": "八歲",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "{妹|いもうと}",
+            "meaning": "妹妹",
+            "pos": "名詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -1138,7 +1328,14 @@
           "word": "10{歳|さい}",
           "meaning": "十歲",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "{息子|むすこ}",
+            "meaning": "兒子",
+            "pos": "名詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -1185,7 +1382,14 @@
           "word": "20{歳|さい}",
           "meaning": "二十歲",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "{来月|らいげつ}",
+            "meaning": "下個月",
+            "pos": "名詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -1232,7 +1436,19 @@
           "word": "4{年生|ねんせい}",
           "meaning": "四年級生",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "{弟|おとうと}",
+            "meaning": "弟弟",
+            "pos": "名詞"
+          },
+          {
+            "text": "{小学|しょうがく}",
+            "meaning": "小學",
+            "pos": "名詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -1277,7 +1493,19 @@
           "word": "4{年生|ねんせい}",
           "meaning": "四年級生",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "{私|わたし}",
+            "meaning": "我",
+            "pos": "代名詞"
+          },
+          {
+            "text": "{大学|だいがく}",
+            "meaning": "大學",
+            "pos": "名詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -1318,7 +1546,14 @@
           "word": "1{本|ほん}",
           "meaning": "一枝（細長的東西）",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "{鉛筆|えんぴつ}",
+            "meaning": "鉛筆",
+            "pos": "名詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -1359,7 +1594,14 @@
           "word": "3{本|ほん}",
           "meaning": "三瓶（細長的東西）",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "ビール",
+            "meaning": "啤酒",
+            "pos": "名詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -1400,7 +1642,14 @@
           "word": "6{本|ほん}",
           "meaning": "六枝（細長的東西）",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "{傘|かさ}",
+            "meaning": "傘",
+            "pos": "名詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -1445,7 +1694,20 @@
           "word": "8{本|ほん}",
           "meaning": "八枝（細長的東西）",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "ペン",
+            "meaning": "筆",
+            "pos": "名詞"
+          },
+          {
+            "text": "{買|か}いました",
+            "lemma": "{買|か}う",
+            "meaning": "買了",
+            "pos": "動詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -1485,7 +1747,20 @@
           "word": "2{枚|まい}",
           "meaning": "兩張（薄的東西）",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "{切符|きっぷ}",
+            "meaning": "車票、門票",
+            "pos": "名詞"
+          },
+          {
+            "text": "{買|か}いました",
+            "lemma": "{買|か}う",
+            "meaning": "買了",
+            "pos": "動詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -1519,7 +1794,14 @@
           "word": "6{枚|まい}",
           "meaning": "六張（薄的東西）",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "{紙|かみ}",
+            "meaning": "紙",
+            "pos": "名詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -1560,7 +1842,20 @@
           "word": "6{個|こ}",
           "meaning": "六個（一般的小東西）",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "ケーキ",
+            "meaning": "蛋糕",
+            "pos": "名詞"
+          },
+          {
+            "text": "{買|か}いました",
+            "lemma": "{買|か}う",
+            "meaning": "買了",
+            "pos": "動詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -1601,7 +1896,20 @@
           "word": "10{個|こ}",
           "meaning": "十個（一般的小東西）",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "りんご",
+            "meaning": "蘋果",
+            "pos": "名詞"
+          },
+          {
+            "text": "{食|た}べました",
+            "lemma": "{食|た}べる",
+            "meaning": "吃了",
+            "pos": "動詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -1648,7 +1956,20 @@
           "word": "1{匹|ひき}",
           "meaning": "一隻（小動物）",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "{犬|いぬ}",
+            "meaning": "狗",
+            "pos": "名詞"
+          },
+          {
+            "text": "{飼|か}っています",
+            "lemma": "{飼|か}う",
+            "meaning": "養著（寵物）",
+            "pos": "動詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -1689,7 +2010,14 @@
           "word": "3{匹|ひき}",
           "meaning": "三隻（小動物）",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "{猫|ねこ}",
+            "meaning": "貓",
+            "pos": "名詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -1730,7 +2058,19 @@
           "word": "6{匹|ひき}",
           "meaning": "六隻（小動物）",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "{池|いけ}",
+            "meaning": "池塘",
+            "pos": "名詞"
+          },
+          {
+            "text": "{魚|さかな}",
+            "meaning": "魚",
+            "pos": "名詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -1771,7 +2111,25 @@
           "word": "3{回|かい}",
           "meaning": "三次",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "{一日|いちにち}",
+            "meaning": "一整天",
+            "pos": "名詞"
+          },
+          {
+            "text": "{薬|くすり}",
+            "meaning": "藥",
+            "pos": "名詞"
+          },
+          {
+            "text": "{飲|の}みます",
+            "lemma": "{飲|の}む",
+            "meaning": "喝、吃（藥）",
+            "pos": "動詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -1812,7 +2170,20 @@
           "word": "6{回|かい}",
           "meaning": "六次",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "{週|しゅう}",
+            "meaning": "週",
+            "pos": "名詞"
+          },
+          {
+            "text": "{泳|およ}ぎます",
+            "lemma": "{泳|およ}ぐ",
+            "meaning": "游泳",
+            "pos": "動詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -1853,7 +2224,14 @@
           "word": "3{階|かい}",
           "meaning": "三樓",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "トイレ",
+            "meaning": "廁所",
+            "pos": "名詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -1894,7 +2272,14 @@
           "word": "6{階|かい}",
           "meaning": "六樓",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "{事務所|じむしょ}",
+            "meaning": "辦公室",
+            "pos": "名詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -1940,7 +2325,14 @@
           "word": "4{時|じ}",
           "meaning": "四點",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "{会議|かいぎ}",
+            "meaning": "會議",
+            "pos": "名詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -1984,7 +2376,20 @@
           "word": "7{時|じ}",
           "meaning": "七點",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "{毎朝|まいあさ}",
+            "meaning": "每天早上",
+            "pos": "名詞"
+          },
+          {
+            "text": "{起|お}きます",
+            "lemma": "{起|お}きる",
+            "meaning": "起床",
+            "pos": "動詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -2024,7 +2429,15 @@
           "word": "9{時|じ}",
           "meaning": "九點",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "{寝|ね}ます",
+            "lemma": "{寝|ね}る",
+            "meaning": "睡覺",
+            "pos": "動詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -2065,7 +2478,15 @@
           "word": "3{分|ふん}",
           "meaning": "三分鐘",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "{待|ま}って",
+            "lemma": "{待|ま}つ",
+            "meaning": "等待",
+            "pos": "動詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -2106,7 +2527,14 @@
           "word": "4{分|ふん}",
           "meaning": "四分鐘",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "{駅|えき}",
+            "meaning": "車站",
+            "pos": "名詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -2147,7 +2575,20 @@
           "word": "10{分|ふん}",
           "meaning": "十分鐘",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "{電車|でんしゃ}",
+            "meaning": "電車",
+            "pos": "名詞"
+          },
+          {
+            "text": "{遅|おく}れています",
+            "lemma": "{遅|おく}れる",
+            "meaning": "誤點、遲到",
+            "pos": "動詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -2194,7 +2635,14 @@
           "word": "1{日|にち}",
           "meaning": "一號",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "{今日|きょう}",
+            "meaning": "今天",
+            "pos": "名詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -2235,7 +2683,14 @@
           "word": "4{日|にち}",
           "meaning": "四號",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "{今日|きょう}",
+            "meaning": "今天",
+            "pos": "名詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -2276,7 +2731,14 @@
           "word": "7{日|にち}",
           "meaning": "七號",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "{七夕|たなばた}",
+            "meaning": "七夕",
+            "pos": "名詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -2317,7 +2779,14 @@
           "word": "14{日|にち}",
           "meaning": "十四號",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "{試験|しけん}",
+            "meaning": "考試",
+            "pos": "名詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -2358,7 +2827,14 @@
           "word": "20{日|にち}",
           "meaning": "二十號",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "{今日|きょう}",
+            "meaning": "今天",
+            "pos": "名詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -2398,7 +2874,20 @@
           "word": "4{月|がつ}",
           "meaning": "四月",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "{学校|がっこう}",
+            "meaning": "學校",
+            "pos": "名詞"
+          },
+          {
+            "text": "{始|はじ}まります",
+            "lemma": "{始|はじ}まる",
+            "meaning": "開始",
+            "pos": "動詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -2438,7 +2927,14 @@
           "word": "7{月|がつ}",
           "meaning": "七月",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "{旅行|りょこう}",
+            "meaning": "旅行",
+            "pos": "名詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -2478,7 +2974,14 @@
           "word": "9{月|がつ}",
           "meaning": "九月",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "{涼|すず}しい",
+            "meaning": "涼爽的",
+            "pos": "形容詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -2518,7 +3021,14 @@
           "word": "4{円|えん}",
           "meaning": "四日圓",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "あめ",
+            "meaning": "糖果",
+            "pos": "名詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -2562,7 +3072,14 @@
           "word": "14{円|えん}",
           "meaning": "十四日圓",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "{駄菓子|だがし}",
+            "meaning": "零食、古早味點心",
+            "pos": "名詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -2608,7 +3125,14 @@
           "word": "7{円|えん}",
           "meaning": "七日圓",
           "pos": "數詞"
-        }
+        },
+        "words": [
+          {
+            "text": "{切手|きって}",
+            "meaning": "郵票",
+            "pos": "名詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -2643,7 +3167,14 @@
         "translation": {
           "zh-Hant": "你家有幾個人？"
         },
-        "task": "何＋助數詞（なん・なに）"
+        "task": "何＋助數詞（なん・なに）",
+        "words": [
+          {
+            "text": "{家族|かぞく}",
+            "meaning": "家人",
+            "pos": "名詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -2679,7 +3210,14 @@
         "translation": {
           "zh-Hant": "那個人是哪一國人？"
         },
-        "task": "何＋助數詞（なん・なに）"
+        "task": "何＋助數詞（なん・なに）",
+        "words": [
+          {
+            "text": "{人|ひと}",
+            "meaning": "人",
+            "pos": "名詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
@@ -2714,7 +3252,14 @@
         "translation": {
           "zh-Hant": "現在幾點？"
         },
-        "task": "何＋助數詞（なん・なに）"
+        "task": "何＋助數詞（なん・なに）",
+        "words": [
+          {
+            "text": "{今|いま}",
+            "meaning": "現在",
+            "pos": "名詞"
+          }
+        ]
       },
       "answer": {
         "accepted": [
