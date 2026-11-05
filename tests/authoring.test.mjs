@@ -6,6 +6,7 @@ import { LANGS, topicType, formsOf } from '../js/topics.js';
 import { AUTHORING_FORMAT, authoringSchema, checkSchema, cardsFromAuthoring, toAuthoring } from '../js/authoring.js';
 import { cardProblems } from '../js/cardcheck.js';
 import { parseImport } from '../js/store.js';
+import { rubyHTML, toKana, toSurface } from '../js/text.js';
 
 const root = new URL('../data/', import.meta.url);
 const manifest = JSON.parse(fs.readFileSync(new URL('manifest.json', root), 'utf8'));
@@ -85,6 +86,29 @@ for (const c of bundled) {
   assert.match(problems(withReg(plain, 'formal')), /not one of: plain, polite/);
   const de = bundled.find((c) => c.language === 'de');
   assert.match(problems(withReg(de, 'plain')), /none in this course/);
+}
+
+// ---------- {漢字|-}: a base word may show a kanji without furigana; nothing else may ----------
+
+{
+  const card = bundled.find((c) => c.id === 'ja-ct-020'); // 1{人|-}: ひとり, so にん would mislead
+  assert.equal(card.prompt.base.word, '1{人|-}');
+  assert.equal(rubyHTML(card.prompt.base.word), '1人', 'shown with no furigana');
+  assert.equal(toSurface('1{人|-}'), '1人');
+  assert.equal(toKana('1{人|-}'), '1人', 'the reading is unknown, so the kanji stays');
+  const problems = (c) => cardProblems(c).join('\n');
+  assert.deepEqual(cardProblems(card), []);
+  assert.match(problems({ ...card, prompt: { ...card.prompt, base: { ...card.prompt.base, word: '1人' } } }), /kanji without furigana: 1人/, 'leaving the markup out is still an error');
+  assert.match(problems({ ...card, prompt: { ...card.prompt, base: { ...card.prompt.base, word: '1{人|-}{教|おし}' } } }), /^$/, 'other kanji in the base word keep their reading');
+  assert.match(problems({ ...card, prompt: { ...card.prompt, base: { ...card.prompt.base, word: '{一|-}{教|-}室' } } }), /kanji without furigana/);
+  assert.match(problems({ ...card, prompt: { ...card.prompt, sentence: card.prompt.sentence.replace('{先生|せんせい}', '{先生|-}') } }), /only allowed in prompt\.base\.word/);
+  assert.match(problems({ ...card, answer: { ...card.answer, accepted: ['{一人|-}'] } }), /only allowed in prompt\.base\.word/);
+
+  const schema = authoringSchema('ja', 'counters');
+  const written = toAuthoring(card);
+  assert.deepEqual(checkSchema(schema, fileOf('ja', 'counters', [written])), [], 'the schema allows it in base.word');
+  assert.match(checkSchema(schema, fileOf('ja', 'counters', [{ ...written, prompt: { ...written.prompt, sentence: written.prompt.sentence.replace('{教室|きょうしつ}', '{教室|-}') } }])).join('\n'), /every kanji needs its reading/);
+  assert.match(checkSchema(schema, fileOf('ja', 'counters', [{ ...written, answer: { ...written.answer, accepted: ['{一人|-}'] } }])).join('\n'), /every kanji needs its reading/);
 }
 
 // ---------- the form registry: one label per form, and the task is that label ----------

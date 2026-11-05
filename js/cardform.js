@@ -16,7 +16,7 @@
 //
 // Editing keeps every field the form does not show (prompt.words, meta.form, createdAt, …).
 import { LANGS, topicType, facetsOf, isRecall } from './topics.js';
-import { BLANK, toKana, isRomaji, romajiToHiragana } from './text.js';
+import { BLANK, toKana, isRomaji, romajiToHiragana, withoutNoReading } from './text.js';
 
 const KANJI = /[一-鿿々]/;
 export const USER_SOURCE = 'user';
@@ -98,7 +98,7 @@ export function missingFurigana(values, lang) {
   if (!LANGS[lang].ruby) return [];
   // Recall cards' answers are meanings and translations, written in the note language.
   const answers = isRecall(topicType(lang, values.topic)) ? [] : lines(values.accepted);
-  const texts = [values.sentence, values.word, values.baseWord, values.example, ...answers];
+  const texts = [values.sentence, values.word, values.baseWord && withoutNoReading(values.baseWord), values.example, ...answers];
   return texts.filter((x) => x && KANJI.test(toKana(x)));
 }
 

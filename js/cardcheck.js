@@ -3,7 +3,7 @@
 // hand-written files) and the importer. No DOM.
 import { validateCard } from './store.js';
 import { checkAnswer } from './check.js';
-import { wordSegments, toSurface, toKana } from './text.js';
+import { wordSegments, toSurface, toKana, hasNoReading, withoutNoReading } from './text.js';
 import { LANGS, facetsOf, formsOf, typeOf, usesRuby, isRecall } from './topics.js';
 import { sentenceOf, vocabCardFrom } from './cardtypes.js';
 
@@ -81,7 +81,12 @@ export function cardProblems(card) {
 
   // Furigana: every kanji has a reading, or kana answers are not recognized.
   if (usesRuby(card.language)) {
-    for (const x of targetTexts(card)) if (KANJI.test(toKana(x))) out.push(`kanji without furigana: ${x}`);
+    // The base word may leave a kanji without furigana on purpose ({人|-}); nothing else may.
+    const base = card.prompt.base?.word;
+    for (const x of targetTexts(card)) {
+      if (x !== base && hasNoReading(x)) out.push(`{漢字|-} (no furigana) is only allowed in prompt.base.word: ${x}`);
+      if (KANJI.test(toKana(x === base ? withoutNoReading(x) : x))) out.push(`kanji without furigana: ${x}`);
+    }
   }
   return out;
 }
