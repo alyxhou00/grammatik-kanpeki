@@ -574,18 +574,32 @@ function renderReveal(card, c) {
       <strong>${T.verdict[r.verdict]}</strong>${note ? `<p lang="${noteLang}">${esc(note)}</p>` : ''}
     </div>`}
     <div class="back" data-card="${esc(card.id)}">${R.back(card, r, s.input, c)}</div>
-    ${canSave ? `<div class="save-alt">
-        <span>${T.saveAs}</span>
-        <button type="button" class="chip" data-action="save-accepted">${T.saveAccepted}</button>
-        <button type="button" class="chip" data-action="save-acceptable">${T.saveAcceptable}</button>
-        <input id="alt-note" class="note-input" placeholder="${esc(T.notePlaceholder)}">
-      </div>` : ''}
+    ${canSave ? renderSaveAlt(s, T) : ''}
     ${state.flash ? `<p class="flash">${esc(state.flash)}</p>` : ''}
     <div class="grades">
       ${GRADES.map((g, i) => `<button type="button" class="grade g-${g}${g === suggest ? ' suggested' : ''}" data-grade="${g}">
         <span class="key">${i + 1}</span><span class="name">${T.grades[g]}</span><span class="iv">${iv(g)}</span></button>`).join('')}
     </div>
     <p class="hint center">${T.gradeHint}${c.speak ? ` · ${T.speakKey}` : ''}</p>`;
+}
+
+/**
+ * "Save my answer as …": picking 正確 / 正確，但不是最好 only selects the kind (click again to unselect).
+ * Nothing is saved until the confirm button, so a stray click cannot change the card.
+ */
+function renderSaveAlt(s, T) {
+  const kind = s.altKind;
+  const chip = (k, label) => `<button type="button" class="chip${kind === k ? ' selected' : ''}" data-action="pick-alt" data-kind="${k}" aria-pressed="${kind === k}">${label}</button>`;
+  return `<div class="save-alt">
+      <span>${T.saveAs}</span>
+      ${chip('accepted', T.saveAccepted)}
+      ${chip('acceptable', T.saveAcceptable)}
+      ${kind ? `<div class="save-alt-confirm">
+        ${kind === 'acceptable' ? `<input id="alt-note" class="note-input" placeholder="${esc(T.notePlaceholder)}" value="${esc(s.altNote || '')}">` : ''}
+        <button type="button" class="btn primary small" data-action="confirm-alt">${T.confirmSave(kind === 'accepted' ? T.saveAccepted : T.saveAcceptable)}</button>
+        <button type="button" class="link" data-action="pick-alt" data-kind="">${T.form.cancel}</button>
+      </div>` : ''}
+    </div>`;
 }
 
 function afterSessionRender() {
@@ -714,7 +728,7 @@ function grade(g) {
     if (g === 'again') s.queue.splice(Math.min(3, s.queue.length), 0, id);
     else s.reviewed++;
   }
-  Object.assign(s, { current: null, phase: 'answer', input: '', result: null, aids: new Set() });
+  Object.assign(s, { current: null, phase: 'answer', input: '', result: null, aids: new Set(), altKind: null, altNote: '' });
   state.flash = '';
   render();
 }
@@ -724,10 +738,12 @@ function saveAlternative(kind) {
   const id = s.current;
   let text = s.input.trim();
   if (LANGS[state.lang].romajiInput && isRomaji(text)) text = romajiToHiragana(text);
-  const note = $('#alt-note')?.value.trim();
+  const note = kind === 'acceptable' ? ($('#alt-note')?.value ?? s.altNote ?? '').trim() : '';
   const card = store.addAlternative(id, text, kind, note);
   if (!card) return;
   s.result = checkAnswer(card, s.input);
+  s.altKind = null;
+  s.altNote = '';
   state.flash = t().saved;
   render();
 }
@@ -1168,8 +1184,16 @@ document.addEventListener('click', (e) => {
       s.aids.add('form');
       return render();
     }
-    case 'save-accepted': return saveAlternative('accepted');
-    case 'save-acceptable': return saveAlternative('acceptable');
+    case 'pick-alt': {
+      const s = session();
+      const k = el.dataset.kind || null;
+      s.altNote = $('#alt-note')?.value ?? s.altNote;
+      s.altKind = s.altKind === k ? null : k;
+      render();
+      ($('#alt-note') || $('[data-action="confirm-alt"]') || $('.grade.suggested'))?.focus({ preventScroll: true });
+      return;
+    }
+    case 'confirm-alt': { const s = session(); if (s.altKind) saveAlternative(s.altKind); return; }
     case 'delete':
       if (confirm(t().confirmDel)) { store.deleteCard(el.dataset.id); render(); }
       return;
@@ -1203,6 +1227,7 @@ document.addEventListener('submit', (e) => {
 
 document.addEventListener('input', (e) => {
   if (e.target.id === 'answer') { const s = session(); if (s) s.input = e.target.value; updateKanaPreview(); }
+  if (e.target.id === 'alt-note') { const s = session(); if (s) s.altNote = e.target.value; }
   if (e.target.id === 'card-search') { state.search = e.target.value; renderCardList(); }
   if (e.target.closest?.('#card-form')) {
     if (e.target.dataset.ruby !== undefined) e.target.parentElement.querySelector('.ruby-preview').innerHTML = rubyPreview(e.target.value);
@@ -1284,7 +1309,13 @@ document.addEventListener('keydown', (e) => {
     }
     return;
   }
-  if (e.target.id === 'alt-note' || e.repeat) return;
+  if (e.target.id === 'alt-note') {
+    // Enter in the note confirms the save (the button stays the visible way to do it).
+    if (e.key === 'Enter' && !e.isComposing && e.keyCode !== 229) { e.preventDefault(); saveAlternative(s.altKind); }
+    return;
+  }
+  if (e.target.closest?.('.save-alt-confirm') && e.key === 'Enter') return; // let Enter press the focused button
+  if (e.repeat) return;
   if (e.key === 'r' || e.key === 'R') {
     const btn = $('.card [data-speak-main]') || $('.card [data-speak]');
     if (btn && !e.ctrlKey && !e.metaKey && !e.altKey) { e.preventDefault(); playSpeakButton(btn); }

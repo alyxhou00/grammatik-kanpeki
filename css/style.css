@@ -395,6 +395,8 @@ ins { background: var(--ok-soft); color: var(--ok); text-decoration: none; borde
 .explain p { margin: 8px 0 0; }
 
 .save-alt { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 16px; font-size: .9rem; color: var(--muted); }
+.save-alt .chip.selected { border-color: var(--accent); background: var(--accent); color: var(--on-accent); }
+.save-alt-confirm { flex: 1 1 100%; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .save-alt .note-input { flex: 1 1 100%; padding: 8px 12px; font-size: .9rem; }
 .flash { color: var(--ok); font-weight: 600; margin: 10px 0 0; }
 
