@@ -31,6 +31,14 @@ Japanese words shown on their own get pitch-accent marks under them: on the word
 - **No guessing:** a word is looked up by its spelling and its reading, so 箸, 橋 and 端 each get their own accent. A word with no match gets no marks. A word written in kana (すごい) gets marks only when every word with that reading has the same accent. Conjugated forms (食べない) are not in the data, so the cloze answer has no marks.
 - A course turns this on with `pitch: 'data/pitch/<course>'` in `js/topics.js` (`''` for none). Check the drawing and the lookup with `node tests/pitch.test.mjs`.
 
+## Grammar guide
+
+Every course has a guide page that explains the grammar behind its topics: **文法說明** in Japanese, **Erklärungen** in German. Open it with the third tab next to Learn / Cards in any topic. It lists every grammar topic of the course with its sections and a table of contents. Topics that have no explanations yet are listed as "準備中 / folgt". For now, only 日本語 → 動詞變化 has content. It explains every form with two verbs side by side: タピる for the 五段 verbs and 食べる for the 一段 verbs. German explanations come later.
+
+Each card points to the place that explains it. After you answer, the link **文法說明：て形（然後…）** under the answer opens the guide at that form. In the card list, it is the book icon. Your study session stays open, so the Learn tab takes you back to the same card. A card with a `meta.form` goes to that form's entry. Other cards go to their topic.
+
+The content is in `js/grammar.js`, one entry per topic. Each form in a topic's `forms` registry gets exactly one entry, under the same label the cards use. A topic can also have entries for patterns no card practises yet (てみる, たばかり …). `node tests/grammar.test.mjs` checks this, and that every bundled card links to a place that exists. To add a form, add it to `forms` in `js/topics.js` and an entry for it in `js/grammar.js`. To add a guide for a topic, add an entry for it under its course in `GUIDES`.
+
 ## Adding your own cards
 
 As in Anki, **Karte hinzufügen / 新增卡片** (next to Learn / Cards) opens a form for a new card in the current topic. The form follows the topic's card type: a sentence to rewrite, a sentence with a `___` blank, or a word for a flip card. Only the main text and at least one correct answer are required. Everything else is optional: a list of "correct but not ideal" answers and typical mistakes (each with a note), translations, a hint, the task chip, an explanation, the topic's facets (such as the verb class), level, tags, and source. After **Add** (or Ctrl+Enter) the form stays open for the next card and keeps the topic, tags, level, and source.
@@ -249,6 +257,7 @@ A validator can't tell a wrong reading ({生|せい} where {生|なま} is meant
 | `js/text.js` | Escaping, furigana, romaji → hiragana, answer normalizers |
 | `js/speech.js` | Read aloud: voice choice and playback through the Web Speech API |
 | `js/sources.js` | Card source codes → full names (`ktxc1kb` → Kontext C1 Kursbuch) |
+| `js/grammar.js` | Grammar guide content per topic, and which place in it explains a card (no DOM) |
 | `js/i18n.js` | UI strings (German page in German, Japanese page in Traditional Chinese) |
 | `js/cardcheck.js` | Content checks for one card (answer lists, words, facets, form labels, furigana), shared by tests and tools (no DOM) |
 | `js/authoring.js` | Authoring format: per-topic schema, schema check, authoring ↔ full cards (no DOM) |
@@ -258,4 +267,4 @@ To add a topic, add an entry to its language in `LANGS` in `js/topics.js`: `id`,
 
 Everything that differs between courses is a field of `LANGS[lang]` (listed in `LANG_FIELDS`): how answers are normalized, whether near misses count as "close", romaji input, furigana, the read-aloud voice, the brand, the date locale and so on. The code reads these fields and never asks which language it is, so a new course is a new `LANGS` entry, its UI strings in `js/i18n.js` and its code in the `language` enum of `schema/cards.schema.json`; `tests/data.test.mjs` checks that every course sets every field and has the same UI strings.
 
-Tests: `node tests/data.test.mjs`, `node tests/cardform.test.mjs`, `node tests/authoring.test.mjs`, `node tests/srs.test.mjs`, `node tests/studylog.test.mjs`, `node tests/speech.test.mjs`.
+Tests: `node tests/data.test.mjs`, `node tests/grammar.test.mjs`, `node tests/cardform.test.mjs`, `node tests/authoring.test.mjs`, `node tests/srs.test.mjs`, `node tests/studylog.test.mjs`, `node tests/speech.test.mjs`.

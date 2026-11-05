@@ -502,6 +502,58 @@ dialog.dlg-wide { width: min(660px, calc(100vw - 32px)); }
 .form-status.ok { color: var(--ok); font-weight: 600; }
 .form-status.error { color: var(--bad); font-weight: 600; }
 
+/* ---------- grammar guide (js/grammar.js) ---------- */
+.guide { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 20px; align-items: start; }
+.guide-toc { position: sticky; top: 76px; max-height: calc(100vh - 96px); overflow-y: auto; font-size: .88rem; }
+.guide-toc ol { list-style: none; margin: 0; padding: 0; }
+.guide-toc .side-title { padding: 0 0 8px; }
+.guide-toc a { color: var(--muted); text-decoration: none; display: block; padding: 3px 0; }
+.guide-toc a:hover { color: var(--accent); }
+.toc-topic { margin-bottom: 10px; }
+.toc-topic > a { font-weight: 700; color: var(--text); display: inline-block; }
+.toc-topic.current > a { color: var(--accent); }
+.toc-topic.sub { margin-left: 12px; }
+.toc-topic.soon > a { color: var(--muted); font-weight: 600; }
+.toc-topic ol { margin: 2px 0 0; padding-left: 10px; border-left: 1.5px solid var(--line); }
+.soon-tag { font-size: .7rem; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 0 6px; white-space: nowrap; }
+.guide-body { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.guide-body [id^="guide-"] { scroll-margin-top: 76px; }
+.guide-body [tabindex="-1"]:focus { outline: none; }
+.g-topic.soon { padding-top: 18px; padding-bottom: 18px; }
+.g-topic.soon .hint { margin: 6px 0 0; }
+.g-topic-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.g-topic-head h2 { margin: 0; font-size: 1.3rem; }
+.g-intro { margin-top: 10px; }
+.g-section { border-top: 1px solid var(--line); margin-top: 24px; padding-top: 18px; }
+.g-section h3 { margin: 0 0 10px; font-size: 1.12rem; }
+.g-section h4 { margin: 18px 0 8px; font-size: 1rem; }
+.g-section p { margin: 0 0 10px; }
+.g-item { border-radius: 10px; padding: 2px 12px 4px; margin: 10px -12px 0; transition: background-color .6s; }
+.g-item h4 { margin-top: 10px; }
+.g-target { animation: g-flash 2.4s ease-out; }
+@keyframes g-flash { 0%, 40% { background-color: var(--accent-soft); } 100% { background-color: transparent; } }
+.g-ex { display: flex; flex-direction: column; gap: 2px; padding: 8px 12px; background: var(--surface-2); border-radius: 8px; }
+.g-ex [lang="ja"] { font-size: 1.1rem; line-height: 1.9; }
+.g-tr { color: var(--muted); font-size: .9rem; }
+.g-note { color: var(--muted); font-size: .92rem; }
+.g-warn { background: var(--warn-soft); border-radius: 8px; padding: 8px 12px; font-size: .95rem; }
+.g-table-wrap { overflow-x: auto; margin: 0 0 12px; }
+.g-table { border-collapse: collapse; width: 100%; font-size: .95rem; }
+.g-table th, .g-table td { border-bottom: 1px solid var(--line); padding: 6px 10px; text-align: left; vertical-align: top; }
+.g-table th { font-size: .8rem; color: var(--muted); font-weight: 700; }
+.g-table td[lang="ja"] { line-height: 1.9; white-space: nowrap; }
+.guide-link { margin: 14px 0 0; }
+.guide-link .link { display: inline-flex; align-items: center; gap: 6px; padding: 4px 0; }
+@media (max-width: 1000px) {
+  .guide { grid-template-columns: minmax(0, 1fr); }
+  .guide-toc { position: static; max-height: none; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; }
+  .guide-toc > ol { columns: 2 180px; column-gap: 20px; }
+  .toc-topic { break-inside: avoid; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .g-target { animation: none; background-color: var(--accent-soft); }
+}
+
 /* ---------- mobile: topics move into a drawer behind the ☰ button ---------- */
 @media (max-width: 760px) {
   .topbar .menu-btn { display: inline-grid; margin-left: -6px; }

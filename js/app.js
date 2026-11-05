@@ -3,13 +3,14 @@ import { answer, preview, DEFAULTS, dayIndex, dayStartMs, isNew, isLearning, isR
 import { streaks, heatmap, countOn, langsOn, weekday } from './studylog.js';
 import { checkAnswer } from './check.js';
 import { UI } from './i18n.js';
-import { LANGS, topicOf, topicType, ancestry, childrenOf, groupOf, labelsOf, facetsOf, vocabTopic } from './topics.js';
+import { LANGS, topicOf, topicType, ancestry, childrenOf, groupOf, labelsOf, facetsOf, formsOf, vocabTopic } from './topics.js';
 import { rendererFor, savedWordIn, vocabCardFrom, speakButton } from './cardtypes.js';
 import * as speech from './speech.js';
 import * as pitch from './pitch.js';
 import { esc, loc, isRomaji, romajiToHiragana, rubyHTML, toKana, toSurface } from './text.js';
 import { emptyValues, valuesFromCard, cardFromValues, formErrors, missingFurigana, formLangs, makeId, USER_SOURCE } from './cardform.js';
 import { SOURCES, sourceName } from './sources.js';
+import { guideOf, guideTopics, guideAnchor, anchorOf, guideRuby } from './grammar.js';
 
 const $ = (sel, el = document) => el.querySelector(sel);
 const GRADES = ['again', 'hard', 'good', 'easy'];
@@ -19,10 +20,11 @@ const ICON = {
   edit: '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16v4ZM13.5 6.5l4 4"/></svg>',
   plus: '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M12 5v14M5 12h14"/></svg>',
   trash: '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M10 11v6M14 11v6M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-12M9 7V4h6v3"/></svg>',
+  book: '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5v-15ZM5 19.5A1.5 1.5 0 0 0 6.5 21H19v-3M9 7h6"/></svg>',
   flame: '<svg class="flame" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12.6 2.2c.4 3-1.1 4.7-2.6 6.3C8.5 10.1 7 11.7 7 14.3a5 5 0 0 0 10 0c0-1.6-.6-2.9-1.4-3.9-.2 1.2-.8 2-1.7 2.4.5-2.9-.2-6.9-1.3-10.6Z"/></svg>',
 };
 
-const state = { lang: 'de', topic: 'nominalisierung', view: 'learn', sessions: {}, loadError: false, flash: '', menuOpen: false };
+const state = { lang: 'de', topic: 'nominalisierung', view: 'learn', guideAt: '', sessions: {}, loadError: false, flash: '', menuOpen: false };
 
 const t = () => UI[state.lang];
 const settings = () => store.getSettings();
@@ -72,15 +74,17 @@ speech.onVoicesChanged(() => {
 // ---------- routing ----------
 
 function parseHash() {
-  const [, lang, topic, view] = location.hash.split('/');
+  const [, lang, topic, view, at] = location.hash.split('/');
   if (LANGS[lang]) {
     state.lang = lang;
     state.topic = topicOf(lang, topic) ? topic : LANGS[lang].topics[0].id;
-    state.view = view === 'cards' ? 'cards' : 'learn';
+    state.view = ['cards', 'guide'].includes(view) ? view : 'learn';
+    // The place in the grammar guide to scroll to (#/ja/verb-conjugation/guide/verb-conjugation--te--te-kudasai).
+    state.guideAt = state.view === 'guide' ? decodeURIComponent(at || '') : '';
   }
 }
-function go(lang, topic, view) {
-  location.hash = `#/${lang}/${topic}/${view}`;
+function go(lang, topic, view, at = '') {
+  location.hash = `#/${lang}/${topic}/${view}${at ? `/${encodeURIComponent(at)}` : ''}`;
 }
 window.addEventListener('hashchange', () => { parseHash(); try { localStorage.setItem('gk.route', location.hash); } catch {} render(); });
 
@@ -449,6 +453,7 @@ function render() {
       <div class="seg" role="tablist">
         <button role="tab" data-view="learn" aria-selected="${state.view === 'learn'}">${t().learn}</button>
         <button role="tab" data-view="cards" aria-selected="${state.view === 'cards'}">${t().cards}</button>
+        <button role="tab" data-view="guide" aria-selected="${state.view === 'guide'}">${t().guide.tab}</button>
       </div>
       <button type="button" class="btn small add-btn" data-action="add-card" title="${esc(t().form.add)}" aria-label="${esc(t().form.add)}">${ICON.plus}<span class="add-label">${esc(t().form.add)}</span></button>
     </div>`;
@@ -458,6 +463,9 @@ function render() {
   if (state.view === 'cards') {
     main.innerHTML = banner + renderCardsView();
     renderCardList();
+  } else if (state.view === 'guide') {
+    main.innerHTML = banner + renderGuide();
+    afterGuideRender();
   } else if (session()) {
     main.innerHTML = banner + renderSession();
     afterSessionRender();
@@ -573,7 +581,7 @@ function renderReveal(card, c) {
     ${r.verdict === 'flip' ? '' : `<div class="verdict v-${r.verdict}" role="status">
       <strong>${T.verdict[r.verdict]}</strong>${note ? `<p lang="${noteLang}">${esc(note)}</p>` : ''}
     </div>`}
-    <div class="back" data-card="${esc(card.id)}">${R.back(card, r, s.input, c)}</div>
+    <div class="back" data-card="${esc(card.id)}">${R.back(card, r, s.input, c)}${guideLinkHTML(card)}</div>
     ${canSave ? renderSaveAlt(s, T) : ''}
     ${state.flash ? `<p class="flash">${esc(state.flash)}</p>` : ''}
     <div class="grades">
@@ -622,6 +630,69 @@ function updateKanaPreview() {
   el.textContent = v && isRomaji(v) ? `→ ${romajiToHiragana(v)}` : '';
 }
 
+// ---------- grammar guide (content in js/grammar.js) ----------
+
+/** "Grammar: て形" under a card's answer, when the guide explains it. */
+function guideLinkHTML(card) {
+  const g = guideAnchor(card);
+  if (!g) return '';
+  return `<p class="guide-link"><button type="button" class="link" data-action="open-guide" data-anchor="${esc(g.anchor)}">${ICON.book}<span>${esc(t().guide.link(g.title))}</span></button></p>`;
+}
+
+/** The book button in the card list. */
+function guideButtonHTML(card) {
+  const g = guideAnchor(card);
+  if (!g) return '';
+  const label = esc(t().guide.link(g.title));
+  return `<button class="icon-btn" data-action="open-guide" data-anchor="${esc(g.anchor)}" title="${label}" aria-label="${label}">${ICON.book}</button>`;
+}
+
+/** The course's grammar guide: every grammar topic, split into sections; topics without content say so. */
+function renderGuide() {
+  const T = t();
+  const lang = state.lang;
+  const topics = guideTopics(lang);
+  const jump = (anchor, label) => `<a href="#/${lang}/${state.topic}/guide/${anchor}" data-guide-jump="${anchor}">${label}</a>`;
+  const toc = topics.map(({ topic: tp, depth }) => {
+    const g = guideOf(lang, tp.id);
+    return `<li class="toc-topic${depth ? ' sub' : ''}${g ? '' : ' soon'}${tp.id === state.topic ? ' current' : ''}">
+      ${jump(anchorOf(tp.id), esc(tp.label))}${g ? '' : ` <span class="soon-tag">${esc(T.guide.soonTag)}</span>`}
+      ${g ? `<ol>${g.sections.map((s) => `<li>${jump(anchorOf(tp.id, s.id), esc(s.title))}</li>`).join('')}</ol>` : ''}
+    </li>`;
+  }).join('');
+  const body = topics.map(({ topic: tp, depth }) => {
+    const g = guideOf(lang, tp.id);
+    const head = `<header class="g-topic-head">
+        <h2 id="guide-${anchorOf(tp.id)}" tabindex="-1">${esc(tp.label)}</h2>
+        <button type="button" class="btn small" data-action="practice" data-id="${tp.id}">${esc(T.guide.practice)}</button>
+      </header>`;
+    const cls = `panel g-topic${depth ? ' sub' : ''}`;
+    if (!g) return `<section class="${cls} soon">${head}<p class="hint">${esc(T.guide.soon)}</p></section>`;
+    const labels = formsOf(lang, tp.id);
+    const sections = g.sections.map((s) => `<section class="g-section">
+        <h3 id="guide-${anchorOf(tp.id, s.id)}" tabindex="-1">${esc(s.title)}</h3>
+        ${s.body || ''}
+        ${(s.items || []).map((it) => `<div class="g-item" id="guide-${anchorOf(tp.id, s.id, it.form || it.id)}" tabindex="-1">
+          <h4>${it.form ? `<span class="form-chip">${esc(labels[it.form] || it.form)}</span>` : `<span lang="ja">${esc(it.title)}</span>`}</h4>${it.body}</div>`).join('')}
+      </section>`).join('');
+    return `<section class="${cls}">${head}${g.intro ? `<div class="g-intro">${g.intro}</div>` : ''}${sections}</section>`;
+  }).join('');
+  return `<div class="guide" lang="${LANGS[lang].noteLang}">
+    <nav class="guide-toc" aria-label="${esc(T.guide.toc)}"><div class="side-title">${esc(T.guide.toc)}</div><ol>${toc}</ol></nav>
+    <div class="guide-body">${guideRuby(body)}</div>
+  </div>`;
+}
+
+/** Scroll to the place the URL names (a card's form, a section), else to the current topic. */
+function afterGuideRender() {
+  const at = state.guideAt || (guideOf(state.lang, state.topic) ? anchorOf(state.topic) : '');
+  const el = at && document.getElementById(`guide-${at}`);
+  if (!el) { window.scrollTo(0, 0); return; }
+  el.scrollIntoView({ block: 'start' });
+  el.focus({ preventScroll: true });
+  if (state.guideAt) el.classList.add('g-target'); // brief highlight of the place a card linked to
+}
+
 // ---------- cards view ----------
 
 function renderCardsView() {
@@ -666,6 +737,7 @@ function renderCardList() {
             ${p?.leech ? `<span class="status s-leech">${T.leech}</span>` : ''}
             <span class="src" title="${esc(c.id)}">${T.source}: ${sourceLabel(c.source)}</span>
             <span class="row-btns">
+            ${guideButtonHTML(c)}
             <button class="icon-btn" data-action="edit-card" data-id="${esc(c.id)}" title="${T.form.edit}" aria-label="${T.form.edit}">${ICON.edit}</button>
             <button class="icon-btn" data-action="delete" data-id="${esc(c.id)}" title="${T.del}" aria-label="${T.del}">${ICON.trash}</button>
             </span>
@@ -1126,6 +1198,8 @@ function redrawCardForm(change) {
 // ---------- events ----------
 
 document.addEventListener('click', (e) => {
+  const jump = e.target.closest('[data-guide-jump]');
+  if (jump) { e.preventDefault(); return go(state.lang, state.topic, 'guide', jump.dataset.guideJump); }
   const speakBtn = e.target.closest('[data-speak]');
   if (speakBtn) return playSpeakButton(speakBtn);
   const word = e.target.closest('.word[data-word]');
@@ -1140,6 +1214,9 @@ document.addEventListener('click', (e) => {
   if (a === 'vocab-add' || a === 'vocab-remove') return toggleSavedWord(a === 'vocab-add');
   if (a === 'add-card') { setMenu(false); return openCardForm(); }
   if (a === 'edit-card') return openCardForm(el.dataset.id);
+  // The guide opens on the current topic, so a session in progress is still there on "Learn".
+  if (a === 'open-guide') { setMenu(false); return go(state.lang, state.topic, 'guide', el.dataset.anchor || ''); }
+  if (a === 'practice') return go(state.lang, el.dataset.id, 'learn');
   if (a === 'close-card-form') { $('#dlg-card').close(); return; }
   if (a === 'add-row') {
     redrawCardForm((v) => v[el.dataset.list].push({ text: '', note: '' }));
@@ -1329,6 +1406,9 @@ document.addEventListener('keydown', (e) => {
 // ---------- boot ----------
 
 (async function boot() {
+  // Pages are drawn after the cards load, so the browser's own scroll restore on reload lands in the wrong place
+  // (and would override the jump to a place in the grammar guide).
+  try { history.scrollRestoration = 'manual'; } catch {}
   if (!location.hash) {
     let last = null;
     try { last = localStorage.getItem('gk.route'); } catch {}

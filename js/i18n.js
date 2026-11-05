@@ -100,6 +100,11 @@ export const UI = {
       dup: 'Eine Karte mit diesem Text gibt es schon.',
       furigana: (xs) => `Kanji ohne Furigana: ${xs.join(' · ')}`,
     },
+    guide: {
+      tab: 'Erklärungen', toc: 'Inhalt', practice: 'Dieses Thema üben',
+      link: (title) => `Grammatik: ${title}`,
+      soon: 'Die Erklärungen zu diesem Thema kommen bald.', soonTag: 'folgt',
+    },
     facetLabels: {},
   },
   ja: {
@@ -197,6 +202,11 @@ export const UI = {
       required: '這一欄必填。', blank: '句子裡要剛好有一個 ___。', fixErrors: '請檢查標出的欄位。',
       dup: '已經有一張一樣的卡片了。',
       furigana: (xs) => `這些漢字沒有振假名：${xs.join('・')}（會顯示不出讀音，輸入假名也不會算對）`,
+    },
+    guide: {
+      tab: '文法說明', toc: '目錄', practice: '練習這個主題',
+      link: (title) => `文法說明：${title}`,
+      soon: '這個主題的說明還在準備中。', soonTag: '準備中',
     },
     facetLabels: { verbClass: '動詞種類', adjClass: '形容詞種類' },
   },
