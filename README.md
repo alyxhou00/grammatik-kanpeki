@@ -131,7 +131,7 @@ The full JSON Schema is in [`schema/cards.schema.json`](schema/cards.schema.json
       "id": "de-nom-demo-001",          // unique, stable; import merges by id
       "language": "de",                 // "de" | "ja"
       "topic": "nominalisierung",       // a topic id from js/topics.js (the most specific one)
-      "source": "demo",                 // where the card came from
+      "source": "demo",                 // where the card came from: a code from js/sources.js (see below)
       "level": "C1",
       "tags": ["konditional", "bei"],
       "prompt": {                       // shown on screen (fields depend on the card type)
@@ -149,6 +149,12 @@ The full JSON Schema is in [`schema/cards.schema.json`](schema/cards.schema.json
   ]
 }
 ```
+
+### Sources
+
+`source` holds a short code, and `js/sources.js` maps each code to its full name, for example `ktxc1kb` → "Kontext C1 Kursbuch". The card list shows the code; hover it to see the full name. Card search also finds cards by that name, and the card form suggests the known codes. A name is one string (a book title) or one per language (`{ de, "zh-Hant", en }`).
+
+To add a source, add its code and name to `SOURCES` in `js/sources.js`, then use the code in the cards. Codes are lowercase letters, digits, `.` and `-`; don't rename a code once cards use it. Every bundled card must use a listed code (`node tests/data.test.mjs` checks this). Other sources, such as your own cards, `import:<file>` or free text typed in the form, are shown as they are.
 
 ### Card types
 
@@ -241,6 +247,7 @@ A validator can't tell a wrong reading ({生|せい} where {生|なま} is meant
 | `js/cardform.js` | Add / edit card form: form values ↔ card (no DOM) |
 | `js/text.js` | Escaping, furigana, romaji → hiragana, answer normalizers |
 | `js/speech.js` | Read aloud: voice choice and playback through the Web Speech API |
+| `js/sources.js` | Card source codes → full names (`ktxc1kb` → Kontext C1 Kursbuch) |
 | `js/i18n.js` | UI strings (German page in German, Japanese page in Traditional Chinese) |
 | `js/cardcheck.js` | Content checks for one card (answer lists, words, facets, furigana), shared by tests and tools (no DOM) |
 | `js/authoring.js` | Authoring format: per-topic schema, schema check, authoring ↔ full cards (no DOM) |

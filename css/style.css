@@ -433,6 +433,7 @@ ins { background: var(--ok-soft); color: var(--ok); text-decoration: none; borde
 .status.s-learn { background: var(--bad-soft); color: var(--bad); }
 .status.s-leech { background: var(--warn-soft); color: var(--warn); }
 .src { color: var(--muted); }
+.src-code { text-decoration: underline dotted; text-underline-offset: 2px; cursor: help; }
 .empty { padding: 24px; text-align: center; color: var(--muted); }
 
 /* ---------- dialogs ---------- */

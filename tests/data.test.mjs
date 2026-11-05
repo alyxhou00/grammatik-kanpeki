@@ -8,6 +8,7 @@ import { wordSegments } from '../js/text.js';
 import { LANGS, LANG_FIELDS, CARD_TYPES, topicOf, ancestry, deckIds, typeOf, labelsOf, facetsOf, vocabTopic } from '../js/topics.js';
 import { vocabCardFrom, vocabId, savedWordIn } from '../js/cardtypes.js';
 import { UI } from '../js/i18n.js';
+import { SOURCES, SOURCE_CODE, sourceInfo, sourceName } from '../js/sources.js';
 
 const errors = [];
 const fail = (id, msg) => errors.push(`${id}: ${msg}`);
@@ -109,6 +110,19 @@ assert.equal(wordSegments('Der Mann wartet.', [{ text: 'an' }]).filter((x) => x.
 for (const s of ['demo', 'demo2', 'demo3', 'demo10', 'demo1.5', 'demo2.25', 'demo1.5-n5', 'demo-n5', 'demo2-b1', 'demo-b2-extra']) assert.ok(isDemoSource(s), `${s} is a demo source`);
 for (const s of ['', undefined, 'user', 'demographie', 'Demo', 'demo-', 'my-demo', 'demo n5', 'import:demo.json', 'demo1.', 'demo.5', 'demo1.5.2', 'demo1,5']) assert.ok(!isDemoSource(s), `${s} is not a demo source`);
 
+// ---------- source registry (js/sources.js) ----------
+
+for (const [code, info] of Object.entries(SOURCES)) {
+  if (!SOURCE_CODE.test(code)) fail(`source ${code}`, 'code must be lowercase letters, digits, "." and "-"');
+  if (!sourceName(code)) fail(`source ${code}`, 'needs a name');
+  if (typeof info.name === 'object') for (const L of Object.values(LANGS))
+    if (!info.name[L.noteLang]) fail(`source ${code}`, `name needs a ${L.noteLang} version (or one string for all languages)`);
+}
+assert.equal(sourceName('ktxc1kb'), 'Kontext C1 Kursbuch');
+assert.equal(sourceName('demo3', ['zh-Hant']), '範例卡片（第三組）');
+assert.equal(sourceName('import:x.json'), '');
+assert.equal(sourceInfo('toString'), null);
+
 // ---------- bundled cards ----------
 
 const root = new URL('../data/', import.meta.url);
@@ -124,6 +138,7 @@ for (const file of manifest.files) {
     checked++;
     if (ids.has(c.id)) fail(c.id, 'duplicate id');
     ids.add(c.id);
+    if (!sourceInfo(c.source)) fail(c.id, `source "${c.source}" is not in js/sources.js`);
     if (/\.demo(\d+(\.\d+)?)?\.json$/.test(file) && !isDemoSource(c.source)) fail(c.id, `card in a demo file needs a demo source, not "${c.source}"`);
     if (upgradeCard(c) !== c) fail(c.id, 'uses version 1 fields');
     if (!c.source) fail(c.id, 'source missing');
