@@ -377,6 +377,11 @@ ruby rt { font-size: .5em; color: var(--muted); font-weight: 400; }
 .val.v-wrong, .val.v-mistake { color: var(--text); }
 del { background: var(--bad-soft); color: var(--bad); text-decoration: line-through; text-decoration-thickness: 1.5px; border-radius: 3px; padding: 0 2px; }
 ins { background: var(--ok-soft); color: var(--ok); text-decoration: none; border-radius: 3px; padding: 0 2px; font-weight: 600; }
+.more-alts > summary { cursor: pointer; list-style: none; }
+.more-alts > summary::-webkit-details-marker { display: none; }
+.more-alts > summary::before { content: "▸ "; }
+.more-alts[open] > summary::before { content: "▾ "; }
+.more-alts .count { font-weight: 400; }
 .alts { margin: 4px 0 0; padding-left: 20px; }
 .alts li { margin-bottom: 6px; }
 .alts:lang(de) li { font-family: var(--serif); font-size: 1.05rem; }

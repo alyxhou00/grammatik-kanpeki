@@ -189,11 +189,19 @@ function typedHTML(card, input) {
   return esc(v);
 }
 
-function acceptableBlock(card, ctx) {
+/**
+ * Answers that are correct but not ideal. After an exactly correct answer they sit behind a click,
+ * so the label does not read as a verdict on the learner's answer.
+ */
+function acceptableBlock(card, ctx, result) {
   const a = card.answer;
   if (!a.acceptable?.length) return '';
-  return `<div class="answer-row"><div class="label">${ctx.t.okButNot}</div><ul class="alts meh" lang="${card.language}">${a.acceptable
-    .map((x) => `<li>${rubyHTML(x.text)}${noteHTML(x.note, ctx.L.noteLang)}</li>`).join('')}</ul></div>`;
+  const list = `<ul class="alts meh" lang="${card.language}">${a.acceptable
+    .map((x) => `<li>${rubyHTML(x.text)}${noteHTML(x.note, ctx.L.noteLang)}</li>`).join('')}</ul>`;
+  if (result.verdict === 'correct') {
+    return `<details class="answer-row more-alts"><summary class="label">${ctx.t.okButNotMore} <span class="count">(${a.acceptable.length})</span></summary>${list}</details>`;
+  }
+  return `<div class="answer-row"><div class="label">${ctx.t.okButNot}</div>${list}</div>`;
 }
 
 const textInput = (card, ctx) => `<input id="answer" lang="${card.language}" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="${esc(ctx.labels.placeholder)}">
@@ -243,7 +251,7 @@ export const CARD_RENDERERS = {
         <div class="answer-row"><div class="label">${t.yourAnswer}</div><p class="val mine v-${result.verdict}" lang="${lang}">${mine}${model ? '' : say}</p></div>
         ${model ? `<div class="answer-row"><div class="label">${t.model}</div><p class="val model" lang="${lang}">${model}${say}</p></div>` : ''}
         ${others.length ? `<div class="answer-row"><div class="label">${t.alsoCorrect}</div><ul class="alts" lang="${lang}">${others.map((x) => `<li>${rubyHTML(x)}</li>`).join('')}</ul></div>` : ''}
-        ${acceptableBlock(card, ctx)}
+        ${acceptableBlock(card, ctx, result)}
         ${chipsBlock(card, ctx)}
         ${explanationBlock(card, ctx)}`;
     },
@@ -283,7 +291,7 @@ export const CARD_RENDERERS = {
           <div class="answer-row"><div class="label">${t.yourAnswer}</div><p class="val mine big v-${result.verdict}" lang="${lang}">${typedHTML(card, input)}</p></div>
           <div class="answer-row"><div class="label">${t.model}</div><p class="val big" lang="${lang}">${a.accepted.map(rubyHTML).join('　／　')}${speakButton(ctx, a.accepted[0], lang, { word: true })}</p></div>
         </div>
-        ${acceptableBlock(card, ctx)}
+        ${acceptableBlock(card, ctx, result)}
         ${chipsBlock(card, ctx)}
         ${explanationBlock(card, ctx)}`;
     },
