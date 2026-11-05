@@ -428,6 +428,7 @@ ins { background: var(--ok-soft); color: var(--ok); text-decoration: none; borde
 .sum-main:lang(de) { font-family: var(--serif); font-size: 1.05rem; }
 .sum-sub { color: var(--muted); font-size: .92rem; margin-top: 2px; }
 .sum-sub:lang(de) { font-family: var(--serif); }
+.res-correct .blank.filled, .res-acceptable .blank.filled { color: var(--ok); background: var(--ok-soft); border-bottom-color: var(--ok); }
 .sum-sub .blank.filled { background: none; padding: 0; }
 .row-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; flex-shrink: 0; font-size: .8rem; }
 .status { font-weight: 700; padding: 0 8px; border-radius: 999px; }

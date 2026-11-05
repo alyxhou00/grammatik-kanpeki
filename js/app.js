@@ -565,7 +565,7 @@ function renderSession() {
       <button class="link" data-action="edit-card" data-id="${esc(card.id)}">${T.form.edit}</button>
       <button class="link" data-action="end">${T.end}</button>
     </div>
-    <article class="panel card phase-${s.phase}">
+    <article class="panel card phase-${s.phase}${s.phase === 'revealed' && s.result?.verdict ? ` res-${s.result.verdict}` : ''}">
       <div class="front" data-card="${esc(card.id)}">${R.front(card, c)}</div>
       ${body}
     </article>`;
