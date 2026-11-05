@@ -7,11 +7,13 @@
 // Shared by every type: prompt.words (hoverable words), prompt.hint, prompt.translation, prompt.task,
 // card.explanation (tabs for each language it has) and chips for card.meta values named in the topic's facets.
 // Sentences and words get a speaker button when the browser has a voice for the course (ctx.speak).
+// A word shown on its own (word card, dictionary form) gets its pitch accent when the course has the data (js/pitch.js).
 //
 // Each renderer gets a `ctx` built by app.js: { t, settings, aids, revealed, L (language config),
 // labels (topic labels merged with defaults), facets, speak }.
 import { esc, loc, rubyHTML, sentenceHTML, isRomaji, romajiToHiragana, toSurface, toKana, shortHash, BLANK } from './text.js';
 import { wordDiff } from './check.js';
+import { readingHTML } from './pitch.js';
 import { LANGS, typeOf } from './topics.js';
 
 // ---------- word list ----------
@@ -83,11 +85,12 @@ const SPEAKER = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="tr
 
 /**
  * A button that reads `text` aloud (furigana markup is fine; app.js handles the click).
- * `main` marks the card's sentence, which the R key plays. Nothing when the browser has no voice for the language.
+ * `main` marks what the R key plays; `word` marks a single word shown on its own, which Japanese reads
+ * from its furigana (js/speech.js). Nothing when the browser has no voice for the language.
  */
-export function speakButton(ctx, text, lang, main = false) {
+export function speakButton(ctx, text, lang, { main = false, word = false } = {}) {
   if (!ctx.speak || !text) return '';
-  return `<button type="button" class="speak-btn"${main ? ' data-speak-main' : ''} data-speak="${esc(text)}" data-speak-lang="${esc(lang)}" title="${esc(ctx.t.speak)}" aria-label="${esc(ctx.t.speak)}">${SPEAKER}</button>`;
+  return `<button type="button" class="speak-btn"${main ? ' data-speak-main' : ''}${word ? ' data-speak-word' : ''} data-speak="${esc(text)}" data-speak-lang="${esc(lang)}" title="${esc(ctx.t.speak)}" aria-label="${esc(ctx.t.speak)}">${SPEAKER}</button>`;
 }
 
 const TR_LABEL = { de: 'DE', en: 'EN', 'zh-Hant': '中文', ja: '日本語' };
@@ -193,7 +196,7 @@ export const CARD_RENDERERS = {
     front(card, ctx) {
       const p = card.prompt;
       return `<div class="eyebrow">${esc(ctx.labels.source)}</div>
-        <p class="${sentenceClass(card)}" lang="${card.language}">${sentenceHTML(p.source, null, p.words || [])}${speakButton(ctx, p.source, card.language, true)}</p>
+        <p class="${sentenceClass(card)}" lang="${card.language}">${sentenceHTML(p.source, null, p.words || [])}${speakButton(ctx, p.source, card.language, { main: true })}</p>
         ${p.task ? `<div class="task-row">${taskChip(card, ctx)}</div>` : ''}
         ${aidsBlock(card, ctx)}`;
     },
@@ -244,7 +247,8 @@ export const CARD_RENDERERS = {
       const base = p.base?.word
         ? `<div class="base-block">
             <div class="eyebrow">${esc(ctx.labels.base)}</div>
-            <div class="base-word" lang="${lang}">${rubyHTML(p.base.word)}${speakButton(ctx, p.base.word, lang)}</div>
+            <div class="base-word" lang="${lang}">${rubyHTML(p.base.word)}${speakButton(ctx, p.base.word, lang, { word: true })}</div>
+            ${ctx.L.pitch ? readingHTML(p.base.word, lang, 'base-reading', { dir: ctx.L.pitch, hidden: true }) : ''}
             ${p.base.meaning ? `<div class="meaning" lang="${ctx.L.noteLang}">${esc(p.base.meaning)}</div>` : ''}
           </div>`
         : '';
@@ -253,7 +257,7 @@ export const CARD_RENDERERS = {
       // Read aloud, the sentence has a pause for the blank until the answer is shown, then the answer in it.
       const fillWord = p.base?.meaning ? { text: p.base.word, meaning: p.base.meaning, pos: p.base.pos } : null;
       return `${base || task ? `<div class="cloze-head">${base}${task}</div>` : ''}
-        <p class="${sentenceClass(card)}" lang="${lang}">${sentenceHTML(p.sentence, ctx.revealed ? card.answer.accepted[0] : null, p.words || [], fillWord)}${speakButton(ctx, ctx.revealed ? p.sentence.replace(BLANK, card.answer.accepted[0]) : p.sentence, lang, true)}</p>
+        <p class="${sentenceClass(card)}" lang="${lang}">${sentenceHTML(p.sentence, ctx.revealed ? card.answer.accepted[0] : null, p.words || [], fillWord)}${speakButton(ctx, ctx.revealed ? p.sentence.replace(BLANK, card.answer.accepted[0]) : p.sentence, lang, { main: true })}</p>
         ${aidsBlock(card, ctx)}`;
     },
     input: textInput,
@@ -264,7 +268,7 @@ export const CARD_RENDERERS = {
       return `
         <div class="answer-grid">
           <div class="answer-row"><div class="label">${t.yourAnswer}</div><p class="val mine big v-${result.verdict}" lang="${lang}">${typedHTML(card, input)}</p></div>
-          <div class="answer-row"><div class="label">${t.model}</div><p class="val big" lang="${lang}">${a.accepted.map(rubyHTML).join('　／　')}${speakButton(ctx, a.accepted[0], lang)}</p></div>
+          <div class="answer-row"><div class="label">${t.model}</div><p class="val big" lang="${lang}">${a.accepted.map(rubyHTML).join('　／　')}${speakButton(ctx, a.accepted[0], lang, { word: true })}</p></div>
         </div>
         ${acceptableBlock(card, ctx)}
         ${chipsBlock(card, ctx)}
@@ -287,8 +291,8 @@ export const CARD_RENDERERS = {
       const p = card.prompt;
       const reading = toKana(p.word);
       return `<div class="eyebrow">${ctx.t.vocabFront}</div>
-        <div class="vocab-word${ctx.revealed ? '' : ' peek'}" lang="${card.language}">${rubyHTML(p.word)}${ctx.revealed ? speakButton(ctx, p.word, card.language, true) : ''}</div>
-        ${ctx.revealed && reading !== toSurface(p.word) ? `<div class="vocab-reading" lang="${card.language}">${esc(reading)}</div>` : ''}
+        <div class="vocab-word${ctx.revealed ? '' : ' peek'}" lang="${card.language}">${rubyHTML(p.word)}${ctx.revealed ? speakButton(ctx, p.word, card.language, { main: true, word: true }) : ''}</div>
+        ${ctx.revealed && (ctx.L.pitch || reading !== toSurface(p.word)) ? readingHTML(p.word, card.language, 'vocab-reading', { dir: ctx.L.pitch, hidden: reading === toSurface(p.word) }) : ''}
         ${ctx.homograph && p.example && !ctx.revealed ? `<p class="vocab-context" lang="${card.language}">${sentenceHTML(p.example)}</p>` : ''}
         ${ctx.revealed || reading === toSurface(p.word) ? '' : `<p class="hint">${ctx.t.vocabPeek}</p>`}`;
     },

@@ -44,6 +44,7 @@ export const UI = {
     speechSample: 'Bei falscher Bedienung kann die Maschine beschädigt werden.',
     noVoice: 'Dieser Browser hat keine deutsche Stimme. Edge und Chrome bringen eine mit; unter Windows lässt sich eine unter Einstellungen → Zeit und Sprache → Sprache installieren.',
     noSpeech: 'Dieser Browser kann nicht vorlesen.',
+    pitchCredit: 'Tonhöhenakzente:',
     // Defaults for card-type labels; topics override them in js/topics.js.
     labels: { source: 'Ausgangssatz', target: 'Deine Umformung', base: 'Grundform', placeholder: 'Antwort eingeben …', showTask: 'Aufgabe anzeigen' },
     search: 'Suchen …', status: { new: 'neu', learn: 'in Lernphase', due: 'fällig', on: (d) => `fällig am ${d}` },
@@ -140,6 +141,7 @@ export const UI = {
     speechSample: '{朝|あさ}ごはんはあまり{食|た}べない。',
     noVoice: '這個瀏覽器沒有日文語音。Edge 和 Chrome 有內建的日文語音；Windows 也可以在「設定 → 時間與語言 → 語言」安裝日文語音。',
     noSpeech: '這個瀏覽器不支援朗讀。',
+    pitchCredit: '高低重音資料：',
     // Defaults for card-type labels; topics override them in js/topics.js.
     labels: { source: '原句', target: '改寫', base: '原形', placeholder: '輸入答案（假名、漢字或羅馬拼音）', showTask: '顯示題目要求' },
     search: '搜尋…', status: { new: '新卡', learn: '學習中', due: '到期', on: (d) => `${d} 到期` },

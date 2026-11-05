@@ -42,6 +42,7 @@ export const LANG_FIELDS = {
   romajiInput: 'boolean', // typed romaji is read as hiragana (preview, shown answer, saved answers)
   sentenceClass: 'string', // extra class on prompt sentences ('' for none)
   speech: 'object', // read aloud (js/speech.js): { locale: BCP 47 tag that picks the voice, rate: default speed }
+  pitch: 'string', // folder of pitch-accent data drawn over single words (js/pitch.js), '' for none
   topics: 'object', // the decks, see above
 };
 
@@ -63,6 +64,7 @@ export const LANGS = {
     romajiInput: false,
     sentenceClass: '',
     speech: { locale: 'de-DE', rate: 1 },
+    pitch: '',
     topics: [
       {
         id: 'nominalisierung', label: 'Nominalisierung', type: 'rewrite',
@@ -111,6 +113,7 @@ export const LANGS = {
     romajiInput: true,
     sentenceClass: 'ja',
     speech: { locale: 'ja-JP', rate: 0.85 },
+    pitch: 'data/pitch/ja',
     topics: [
       {
         id: 'verb-conjugation', label: '動詞變化', type: 'cloze',

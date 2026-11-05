@@ -5,9 +5,12 @@
 // (Edge has "Natural" online voices, Chrome has "Google 日本語 / Deutsch", Windows and macOS ship
 // offline voices once the language's speech pack is installed).
 //
-// Furigana markup is read as written in kanji ({箸|はし} → 箸): the engine needs the word, not only
-// its kana, to pick the right pitch accent (箸 and 橋 are both はし but sound different).
-import { toSurface, BLANK } from './text.js';
+// Sentences are read as written in kanji ({箸|はし} → 箸): the context picks the reading, and the kanji
+// tell the engine which word it is, so the pitch accent comes out right (箸で食べる, 橋を渡る).
+// A word read on its own is read from its furigana instead ({薬|くすり} → くすり): with nothing around
+// it the engine has to guess the reading of the kanji, and often guesses wrong (薬 alone → やく).
+// The price is that homophones sound alike (はし for 箸, 橋 and 端); the example sentence has the difference.
+import { toSurface, toKana, BLANK } from './text.js';
 
 const synth = typeof window !== 'undefined' && 'speechSynthesis' in window ? window.speechSynthesis : null;
 
@@ -16,14 +19,18 @@ export const supported = () => !!synth;
 // Comma-like marks that make the engine pause, per script.
 const GAP = { ja: '、', zh: '，' };
 
+// Languages whose furigana is a reading the engine can say: a single word is read from it.
+const WORD_FROM_READING = new Set(['ja']);
+
 /**
- * The text the engine gets: kanji spelling and single spaces. A blank (___) becomes a comma, so it is
+ * The text the engine gets: kanji spelling (or, for a single `word`, its reading) and single spaces. A blank (___) becomes a comma, so it is
  * heard as a short pause in one utterance (splitting the sentence would end each half with falling,
  * sentence-final intonation). A gap at the start, or right before other punctuation, is dropped.
  */
-export function speechText(s, locale = '') {
+export function speechText(s, locale = '', { word = false } = {}) {
   const gap = GAP[base(locale)] || ', ';
-  return toSurface(s).replaceAll(BLANK, gap)
+  const text = word && WORD_FROM_READING.has(base(locale)) ? toKana(s) : toSurface(s);
+  return text.replaceAll(BLANK, gap)
     .replace(/\s+/g, ' ').trim()
     .replace(/\s+(?=[、，,])/g, '')
     .replace(/^[、，,]\s*/, '')
@@ -58,12 +65,13 @@ export const canSpeak = (locale) => !!locale && voicesFor(locale).length > 0;
 let current = null; // keep a reference: Chrome drops callbacks of utterances that were garbage-collected
 
 /**
- * Read `text` aloud. `onEnd` runs when it finishes or is interrupted.
+ * Read `text` aloud; `word` marks a single word shown on its own (see the top of this file).
+ * `onEnd` runs when it finishes or is interrupted.
  * Starting a new one stops the one that is playing.
  */
-export function speak(text, { locale, voiceURI, rate = 1, onEnd } = {}) {
+export function speak(text, { locale, voiceURI, rate = 1, word = false, onEnd } = {}) {
   if (!synth) return false;
-  const say = speechText(text, locale);
+  const say = speechText(text, locale, { word });
   if (!say) return false;
   stop();
   const u = new SpeechSynthesisUtterance(say);

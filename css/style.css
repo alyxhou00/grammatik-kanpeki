@@ -325,6 +325,19 @@ ruby rt { font-size: .5em; color: var(--muted); font-weight: 400; }
 .speech-test { margin-top: 4px; }
 .opt.row select[name="speechVoice"] { min-width: 0; max-width: 70%; text-overflow: ellipsis; }
 .vocab-reading { text-align: center; color: var(--muted); font-size: 1.2rem; }
+.base-reading { color: var(--muted); font-size: 1.05rem; margin-top: -4px; }
+
+/* Pitch accent (js/pitch.js): a line over the high morae and under the low ones, with a step where the
+   pitch changes. The short tail is the particle after the word (が): it tells 橋 (drops) from 端 (stays high). */
+.has-pitch { color: var(--text); }
+.pitch { display: inline-flex; line-height: 1.45; padding: 2px 0; }
+.pitch + .pitch { margin-left: 1em; opacity: .55; font-size: .85em; } /* less common accents */
+.pitch .m { padding: 0 .08em; border: 0 solid var(--accent); }
+.pitch .m.h { border-top-width: 2px; }
+.pitch .m.l { border-bottom-width: 2px; }
+.pitch .m.step { border-left-width: 2px; }
+.pitch .m.tail { width: .75em; opacity: .5; }
+.dlg .credit a { color: inherit; }
 /* Shown on the front when the word list has another sense of the same word. */
 .vocab-context { text-align: center; color: var(--muted); font-size: 1.05rem; margin: 4px 0 0; }
 .vocab-context:lang(de) { font-family: var(--serif); }

@@ -6,6 +6,7 @@ import { UI } from './i18n.js';
 import { LANGS, topicOf, topicType, ancestry, childrenOf, groupOf, labelsOf, facetsOf, vocabTopic } from './topics.js';
 import { rendererFor, savedWordIn, vocabCardFrom, speakButton } from './cardtypes.js';
 import * as speech from './speech.js';
+import * as pitch from './pitch.js';
 import { esc, loc, isRomaji, romajiToHiragana, rubyHTML, toKana, toSurface } from './text.js';
 import { emptyValues, valuesFromCard, cardFromValues, formErrors, missingFurigana, formLangs, makeId, USER_SOURCE } from './cardform.js';
 
@@ -30,6 +31,12 @@ const currentCard = () => { const s = session(); return s?.current ? store.getCa
 const cfg = () => ({ ...DEFAULTS, newPerDay: settings().newPerDay, reviewsPerDay: settings().reviewsPerDay });
 let waitTimer = null;
 
+// ---------- pitch accent (js/pitch.js) ----------
+
+// A word's reading asks for its accent with data-pitch; draw it wherever such a word appears
+// (cards, the word popup), once the data has loaded.
+new MutationObserver(() => pitch.hydrate(document.body)).observe(document.body, { childList: true, subtree: true });
+
 // ---------- speech (read sentences aloud, see js/speech.js) ----------
 
 const speechLocale = (lang) => LANGS[lang]?.speech?.locale;
@@ -46,7 +53,7 @@ function playSpeakButton(btn) {
   if (wasPlaying) return;
   const lang = btn.dataset.speakLang;
   btn.classList.add('speaking');
-  const ok = speech.speak(btn.dataset.speak, { ...speechOpts(lang), onEnd: () => btn.classList.remove('speaking') });
+  const ok = speech.speak(btn.dataset.speak, { ...speechOpts(lang), word: 'speakWord' in btn.dataset, onEnd: () => btn.classList.remove('speaking') });
   if (!ok) btn.classList.remove('speaking');
 }
 
@@ -118,8 +125,8 @@ function renderPop(w) {
     ? `<span class="pop-saved">✓ ${T.inWordList}</span><button type="button" class="link" data-action="vocab-remove">${T.remove}</button>`
     : `<button type="button" class="btn primary small" data-action="vocab-add">＋ ${T.addToWordList}</button>`;
   pop().innerHTML = `
-    <div class="pop-word" lang="${lang}">${rubyHTML(w.lemma)}${speakButton({ t: T, speak: speechOn(lang) }, w.lemma, lang)}</div>
-    ${reading !== toSurface(w.lemma) ? `<div class="pop-reading" lang="${lang}">${esc(reading)}</div>` : ''}
+    <div class="pop-word" lang="${lang}">${rubyHTML(w.lemma)}${speakButton({ t: T, speak: speechOn(lang) }, w.lemma, lang, { word: true })}</div>
+    ${LANGS[lang].pitch || reading !== toSurface(w.lemma) ? pitch.readingHTML(w.lemma, lang, 'pop-reading', { dir: LANGS[lang].pitch, hidden: reading === toSurface(w.lemma) }) : ''}
     <div class="pop-meaning" lang="${LANGS[lang].noteLang}">${esc(w.meaning)}</div>
     ${w.pos ? `<span class="group-chip">${esc(w.pos)}</span>` : ''}
     ${actions ? `<div class="pop-actions">${actions}</div>` : ''}`;
@@ -812,6 +819,7 @@ function openSettings() {
       <label class="opt"><input type="checkbox" name="showForm" ${S.showForm ? 'checked' : ''}> ${T.showForm}</label>
     </section>
     ${speechSettingsHTML()}
+    ${L.pitch ? `<p class="hint credit">${T.pitchCredit} <a href="https://github.com/mifunetoshiro/kanjium" target="_blank" rel="noopener">Kanjium</a> (Uros O.), <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a></p>` : ''}
     <section><button type="button" class="btn danger" data-action="reset-progress">${T.resetProgress}</button></section>
   </form>`;
   if (!dlg.open) dlg.showModal();

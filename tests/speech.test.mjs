@@ -24,6 +24,12 @@ const speech = await import('../js/speech.js');
 
 // Furigana is read as kanji (the engine needs the word for its pitch accent).
 assert.equal(speech.speechText('{朝|あさ}ごはんはあまり{食|た}べない。', 'ja-JP'), '朝ごはんはあまり食べない。');
+// A word on its own is read from its furigana (薬 alone would be guessed as やく); only where the
+// course's furigana is a reading (Japanese), and a word without furigana stays as written.
+assert.equal(speech.speechText('{薬|くすり}', 'ja-JP', { word: true }), 'くすり');
+assert.equal(speech.speechText('{食|た}べない', 'ja-JP', { word: true }), 'たべない');
+assert.equal(speech.speechText('すごい', 'ja-JP', { word: true }), 'すごい');
+assert.equal(speech.speechText('der {Baum|BAUM}', 'de-DE', { word: true }), 'der Baum');
 // A blank is a pause, never the answer; a pause at the start or before punctuation is dropped.
 assert.equal(speech.speechText('{私|わたし}は___{学生|がくせい}です。', 'ja-JP'), '私は、学生です。');
 assert.equal(speech.speechText('{朝|あさ}ごはんはあまり___。', 'ja-JP'), '朝ごはんはあまり。');
@@ -52,6 +58,8 @@ assert.deepEqual([u.text, u.lang, u.voice.voiceURI, u.rate], ['箸', 'ja-JP', 'n
 speech.stop();
 u.onend();
 assert.equal(ends, 1);
+speech.speak('{薬|くすり}', { locale: 'ja-JP', word: true });
+assert.equal(spoken.at(-1).text, 'くすり');
 assert.equal(speech.speak('___', { locale: 'ja-JP' }), false, 'nothing to say');
 
 console.log('ok - speech: text, voice ranking, course config, speak/stop');

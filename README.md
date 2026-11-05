@@ -18,10 +18,18 @@ A speaker button next to a sentence or word reads it aloud, so you can hear the 
 
 - **Where:** the sentence and the model answer (Nominalisierung), the dictionary form, the sentence and the model answer (cloze cards: before you answer, the blank is read as a short pause, so the answer is not given away; after you answer, the sentence is read with the answer filled in), the word after flipping and its example (word list), and the word popup. **R** plays the card's sentence after answering.
 - **Settings → Vorlesen / 朗讀:** voice and speed per course. Japanese starts a bit slower (0.85×) than German (1×). "Automatic" picks the most natural voice it finds.
-- Furigana is read as written in kanji, not as kana, because the engine needs the word to pick its pitch accent (箸 and 橋 are both はし but sound different). The engine can still misread a kanji now and then; the furigana on screen is the reference.
+- **Sentences are read in kanji, single words in kana.** In a sentence, the context lets the engine pick the right reading and, from the kanji, the right pitch accent (箸で食べる, 橋を渡る). A word on its own (the word card, the popup, the dictionary form, the cloze answer) is read from its furigana instead: with nothing around it, the engine guesses the reading of a kanji and often gets it wrong (薬 alone → やく instead of くすり). Because of this, homophones sound alike when read alone (はし for 箸, 橋 and 端). The pitch-accent marks show the difference, and the example sentence lets you hear it.
 - **Voices depend on the browser and OS.** Edge has natural online voices (Nanami, Keita, Katja, Conrad), Chrome has "Google 日本語" and "Google Deutsch". Firefox and other Chromium-based apps only use the voices installed in the OS: on Windows, add Japanese or German under Settings → Time & language → Language & region → (language) → Speech. Without a voice for the course, the buttons stay hidden and the settings say why.
 
 A new course sets its voice with `speech: { locale, rate }` in `js/topics.js` (for example `{ locale: 'fr-FR', rate: 1 }`).
+
+## Pitch accent
+
+Japanese words shown on their own get pitch-accent marks under them: on the word card after flipping, in the word popup, and under the dictionary form of cloze cards. A line runs over the high morae and under the low ones, with a step where the pitch changes. The short tail at the end is the particle after the word (が). It shows the difference between 橋 (はし², drops before が) and 端 (はし⁰, stays high). Hover the marks to see the type (平板型, 頭高型, 中高型, 尾高型). Words with more than one accent show each one, most common first.
+
+- **Data:** [Kanjium](https://github.com/mifunetoshiro/kanjium)'s `accents.txt` (124,137 words, CC BY-SA 4.0). It is converted by `tools/pitch.mjs` into 128 small files in `data/pitch/ja/`; see the README there for the license and how to rebuild them. A word loads one file of about 30 KB the first time it is shown. There is no server and nothing to install.
+- **No guessing:** a word is looked up by its spelling and its reading, so 箸, 橋 and 端 each get their own accent. A word with no match gets no marks. A word written in kana (すごい) gets marks only when every word with that reading has the same accent. Conjugated forms (食べない) are not in the data, so the cloze answer has no marks.
+- A course turns this on with `pitch: 'data/pitch/<course>'` in `js/topics.js` (`''` for none). Check the drawing and the lookup with `node tests/pitch.test.mjs`.
 
 ## Adding your own cards
 
