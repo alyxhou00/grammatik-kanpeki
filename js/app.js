@@ -9,6 +9,7 @@ import * as speech from './speech.js';
 import * as pitch from './pitch.js';
 import { esc, loc, isRomaji, romajiToHiragana, rubyHTML, toKana, toSurface } from './text.js';
 import { emptyValues, valuesFromCard, cardFromValues, formErrors, missingFurigana, formLangs, makeId, USER_SOURCE } from './cardform.js';
+import { SOURCES, sourceName } from './sources.js';
 
 const $ = (sel, el = document) => el.querySelector(sel);
 const GRADES = ['again', 'hard', 'good', 'easy'];
@@ -622,10 +623,21 @@ function renderCardsView() {
   </section>`;
 }
 
+/** Full name of a card source in the course's language ('' if the code is not in js/sources.js). */
+const srcName = (code) => sourceName(code, [LANGS[state.lang].noteLang, 'en']);
+
+/** A card's source as shown in the card list: the code, with its full name on hover. */
+function sourceLabel(code) {
+  if (code === USER_SOURCE) return esc(t().sourceUser);
+  const name = srcName(code);
+  return name ? `<abbr class="src-code" title="${esc(name)}">${esc(code)}</abbr>` : esc(code);
+}
+
 function renderCardList() {
   const T = t();
   const q = (state.search || '').trim().toLowerCase();
-  const cards = store.cardsFor(state.lang, state.topic).filter((c) => !q || JSON.stringify(c).toLowerCase().includes(q));
+  const cards = store.cardsFor(state.lang, state.topic)
+    .filter((c) => !q || (JSON.stringify(c) + srcName(c.source)).toLowerCase().includes(q));
   const fmt = new Intl.DateTimeFormat(LANGS[state.lang].dateLocale, { month: '2-digit', day: '2-digit' });
   $('#card-count').textContent = cards.length;
   $('#card-list').innerHTML = cards.length
@@ -638,7 +650,7 @@ function renderCardList() {
           <div class="row-meta">
             <span class="status s-${st}">${esc(label)}</span>
             ${p?.leech ? `<span class="status s-leech">${T.leech}</span>` : ''}
-            <span class="src" title="${esc(c.id)}">${T.source}: ${esc(c.source === USER_SOURCE ? T.sourceUser : c.source)}</span>
+            <span class="src" title="${esc(c.id)}">${T.source}: ${sourceLabel(c.source)}</span>
             <span class="row-btns">
             <button class="icon-btn" data-action="edit-card" data-id="${esc(c.id)}" title="${T.form.edit}" aria-label="${T.form.edit}">${ICON.edit}</button>
             <button class="icon-btn" data-action="delete" data-id="${esc(c.id)}" title="${T.del}" aria-label="${T.del}">${ICON.trash}</button>
@@ -882,7 +894,7 @@ const rubyPreview = (v) => (String(v).includes('{') ? String(v).split('\n').map(
 function field(name, label, value, o = {}) {
   const T = t().form;
   const err = cardForm.errors[name];
-  const attrs = `name="${name}" ${o.lang ? `lang="${o.lang}"` : ''} ${o.ph ? `placeholder="${esc(o.ph)}"` : ''} ${o.main ? 'data-main' : ''} ${o.ruby ? 'data-ruby' : ''} ${err ? 'aria-invalid="true"' : ''} autocomplete="off" spellcheck="false"`;
+  const attrs = `name="${name}" ${o.lang ? `lang="${o.lang}"` : ''} ${o.ph ? `placeholder="${esc(o.ph)}"` : ''} ${o.list ? `list="${o.list}"` : ''} ${o.main ? 'data-main' : ''} ${o.ruby ? 'data-ruby' : ''} ${err ? 'aria-invalid="true"' : ''} autocomplete="off" spellcheck="false"`;
   const control = o.rows
     ? `<textarea ${attrs} rows="${o.rows}">${esc(value)}</textarea>`
     : `<input ${attrs} value="${esc(value)}">`;
@@ -997,7 +1009,8 @@ function renderCardForm() {
             ${field('level', T.level, v.level, { ph: L.level })}
             ${field('tags', T.tags, v.tags, { ph: T.tagsPh })}
           </div>
-          ${field('cardSource', T.source, v.cardSource, { ph: T.sourcePh })}
+          ${field('cardSource', T.source, v.cardSource, { ph: T.sourcePh, list: 'source-codes' })}
+          <datalist id="source-codes">${Object.keys(SOURCES).map((k) => `<option value="${esc(k)}">${esc(srcName(k))}</option>`).join('')}</datalist>
         </details>
       </section>
     </div>
