@@ -23,7 +23,8 @@
           "meaning": "吃",
           "pos": "動詞"
         },
-        "task": "ます形（禮貌）",
+        "task": "ます形",
+        "register": "polite",
         "sentence": "{毎朝|まいあさ}、パンを___。",
         "translation": {
           "zh-Hant": "每天早上吃麵包。"
@@ -78,7 +79,8 @@
           "meaning": "起床",
           "pos": "動詞"
         },
-        "task": "ます形（禮貌）",
+        "task": "ます形",
+        "register": "polite",
         "sentence": "{毎日|まいにち}、{七時|しちじ}に___。",
         "translation": {
           "zh-Hant": "每天七點起床。"
@@ -138,7 +140,8 @@
           "meaning": "（人、動物）在",
           "pos": "動詞"
         },
-        "task": "ます形（禮貌）",
+        "task": "ます形",
+        "register": "polite",
         "sentence": "{田中|たなか}さんは{今|いま}、{会議室|かいぎしつ}に___。",
         "translation": {
           "zh-Hant": "田中先生現在在會議室。"
@@ -198,7 +201,8 @@
           "meaning": "做",
           "pos": "動詞"
         },
-        "task": "ます形（禮貌）",
+        "task": "ます形",
+        "register": "polite",
         "sentence": "{毎晩|まいばん}、{日本語|にほんご}の{勉強|べんきょう}を___。",
         "translation": {
           "zh-Hant": "每天晚上都念日文。"
@@ -263,7 +267,8 @@
           "meaning": "喝",
           "pos": "動詞"
         },
-        "task": "ます形（禮貌）",
+        "task": "ます形",
+        "register": "polite",
         "sentence": "{毎朝|まいあさ}、コーヒーを___。",
         "translation": {
           "zh-Hant": "每天早上喝咖啡。"
@@ -318,7 +323,8 @@
           "meaning": "回去；回家",
           "pos": "動詞"
         },
-        "task": "ます形（禮貌）",
+        "task": "ます形",
+        "register": "polite",
         "sentence": "{毎日|まいにち}、{六時|ろくじ}に{家|いえ}へ___。",
         "translation": {
           "zh-Hant": "每天六點回家。"
@@ -383,7 +389,8 @@
           "meaning": "看",
           "pos": "動詞"
         },
-        "task": "ました形（禮貌・過去）",
+        "task": "ました形（過去）",
+        "register": "polite",
         "sentence": "{昨日|きのう}、テレビでサッカーを___。",
         "translation": {
           "zh-Hant": "昨天在電視上看了足球。"
@@ -403,7 +410,7 @@
         "acceptable": [
           {
             "text": "{見|み}た",
-            "note": "文法正確，但這題要禮貌形（ます形）。"
+            "note": "文法正確，但這題要禮貌形（ました）。"
           }
         ],
         "mistakes": [
@@ -438,7 +445,8 @@
           "meaning": "借（入）",
           "pos": "動詞"
         },
-        "task": "ました形（禮貌・過去）",
+        "task": "ました形（過去）",
+        "register": "polite",
         "sentence": "{図書館|としょかん}で{本|ほん}を___。",
         "translation": {
           "zh-Hant": "在圖書館借了書。"
@@ -463,7 +471,7 @@
         "acceptable": [
           {
             "text": "{借|か}りた",
-            "note": "文法正確，但這題要禮貌形（ます形）。"
+            "note": "文法正確，但這題要禮貌形（ました）。"
           }
         ]
       },
@@ -492,7 +500,8 @@
           "meaning": "買",
           "pos": "動詞"
         },
-        "task": "ました形（禮貌・過去）",
+        "task": "ました形（過去）",
+        "register": "polite",
         "sentence": "デパートで{靴|くつ}を___。",
         "translation": {
           "zh-Hant": "在百貨公司買了鞋子。"
@@ -512,7 +521,7 @@
         "acceptable": [
           {
             "text": "{買|か}った",
-            "note": "文法正確，但這題要禮貌形（ます形）。"
+            "note": "文法正確，但這題要禮貌形（ました）。"
           }
         ],
         "mistakes": [
@@ -547,7 +556,8 @@
           "meaning": "念書；學習",
           "pos": "動詞"
         },
-        "task": "ました形（禮貌・過去）",
+        "task": "ました形（過去）",
+        "register": "polite",
         "sentence": "{昨日|きのう}、{図書館|としょかん}で___。",
         "translation": {
           "zh-Hant": "昨天在圖書館念了書。"
@@ -572,7 +582,7 @@
         "acceptable": [
           {
             "text": "{勉強|べんきょう}した",
-            "note": "文法正確，但這題要禮貌形（ます形）。"
+            "note": "文法正確，但這題要禮貌形（ました）。"
           }
         ],
         "mistakes": [
@@ -607,7 +617,8 @@
           "meaning": "去",
           "pos": "動詞"
         },
-        "task": "ません形（禮貌・否定）",
+        "task": "ません形（否定）",
+        "register": "polite",
         "sentence": "{明日|あした}は{学校|がっこう}へ___。",
         "translation": {
           "zh-Hant": "明天不去學校。"
@@ -667,7 +678,8 @@
           "meaning": "懂；明白",
           "pos": "動詞"
         },
-        "task": "ません形（禮貌・否定）",
+        "task": "ません形（否定）",
+        "register": "polite",
         "sentence": "すみません、よく___。",
         "translation": {
           "zh-Hant": "不好意思，我不太懂。"
@@ -727,7 +739,8 @@
           "meaning": "記住",
           "pos": "動詞"
         },
-        "task": "ません形（禮貌・否定）",
+        "task": "ません形（否定）",
+        "register": "polite",
         "sentence": "{人|ひと}の{名前|なまえ}がなかなか___。",
         "translation": {
           "zh-Hant": "總是記不住別人的名字。"
@@ -787,6 +800,7 @@
           "pos": "動詞"
         },
         "task": "なかった形（過去否定）",
+        "register": "plain",
         "sentence": "{今朝|けさ}は{何|なに}も___。",
         "translation": {
           "zh-Hant": "今天早上什麼都沒吃。"
@@ -847,6 +861,7 @@
           "pos": "動詞"
         },
         "task": "ない形（否定）",
+        "register": "plain",
         "sentence": "{今日|きょう}は{何|なに}も___。",
         "translation": {
           "zh-Hant": "今天什麼都不做。"
@@ -907,6 +922,7 @@
           "pos": "動詞"
         },
         "task": "ない形（否定）",
+        "register": "plain",
         "sentence": "{家|いえ}には{誰|だれ}も___。",
         "translation": {
           "zh-Hant": "家裡一個人都沒有。"
@@ -967,6 +983,7 @@
           "pos": "動詞"
         },
         "task": "ない形（否定）",
+        "register": "plain",
         "sentence": "{田中|たなか}さんは{今日|きょう}、{学校|がっこう}に___。",
         "translation": {
           "zh-Hant": "田中同學今天不來學校。"
@@ -1027,6 +1044,7 @@
           "pos": "動詞"
         },
         "task": "た形（過去）",
+        "register": "plain",
         "sentence": "{昨日|きのう}は{十一時|じゅういちじ}に___。",
         "translation": {
           "zh-Hant": "昨天十一點睡了。"
@@ -1087,6 +1105,7 @@
           "pos": "動詞"
         },
         "task": "た形（過去）",
+        "register": "plain",
         "sentence": "{今朝|けさ}は{八時|はちじ}に{家|いえ}を___。",
         "translation": {
           "zh-Hant": "今天早上八點出門了。"
@@ -1152,6 +1171,7 @@
           "pos": "動詞"
         },
         "task": "た形（過去）",
+        "register": "plain",
         "sentence": "{昨日|きのう}、{友達|ともだち}が{家|いえ}に___。",
         "translation": {
           "zh-Hant": "昨天朋友來我家了。"
@@ -1497,6 +1517,7 @@
           "pos": "動詞"
         },
         "task": "たい形（想做）",
+        "register": "plain",
         "sentence": "{今日|きょう}は{早|はや}く___。",
         "translation": {
           "zh-Hant": "今天想早點睡。"
@@ -1518,6 +1539,12 @@
       "answer": {
         "accepted": [
           "{寝|ね}たい"
+        ],
+        "acceptable": [
+          {
+            "text": "{寝|ね}たいです",
+            "note": "正確而且更禮貌；這題用普通形就好。"
+          }
         ],
         "mistakes": [
           {
@@ -1552,6 +1579,7 @@
           "pos": "動詞"
         },
         "task": "たい形（想做）",
+        "register": "plain",
         "sentence": "{先生|せんせい}と{日本語|にほんご}で___。",
         "translation": {
           "zh-Hant": "想跟老師用日文聊天。"
@@ -1572,6 +1600,12 @@
       "answer": {
         "accepted": [
           "{話|はな}したい"
+        ],
+        "acceptable": [
+          {
+            "text": "{話|はな}したいです",
+            "note": "正確而且更禮貌；這題用普通形就好。"
+          }
         ],
         "mistakes": [
           {
@@ -1606,6 +1640,7 @@
           "pos": "動詞"
         },
         "task": "たい形（想做）",
+        "register": "plain",
         "sentence": "{明日|あした}は{新|あたら}しいシャツを___。",
         "translation": {
           "zh-Hant": "明天想穿新襯衫。"
@@ -1626,6 +1661,12 @@
       "answer": {
         "accepted": [
           "{着|き}たい"
+        ],
+        "acceptable": [
+          {
+            "text": "{着|き}たいです",
+            "note": "正確而且更禮貌；這題用普通形就好。"
+          }
         ]
       },
       "explanation": {
@@ -1653,7 +1694,8 @@
           "meaning": "關（門、窗）",
           "pos": "動詞"
         },
-        "task": "ましょう形（禮貌的「～吧」）",
+        "task": "ましょう形（～吧）",
+        "register": "polite",
         "sentence": "{寒|さむ}いですね。{窓|まど}を___か。",
         "translation": {
           "zh-Hant": "好冷喔。要不要把窗戶關起來？"
@@ -1674,6 +1716,12 @@
       "answer": {
         "accepted": [
           "{閉|し}めましょう"
+        ],
+        "acceptable": [
+          {
+            "text": "{閉|し}めよう",
+            "note": "這是普通形的說法，完全正確；這題要禮貌形（ましょう）。"
+          }
         ],
         "mistakes": [
           {
@@ -1707,7 +1755,8 @@
           "meaning": "休息",
           "pos": "動詞"
         },
-        "task": "ましょう形（禮貌的「～吧」）",
+        "task": "ましょう形（～吧）",
+        "register": "polite",
         "sentence": "{疲|つか}れましたね。ちょっと___。",
         "translation": {
           "zh-Hant": "好累喔。稍微休息一下吧。"
@@ -1729,6 +1778,12 @@
       "answer": {
         "accepted": [
           "{休|やす}みましょう"
+        ],
+        "acceptable": [
+          {
+            "text": "{休|やす}もう",
+            "note": "這是普通形的說法，完全正確；這題要禮貌形（ましょう）。"
+          }
         ],
         "mistakes": [
           {
