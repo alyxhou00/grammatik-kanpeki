@@ -16,6 +16,10 @@ export const SOURCES = {
   demo3: { name: { de: 'Beispielkarten, Teil 3', 'zh-Hant': '範例卡片（第三組）', en: 'Demo cards, set 3' } },
   'demo-counters': { name: { de: 'Beispielkarten: Zahlen und Zählwörter', 'zh-Hant': '範例卡片：數字・助數詞', en: 'Demo cards: numbers and counters' } },
   ktxc1kb: { name: 'Kontext C1 Kursbuch' },
+  ktxc1ueb: { name: 'Kontext C1 Übungsbuch' },
+  aimc1xblatt: { name: 'aim Kurs Deutsch C1 für Studierende und Auszubildende, Extrablatt' },
+  agic11xblatt: { name: 'anglo-german-institute, Intensivkurs Deutsch als Fremdsprache C1.1, Extrablatt' },
+  aspekteneuc1: { name: 'Aspekte neu C1' },
 };
 
 export const SOURCE_CODE = /^[a-z0-9][a-z0-9.-]*$/;

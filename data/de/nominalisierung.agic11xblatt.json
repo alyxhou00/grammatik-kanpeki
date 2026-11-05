@@ -1,0 +1,1288 @@
+{
+  "format": "grammatik-kanpeki.cards",
+  "version": 2,
+  "cards": [
+    {
+      "id": "de-nom-agic11xblatt-001",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "agic11xblatt",
+      "level": "C1",
+      "tags": [
+        "Regel 4",
+        "konditional",
+        "durch",
+        "Satz"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Wenn die Lehrerin die Fehler korrigiert, schreiben die Lernenden bessere Texte.",
+        "hint": "wenn → durch / bei; handelnde Person → durch",
+        "translation": {
+          "en": "When the teacher corrects the mistakes, the learners write better texts.",
+          "zh-Hant": "老師改正錯誤時，學生寫出的文章會更好。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Durch eine Korrektur der Fehler durch die Lehrerin schreiben die Lernenden bessere Texte.",
+          "Durch die Korrektur der Fehler durch die Lehrerin schreiben die Lernenden bessere Texte.",
+          "Bei einer Korrektur der Fehler durch die Lehrerin schreiben die Lernenden bessere Texte.",
+          "Bei Korrektur der Fehler durch die Lehrerin schreiben die Lernenden bessere Texte."
+        ],
+        "mistakes": [
+          {
+            "text": "Durch eine Korrektur der Fehler von der Lehrerin schreiben die Lernenden bessere Texte.",
+            "note": "»von der Lehrerin« klingt wie »die Fehler der Lehrerin«. Wer etwas tut, steht mit »durch«."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "Der wenn-Satz wird zu »durch« (oder »bei«) + Nomen: korrigieren → die Korrektur. Das Akkusativobjekt wird Genitiv (der Fehler), das Subjekt steht mit »durch« (durch die Lehrerin). Zweimal »durch« ist hier korrekt.",
+        "en": "The wenn-clause becomes \"durch\" (or \"bei\") + noun: korrigieren → die Korrektur. The object becomes a genitive (der Fehler), the subject follows \"durch\" (durch die Lehrerin). Two \"durch\" are fine here.",
+        "zh-Hant": "wenn 子句改成 durch（或 bei）＋名詞：korrigieren → die Korrektur。受詞變成 Genitiv（der Fehler），主詞用 durch 表示（durch die Lehrerin）。這裡出現兩次 durch 是正確的。"
+      }
+    },
+    {
+      "id": "de-nom-agic11xblatt-002",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "agic11xblatt",
+      "level": "C1",
+      "tags": [
+        "Regel 4",
+        "konzessiv",
+        "ohne",
+        "Verneinung",
+        "durch",
+        "Satz"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Selbst wenn Eltern Fehler nicht korrigieren, erwerben Kinder ihre Muttersprache dennoch vollständig.",
+        "hint": "selbst wenn … nicht → selbst ohne",
+        "translation": {
+          "en": "Even if parents don't correct mistakes, children still acquire their native language completely.",
+          "zh-Hant": "即使父母不糾正錯誤，孩子仍然能完整習得母語。"
+        },
+        "words": [
+          {
+            "text": "erwerben",
+            "meaning": "durch Lernen bekommen (z. B. eine Sprache)",
+            "pos": "Verb"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "Selbst ohne Korrektur der Fehler durch die Eltern erwerben Kinder ihre Muttersprache dennoch vollständig.",
+          "Selbst ohne Korrektur von Fehlern durch die Eltern erwerben Kinder ihre Muttersprache dennoch vollständig.",
+          "Selbst ohne Korrektur von Fehlern durch Eltern erwerben Kinder ihre Muttersprache dennoch vollständig.",
+          "Selbst ohne Korrektur der Fehler durch die Eltern ist der Erwerb der Muttersprache durch die Kinder vollständig."
+        ],
+        "mistakes": [
+          {
+            "text": "Selbst ohne keine Korrektur der Fehler durch die Eltern erwerben Kinder ihre Muttersprache dennoch vollständig.",
+            "note": "»ohne« verneint schon. »ohne keine« ist eine doppelte Verneinung."
+          },
+          {
+            "text": "Selbst bei keiner Korrektur der Fehler durch die Eltern erwerben Kinder ihre Muttersprache dennoch vollständig.",
+            "note": "Möglich gemeint, aber unidiomatisch: »wenn … nicht« wird zu »ohne«."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "»wenn … nicht« wird zu »ohne« + Akkusativ (meist ohne Artikel): selbst ohne Korrektur. Akkusativobjekt → Genitiv (der Fehler) oder von + Dativ (von Fehlern); Subjekt → durch die Eltern. Man kann auch den Hauptsatz nominalisieren: … ist der Erwerb der Muttersprache durch die Kinder vollständig.",
+        "en": "\"wenn … nicht\" becomes \"ohne\" + accusative (usually without an article): selbst ohne Korrektur. Object → genitive (der Fehler) or von + dative (von Fehlern); subject → durch die Eltern. The main clause can be nominalised too: … ist der Erwerb der Muttersprache durch die Kinder vollständig.",
+        "zh-Hant": "wenn … nicht 改成 ohne＋Akkusativ（通常不加冠詞）：selbst ohne Korrektur。受詞 → Genitiv（der Fehler）或 von＋Dativ（von Fehlern）；主詞 → durch die Eltern。主句也可以名詞化：… ist der Erwerb der Muttersprache durch die Kinder vollständig。"
+      }
+    },
+    {
+      "id": "de-nom-agic11xblatt-003",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "agic11xblatt",
+      "level": "C1",
+      "tags": [
+        "Regel 5",
+        "konditional",
+        "durch",
+        "Funktionsverbgefüge",
+        "Satz"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Wenn die Lehrerin den Lernenden hilft, verbessert sich die Aussprache.",
+        "hint": "Auch den Hauptsatz nominal: sich verbessern → eine Verbesserung tritt ein",
+        "translation": {
+          "en": "When the teacher helps the learners, their pronunciation improves.",
+          "zh-Hant": "老師幫助學生時，發音就會進步。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Durch die Hilfe der Lehrerin tritt eine Verbesserung der Aussprache ein.",
+          "Mit der Hilfe der Lehrerin tritt eine Verbesserung der Aussprache ein.",
+          "Mit Hilfe der Lehrerin tritt eine Verbesserung der Aussprache ein.",
+          "Mithilfe der Lehrerin tritt eine Verbesserung der Aussprache ein."
+        ],
+        "acceptable": [
+          {
+            "text": "Durch die Hilfe der Lehrerin verbessert sich die Aussprache.",
+            "note": "Korrekt, aber nur der wenn-Satz ist nominalisiert. Regel 5: Auch der Hauptsatz wird nominal – eine Verbesserung tritt ein."
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "Durch die Hilfe der Lehrerin tritt eine Verbesserung von der Aussprache ein.",
+            "note": "»die Aussprache« hat einen Artikel, also Genitiv: der Aussprache."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "wenn → durch + Nomen: helfen → die Hilfe; das Subjekt wird Genitiv (der Lehrerin). Im Hauptsatz wird das Verb zum Nomen mit Funktionsverb: sich verbessern → eine Verbesserung tritt ein.",
+        "en": "wenn → durch + noun: helfen → die Hilfe; the subject becomes a genitive (der Lehrerin). In the main clause the verb becomes a noun with a light verb: sich verbessern → eine Verbesserung tritt ein.",
+        "zh-Hant": "wenn → durch＋名詞：helfen → die Hilfe；主詞變成 Genitiv（der Lehrerin）。主句的動詞也改成名詞加功能動詞：sich verbessern → eine Verbesserung tritt ein。"
+      }
+    },
+    {
+      "id": "de-nom-agic11xblatt-004",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "agic11xblatt",
+      "level": "C1",
+      "tags": [
+        "Regel 5",
+        "Funktionsverbgefüge",
+        "Satz"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Daher nimmt man an, dass sich das Sprachvermögen auch in der Schule verbessert.",
+        "task": "Es besteht daher …",
+        "translation": {
+          "en": "It is therefore assumed that language ability also improves at school.",
+          "zh-Hant": "因此人們認為，語言能力在學校裡也會提升。"
+        },
+        "words": [
+          {
+            "text": "Sprachvermögen",
+            "lemma": "das Sprachvermögen",
+            "meaning": "Fähigkeit, eine Sprache zu benutzen",
+            "pos": "Nomen"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "Es besteht daher die Annahme, dass sich das Sprachvermögen auch in der Schule verbessert."
+        ],
+        "mistakes": [
+          {
+            "text": "Es besteht daher die Annahme, dass sich eine Verbesserung des Sprachvermögens auch in der Schule.",
+            "note": "Der dass-Satz braucht weiter ein Verb. Hier wird nur »man nimmt an« zu »es besteht die Annahme«."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "»man nimmt an« → »es besteht die Annahme« (annehmen → die Annahme, mit dem Funktionsverb »bestehen«). Der dass-Satz bleibt.",
+        "en": "\"man nimmt an\" → \"es besteht die Annahme\" (annehmen → die Annahme, with the light verb \"bestehen\"). The dass-clause stays.",
+        "zh-Hant": "man nimmt an → es besteht die Annahme（annehmen → die Annahme，搭配功能動詞 bestehen）。dass 子句不變。"
+      }
+    },
+    {
+      "id": "de-nom-agic11xblatt-005",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "agic11xblatt",
+      "level": "C1",
+      "tags": [
+        "Regel 5",
+        "konditional",
+        "Funktionsverbgefüge",
+        "Satz"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Daher nimmt man an, dass sich das Sprachvermögen auch in der Schule verbessert, wenn man die Anzahl der Sprachkontakte erhöht.",
+        "task": "Daher nimmt man an, dass eine Verbesserung …",
+        "hint": "wenn-Satz → mit / bei + Nomen; sich verbessern → eine Verbesserung tritt ein",
+        "translation": {
+          "en": "It is therefore assumed that language ability also improves at school when the number of language contacts is increased.",
+          "zh-Hant": "因此人們認為，增加接觸語言的機會，在學校裡語言能力也會提升。"
+        },
+        "words": [
+          {
+            "text": "Sprachvermögen",
+            "lemma": "das Sprachvermögen",
+            "meaning": "Fähigkeit, eine Sprache zu benutzen",
+            "pos": "Nomen"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "Daher nimmt man an, dass eine Verbesserung des Sprachvermögens auch in der Schule mit Erhöhung der Anzahl der Sprachkontakte eintritt.",
+          "Daher nimmt man an, dass eine Verbesserung des Sprachvermögens mit Erhöhung der Anzahl der Sprachkontakte auch in der Schule eintritt.",
+          "Daher nimmt man an, dass eine Verbesserung des Sprachvermögens auch in der Schule mit Erhöhung der Anzahl von Sprachkontakten eintritt.",
+          "Daher nimmt man an, dass eine Verbesserung des Sprachvermögens mit Erhöhung der Anzahl von Sprachkontakten auch in der Schule eintritt.",
+          "Daher nimmt man an, dass eine Verbesserung des Sprachvermögens auch in der Schule mit der Erhöhung der Anzahl der Sprachkontakte eintritt.",
+          "Daher nimmt man an, dass eine Verbesserung des Sprachvermögens mit der Erhöhung der Anzahl der Sprachkontakte auch in der Schule eintritt.",
+          "Daher nimmt man an, dass eine Verbesserung des Sprachvermögens auch in der Schule mit der Erhöhung der Anzahl von Sprachkontakten eintritt.",
+          "Daher nimmt man an, dass eine Verbesserung des Sprachvermögens mit der Erhöhung der Anzahl von Sprachkontakten auch in der Schule eintritt.",
+          "Daher nimmt man an, dass eine Verbesserung des Sprachvermögens auch in der Schule mit einer Erhöhung der Anzahl der Sprachkontakte eintritt.",
+          "Daher nimmt man an, dass eine Verbesserung des Sprachvermögens mit einer Erhöhung der Anzahl der Sprachkontakte auch in der Schule eintritt.",
+          "Daher nimmt man an, dass eine Verbesserung des Sprachvermögens auch in der Schule mit einer Erhöhung der Anzahl von Sprachkontakten eintritt.",
+          "Daher nimmt man an, dass eine Verbesserung des Sprachvermögens mit einer Erhöhung der Anzahl von Sprachkontakten auch in der Schule eintritt.",
+          "Daher nimmt man an, dass eine Verbesserung des Sprachvermögens auch in der Schule bei Erhöhung der Anzahl der Sprachkontakte eintritt.",
+          "Daher nimmt man an, dass eine Verbesserung des Sprachvermögens bei Erhöhung der Anzahl der Sprachkontakte auch in der Schule eintritt.",
+          "Daher nimmt man an, dass eine Verbesserung des Sprachvermögens auch in der Schule bei Erhöhung der Anzahl von Sprachkontakten eintritt.",
+          "Daher nimmt man an, dass eine Verbesserung des Sprachvermögens bei Erhöhung der Anzahl von Sprachkontakten auch in der Schule eintritt.",
+          "Daher nimmt man an, dass eine Verbesserung des Sprachvermögens auch in der Schule bei der Erhöhung der Anzahl der Sprachkontakte eintritt.",
+          "Daher nimmt man an, dass eine Verbesserung des Sprachvermögens bei der Erhöhung der Anzahl der Sprachkontakte auch in der Schule eintritt.",
+          "Daher nimmt man an, dass eine Verbesserung des Sprachvermögens auch in der Schule bei der Erhöhung der Anzahl von Sprachkontakten eintritt.",
+          "Daher nimmt man an, dass eine Verbesserung des Sprachvermögens bei der Erhöhung der Anzahl von Sprachkontakten auch in der Schule eintritt.",
+          "Daher nimmt man an, dass eine Verbesserung des Sprachvermögens auch in der Schule bei einer Erhöhung der Anzahl der Sprachkontakte eintritt.",
+          "Daher nimmt man an, dass eine Verbesserung des Sprachvermögens bei einer Erhöhung der Anzahl der Sprachkontakte auch in der Schule eintritt.",
+          "Daher nimmt man an, dass eine Verbesserung des Sprachvermögens auch in der Schule bei einer Erhöhung der Anzahl von Sprachkontakten eintritt.",
+          "Daher nimmt man an, dass eine Verbesserung des Sprachvermögens bei einer Erhöhung der Anzahl von Sprachkontakten auch in der Schule eintritt."
+        ],
+        "acceptable": [
+          {
+            "text": "Daher nimmt man an, dass eine Verbesserung des Sprachvermögens auch in der Schule eintritt, wenn man die Anzahl der Sprachkontakte erhöht.",
+            "note": "Ein guter Zwischenschritt, aber der wenn-Satz ist noch Verbalstil: mit / bei Erhöhung der Anzahl der Sprachkontakte."
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "Daher nimmt man an, dass eine Verbesserung des Sprachvermögens auch in der Schule durch Erhöhung der Anzahl der Sprachkontakte eintritt.",
+            "note": "Inhaltlich möglich, aber der wenn-Satz nennt eine Bedingung, kein Mittel: mit / bei Erhöhung."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "Im dass-Satz: sich verbessern → eine Verbesserung tritt ein, das Subjekt wird Genitiv (des Sprachvermögens). Der wenn-Satz wird zu »mit« oder »bei« + Nomen: erhöhen → die Erhöhung der Anzahl der Sprachkontakte / von Sprachkontakten.",
+        "en": "In the dass-clause: sich verbessern → eine Verbesserung tritt ein, the subject becomes a genitive (des Sprachvermögens). The wenn-clause becomes \"mit\" or \"bei\" + noun: erhöhen → die Erhöhung der Anzahl der Sprachkontakte / von Sprachkontakten.",
+        "zh-Hant": "dass 子句裡：sich verbessern → eine Verbesserung tritt ein，主詞變成 Genitiv（des Sprachvermögens）。wenn 子句改成 mit 或 bei＋名詞：erhöhen → die Erhöhung der Anzahl der Sprachkontakte／von Sprachkontakten。"
+      }
+    },
+    {
+      "id": "de-nom-agic11xblatt-006",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "agic11xblatt",
+      "level": "C1",
+      "tags": [
+        "Nominale Gruppe",
+        "Genitiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Man betreut die Kinder.",
+        "task": "Nominale Gruppe (ohne Artikel)",
+        "translation": {
+          "en": "The children are looked after.",
+          "zh-Hant": "有人照顧孩子。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Betreuung der Kinder"
+        ],
+        "acceptable": [
+          {
+            "text": "die betreuung der Kinder",
+            "note": "Korrekt, aber in Stichpunkten und Überschriften fällt der Artikel meist weg."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "»man« fällt weg; betreuen → die Betreuung; das Akkusativobjekt wird Genitiv: der Kinder.",
+        "en": "\"man\" disappears; betreuen → die Betreuung; the object becomes a genitive: der Kinder.",
+        "zh-Hant": "man 省略；betreuen → die Betreuung；受詞變成 Genitiv：der Kinder。"
+      }
+    },
+    {
+      "id": "de-nom-agic11xblatt-007",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "agic11xblatt",
+      "level": "C1",
+      "tags": [
+        "Nominale Gruppe",
+        "Regel 1",
+        "reflexiv",
+        "n-Deklination"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Der Mensch verhält sich.",
+        "task": "Nominale Gruppe (ohne Artikel)",
+        "translation": {
+          "en": "Man behaves.",
+          "zh-Hant": "人的行為表現。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Verhalten des Menschen"
+        ],
+        "acceptable": [
+          {
+            "text": "das verhalten des Menschen",
+            "note": "Korrekt, aber in Stichpunkten und Überschriften fällt der Artikel meist weg."
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "Verhalten des Mensches",
+            "note": "»Mensch« ist ein n-Nomen: des Menschen."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "Verb ohne Dativ-/Akkusativergänzung: das Subjekt wird Genitiv. sich verhalten → das Verhalten; »Mensch« → des Menschen (n-Deklination).",
+        "en": "Verb without a dative/accusative object: the subject becomes a genitive. sich verhalten → das Verhalten; \"Mensch\" → des Menschen (weak noun).",
+        "zh-Hant": "沒有 Dativ／Akkusativ 受詞的動詞：主詞變成 Genitiv。sich verhalten → das Verhalten；Mensch → des Menschen（n 變格）。"
+      }
+    },
+    {
+      "id": "de-nom-agic11xblatt-008",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "agic11xblatt",
+      "level": "C1",
+      "tags": [
+        "Nominale Gruppe",
+        "transitiv",
+        "durch",
+        "n-Deklination"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Der Mensch wertet aus.",
+        "task": "Nominale Gruppe (ohne Artikel)",
+        "translation": {
+          "en": "Man evaluates.",
+          "zh-Hant": "由人進行分析評估。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Auswertung durch den Menschen"
+        ],
+        "acceptable": [
+          {
+            "text": "die auswertung durch den Menschen",
+            "note": "Korrekt, aber in Stichpunkten und Überschriften fällt der Artikel meist weg."
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "Auswertung des Menschen",
+            "note": "Bei einem transitiven Verb klingt der Genitiv wie das Objekt (der Mensch wird ausgewertet). Das Subjekt steht mit »durch«."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "Bei transitiven Verben (Verb + Akkusativ) steht das Subjekt mit »durch«, auch wenn kein Objekt genannt ist – sonst hielte man es für das Objekt.",
+        "en": "With transitive verbs (verb + accusative), the subject follows \"durch\", even when no object is named; otherwise it would read as the object.",
+        "zh-Hant": "及物動詞（動詞＋Akkusativ）的主詞要用 durch，即使沒有說出受詞也一樣，否則會被誤解成受詞。"
+      }
+    },
+    {
+      "id": "de-nom-agic11xblatt-009",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "agic11xblatt",
+      "level": "C1",
+      "tags": [
+        "Nominale Gruppe",
+        "Regel 7",
+        "Adjektiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Man verhält sich rational.",
+        "task": "Nominale Gruppe (ohne Artikel)",
+        "translation": {
+          "en": "One behaves rationally.",
+          "zh-Hant": "人們理性地行事。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "rationales Verhalten"
+        ],
+        "acceptable": [
+          {
+            "text": "das rationales Verhalten",
+            "note": "Korrekt, aber in Stichpunkten und Überschriften fällt der Artikel meist weg."
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "rational Verhalten",
+            "note": "Vor dem Nomen braucht das Adjektiv eine Endung: rationales Verhalten."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "Das adverbial gebrauchte Adjektiv wird zum Attribut vor dem Nomen; ohne Artikel mit starker Endung: rationales Verhalten.",
+        "en": "The adjective used as an adverb becomes an attribute before the noun; without an article it takes the strong ending: rationales Verhalten.",
+        "zh-Hant": "當副詞用的形容詞變成名詞前的修飾語；沒有冠詞時用強變化詞尾：rationales Verhalten。"
+      }
+    },
+    {
+      "id": "de-nom-agic11xblatt-010",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "agic11xblatt",
+      "level": "C1",
+      "tags": [
+        "Nominale Gruppe",
+        "Regel 2",
+        "Genitiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Man wertet alle Informationen aus.",
+        "task": "Nominale Gruppe (ohne Artikel)",
+        "translation": {
+          "en": "All information is evaluated.",
+          "zh-Hant": "所有資訊都經過分析。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Auswertung aller Informationen"
+        ],
+        "acceptable": [
+          {
+            "text": "die auswertung aller Informationen",
+            "note": "Korrekt, aber in Stichpunkten und Überschriften fällt der Artikel meist weg."
+          },
+          {
+            "text": "Auswertung von allen Informationen",
+            "note": "Verständlich, aber mit Artikelwort (alle) steht der Genitiv: aller Informationen."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "Akkusativobjekt mit Artikelwort oder Adjektiv → Genitiv: alle Informationen → aller Informationen.",
+        "en": "Accusative object with a determiner or adjective → genitive: alle Informationen → aller Informationen.",
+        "zh-Hant": "有冠詞類詞或形容詞的 Akkusativ 受詞 → Genitiv：alle Informationen → aller Informationen。"
+      }
+    },
+    {
+      "id": "de-nom-agic11xblatt-011",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "agic11xblatt",
+      "level": "C1",
+      "tags": [
+        "Nominale Gruppe",
+        "Regel 2",
+        "von + Dativ",
+        "Nomen ohne Artikel"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Man wägt Kosten und Nutzen ab.",
+        "task": "Nominale Gruppe (ohne Artikel)",
+        "translation": {
+          "en": "One weighs costs and benefits.",
+          "zh-Hant": "權衡成本與效益。"
+        },
+        "words": [
+          {
+            "text": "wägt",
+            "lemma": "abwägen",
+            "meaning": "genau vergleichen und beurteilen",
+            "pos": "Verb"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "Abwägung von Kosten und Nutzen"
+        ],
+        "acceptable": [
+          {
+            "text": "die abwägung von Kosten und Nutzen",
+            "note": "Korrekt, aber in Stichpunkten und Überschriften fällt der Artikel meist weg."
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "Abwägung Kosten und Nutzens",
+            "note": "Ohne Artikelwort und Adjektiv ist der Genitiv nicht erkennbar: von + Dativ."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "Akkusativobjekt ohne Artikelwort / Adjektiv → von + Dativ: Abwägung von Kosten und Nutzen.",
+        "en": "Accusative object without determiner / adjective → von + dative: Abwägung von Kosten und Nutzen.",
+        "zh-Hant": "沒有冠詞類詞或形容詞的 Akkusativ 受詞 → von＋Dativ：Abwägung von Kosten und Nutzen。"
+      }
+    },
+    {
+      "id": "de-nom-agic11xblatt-012",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "agic11xblatt",
+      "level": "C1",
+      "tags": [
+        "Nominale Gruppe",
+        "temporal",
+        "nach",
+        "von + Dativ"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Man entscheidet, nachdem man Kosten und Nutzen abgewogen hat.",
+        "task": "Nominale Gruppe (ohne Artikel)",
+        "translation": {
+          "en": "One decides after weighing costs and benefits.",
+          "zh-Hant": "權衡成本與效益之後再做決定。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Entscheidung nach Abwägung von Kosten und Nutzen"
+        ],
+        "acceptable": [
+          {
+            "text": "die entscheidung nach Abwägung von Kosten und Nutzen",
+            "note": "Korrekt, aber in Stichpunkten und Überschriften fällt der Artikel meist weg."
+          },
+          {
+            "text": "Entscheidung nach der Abwägung von Kosten und Nutzen",
+            "note": "Korrekt; in der nominalen Gruppe fällt der Artikel nach »nach« aber oft weg."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "Verb + Nebensatz: Hauptverb → Nomen (Entscheidung), Konjunktion → Präposition (nachdem → nach), Nebensatzverb → Nomen (Abwägung) + von + Nomen.",
+        "en": "Verb + clause: main verb → noun (Entscheidung), conjunction → preposition (nachdem → nach), clause verb → noun (Abwägung) + von + noun.",
+        "zh-Hant": "動詞＋子句：主要動詞 → 名詞（Entscheidung），連接詞 → 介系詞（nachdem → nach），子句動詞 → 名詞（Abwägung）＋von＋名詞。"
+      }
+    },
+    {
+      "id": "de-nom-agic11xblatt-013",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "agic11xblatt",
+      "level": "C1",
+      "tags": [
+        "Nominale Gruppe",
+        "von + Dativ",
+        "Präposition",
+        "Nomen ohne Artikel"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Geld beeinflusst die Entscheidung.",
+        "task": "Nominale Gruppe (ohne Artikel)",
+        "translation": {
+          "en": "Money influences the decision.",
+          "zh-Hant": "金錢影響決定。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Einfluss von Geld auf die Entscheidung"
+        ],
+        "acceptable": [
+          {
+            "text": "der einfluss von Geld auf die Entscheidung",
+            "note": "Korrekt, aber in Stichpunkten und Überschriften fällt der Artikel meist weg."
+          },
+          {
+            "text": "Beeinflussung der Entscheidung durch Geld",
+            "note": "Korrekt, aber gesucht ist die Form mit »Einfluss … auf« und »von« für das unbestimmte Subjekt."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "Das unbestimmte Subjekt (Nomen ohne Artikel) wird mit »von« angeschlossen: Einfluss von Geld. beeinflussen → der Einfluss auf + Akkusativ.",
+        "en": "The indefinite subject (noun without article) is attached with \"von\": Einfluss von Geld. beeinflussen → der Einfluss auf + accusative.",
+        "zh-Hant": "不確定的主詞（沒有冠詞的名詞）用 von 連接：Einfluss von Geld。beeinflussen → der Einfluss auf＋Akkusativ。"
+      }
+    },
+    {
+      "id": "de-nom-agic11xblatt-014",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "agic11xblatt",
+      "level": "C1",
+      "tags": [
+        "Nominale Gruppe",
+        "durch",
+        "von oder durch"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Tagesmütter betreuen die Kinder.",
+        "task": "Nominale Gruppe (ohne Artikel)",
+        "translation": {
+          "en": "Childminders look after the children.",
+          "zh-Hant": "保母照顧孩子。"
+        },
+        "words": [
+          {
+            "text": "Tagesmütter",
+            "lemma": "die Tagesmutter",
+            "meaning": "Frau, die tagsüber fremde Kinder betreut",
+            "pos": "Nomen"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "Betreuung der Kinder durch Tagesmütter"
+        ],
+        "acceptable": [
+          {
+            "text": "die betreuung der Kinder durch Tagesmütter",
+            "note": "Korrekt, aber in Stichpunkten und Überschriften fällt der Artikel meist weg."
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "Betreuung der Kinder von Tagesmüttern",
+            "note": "Das hieße: Es werden die Kinder der Tagesmütter betreut. Wer handelt, steht mit »durch«."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "Mit »durch« gibt man an, wer der handelnde Teil ist. »von Tagesmüttern« würde hier zu »Kinder« gehören (die Kinder der Tagesmütter).",
+        "en": "\"durch\" marks who is acting. \"von Tagesmüttern\" would attach to \"Kinder\" here (the childminders' children).",
+        "zh-Hant": "durch 表示動作的執行者。這裡如果用 von Tagesmüttern，會變成修飾 Kinder（保母自己的孩子）。"
+      }
+    },
+    {
+      "id": "de-nom-agic11xblatt-015",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "agic11xblatt",
+      "level": "C1",
+      "tags": [
+        "Nominale Gruppe",
+        "durch",
+        "von oder durch"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Kontrollstudien bestätigen die Ergebnisse.",
+        "task": "Nominale Gruppe (ohne Artikel)",
+        "translation": {
+          "en": "Control studies confirm the results.",
+          "zh-Hant": "對照研究證實了這些結果。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Bestätigung der Ergebnisse durch Kontrollstudien"
+        ],
+        "acceptable": [
+          {
+            "text": "die bestätigung der Ergebnisse durch Kontrollstudien",
+            "note": "Korrekt, aber in Stichpunkten und Überschriften fällt der Artikel meist weg."
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "Bestätigung der Ergebnisse von Kontrollstudien",
+            "note": "Das hieße: Die Ergebnisse der Kontrollstudien werden bestätigt. Wer handelt, steht mit »durch«."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "»durch Kontrollstudien« = die Studien bestätigen. »von Kontrollstudien« würde zu »Ergebnisse« gehören (die Ergebnisse der Kontrollstudien).",
+        "en": "\"durch Kontrollstudien\" = the studies confirm. \"von Kontrollstudien\" would attach to \"Ergebnisse\" (the results of the control studies).",
+        "zh-Hant": "durch Kontrollstudien＝研究去證實。如果用 von Kontrollstudien，會變成修飾 Ergebnisse（對照研究的結果）。"
+      }
+    },
+    {
+      "id": "de-nom-agic11xblatt-016",
+      "language": "de",
+      "topic": "nominalisierung-praepositionen",
+      "source": "agic11xblatt",
+      "level": "C1",
+      "tags": [
+        "Präposition",
+        "Akkusativ"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "sich um etwas bemühen",
+        "translation": {
+          "en": "to make an effort to get something",
+          "zh-Hant": "努力爭取某事"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Bemühung um etwas",
+          "das Bemühen um etwas",
+          "die Bemühungen um etwas"
+        ],
+        "mistakes": [
+          {
+            "text": "die Mühe um etwas",
+            "note": "»die Mühe« gehört zu »sich Mühe geben«. Zu »sich bemühen um« gehört »die Bemühung / das Bemühen um«."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "sich bemühen um + Akkusativ → die Bemühung (oft Plural: die Bemühungen) / das Bemühen um + Akkusativ.",
+        "en": "sich bemühen um + accusative → die Bemühung (often plural: die Bemühungen) / das Bemühen um + accusative.",
+        "zh-Hant": "sich bemühen um＋Akkusativ → die Bemühung（常用複數 die Bemühungen）／das Bemühen um＋Akkusativ。"
+      }
+    },
+    {
+      "id": "de-nom-agic11xblatt-017",
+      "language": "de",
+      "topic": "nominalisierung-praepositionen",
+      "source": "agic11xblatt",
+      "level": "C1",
+      "tags": [
+        "Präposition",
+        "Dativ"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "sich mit etwas beschäftigen",
+        "translation": {
+          "en": "to deal with something",
+          "zh-Hant": "從事、研究某事"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Beschäftigung mit etwas"
+        ]
+      },
+      "explanation": {
+        "de": "sich beschäftigen mit + Dativ → die Beschäftigung mit + Dativ.",
+        "en": "sich beschäftigen mit + dative → die Beschäftigung mit + dative.",
+        "zh-Hant": "sich beschäftigen mit＋Dativ → die Beschäftigung mit＋Dativ。"
+      }
+    },
+    {
+      "id": "de-nom-agic11xblatt-018",
+      "language": "de",
+      "topic": "nominalisierung-praepositionen",
+      "source": "agic11xblatt",
+      "level": "C1",
+      "tags": [
+        "Präposition",
+        "Akkusativ"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "sich für etwas entscheiden",
+        "translation": {
+          "en": "to decide in favour of something",
+          "zh-Hant": "決定選擇某事"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Entscheidung für etwas"
+        ]
+      },
+      "explanation": {
+        "de": "sich entscheiden für + Akkusativ → die Entscheidung für + Akkusativ (ebenso: gegen).",
+        "en": "sich entscheiden für + accusative → die Entscheidung für + accusative (likewise: gegen).",
+        "zh-Hant": "sich entscheiden für＋Akkusativ → die Entscheidung für＋Akkusativ（gegen 也一樣）。"
+      }
+    },
+    {
+      "id": "de-nom-agic11xblatt-019",
+      "language": "de",
+      "topic": "nominalisierung-praepositionen",
+      "source": "agic11xblatt",
+      "level": "C1",
+      "tags": [
+        "Präposition",
+        "Akkusativ"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "sich gegen etwas entscheiden",
+        "translation": {
+          "en": "to decide against something",
+          "zh-Hant": "決定不選擇某事"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Entscheidung gegen etwas"
+        ]
+      },
+      "explanation": {
+        "de": "sich entscheiden gegen + Akkusativ → die Entscheidung gegen + Akkusativ.",
+        "en": "sich entscheiden gegen + accusative → die Entscheidung gegen + accusative.",
+        "zh-Hant": "sich entscheiden gegen＋Akkusativ → die Entscheidung gegen＋Akkusativ。"
+      }
+    },
+    {
+      "id": "de-nom-agic11xblatt-020",
+      "language": "de",
+      "topic": "nominalisierung-praepositionen",
+      "source": "agic11xblatt",
+      "level": "C1",
+      "tags": [
+        "Präposition",
+        "Akkusativ"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "über etwas nachdenken",
+        "translation": {
+          "en": "to think about something",
+          "zh-Hant": "思考某事"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "das Nachdenken über etwas"
+        ],
+        "acceptable": [
+          {
+            "text": "die Überlegung zu etwas",
+            "note": "Sinngemäß richtig, aber ein anderes Verb (überlegen). Zu »nachdenken«: das Nachdenken über."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "nachdenken über + Akkusativ → das Nachdenken über + Akkusativ (substantivierter Infinitiv).",
+        "en": "nachdenken über + accusative → das Nachdenken über + accusative (nominalised infinitive).",
+        "zh-Hant": "nachdenken über＋Akkusativ → das Nachdenken über＋Akkusativ（名詞化不定式）。"
+      }
+    },
+    {
+      "id": "de-nom-agic11xblatt-021",
+      "language": "de",
+      "topic": "nominalisierung-praepositionen",
+      "source": "agic11xblatt",
+      "level": "C1",
+      "tags": [
+        "Präposition",
+        "Akkusativ"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "an etwas denken",
+        "translation": {
+          "en": "to think of something",
+          "zh-Hant": "想到某事"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "der Gedanke an etwas",
+          "das Denken an etwas"
+        ],
+        "mistakes": [
+          {
+            "text": "der Gedanke über etwas",
+            "note": "Die Präposition bleibt: denken an → der Gedanke an."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "denken an + Akkusativ → der Gedanke an + Akkusativ (auch: das Denken an). Andere Nomen zu »denken«: das Gedenken (Erinnerung an Tote), die Bedenken (Zweifel, Plural).",
+        "en": "denken an + accusative → der Gedanke an + accusative (also das Denken an). Other nouns from \"denken\": das Gedenken (remembrance of the dead), die Bedenken (doubts, plural).",
+        "zh-Hant": "denken an＋Akkusativ → der Gedanke an＋Akkusativ（也可說 das Denken an）。denken 的其他名詞：das Gedenken（悼念）、die Bedenken（疑慮，複數）。"
+      }
+    },
+    {
+      "id": "de-nom-agic11xblatt-022",
+      "language": "de",
+      "topic": "nominalisierung-praepositionen",
+      "source": "agic11xblatt",
+      "level": "C1",
+      "tags": [
+        "Präposition",
+        "Dativ"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "mit jemandem sprechen",
+        "translation": {
+          "en": "to talk to someone",
+          "zh-Hant": "跟某人談話"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "das Gespräch mit jemandem"
+        ]
+      },
+      "explanation": {
+        "de": "sprechen mit + Dativ → das Gespräch mit + Dativ. Das Nomen kommt hier nicht direkt vom Verb (sprechen → das Gespräch).",
+        "en": "sprechen mit + dative → das Gespräch mit + dative. The noun is not formed directly from the verb here (sprechen → das Gespräch).",
+        "zh-Hant": "sprechen mit＋Dativ → das Gespräch mit＋Dativ。這裡的名詞不是直接由動詞變來的（sprechen → das Gespräch）。"
+      }
+    },
+    {
+      "id": "de-nom-agic11xblatt-023",
+      "language": "de",
+      "topic": "nominalisierung-praepositionen",
+      "source": "agic11xblatt",
+      "level": "C1",
+      "tags": [
+        "Präposition",
+        "Akkusativ"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "über etwas sprechen",
+        "translation": {
+          "en": "to talk about something",
+          "zh-Hant": "談論某事"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "das Gespräch über etwas"
+        ]
+      },
+      "explanation": {
+        "de": "sprechen über + Akkusativ → das Gespräch über + Akkusativ. (sprechen von + Dativ geht auch, hat aber kein passendes Nomen.)",
+        "en": "sprechen über + accusative → das Gespräch über + accusative. (\"sprechen von\" + dative also exists, but has no matching noun.)",
+        "zh-Hant": "sprechen über＋Akkusativ → das Gespräch über＋Akkusativ。（也有 sprechen von＋Dativ，但沒有對應的名詞。）"
+      }
+    },
+    {
+      "id": "de-nom-agic11xblatt-024",
+      "language": "de",
+      "topic": "nominalisierung-praepositionen",
+      "source": "agic11xblatt",
+      "level": "C1",
+      "tags": [
+        "Präposition",
+        "Dativ"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "an etwas teilnehmen",
+        "translation": {
+          "en": "to take part in something",
+          "zh-Hant": "參加某事"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Teilnahme an etwas"
+        ]
+      },
+      "explanation": {
+        "de": "teilnehmen an + Dativ → die Teilnahme an + Dativ (nehmen → die Nahme, nur in Komposita).",
+        "en": "teilnehmen an + dative → die Teilnahme an + dative (nehmen → -nahme, only in compounds).",
+        "zh-Hant": "teilnehmen an＋Dativ → die Teilnahme an＋Dativ（nehmen → -nahme，只用在複合詞裡）。"
+      }
+    },
+    {
+      "id": "de-nom-agic11xblatt-025",
+      "language": "de",
+      "topic": "nominalisierung-praepositionen",
+      "source": "agic11xblatt",
+      "level": "C1",
+      "tags": [
+        "Präposition",
+        "Dativ"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "an etwas zweifeln",
+        "translation": {
+          "en": "to doubt something",
+          "zh-Hant": "懷疑某事"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "der Zweifel an etwas"
+        ]
+      },
+      "explanation": {
+        "de": "zweifeln an + Dativ → der Zweifel an + Dativ (z. B. Die Polizei zweifelt an dem Mann → der Zweifel der Polizei an dem Mann).",
+        "en": "zweifeln an + dative → der Zweifel an + dative (e.g. Die Polizei zweifelt an dem Mann → der Zweifel der Polizei an dem Mann).",
+        "zh-Hant": "zweifeln an＋Dativ → der Zweifel an＋Dativ（例：Die Polizei zweifelt an dem Mann → der Zweifel der Polizei an dem Mann）。"
+      }
+    },
+    {
+      "id": "de-nom-agic11xblatt-026",
+      "language": "de",
+      "topic": "nominalisierung-praepositionen",
+      "source": "agic11xblatt",
+      "level": "C1",
+      "tags": [
+        "Präposition",
+        "Dativ",
+        "Dativergänzung"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "jemandem bei etwas helfen",
+        "translation": {
+          "en": "to help someone with something",
+          "zh-Hant": "幫某人做某事"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Hilfe bei etwas"
+        ],
+        "acceptable": [
+          {
+            "text": "die Hilfe für jemanden bei etwas",
+            "note": "Korrekt: Die Dativergänzung (jemandem) wird zu »für« + Akkusativ. Gefragt war nur das Nomen mit »bei«."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "helfen bei + Dativ → die Hilfe bei + Dativ (z. B. Ich helfe dir beim Kochen → meine Hilfe beim Kochen).",
+        "en": "helfen bei + dative → die Hilfe bei + dative (e.g. Ich helfe dir beim Kochen → meine Hilfe beim Kochen).",
+        "zh-Hant": "helfen bei＋Dativ → die Hilfe bei＋Dativ（例：Ich helfe dir beim Kochen → meine Hilfe beim Kochen）。"
+      }
+    },
+    {
+      "id": "de-nom-agic11xblatt-027",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "agic11xblatt",
+      "level": "C1",
+      "tags": [
+        "Verbalisieren (umgekehrt)",
+        "Adjektiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Kleine Kinder erwerben die Muttersprache schon sehr früh.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "Young children acquire their native language very early.",
+          "zh-Hant": "幼兒很早就習得母語。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "der frühkindliche Erwerb der Muttersprache",
+          "der Erwerb der Muttersprache in der frühen Kindheit"
+        ],
+        "acceptable": [
+          {
+            "text": "der frühe Erwerb der Muttersprache durch kleine Kinder",
+            "note": "Korrekt, aber das Adjektiv »frühkindlich« fasst »kleine Kinder« und »früh« in einem Wort zusammen."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "erwerben → der Erwerb; die Muttersprache → der Muttersprache (Genitiv). »früh« + »als kleines Kind« → das Adjektiv frühkindlich.",
+        "en": "erwerben → der Erwerb; die Muttersprache → der Muttersprache (genitive). \"früh\" + \"als kleines Kind\" → the adjective frühkindlich.",
+        "zh-Hant": "erwerben → der Erwerb；die Muttersprache → der Muttersprache（Genitiv）。früh＋als kleines Kind → 形容詞 frühkindlich。"
+      }
+    },
+    {
+      "id": "de-nom-agic11xblatt-028",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "agic11xblatt",
+      "level": "C1",
+      "tags": [
+        "Verbalisieren (umgekehrt)",
+        "temporal",
+        "bei"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Das Unbewusste ist wichtig, wenn man eine Sprache erwirbt.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "The unconscious is important when acquiring a language.",
+          "zh-Hant": "習得語言時，潛意識很重要。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Wichtigkeit des Unbewussten beim Spracherwerb",
+          "die Bedeutung des Unbewussten beim Spracherwerb",
+          "die Wichtigkeit des Unbewussten beim Erwerb einer Sprache"
+        ],
+        "mistakes": [
+          {
+            "text": "die Wichtigkeit des Unbewusstes beim Spracherwerb",
+            "note": "»das Unbewusste« ist ein nominalisiertes Adjektiv: des Unbewussten."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "wichtig sein → die Wichtigkeit; »das Unbewusste« (nominalisiertes Adjektiv) → des Unbewussten. wenn (zeitgleich) → bei: beim Spracherwerb.",
+        "en": "wichtig sein → die Wichtigkeit; \"das Unbewusste\" (nominalised adjective) → des Unbewussten. wenn (at the same time) → bei: beim Spracherwerb.",
+        "zh-Hant": "wichtig sein → die Wichtigkeit；das Unbewusste（名詞化形容詞）→ des Unbewussten。wenn（同時）→ bei：beim Spracherwerb。"
+      }
+    },
+    {
+      "id": "de-nom-agic11xblatt-029",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "agic11xblatt",
+      "level": "C1",
+      "tags": [
+        "Verbalisieren (umgekehrt)"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Spielen ist ein Teil des Lernprozesses.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "Playing is part of the learning process.",
+          "zh-Hant": "遊戲是學習過程的一部分。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "das Spiel als Teil des Lernprozesses",
+          "das Spielen als Teil des Lernprozesses"
+        ]
+      },
+      "explanation": {
+        "de": "Aus »X ist Teil von Y« wird »X als Teil von Y«: spielen → das Spiel / das Spielen.",
+        "en": "\"X ist Teil von Y\" becomes \"X als Teil von Y\": spielen → das Spiel / das Spielen.",
+        "zh-Hant": "X ist Teil von Y 變成 X als Teil von Y：spielen → das Spiel／das Spielen。"
+      }
+    },
+    {
+      "id": "de-nom-agic11xblatt-030",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "agic11xblatt",
+      "level": "C1",
+      "tags": [
+        "Verbalisieren (umgekehrt)",
+        "Regel 2",
+        "Regel 4",
+        "durch"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Kunst fördert die Kommunikationsfähigkeit.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "Art promotes communication skills.",
+          "zh-Hant": "藝術能促進溝通能力。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Förderung der Kommunikationsfähigkeit durch Kunst"
+        ],
+        "mistakes": [
+          {
+            "text": "die Förderung der Kommunikationsfähigkeit von Kunst",
+            "note": "Das hieße »die Kommunikationsfähigkeit der Kunst«. Wer oder was handelt, steht mit »durch«."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "fördern → die Förderung; Akkusativobjekt → Genitiv (der Kommunikationsfähigkeit); Subjekt → durch Kunst.",
+        "en": "fördern → die Förderung; object → genitive (der Kommunikationsfähigkeit); subject → durch Kunst.",
+        "zh-Hant": "fördern → die Förderung；受詞 → Genitiv（der Kommunikationsfähigkeit）；主詞 → durch Kunst。"
+      }
+    },
+    {
+      "id": "de-nom-agic11xblatt-031",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "agic11xblatt",
+      "level": "C1",
+      "tags": [
+        "Verbalisieren (umgekehrt)",
+        "modal",
+        "durch",
+        "Präposition"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Wenn man sich mit Kunst auseinandersetzt, erweitert sich der Erfahrungshorizont.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "Engaging with art broadens one's horizons.",
+          "zh-Hant": "接觸、探討藝術能拓展視野。"
+        },
+        "words": [
+          {
+            "text": "auseinandersetzt",
+            "lemma": "sich auseinandersetzen mit",
+            "meaning": "sich intensiv und kritisch mit etwas beschäftigen",
+            "pos": "Verb"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "die Erweiterung des Erfahrungshorizonts durch die Auseinandersetzung mit Kunst",
+          "die Erweiterung des Erfahrungshorizontes durch die Auseinandersetzung mit Kunst",
+          "die Erweiterung des Erfahrungshorizonts durch eine Auseinandersetzung mit Kunst",
+          "die Erweiterung des Erfahrungshorizontes durch eine Auseinandersetzung mit Kunst"
+        ]
+      },
+      "explanation": {
+        "de": "sich erweitern → die Erweiterung (das Subjekt wird Genitiv). Der wenn-Satz nennt das Mittel → durch: sich auseinandersetzen mit → die Auseinandersetzung mit.",
+        "en": "sich erweitern → die Erweiterung (the subject becomes a genitive). The wenn-clause names the means → durch: sich auseinandersetzen mit → die Auseinandersetzung mit.",
+        "zh-Hant": "sich erweitern → die Erweiterung（主詞變成 Genitiv）。wenn 子句表示方法 → durch：sich auseinandersetzen mit → die Auseinandersetzung mit。"
+      }
+    },
+    {
+      "id": "de-nom-agic11xblatt-032",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "agic11xblatt",
+      "level": "C1",
+      "tags": [
+        "Verbalisieren (umgekehrt)",
+        "Regel 2",
+        "Genitiv",
+        "Adjektiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Man berücksichtigt die emotionalen Aspekte von Sprache.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "The emotional aspects of language are taken into account.",
+          "zh-Hant": "把語言的情感層面納入考量。"
+        },
+        "words": [
+          {
+            "text": "berücksichtigt",
+            "lemma": "berücksichtigen",
+            "meaning": "bei Überlegungen beachten, mit einbeziehen",
+            "pos": "Verb"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "die Berücksichtigung der emotionalen Aspekte von Sprache"
+        ],
+        "mistakes": [
+          {
+            "text": "die Berücksichtigung die emotionalen Aspekte von Sprache",
+            "note": "Das Akkusativobjekt wird Genitiv: der emotionalen Aspekte."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "»man« fällt weg; berücksichtigen → die Berücksichtigung; das Akkusativobjekt wird Genitiv: der emotionalen Aspekte (»von Sprache« bleibt).",
+        "en": "\"man\" disappears; berücksichtigen → die Berücksichtigung; the object becomes a genitive: der emotionalen Aspekte (\"von Sprache\" stays).",
+        "zh-Hant": "man 省略；berücksichtigen → die Berücksichtigung；受詞變成 Genitiv：der emotionalen Aspekte（von Sprache 保留）。"
+      }
+    }
+  ]
+}

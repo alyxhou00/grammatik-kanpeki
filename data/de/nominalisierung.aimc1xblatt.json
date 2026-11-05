@@ -1,0 +1,1853 @@
+{
+  "format": "grammatik-kanpeki.cards",
+  "version": 2,
+  "cards": [
+    {
+      "id": "de-nom-aimc1xblatt-001",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 1",
+        "Regel 1",
+        "Genitiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Der Zug kommt an.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "The train arrives.",
+          "zh-Hant": "火車抵達。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Ankunft des Zuges",
+          "die Ankunft des Zugs"
+        ],
+        "acceptable": [
+          {
+            "text": "das Ankommen des Zuges",
+            "note": "Korrekt, aber zu »ankommen« gibt es das Nomen »die Ankunft«."
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "die Ankunft des Zug",
+            "note": "Das Genitiv-(e)s fehlt: des Zuges."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "Das Subjekt wird Genitivattribut: ankommen → die Ankunft des Zuges.",
+        "en": "The subject becomes a genitive attribute: ankommen → die Ankunft des Zuges.",
+        "zh-Hant": "主詞變成 Genitiv 修飾語：ankommen → die Ankunft des Zuges。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-002",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 1",
+        "Regel 1",
+        "substantivierter Infinitiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Die Zeit vergeht.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "Time passes.",
+          "zh-Hant": "時間流逝。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "das Vergehen der Zeit"
+        ],
+        "acceptable": [
+          {
+            "text": "der Lauf der Zeit",
+            "note": "Idiomatisch, aber es nominalisiert ein anderes Verb (laufen). Zu »vergehen«: das Vergehen."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "Gibt es kein eigenes Verbalnomen, nimmt man den substantivierten Infinitiv: vergehen → das Vergehen der Zeit.",
+        "en": "When there is no separate verbal noun, use the nominalised infinitive: vergehen → das Vergehen der Zeit.",
+        "zh-Hant": "沒有專用的動作名詞時，就用名詞化的不定式：vergehen → das Vergehen der Zeit。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-003",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 1",
+        "Regel 1",
+        "substantivierter Infinitiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Das Kind weint.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "The child is crying.",
+          "zh-Hant": "孩子在哭。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "das Weinen des Kindes"
+        ],
+        "mistakes": [
+          {
+            "text": "das Weinen des Kinds",
+            "note": "Bei einsilbigen Nomen wie »Kind« ist im Genitiv -es üblich: des Kindes."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "weinen → das Weinen (substantivierter Infinitiv, neutral); das Subjekt wird Genitiv: des Kindes.",
+        "en": "weinen → das Weinen (nominalised infinitive, neuter); the subject becomes a genitive: des Kindes.",
+        "zh-Hant": "weinen → das Weinen（名詞化不定式，中性）；主詞變成 Genitiv：des Kindes。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-004",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 1",
+        "Regel 1",
+        "reflexiv",
+        "Genitiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Der Angestellte verspätet sich.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "The employee is late.",
+          "zh-Hant": "員工遲到。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Verspätung des Angestellten"
+        ],
+        "mistakes": [
+          {
+            "text": "die Verspätung des Angestellte",
+            "note": "»Angestellte« ist ein nominalisiertes Adjektiv: im Genitiv des Angestellten."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "»sich« fällt weg: sich verspäten → die Verspätung. »der Angestellte« wird wie ein Adjektiv dekliniert: des Angestellten.",
+        "en": "\"sich\" disappears: sich verspäten → die Verspätung. \"der Angestellte\" declines like an adjective: des Angestellten.",
+        "zh-Hant": "sich 省略：sich verspäten → die Verspätung。der Angestellte 像形容詞一樣變格：des Angestellten。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-005",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 1",
+        "Regel 1",
+        "reflexiv",
+        "Genitiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Der Chef ärgert sich.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "The boss is annoyed.",
+          "zh-Hant": "老闆很生氣。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "der Ärger des Chefs"
+        ]
+      },
+      "explanation": {
+        "de": "sich ärgern → der Ärger (Infinitiv ohne Endung); das Subjekt wird Genitiv: des Chefs.",
+        "en": "sich ärgern → der Ärger (infinitive without ending); the subject becomes a genitive: des Chefs.",
+        "zh-Hant": "sich ärgern → der Ärger（去掉詞尾的不定式）；主詞變成 Genitiv：des Chefs。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-006",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 1",
+        "Regel 1",
+        "Genitiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Die Raumsonde landet.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "The space probe lands.",
+          "zh-Hant": "太空探測器著陸。"
+        },
+        "words": [
+          {
+            "text": "Raumsonde",
+            "lemma": "die Raumsonde",
+            "meaning": "unbemanntes Raumfahrzeug, das den Weltraum erforscht",
+            "pos": "Nomen"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "die Landung der Raumsonde"
+        ]
+      },
+      "explanation": {
+        "de": "landen → die Landung; das Subjekt wird Genitiv: der Raumsonde.",
+        "en": "landen → die Landung; the subject becomes a genitive: der Raumsonde.",
+        "zh-Hant": "landen → die Landung；主詞變成 Genitiv：der Raumsonde。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-007",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 1",
+        "Regel 1",
+        "-ion"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Die Bombe explodierte.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "The bomb exploded.",
+          "zh-Hant": "炸彈爆炸了。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Explosion der Bombe"
+        ],
+        "mistakes": [
+          {
+            "text": "die Explodierung der Bombe",
+            "note": "Dieses Wort gibt es nicht. explodieren → die Explosion."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "explodieren → die Explosion (-ion). Die Zeitform (Präteritum) geht im Nominalstil verloren.",
+        "en": "explodieren → die Explosion (-ion). The tense (past) is lost in Nominalstil.",
+        "zh-Hant": "explodieren → die Explosion（-ion）。名詞化後時態（過去式）就看不出來了。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-008",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 1",
+        "Regel 1",
+        "n-Deklination"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Der Journalist berichtet.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "The journalist reports.",
+          "zh-Hant": "記者進行報導。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "der Bericht des Journalisten",
+          "die Berichterstattung des Journalisten"
+        ],
+        "mistakes": [
+          {
+            "text": "der Bericht des Journalists",
+            "note": "»Journalist« ist ein n-Nomen: des Journalisten."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "berichten → der Bericht / die Berichterstattung. »Journalist« gehört zur n-Deklination: Genitiv des Journalisten.",
+        "en": "berichten → der Bericht / die Berichterstattung. \"Journalist\" is a weak (n-) noun: genitive des Journalisten.",
+        "zh-Hant": "berichten → der Bericht／die Berichterstattung。Journalist 屬於 n 變格名詞：Genitiv 是 des Journalisten。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-009",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 2",
+        "Regel 2",
+        "Regel 4",
+        "durch",
+        "n-Deklination"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Der Journalist schreibt den Artikel.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "The journalist writes the article.",
+          "zh-Hant": "記者撰寫這篇文章。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "das Schreiben des Artikels durch den Journalisten"
+        ],
+        "mistakes": [
+          {
+            "text": "das Schreiben des Artikels durch den Journalist",
+            "note": "»Journalist« ist ein n-Nomen: durch den Journalisten."
+          },
+          {
+            "text": "das Schreiben des Artikels des Journalisten",
+            "note": "Bei zwei Ergänzungen wird nur das Akkusativobjekt Genitiv; das Subjekt steht mit »durch«."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "Akkusativobjekt → Genitiv (des Artikels), Subjekt → durch + Akkusativ (durch den Journalisten).",
+        "en": "Accusative object → genitive (des Artikels), subject → durch + accusative (durch den Journalisten).",
+        "zh-Hant": "Akkusativ 受詞 → Genitiv（des Artikels），主詞 → durch＋Akkusativ（durch den Journalisten）。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-010",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 2",
+        "Regel 2",
+        "Regel 4",
+        "durch"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Die Redakteurin korrigiert den Text.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "The editor corrects the text.",
+          "zh-Hant": "編輯修改這篇文字。"
+        },
+        "words": [
+          {
+            "text": "Redakteurin",
+            "lemma": "die Redakteurin",
+            "meaning": "Frau, die bei einer Zeitung Texte auswählt und bearbeitet",
+            "pos": "Nomen"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "die Korrektur des Textes durch die Redakteurin",
+          "die Korrektur des Texts durch die Redakteurin"
+        ],
+        "acceptable": [
+          {
+            "text": "das Korrigieren des Textes durch die Redakteurin",
+            "note": "Korrekt, aber zu »korrigieren« gibt es das Nomen »die Korrektur«."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "korrigieren → die Korrektur; den Text → des Textes; Subjekt → durch die Redakteurin.",
+        "en": "korrigieren → die Korrektur; den Text → des Textes; subject → durch die Redakteurin.",
+        "zh-Hant": "korrigieren → die Korrektur；den Text → des Textes；主詞 → durch die Redakteurin。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-011",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 2",
+        "Regel 2",
+        "Regel 4",
+        "durch"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Eine Druckerei druckt die Zeitung.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "A print shop prints the newspaper.",
+          "zh-Hant": "印刷廠印報紙。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "der Druck der Zeitung durch eine Druckerei",
+          "das Drucken der Zeitung durch eine Druckerei"
+        ]
+      },
+      "explanation": {
+        "de": "drucken → der Druck / das Drucken; die Zeitung → der Zeitung (Genitiv); Subjekt → durch eine Druckerei.",
+        "en": "drucken → der Druck / das Drucken; die Zeitung → der Zeitung (genitive); subject → durch eine Druckerei.",
+        "zh-Hant": "drucken → der Druck／das Drucken；die Zeitung → der Zeitung（Genitiv）；主詞 → durch eine Druckerei。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-012",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 2",
+        "Regel 2",
+        "Regel 4",
+        "durch",
+        "von + Dativ"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Der Händler verkauft Presseerzeugnisse.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "The dealer sells press products.",
+          "zh-Hant": "商家販售報章雜誌。"
+        },
+        "words": [
+          {
+            "text": "Presseerzeugnisse",
+            "lemma": "das Presseerzeugnis",
+            "meaning": "gedrucktes Produkt der Presse (Zeitung, Zeitschrift)",
+            "pos": "Nomen"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "der Verkauf von Presseerzeugnissen durch den Händler"
+        ],
+        "mistakes": [
+          {
+            "text": "der Verkauf Presseerzeugnisse durch den Händler",
+            "note": "Ohne Artikel ist der Genitiv nicht erkennbar: von + Dativ (von Presseerzeugnissen)."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "Presseerzeugnisse steht ohne Artikel → von + Dativ (von Presseerzeugnissen); Subjekt → durch den Händler.",
+        "en": "Presseerzeugnisse has no article → von + dative (von Presseerzeugnissen); subject → durch den Händler.",
+        "zh-Hant": "Presseerzeugnisse 沒有冠詞 → von＋Dativ（von Presseerzeugnissen）；主詞 → durch den Händler。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-013",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 2",
+        "Regel 2",
+        "Regel 4",
+        "durch"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Die Pressesprecherin liest den Artikel.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "The press spokeswoman reads the article.",
+          "zh-Hant": "新聞發言人閱讀這篇文章。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "das Lesen des Artikels durch die Pressesprecherin",
+          "die Lektüre des Artikels durch die Pressesprecherin"
+        ]
+      },
+      "explanation": {
+        "de": "lesen → das Lesen (oder gehoben: die Lektüre); den Artikel → des Artikels; Subjekt → durch die Pressesprecherin.",
+        "en": "lesen → das Lesen (or formal: die Lektüre); den Artikel → des Artikels; subject → durch die Pressesprecherin.",
+        "zh-Hant": "lesen → das Lesen（書面語也可用 die Lektüre）；den Artikel → des Artikels；主詞 → durch die Pressesprecherin。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-014",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 2",
+        "Regel 2",
+        "Regel 4",
+        "durch"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Der Politiker dementiert seine Aussage.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "The politician denies his statement.",
+          "zh-Hant": "政治人物否認自己說過的話。"
+        },
+        "words": [
+          {
+            "text": "dementiert",
+            "lemma": "dementieren",
+            "meaning": "öffentlich sagen, dass etwas nicht stimmt",
+            "pos": "Verb"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "das Dementi seiner Aussage durch den Politiker",
+          "das Dementieren seiner Aussage durch den Politiker"
+        ],
+        "mistakes": [
+          {
+            "text": "das Dementi seine Aussage durch den Politiker",
+            "note": "Das Akkusativobjekt wird Genitiv: seiner Aussage."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "dementieren → das Dementi; seine Aussage → seiner Aussage (Genitiv); Subjekt → durch den Politiker.",
+        "en": "dementieren → das Dementi; seine Aussage → seiner Aussage (genitive); subject → durch den Politiker.",
+        "zh-Hant": "dementieren → das Dementi；seine Aussage → seiner Aussage（Genitiv）；主詞 → durch den Politiker。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-015",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 3",
+        "Regel 5",
+        "Possessivartikel",
+        "Präposition"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Er ärgert sich über den Artikel.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "He is annoyed about the article.",
+          "zh-Hant": "他對這篇文章很不滿。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "sein Ärger über den Artikel"
+        ]
+      },
+      "explanation": {
+        "de": "Personalpronomen → Possessivartikel: er → sein Ärger. Die Präposition bleibt: über den Artikel.",
+        "en": "Pronoun → possessive: er → sein Ärger. The preposition stays: über den Artikel.",
+        "zh-Hant": "人稱代名詞 → 物主冠詞：er → sein Ärger。介系詞保留：über den Artikel。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-016",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 3",
+        "Regel 5",
+        "Possessivartikel",
+        "Präposition"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Sie bewirbt sich um die Stelle bei der Zeitung.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "She is applying for the job at the newspaper.",
+          "zh-Hant": "她應徵報社的職位。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "ihre Bewerbung um die Stelle bei der Zeitung"
+        ],
+        "mistakes": [
+          {
+            "text": "ihre Bewerbung für die Stelle bei der Zeitung",
+            "note": "Die Präposition bleibt: sich bewerben um → die Bewerbung um."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "sie (Singular, bewirbt) → ihre Bewerbung. sich bewerben um → die Bewerbung um.",
+        "en": "sie (singular, bewirbt) → ihre Bewerbung. sich bewerben um → die Bewerbung um.",
+        "zh-Hant": "sie（單數，bewirbt）→ ihre Bewerbung。sich bewerben um → die Bewerbung um。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-017",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 3",
+        "Regel 5",
+        "Possessivartikel",
+        "Präposition"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Sie sorgen sich um die Werbeeinnahmen.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "They are worried about advertising revenue.",
+          "zh-Hant": "他們擔心廣告收入。"
+        },
+        "words": [
+          {
+            "text": "Werbeeinnahmen",
+            "lemma": "die Werbeeinnahmen",
+            "meaning": "Geld, das man durch Werbung verdient",
+            "pos": "Nomen"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "ihre Sorge um die Werbeeinnahmen",
+          "ihre Sorgen um die Werbeeinnahmen"
+        ]
+      },
+      "explanation": {
+        "de": "sie (Plural, sorgen) → ihre Sorge(n). sich sorgen um → die Sorge um.",
+        "en": "sie (plural, sorgen) → ihre Sorge(n). sich sorgen um → die Sorge um.",
+        "zh-Hant": "sie（複數，sorgen）→ ihre Sorge(n)。sich sorgen um → die Sorge um。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-018",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 3",
+        "Regel 5",
+        "Possessivartikel",
+        "Präposition"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Du warnst vor zu viel Medienkonsum.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "You warn against consuming too much media.",
+          "zh-Hant": "你警告大家不要過度使用媒體。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "deine Warnung vor zu viel Medienkonsum"
+        ]
+      },
+      "explanation": {
+        "de": "du → deine Warnung. warnen vor → die Warnung vor.",
+        "en": "du → deine Warnung. warnen vor → die Warnung vor.",
+        "zh-Hant": "du → deine Warnung。warnen vor → die Warnung vor。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-019",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 3",
+        "Regel 5",
+        "Possessivartikel",
+        "Präposition",
+        "Nebensatz"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Du erinnerst dich daran, wie es ohne Internet war.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "You remember what it was like without the internet.",
+          "zh-Hant": "你記得沒有網路的時候是什麼樣子。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "deine Erinnerung an die Zeit ohne Internet",
+          "deine Erinnerung an das Leben ohne Internet",
+          "deine Erinnerungen an die Zeit ohne Internet",
+          "deine Erinnerungen an das Leben ohne Internet"
+        ],
+        "mistakes": [
+          {
+            "text": "deine Erinnerung daran, wie es ohne Internet war",
+            "note": "Nur halb nominalisiert: Der wie-Satz braucht ein Nomen (die Zeit / das Leben ohne Internet)."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "du → deine Erinnerung; sich erinnern an → die Erinnerung an. Der wie-Satz hat kein Verbalnomen, darum braucht er ein passendes Nomen: die Zeit ohne Internet.",
+        "en": "du → deine Erinnerung; sich erinnern an → die Erinnerung an. The wie-clause has no verbal noun, so it needs a fitting noun: die Zeit ohne Internet.",
+        "zh-Hant": "du → deine Erinnerung；sich erinnern an → die Erinnerung an。wie 子句沒有對應的動作名詞，要換成合適的名詞：die Zeit ohne Internet。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-020",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 3",
+        "Regel 5",
+        "Possessivartikel",
+        "Präposition",
+        "Infinitivsatz"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Wir fürchten uns davor, einsam zu sein.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "We are afraid of being lonely.",
+          "zh-Hant": "我們害怕孤單。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "unsere Furcht vor Einsamkeit",
+          "unsere Furcht vor der Einsamkeit",
+          "unsere Angst vor Einsamkeit",
+          "unsere Angst vor der Einsamkeit"
+        ]
+      },
+      "explanation": {
+        "de": "wir → unsere Furcht; sich fürchten vor → die Furcht vor. Der Infinitivsatz wird zum Nomen: einsam sein → die Einsamkeit.",
+        "en": "wir → unsere Furcht; sich fürchten vor → die Furcht vor. The infinitive clause becomes a noun: einsam sein → die Einsamkeit.",
+        "zh-Hant": "wir → unsere Furcht；sich fürchten vor → die Furcht vor。不定式子句變成名詞：einsam sein → die Einsamkeit。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-021",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 4",
+        "Regel 7",
+        "Adverb",
+        "Possessivartikel"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Er trat gestern auf.",
+        "task": "Ausdruck im Nominalstil",
+        "hint": "gestern → gestrig",
+        "translation": {
+          "en": "He performed yesterday.",
+          "zh-Hant": "他昨天登台表演。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "sein gestriger Auftritt"
+        ],
+        "mistakes": [
+          {
+            "text": "sein gestern Auftritt",
+            "note": "Zeitadverbien haben eigene Adjektive: gestern → gestrig (sein gestriger Auftritt)."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "auftreten → der Auftritt; er → sein; gestern → gestrig. Nach »sein« (Nominativ maskulin) endet das Adjektiv auf -er: sein gestriger Auftritt.",
+        "en": "auftreten → der Auftritt; er → sein; gestern → gestrig. After \"sein\" (nominative masculine) the adjective ends in -er: sein gestriger Auftritt.",
+        "zh-Hant": "auftreten → der Auftritt；er → sein；gestern → gestrig。sein 後面（陽性 Nominativ）形容詞詞尾是 -er：sein gestriger Auftritt。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-022",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 4",
+        "Regel 7",
+        "Adverb",
+        "Possessivartikel"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Sie rief mehrfach an.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "She called several times.",
+          "zh-Hant": "她打了好幾次電話。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "ihre mehrfachen Anrufe",
+          "ihr mehrfacher Anruf"
+        ]
+      },
+      "explanation": {
+        "de": "anrufen → der Anruf; sie → ihr; mehrfach → mehrfach (Adjektiv). Weil es mehrere Anrufe sind, passt der Plural: ihre mehrfachen Anrufe.",
+        "en": "anrufen → der Anruf; sie → ihr; mehrfach → mehrfach (adjective). Since there were several calls, the plural fits: ihre mehrfachen Anrufe.",
+        "zh-Hant": "anrufen → der Anruf；sie → ihr；mehrfach 當形容詞用。因為打了好幾次，用複數比較自然：ihre mehrfachen Anrufe。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-023",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 4",
+        "Regel 7",
+        "Adverb",
+        "Possessivartikel",
+        "substantivierter Infinitiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Er weint unaufhörlich.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "He cries incessantly.",
+          "zh-Hant": "他哭個不停。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "sein unaufhörliches Weinen"
+        ],
+        "mistakes": [
+          {
+            "text": "sein unaufhörlicher Weinen",
+            "note": "»das Weinen« ist neutral: sein unaufhörliches Weinen."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "weinen → das Weinen (neutral); er → sein; unaufhörlich → sein unaufhörliches Weinen.",
+        "en": "weinen → das Weinen (neuter); er → sein; unaufhörlich → sein unaufhörliches Weinen.",
+        "zh-Hant": "weinen → das Weinen（中性）；er → sein；unaufhörlich → sein unaufhörliches Weinen。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-024",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 4",
+        "Regel 7",
+        "Adverb",
+        "Possessivartikel",
+        "reflexiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Wir engagieren uns stark.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "We are strongly committed.",
+          "zh-Hant": "我們非常投入。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "unser starkes Engagement"
+        ],
+        "mistakes": [
+          {
+            "text": "unser starker Engagement",
+            "note": "»das Engagement« ist neutral: unser starkes Engagement."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "sich engagieren → das Engagement (neutral); wir → unser; stark → unser starkes Engagement.",
+        "en": "sich engagieren → das Engagement (neuter); wir → unser; stark → unser starkes Engagement.",
+        "zh-Hant": "sich engagieren → das Engagement（中性）；wir → unser；stark → unser starkes Engagement。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-025",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 4",
+        "Regel 7",
+        "Adverb",
+        "Possessivartikel"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Er fährt morgen ab.",
+        "task": "Ausdruck im Nominalstil",
+        "hint": "morgen → morgig",
+        "translation": {
+          "en": "He leaves tomorrow.",
+          "zh-Hant": "他明天出發。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "seine morgige Abfahrt"
+        ]
+      },
+      "explanation": {
+        "de": "abfahren → die Abfahrt; er → seine; morgen → morgig: seine morgige Abfahrt.",
+        "en": "abfahren → die Abfahrt; er → seine; morgen → morgig: seine morgige Abfahrt.",
+        "zh-Hant": "abfahren → die Abfahrt；er → seine；morgen → morgig：seine morgige Abfahrt。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-026",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 4",
+        "Regel 7",
+        "Adverb",
+        "Possessivartikel",
+        "reflexiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Wir irren uns oft.",
+        "task": "Ausdruck im Nominalstil",
+        "hint": "oft → häufig",
+        "translation": {
+          "en": "We are often wrong.",
+          "zh-Hant": "我們常常搞錯。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "unsere häufigen Irrtümer",
+          "unser häufiger Irrtum"
+        ],
+        "mistakes": [
+          {
+            "text": "unsere ofte Irrtümer",
+            "note": "»oft« hat keine Adjektivform. Man nimmt »häufig«: unsere häufigen Irrtümer."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "sich irren → der Irrtum (Plural: die Irrtümer); wir → unser; oft → häufig (oft hat keine Adjektivform).",
+        "en": "sich irren → der Irrtum (plural: die Irrtümer); wir → unser; oft → häufig (\"oft\" has no adjective form).",
+        "zh-Hant": "sich irren → der Irrtum（複數 die Irrtümer）；wir → unser；oft 沒有形容詞形式，改用 häufig。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-027",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 5",
+        "Verneinung",
+        "Possessivartikel"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Sie engagierte sich nicht.",
+        "task": "Ausdruck im Nominalstil",
+        "hint": "nicht vorhanden: fehlend / mangelnd",
+        "translation": {
+          "en": "She did not get involved.",
+          "zh-Hant": "她沒有投入參與。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "ihr fehlendes Engagement",
+          "ihr mangelndes Engagement"
+        ],
+        "acceptable": [
+          {
+            "text": "kein Engagement",
+            "note": "Korrekt verneint, aber die Person (sie → ihr) geht verloren."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "»nicht« kann man mit Adjektiven wie »fehlend« oder »mangelnd« ausdrücken: ihr fehlendes Engagement.",
+        "en": "\"nicht\" can be expressed with adjectives like \"fehlend\" or \"mangelnd\": ihr fehlendes Engagement.",
+        "zh-Hant": "nicht 可以用 fehlend 或 mangelnd 這類形容詞表達：ihr fehlendes Engagement。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-028",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 5",
+        "Verneinung",
+        "Possessivartikel"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Er wusste vieles nicht.",
+        "task": "Ausdruck im Nominalstil",
+        "hint": "nicht genug / nicht vorhanden",
+        "translation": {
+          "en": "He didn't know a lot of things.",
+          "zh-Hant": "他很多事都不知道。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "sein mangelndes Wissen",
+          "sein fehlendes Wissen",
+          "seine mangelnden Kenntnisse",
+          "seine fehlenden Kenntnisse",
+          "seine Unwissenheit"
+        ]
+      },
+      "explanation": {
+        "de": "wissen → das Wissen (oder: die Kenntnisse); »vieles nicht« → mangelnd / fehlend: sein mangelndes Wissen.",
+        "en": "wissen → das Wissen (or die Kenntnisse); \"vieles nicht\" → mangelnd / fehlend: sein mangelndes Wissen.",
+        "zh-Hant": "wissen → das Wissen（或 die Kenntnisse）；vieles nicht → mangelnd／fehlend：sein mangelndes Wissen。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-029",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 5",
+        "Verneinung",
+        "Possessivartikel"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Sie war nicht überrascht.",
+        "task": "Ausdruck im Nominalstil",
+        "hint": "nicht vorhanden: fehlend",
+        "translation": {
+          "en": "She was not surprised.",
+          "zh-Hant": "她並不驚訝。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "ihre fehlende Überraschung"
+        ],
+        "acceptable": [
+          {
+            "text": "das Ausbleiben ihrer Überraschung",
+            "note": "Korrekt, aber umständlich. Kürzer: ihre fehlende Überraschung."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "überrascht sein → die Überraschung; nicht → fehlend: ihre fehlende Überraschung.",
+        "en": "überrascht sein → die Überraschung; nicht → fehlend: ihre fehlende Überraschung.",
+        "zh-Hant": "überrascht sein → die Überraschung；nicht → fehlend：ihre fehlende Überraschung。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-030",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 5",
+        "Einschränkung"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Kaum jemand war begeistert.",
+        "task": "Ausdruck im Nominalstil",
+        "hint": "kaum = nur sehr wenig",
+        "translation": {
+          "en": "Hardly anyone was enthusiastic.",
+          "zh-Hant": "幾乎沒有人感到熱衷。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die geringe Begeisterung",
+          "die mangelnde Begeisterung"
+        ],
+        "acceptable": [
+          {
+            "text": "die fehlende Begeisterung",
+            "note": "Etwas zu stark: »kaum jemand« heißt nicht »niemand«. Besser: die geringe / mangelnde Begeisterung."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "begeistert sein → die Begeisterung; »kaum jemand« (sehr wenige) → gering / mangelnd: die geringe Begeisterung.",
+        "en": "begeistert sein → die Begeisterung; \"kaum jemand\" (very few) → gering / mangelnd: die geringe Begeisterung.",
+        "zh-Hant": "begeistert sein → die Begeisterung；kaum jemand（極少數人）→ gering／mangelnd：die geringe Begeisterung。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-031",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 5",
+        "Einschränkung",
+        "Possessivartikel",
+        "reflexiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Er bemühte sich zu wenig.",
+        "task": "Ausdruck im Nominalstil",
+        "hint": "nicht genug: unzureichend",
+        "translation": {
+          "en": "He did not try hard enough.",
+          "zh-Hant": "他不夠努力。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "seine unzureichenden Bemühungen",
+          "seine mangelnden Bemühungen",
+          "sein unzureichendes Bemühen",
+          "sein mangelndes Bemühen"
+        ]
+      },
+      "explanation": {
+        "de": "sich bemühen → die Bemühung(en) / das Bemühen; »zu wenig« (nicht genug) → unzureichend: seine unzureichenden Bemühungen.",
+        "en": "sich bemühen → die Bemühung(en) / das Bemühen; \"zu wenig\" (not enough) → unzureichend: seine unzureichenden Bemühungen.",
+        "zh-Hant": "sich bemühen → die Bemühung(en)／das Bemühen；zu wenig（不夠）→ unzureichend：seine unzureichenden Bemühungen。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-032",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 5",
+        "Verneinung"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Es gab kein Dokument.",
+        "task": "Ausdruck im Nominalstil",
+        "hint": "nicht vorhanden: das Fehlen / der Mangel",
+        "translation": {
+          "en": "There was no document.",
+          "zh-Hant": "沒有任何文件。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "das Fehlen eines Dokuments",
+          "das Fehlen eines Dokumentes"
+        ],
+        "acceptable": [
+          {
+            "text": "das fehlende Dokument",
+            "note": "Möglich, meint aber ein bestimmtes Dokument. »Es gab kein Dokument« → das Fehlen eines Dokuments."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "»es gab kein …« → das Fehlen + Genitiv: das Fehlen eines Dokuments.",
+        "en": "\"es gab kein …\" → das Fehlen + genitive: das Fehlen eines Dokuments.",
+        "zh-Hant": "es gab kein … → das Fehlen＋Genitiv：das Fehlen eines Dokuments。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-033",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 6",
+        "Regel 3",
+        "Passiv",
+        "durch"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Der Vertrag wurde vom Arbeitgeber gekündigt.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "The contract was terminated by the employer.",
+          "zh-Hant": "合約被雇主終止了。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Kündigung des Vertrags durch den Arbeitgeber",
+          "die Kündigung des Vertrages durch den Arbeitgeber"
+        ],
+        "mistakes": [
+          {
+            "text": "die Kündigung des Vertrags vom Arbeitgeber",
+            "note": "Das Agens im Passiv (von + Dativ) wird im Nominalstil zu »durch« + Akkusativ: durch den Arbeitgeber."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "Das Passiv-Subjekt wird Genitiv (des Vertrags); das Agens »vom Arbeitgeber« wird zu »durch den Arbeitgeber«.",
+        "en": "The passive subject becomes a genitive (des Vertrags); the agent \"vom Arbeitgeber\" becomes \"durch den Arbeitgeber\".",
+        "zh-Hant": "被動句主詞變成 Genitiv（des Vertrags）；施事者 vom Arbeitgeber 改成 durch den Arbeitgeber。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-034",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 6",
+        "Regel 3",
+        "Passiv",
+        "durch"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Die Hausaufgaben wurden von der Lehrerin korrigiert.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "The homework was corrected by the teacher.",
+          "zh-Hant": "作業由老師批改。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Korrektur der Hausaufgaben durch die Lehrerin"
+        ],
+        "acceptable": [
+          {
+            "text": "das Korrigieren der Hausaufgaben durch die Lehrerin",
+            "note": "Korrekt, aber zu »korrigieren« gibt es das Nomen »die Korrektur«."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "korrigieren → die Korrektur; die Hausaufgaben → der Hausaufgaben (Genitiv); von der Lehrerin → durch die Lehrerin.",
+        "en": "korrigieren → die Korrektur; die Hausaufgaben → der Hausaufgaben (genitive); von der Lehrerin → durch die Lehrerin.",
+        "zh-Hant": "korrigieren → die Korrektur；die Hausaufgaben → der Hausaufgaben（Genitiv）；von der Lehrerin → durch die Lehrerin。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-035",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 6",
+        "Regel 3",
+        "Regel 7",
+        "Passiv",
+        "durch",
+        "Adjektiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Das Schwimmbad wurde vom Personal gründlich gereinigt.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "The swimming pool was thoroughly cleaned by the staff.",
+          "zh-Hant": "游泳池由工作人員徹底清潔過。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die gründliche Reinigung des Schwimmbads durch das Personal",
+          "die gründliche Reinigung des Schwimmbades durch das Personal"
+        ],
+        "mistakes": [
+          {
+            "text": "die gründlich Reinigung des Schwimmbads durch das Personal",
+            "note": "Vor dem Nomen wird das Adverb zum Adjektiv mit Endung: die gründliche Reinigung."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "reinigen → die Reinigung; gründlich → die gründliche Reinigung; das Schwimmbad → des Schwimmbads; vom Personal → durch das Personal.",
+        "en": "reinigen → die Reinigung; gründlich → die gründliche Reinigung; das Schwimmbad → des Schwimmbads; vom Personal → durch das Personal.",
+        "zh-Hant": "reinigen → die Reinigung；gründlich → die gründliche Reinigung；das Schwimmbad → des Schwimmbads；vom Personal → durch das Personal。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-036",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 6",
+        "Regel 3",
+        "Passiv",
+        "durch",
+        "von + Dativ",
+        "Zahlwort"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Über 50 Mitarbeitende wurden von der Firma entlassen.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "Over 50 employees were dismissed by the company.",
+          "zh-Hant": "公司裁掉了超過 50 名員工。"
+        },
+        "words": [
+          {
+            "text": "entlassen",
+            "meaning": "jemandem die Arbeitsstelle kündigen",
+            "pos": "Verb"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "die Entlassung von über 50 Mitarbeitenden durch die Firma"
+        ],
+        "mistakes": [
+          {
+            "text": "die Entlassung von über 50 Mitarbeitende durch die Firma",
+            "note": "Nach »von« steht der Dativ; das nominalisierte Partizip endet auf -n: von über 50 Mitarbeitenden."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "Eine Zahl zeigt den Genitiv nicht → von + Dativ (von über 50 Mitarbeitenden); von der Firma → durch die Firma.",
+        "en": "A number doesn't show the genitive → von + dative (von über 50 Mitarbeitenden); von der Firma → durch die Firma.",
+        "zh-Hant": "數字看不出 Genitiv → von＋Dativ（von über 50 Mitarbeitenden）；von der Firma → durch die Firma。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-037",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 6",
+        "Regel 3",
+        "Passiv",
+        "durch"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Die Glühbirne wurde von Edison erfunden.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "The light bulb was invented by Edison.",
+          "zh-Hant": "電燈泡是愛迪生發明的。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Erfindung der Glühbirne durch Edison"
+        ],
+        "acceptable": [
+          {
+            "text": "Edisons Erfindung der Glühbirne",
+            "note": "Korrekt und idiomatisch (vorangestellter Genitiv bei Namen), aber hier geübt wird »durch« für das Agens."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "erfinden → die Erfindung; die Glühbirne → der Glühbirne; von Edison → durch Edison.",
+        "en": "erfinden → die Erfindung; die Glühbirne → der Glühbirne; von Edison → durch Edison.",
+        "zh-Hant": "erfinden → die Erfindung；die Glühbirne → der Glühbirne；von Edison → durch Edison。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-038",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 6",
+        "Regel 3",
+        "Passiv",
+        "durch"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Die Fähigkeiten von Tieren wurden von der Wissenschaft unterschätzt.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "The abilities of animals were underestimated by science.",
+          "zh-Hant": "動物的能力被科學界低估了。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Unterschätzung der Fähigkeiten von Tieren durch die Wissenschaft",
+          "die Unterschätzung der tierischen Fähigkeiten durch die Wissenschaft"
+        ],
+        "mistakes": [
+          {
+            "text": "die Unterschätzung der Fähigkeiten von Tieren von der Wissenschaft",
+            "note": "Drei »von« wären unklar; das Agens steht mit »durch«: durch die Wissenschaft."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "unterschätzen → die Unterschätzung; die Fähigkeiten → der Fähigkeiten (»von Tieren« bleibt); von der Wissenschaft → durch die Wissenschaft.",
+        "en": "unterschätzen → die Unterschätzung; die Fähigkeiten → der Fähigkeiten (\"von Tieren\" stays); von der Wissenschaft → durch die Wissenschaft.",
+        "zh-Hant": "unterschätzen → die Unterschätzung；die Fähigkeiten → der Fähigkeiten（von Tieren 保留）；von der Wissenschaft → durch die Wissenschaft。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-039",
+      "language": "de",
+      "topic": "nominalisierung-praepositionen",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 11a",
+        "Präposition",
+        "Dativ"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "mit jemandem diskutieren",
+        "translation": {
+          "en": "to discuss with someone",
+          "zh-Hant": "跟某人討論"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Diskussion mit jemandem"
+        ]
+      },
+      "explanation": {
+        "de": "diskutieren mit + Dativ → die Diskussion mit + Dativ.",
+        "en": "diskutieren mit + dative → die Diskussion mit + dative.",
+        "zh-Hant": "diskutieren mit＋Dativ → die Diskussion mit＋Dativ。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-040",
+      "language": "de",
+      "topic": "nominalisierung-praepositionen",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 11a",
+        "Präposition",
+        "Akkusativ"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "über etwas diskutieren",
+        "translation": {
+          "en": "to discuss something",
+          "zh-Hant": "討論某事"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Diskussion über etwas"
+        ]
+      },
+      "explanation": {
+        "de": "diskutieren über + Akkusativ → die Diskussion über + Akkusativ.",
+        "en": "diskutieren über + accusative → die Diskussion über + accusative.",
+        "zh-Hant": "diskutieren über＋Akkusativ → die Diskussion über＋Akkusativ。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-041",
+      "language": "de",
+      "topic": "nominalisierung-praepositionen",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 11a",
+        "Präposition",
+        "Akkusativ"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "auf etwas hoffen",
+        "translation": {
+          "en": "to hope for something",
+          "zh-Hant": "期盼某事"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Hoffnung auf etwas"
+        ],
+        "mistakes": [
+          {
+            "text": "die Hoffnung für etwas",
+            "note": "Die Präposition bleibt: hoffen auf → die Hoffnung auf."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "hoffen auf + Akkusativ → die Hoffnung auf + Akkusativ.",
+        "en": "hoffen auf + accusative → die Hoffnung auf + accusative.",
+        "zh-Hant": "hoffen auf＋Akkusativ → die Hoffnung auf＋Akkusativ。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-042",
+      "language": "de",
+      "topic": "nominalisierung-praepositionen",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 11a",
+        "Präposition",
+        "Dativ"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "nach etwas fragen",
+        "translation": {
+          "en": "to ask about something",
+          "zh-Hant": "詢問某事"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Frage nach etwas"
+        ]
+      },
+      "explanation": {
+        "de": "fragen nach + Dativ → die Frage nach + Dativ. Außerdem: die Frage an jemanden (Akk.), die Frage über ein Thema (Akk.).",
+        "en": "fragen nach + dative → die Frage nach + dative. Also: die Frage an jemanden (acc.), die Frage über ein Thema (acc.).",
+        "zh-Hant": "fragen nach＋Dativ → die Frage nach＋Dativ。另外還有：die Frage an jemanden（Akkusativ）、die Frage über ein Thema（Akkusativ）。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-043",
+      "language": "de",
+      "topic": "nominalisierung-praepositionen",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 11a",
+        "Präposition",
+        "Akkusativ"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "um etwas bitten",
+        "translation": {
+          "en": "to ask for something",
+          "zh-Hant": "請求某事"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Bitte um etwas"
+        ]
+      },
+      "explanation": {
+        "de": "bitten um + Akkusativ → die Bitte um + Akkusativ.",
+        "en": "bitten um + accusative → die Bitte um + accusative.",
+        "zh-Hant": "bitten um＋Akkusativ → die Bitte um＋Akkusativ。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-044",
+      "language": "de",
+      "topic": "nominalisierung-praepositionen",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 11a",
+        "Präposition",
+        "Akkusativ"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "auf etwas verzichten",
+        "translation": {
+          "en": "to do without something",
+          "zh-Hant": "放棄某事"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "der Verzicht auf etwas"
+        ]
+      },
+      "explanation": {
+        "de": "verzichten auf + Akkusativ → der Verzicht auf + Akkusativ.",
+        "en": "verzichten auf + accusative → der Verzicht auf + accusative.",
+        "zh-Hant": "verzichten auf＋Akkusativ → der Verzicht auf＋Akkusativ。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-045",
+      "language": "de",
+      "topic": "nominalisierung-praepositionen",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 11a",
+        "Präposition",
+        "Dativ"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "jemanden zu etwas ermutigen",
+        "translation": {
+          "en": "to encourage someone to do something",
+          "zh-Hant": "鼓勵某人做某事"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Ermutigung zu etwas"
+        ]
+      },
+      "explanation": {
+        "de": "ermutigen zu + Dativ → die Ermutigung zu + Dativ.",
+        "en": "ermutigen zu + dative → die Ermutigung zu + dative.",
+        "zh-Hant": "ermutigen zu＋Dativ → die Ermutigung zu＋Dativ。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-046",
+      "language": "de",
+      "topic": "nominalisierung-praepositionen",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 11a",
+        "Präposition",
+        "Dativ"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "sich bei jemandem beschweren",
+        "translation": {
+          "en": "to complain to someone",
+          "zh-Hant": "向某人抱怨"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Beschwerde bei jemandem"
+        ]
+      },
+      "explanation": {
+        "de": "sich beschweren bei + Dativ (bei wem?) → die Beschwerde bei + Dativ.",
+        "en": "sich beschweren bei + dative (to whom?) → die Beschwerde bei + dative.",
+        "zh-Hant": "sich beschweren bei＋Dativ（向誰）→ die Beschwerde bei＋Dativ。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-047",
+      "language": "de",
+      "topic": "nominalisierung-praepositionen",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 11a",
+        "Präposition",
+        "Akkusativ"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "sich über etwas beschweren",
+        "translation": {
+          "en": "to complain about something",
+          "zh-Hant": "抱怨某事"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Beschwerde über etwas"
+        ]
+      },
+      "explanation": {
+        "de": "sich beschweren über + Akkusativ (worüber?) → die Beschwerde über + Akkusativ.",
+        "en": "sich beschweren über + accusative (about what?) → die Beschwerde über + accusative.",
+        "zh-Hant": "sich beschweren über＋Akkusativ（抱怨什麼）→ die Beschwerde über＋Akkusativ。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-048",
+      "language": "de",
+      "topic": "nominalisierung-praepositionen",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 11a",
+        "Präposition",
+        "Dativ",
+        "Akkusativ"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "sich für etwas interessieren",
+        "translation": {
+          "en": "to be interested in something",
+          "zh-Hant": "對某事感興趣"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "das Interesse an etwas",
+          "das Interesse für etwas"
+        ]
+      },
+      "explanation": {
+        "de": "sich interessieren für + Akk. → das Interesse an + Dativ (häufiger) oder für + Akkusativ. Die Präposition kann sich ändern!",
+        "en": "sich interessieren für + acc. → das Interesse an + dative (more common) or für + accusative. The preposition can change!",
+        "zh-Hant": "sich interessieren für＋Akkusativ → das Interesse an＋Dativ（較常用）或 für＋Akkusativ。介系詞可能會改變！"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-049",
+      "language": "de",
+      "topic": "nominalisierung-praepositionen",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 11a",
+        "Präposition",
+        "Dativergänzung",
+        "Akkusativ"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "jemandem vertrauen",
+        "translation": {
+          "en": "to trust someone",
+          "zh-Hant": "信任某人"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "das Vertrauen in jemanden",
+          "das Vertrauen zu jemandem"
+        ],
+        "mistakes": [
+          {
+            "text": "das Vertrauen jemandem",
+            "note": "Eine Dativergänzung braucht beim Nomen eine Präposition: das Vertrauen in jemanden / zu jemandem."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "vertrauen + Dativ → das Vertrauen in + Akkusativ (oder zu + Dativ).",
+        "en": "vertrauen + dative → das Vertrauen in + accusative (or zu + dative).",
+        "zh-Hant": "vertrauen＋Dativ → das Vertrauen in＋Akkusativ（或 zu＋Dativ）。"
+      }
+    },
+    {
+      "id": "de-nom-aimc1xblatt-050",
+      "language": "de",
+      "topic": "nominalisierung-praepositionen",
+      "source": "aimc1xblatt",
+      "level": "C1",
+      "tags": [
+        "Übung 11a",
+        "Präposition",
+        "Dativergänzung",
+        "Dativ"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "einer Sache zustimmen",
+        "translation": {
+          "en": "to agree to something",
+          "zh-Hant": "同意某事"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Zustimmung zu einer Sache"
+        ],
+        "mistakes": [
+          {
+            "text": "die Zustimmung einer Sache",
+            "note": "Eine Dativergänzung wird nicht Genitiv, sondern braucht eine Präposition: die Zustimmung zu einer Sache."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "zustimmen + Dativ → die Zustimmung zu + Dativ.",
+        "en": "zustimmen + dative → die Zustimmung zu + dative.",
+        "zh-Hant": "zustimmen＋Dativ → die Zustimmung zu＋Dativ。"
+      }
+    }
+  ]
+}
