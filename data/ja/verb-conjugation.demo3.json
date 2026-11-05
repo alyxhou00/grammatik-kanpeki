@@ -1228,7 +1228,7 @@
       "createdAt": "2026-11-05",
       "meta": {
         "verbClass": "shimo-ichidan",
-        "form": "te"
+        "form": "te-kudasai"
       },
       "prompt": {
         "base": {
@@ -1236,7 +1236,7 @@
           "meaning": "教；告訴",
           "pos": "動詞"
         },
-        "task": "て形 ＋ ください",
+        "task": "てください（請…）",
         "sentence": "{駅|えき}への{道|みち}を___ください。",
         "translation": {
           "zh-Hant": "請告訴我去車站的路。"
@@ -1287,7 +1287,7 @@
       "createdAt": "2026-11-05",
       "meta": {
         "verbClass": "kami-ichidan",
-        "form": "te"
+        "form": "te-kudasai"
       },
       "prompt": {
         "base": {
@@ -1295,7 +1295,7 @@
           "meaning": "看",
           "pos": "動詞"
         },
-        "task": "て形 ＋ ください",
+        "task": "てください（請…）",
         "sentence": "この{写真|しゃしん}を___ください。",
         "translation": {
           "zh-Hant": "請看這張照片。"
@@ -1341,7 +1341,7 @@
       "createdAt": "2026-11-05",
       "meta": {
         "verbClass": "kami-ichidan",
-        "form": "te"
+        "form": "te-kudasai"
       },
       "prompt": {
         "base": {
@@ -1349,7 +1349,7 @@
           "meaning": "下（車）",
           "pos": "動詞"
         },
-        "task": "て形 ＋ ください",
+        "task": "てください（請…）",
         "sentence": "{次|つぎ}の{駅|えき}で___ください。",
         "translation": {
           "zh-Hant": "請在下一站下車。"
@@ -1400,7 +1400,7 @@
       "createdAt": "2026-11-05",
       "meta": {
         "verbClass": "irregular",
-        "form": "te"
+        "form": "te-kudasai"
       },
       "prompt": {
         "base": {
@@ -1408,7 +1408,7 @@
           "meaning": "打電話",
           "pos": "動詞"
         },
-        "task": "て形 ＋ ください",
+        "task": "てください（請…）",
         "sentence": "{後|あと}で___ください。",
         "translation": {
           "zh-Hant": "請待會兒打電話給我。"
@@ -1694,7 +1694,7 @@
           "meaning": "關（門、窗）",
           "pos": "動詞"
         },
-        "task": "ましょう形（～吧）",
+        "task": "ましょう形（…吧）",
         "register": "polite",
         "sentence": "{寒|さむ}いですね。{窓|まど}を___か。",
         "translation": {
@@ -1755,7 +1755,7 @@
           "meaning": "休息",
           "pos": "動詞"
         },
-        "task": "ましょう形（～吧）",
+        "task": "ましょう形（…吧）",
         "register": "polite",
         "sentence": "{疲|つか}れましたね。ちょっと___。",
         "translation": {
