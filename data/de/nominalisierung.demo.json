@@ -40,7 +40,7 @@
       "explanation": {
         "de": "Konditionales »wenn« wird zu »bei« + Dativ. Aus »bedienen« wird »die Bedienung«; das Adverb »falsch« wird zum Adjektiv. Ohne Artikel bekommt es die starke Endung: »falscher«.",
         "en": "Conditional 'wenn' becomes 'bei' + dative. The verb 'bedienen' turns into the noun 'Bedienung', and the adverb 'falsch' becomes an adjective. With no article it takes the strong ending: 'falscher'.",
-        "zh-Hant": "表示條件的 wenn 改成 bei＋第三格。動詞 bedienen 名詞化為 die Bedienung；副詞 falsch 變成形容詞，因為沒有冠詞，要用強變化詞尾 falscher。"
+        "zh-Hant": "表示條件的 wenn 改成 bei＋Dativ。動詞 bedienen 名詞化為 die Bedienung；副詞 falsch 變成形容詞，因為沒有冠詞，要用強變化詞尾 falscher。"
       }
     },
     {
@@ -79,7 +79,7 @@
       "explanation": {
         "de": "Temporales »nachdem« wird zu »nach« + Dativ. Das Passiv verschwindet: Das Subjekt des Nebensatzes (»die Verträge«) wird zum Genitivattribut.",
         "en": "Temporal 'nachdem' becomes 'nach' + dative. The passive disappears: the subject of the clause ('die Verträge') becomes a genitive attribute.",
-        "zh-Hant": "表示時間的 nachdem 改成 nach＋第三格。被動態消失，原本子句的主詞 die Verträge 變成第二格修飾語。"
+        "zh-Hant": "表示時間的 nachdem 改成 nach＋Dativ。被動態消失，原本子句的主詞 die Verträge 變成 Genitiv（屬格）修飾語。"
       }
     },
     {
@@ -126,7 +126,7 @@
       "explanation": {
         "de": "Kausales »weil« wird zu »wegen«, »aufgrund« oder »infolge« + Genitiv. »steigen« → »der Anstieg«; das Adverb »stark« wird zum Adjektiv vor dem Nomen. Mit Kompositum noch knapper: »der Kostenanstieg«.",
         "en": "Causal 'weil' becomes 'wegen', 'aufgrund' or 'infolge' + genitive. 'steigen' → 'der Anstieg'; the adverb 'stark' becomes an adjective. A compound is even tighter: 'der Kostenanstieg'.",
-        "zh-Hant": "表示原因的 weil 改成 wegen、aufgrund 或 infolge＋第二格。steigen → der Anstieg；副詞 stark 變成名詞前的形容詞。用複合名詞 der Kostenanstieg 更精簡。"
+        "zh-Hant": "表示原因的 weil 改成 wegen、aufgrund 或 infolge＋Genitiv。steigen → der Anstieg；副詞 stark 變成名詞前的形容詞。用複合名詞 der Kostenanstieg 更精簡。"
       }
     },
     {
@@ -166,7 +166,7 @@
       "explanation": {
         "de": "Konzessives »obwohl« wird zu »trotz« + Genitiv. »sich vorbereiten« → »die Vorbereitung«. Ohne Artikel: »intensiver« (starke Endung); mit Possessivartikel: »seiner intensiven«.",
         "en": "Concessive 'obwohl' becomes 'trotz' + genitive. 'sich vorbereiten' → 'die Vorbereitung'. Without an article: 'intensiver' (strong ending); with a possessive: 'seiner intensiven'.",
-        "zh-Hant": "表示讓步的 obwohl 改成 trotz＋第二格。sich vorbereiten → die Vorbereitung。沒有冠詞時用 intensiver（強變化）；加上物主冠詞則是 seiner intensiven。"
+        "zh-Hant": "表示讓步的 obwohl 改成 trotz＋Genitiv。sich vorbereiten → die Vorbereitung。沒有冠詞時用 intensiver（強變化）；加上物主冠詞則是 seiner intensiven。"
       }
     },
     {
@@ -206,7 +206,7 @@
       "explanation": {
         "de": "Finales »um … zu« wird zu »zu« + Dativ, meist verschmolzen: zur (= zu der), zum (= zu dem). »sichern« → »die Sicherung«; als Kompositum: »die Qualitätssicherung«.",
         "en": "Purpose 'um … zu' becomes 'zu' + dative, usually contracted: zur (= zu der), zum (= zu dem). 'sichern' → 'die Sicherung'; as a compound: 'die Qualitätssicherung'.",
-        "zh-Hant": "表示目的的 um … zu 改成 zu＋第三格，通常縮寫成 zur（zu der）或 zum（zu dem）。sichern → die Sicherung，也可以用複合名詞 die Qualitätssicherung。"
+        "zh-Hant": "表示目的的 um … zu 改成 zu＋Dativ，通常縮寫成 zur（zu der）或 zum（zu dem）。sichern → die Sicherung，也可以用複合名詞 die Qualitätssicherung。"
       }
     },
     {
@@ -244,7 +244,7 @@
       "explanation": {
         "de": "Die Konjunktion »während« wird zur Präposition »während« + Genitiv. Enthält der Nebensatz schon ein Nomen, das den Vorgang benennt (»die Bauarbeiten«), braucht man kein zusätzliches Verbalnomen.",
         "en": "The conjunction 'während' becomes the preposition 'während' + genitive. If the clause already contains a noun naming the process ('die Bauarbeiten'), you don't need an extra verbal noun.",
-        "zh-Hant": "連接詞 während 改成介系詞 während＋第二格。如果子句裡已經有表示這個過程的名詞（die Bauarbeiten），就不需要再多加一個動作名詞。"
+        "zh-Hant": "連接詞 während 改成介系詞 während＋Genitiv。如果子句裡已經有表示這個過程的名詞（die Bauarbeiten），就不需要再多加一個動作名詞。"
       }
     },
     {
@@ -285,7 +285,7 @@
       "explanation": {
         "de": "Finales »damit« (gleiche Funktion wie »um … zu«) wird zu »zu« + Dativ. Das Subjekt »der Antrag« wandert in den Hauptsatz, das Pronomen »er« fällt weg.",
         "en": "Purpose 'damit' (same job as 'um … zu') becomes 'zu' + dative. The subject 'der Antrag' moves into the main clause and the pronoun 'er' disappears.",
-        "zh-Hant": "表示目的的 damit（功能跟 um … zu 一樣）改成 zu＋第三格。主詞 der Antrag 移到主句，代名詞 er 就不需要了。"
+        "zh-Hant": "表示目的的 damit（功能跟 um … zu 一樣）改成 zu＋Dativ。主詞 der Antrag 移到主句，代名詞 er 就不需要了。"
       }
     },
     {
@@ -328,7 +328,7 @@
       "explanation": {
         "de": "»sobald« (unmittelbar danach) wird zu »nach« oder »bei« + Dativ, eventuell verstärkt mit »unmittelbar«. »eintreffen« → »das Eintreffen« (substantivierter Infinitiv, hier üblich) oder »der Eingang« – typisch für Waren, Zahlungen und Post.",
         "en": "'sobald' (immediately after) becomes 'nach' or 'bei' + dative, optionally with 'unmittelbar'. 'eintreffen' → 'das Eintreffen' (a nominalised infinitive, normal here) or 'der Eingang', the usual word for goods, payments and mail.",
-        "zh-Hant": "sobald（一…就…）改成 nach 或 bei＋第三格，可以加 unmittelbar 加強語氣。eintreffen → das Eintreffen（這裡用名詞化不定式很常見）或 der Eingang，後者常用於貨物、款項和郵件。"
+        "zh-Hant": "sobald（一…就…）改成 nach 或 bei＋Dativ，可以加 unmittelbar 加強語氣。eintreffen → das Eintreffen（這裡用名詞化不定式很常見）或 der Eingang，後者常用於貨物、款項和郵件。"
       }
     },
     {
@@ -370,7 +370,7 @@
       "explanation": {
         "de": "Modales »indem« (Mittel, Methode) wird zu »durch« + Akkusativ. Feste Verbindungen wie »Sport treiben« schrumpfen oft auf das Nomen: »durch regelmäßigen Sport«.",
         "en": "Modal 'indem' (means, method) becomes 'durch' + accusative. Fixed verb phrases like 'Sport treiben' usually shrink to the noun: 'durch regelmäßigen Sport'.",
-        "zh-Hant": "表示方法的 indem 改成 durch＋第四格。像 Sport treiben 這種固定搭配，名詞化時通常只留下名詞：durch regelmäßigen Sport。"
+        "zh-Hant": "表示方法的 indem 改成 durch＋Akkusativ。像 Sport treiben 這種固定搭配，名詞化時通常只留下名詞：durch regelmäßigen Sport。"
       }
     },
     {
@@ -407,7 +407,7 @@
       "explanation": {
         "de": "»falls« / »wenn« (Bedingung) wird zu »bei« + Dativ. Unpersönliche Wetterverben werden zum Nomen ohne Artikel: es regnet → bei Regen, es schneit → bei Schnee.",
         "en": "'falls' / 'wenn' (condition) becomes 'bei' + dative. Impersonal weather verbs turn into a bare noun: es regnet → bei Regen, es schneit → bei Schnee.",
-        "zh-Hant": "表示條件的 falls／wenn 改成 bei＋第三格。描述天氣的無人稱動詞直接變成不加冠詞的名詞：es regnet → bei Regen，es schneit → bei Schnee。"
+        "zh-Hant": "表示條件的 falls／wenn 改成 bei＋Dativ。描述天氣的無人稱動詞直接變成不加冠詞的名詞：es regnet → bei Regen，es schneit → bei Schnee。"
       }
     },
     {
@@ -449,7 +449,7 @@
       "explanation": {
         "de": "Der ganze dass-Satz wird zum Subjekt: »beschließen« → »der Beschluss«, das Subjekt »die Regierung« wird Genitivattribut. Der Infinitivsatz wird zu »zu« + Dativ: »zur Senkung der Steuern« bzw. »zur Steuersenkung«.",
         "en": "The whole dass-clause becomes the subject: 'beschließen' → 'der Beschluss', and 'die Regierung' becomes a genitive attribute. The infinitive clause turns into 'zu' + dative: 'zur Senkung der Steuern' or 'zur Steuersenkung'.",
-        "zh-Hant": "整個 dass 子句變成主詞：beschließen → der Beschluss，原主詞 die Regierung 變成第二格修飾語。不定式子句改成 zu＋第三格：zur Senkung der Steuern 或 zur Steuersenkung。"
+        "zh-Hant": "整個 dass 子句變成主詞：beschließen → der Beschluss，原主詞 die Regierung 變成 Genitiv（屬格）修飾語。不定式子句改成 zu＋Dativ：zur Senkung der Steuern 或 zur Steuersenkung。"
       }
     },
     {
@@ -491,7 +491,7 @@
       "explanation": {
         "de": "Temporales »bevor« wird zu »vor« + Dativ. Funktionsverbgefüge haben oft ein eigenes Nomen: in Betrieb nehmen → die Inbetriebnahme (ebenso: in Kraft treten → das Inkrafttreten).",
         "en": "Temporal 'bevor' becomes 'vor' + dative. Light-verb constructions often have their own noun: in Betrieb nehmen → die Inbetriebnahme (likewise: in Kraft treten → das Inkrafttreten).",
-        "zh-Hant": "表示時間的 bevor 改成 vor＋第三格。功能動詞結構通常有自己的名詞：in Betrieb nehmen → die Inbetriebnahme（同理：in Kraft treten → das Inkrafttreten）。"
+        "zh-Hant": "表示時間的 bevor 改成 vor＋Dativ。功能動詞結構通常有自己的名詞：in Betrieb nehmen → die Inbetriebnahme（同理：in Kraft treten → das Inkrafttreten）。"
       }
     }
   ]
