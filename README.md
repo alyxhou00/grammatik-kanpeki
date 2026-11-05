@@ -2,7 +2,7 @@
 
 An Anki-style grammar trainer for German and Japanese that runs in the browser.
 
-> **A personal trainer, for now.** The site only works as a tool for one person on one browser. There are no accounts, no sync between devices, no shared decks, and no server: cards, progress, history and settings live in your browser's `localStorage`. Move them between devices by hand with Import / Export. A backend for sync and premium features may come later as an optional add-on (see [`docs/reviews/2026-11-05-backend-optional-review.md`](docs/reviews/2026-11-05-backend-optional-review.md)).
+> **A personal trainer, for now.** The site only works as a tool for one person on one browser. There are no accounts, no sync between devices, no shared decks, and no server: cards, progress, history and settings live in your browser's `localStorage`. Move them between devices by hand with Import / Export. A backend for sync and premium features may come later as an optional add-on.
 
 ## Courses
 
@@ -60,15 +60,3 @@ Then open <http://localhost:8123>. To try a git worktree/branch, serve its folde
 | `tools/schema.mjs`, `tools/validate.mjs` | Print a topic's schema or LLM prompt; check a card file |
 
 To add a course or topic, add an entry to `LANGS` in `js/topics.js` (with an `about` brief), its UI strings in `js/i18n.js`, and for a new course its code in the `language` enum of the schema. The sidebar, form, schema, prompt and validator follow from that entry.
-
-## Tests
-
-```bash
-node tests/data.test.mjs
-node tests/cardform.test.mjs
-node tests/authoring.test.mjs
-node tests/srs.test.mjs
-node tests/studylog.test.mjs
-node tests/speech.test.mjs
-node tests/pitch.test.mjs
-```
