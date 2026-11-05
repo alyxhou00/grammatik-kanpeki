@@ -666,17 +666,16 @@ function renderGuide() {
       ${g ? `<ol>${g.sections.map((s) => `<li>${jump(anchorOf(tp.id, s.id), esc(s.title))}</li>`).join('')}</ol>` : ''}
     </li>`;
   }).join('');
+  // Topics and their chapters fold (a <details>); which ones are folded is kept in the settings.
+  const folded = settings().guideFolded;
   const body = topics.map(({ topic: tp, depth }) => {
     const g = guideOf(lang, tp.id);
-    const head = `<header class="g-topic-head">
-        <h2 id="guide-${anchorOf(tp.id)}" tabindex="-1">${esc(tp.label)}</h2>
-        <button type="button" class="btn small" data-action="practice" data-id="${tp.id}">${esc(T.guide.practice)}</button>
-      </header>`;
+    const headInner = `<h2 id="guide-${anchorOf(tp.id)}" tabindex="-1">${esc(tp.label)}</h2>
+        <button type="button" class="btn small" data-action="practice" data-id="${tp.id}">${esc(T.guide.practice)}</button>`;
     const cls = `panel g-topic${depth ? ' sub' : ''}`;
-    if (!g) return `<section class="${cls} soon">${head}<p class="hint">${esc(T.guide.soon)}</p></section>`;
+    if (!g) return `<section class="${cls} soon"><header class="g-topic-head">${headInner}</header><p class="hint">${esc(T.guide.soon)}</p></section>`;
     const labels = formsOf(lang, tp.id);
-    // Each chapter folds (a <details>); which ones are folded is kept in the settings.
-    const folded = settings().guideFolded;
+    const topicKey = `${lang}/${anchorOf(tp.id)}`;
     const sections = g.sections.map((s) => {
       const anchor = anchorOf(tp.id, s.id);
       return `<details class="g-section" data-guide-section="${lang}/${anchor}" ${folded.includes(`${lang}/${anchor}`) ? '' : 'open'}>
@@ -688,7 +687,10 @@ function renderGuide() {
         </div>
       </details>`;
     }).join('');
-    return `<section class="${cls}">${head}${g.intro ? `<div class="g-intro">${g.intro}</div>` : ''}${sections}</section>`;
+    return `<section class="${cls}"><details class="g-topic-fold" data-guide-section="${topicKey}" ${folded.includes(topicKey) ? '' : 'open'}>
+      <summary class="g-topic-head">${headInner}</summary>
+      ${g.intro ? `<div class="g-intro">${g.intro}</div>` : ''}${sections}
+    </details></section>`;
   }).join('');
   const back = state.guideReturn
     ? `<button type="button" class="btn primary guide-back" data-action="guide-return">← ${esc(state.guideReturn.label)}</button>`
@@ -737,9 +739,10 @@ function afterGuideRender() {
   const at = state.guideAt || (guideOf(state.lang, state.topic) ? anchorOf(state.topic) : '');
   const el = at && document.getElementById(`guide-${at}`);
   if (!el) { window.scrollTo(0, 0); return; }
-  // A place inside a folded chapter unfolds it.
-  const chapter = el.closest('details[data-guide-section]');
-  if (chapter && !chapter.open) chapter.open = true;
+  // A place inside a folded chapter (or topic) unfolds it.
+  for (let d = el.closest('details[data-guide-section]'); d; d = d.parentElement.closest('details[data-guide-section]')) {
+    if (!d.open) d.open = true;
+  }
   el.scrollIntoView({ block: 'start' });
   el.focus({ preventScroll: true });
   if (state.guideAt) el.classList.add('g-target'); // brief highlight of the place a card linked to
@@ -1272,7 +1275,8 @@ document.addEventListener('click', (e) => {
   if (a === 'open-guide') { setMenu(false); return openGuide(el.dataset.anchor || ''); }
   if (a === 'guide-return') return returnFromGuide();
   if (a === 'guide-fold') return foldGuide(el.dataset.open === '1');
-  if (a === 'practice') return go(state.lang, el.dataset.id, 'learn');
+  // The button sits in a guide topic's <summary>: don't also fold the topic.
+  if (a === 'practice') { e.preventDefault(); return go(state.lang, el.dataset.id, 'learn'); }
   if (a === 'close-card-form') { $('#dlg-card').close(); return; }
   if (a === 'add-row') {
     redrawCardForm((v) => v[el.dataset.list].push({ text: '', note: '' }));
