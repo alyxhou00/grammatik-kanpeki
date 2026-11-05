@@ -929,10 +929,17 @@ function renderCardForm() {
   const indent = (id) => '   '.repeat(ancestry(lang, id).length - 1);
   const topics = L.topics.map((tp) => `<option value="${tp.id}" ${tp.id === v.topic ? 'selected' : ''}>${indent(tp.id)}${esc(tp.label.replace(/­/g, ''))}</option>`).join('');
 
+  // Task and, in a course with registers, the register as its own select.
+  const regs = Object.entries(L.registers);
+  const task = field('task', T.task, v.task, { ph: T.taskPh, lang: L.noteLang });
+  const taskRow = regs.length
+    ? `<div class="field-grid">${task}<label class="field"><span class="field-label">${T.register}</span>
+        <select name="register"><option value="">${T.registerNone}</option>${regs.map(([val, name]) => `<option value="${esc(val)}" ${v.register === val ? 'selected' : ''}>${esc(name)}</option>`).join('')}</select></label></div>`
+    : task;
   let front;
   if (type === 'rewrite') {
     front = field('source', labels.source, v.source, { rows: 3, lang, main: true })
-      + field('task', T.task, v.task, { ph: T.taskPh, lang: L.noteLang });
+      + taskRow;
   } else if (type === 'cloze') {
     front = field('sentence', T.sentence, v.sentence, { rows: 2, lang, main: true, ruby: L.ruby, help: T.sentenceHelp })
       + `<div class="field-grid">
@@ -940,7 +947,7 @@ function renderCardForm() {
           ${field('baseMeaning', T.baseMeaning, v.baseMeaning, { lang: L.noteLang })}
           ${field('basePos', T.pos, v.basePos, { lang: L.noteLang })}
         </div>`
-      + field('task', T.task, v.task, { ph: T.taskPh, lang: L.noteLang });
+      + taskRow;
   } else {
     front = `<div class="field-grid">
         ${field('word', T.word, v.word, { lang, main: true, ruby: L.ruby })}
@@ -1071,8 +1078,8 @@ function saveCardForm() {
     render();
     return;
   }
-  // As in Anki, the window stays open for the next card; topic, tags, level, source and facets are kept.
-  const keep = { topic: v.topic, level: v.level, tags: v.tags, cardSource: v.cardSource, meta: v.meta };
+  // As in Anki, the window stays open for the next card; topic, register, tags, level, source and facets are kept.
+  const keep = { topic: v.topic, register: v.register, level: v.level, tags: v.tags, cardSource: v.cardSource, meta: v.meta };
   cardForm = { id: null, lang, values: { ...emptyValues(lang, v.topic), ...keep }, errors: {}, status: { kind: 'ok', text: T.added } };
   render();
   renderCardForm();

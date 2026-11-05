@@ -73,12 +73,20 @@ export function authoringSchema(lang, topicId) {
   const words = (where) => list(word, `Optional: words in ${where} a learner may not know. They can hover them to see the meaning and save them to their word list. In the order they appear, each written exactly as in ${where}; a word is matched as a whole word only.`);
   const task = str(`What to produce, shown as a chip, in ${note}${type === 'cloze' ? ', e.g. the target form or case' : ''}. Optional.`);
   const hint = str(`A tip, hidden until clicked, in ${note}. Optional.`);
+  const regs = Object.entries(L.registers);
+  // Spread into a prompt's properties: nothing in a course without registers.
+  const register = regs.length ? {
+    register: {
+      enum: regs.map(([k]) => k),
+      description: `Which register the answer is in, shown as its own label beside the task: ${regs.map(([k, n]) => `${k} (${n})`).join(', ')}. Set it whenever the answer could be written in either register; then the task does not say it again, and the answer in the other register goes into acceptable with a note. Leave it out when the answer looks the same in both (a form inside a fixed pattern, e.g. the te-form before ください).`,
+    },
+  } : {};
 
   let prompt;
   if (type === 'rewrite') {
     prompt = obj({
       source: text(`The sentence to rewrite (${labels.source || 'source sentence'}).`),
-      task, hint, translation: translation('the sentence'), words: words('source'),
+      task, ...register, hint, translation: translation('the sentence'), words: words('source'),
     }, ['source'], `What the learner sees: a ${course} sentence to rewrite as ${labels.target || 'the target form'}.`);
   } else if (type === 'cloze') {
     prompt = obj({
@@ -90,7 +98,7 @@ export function authoringSchema(lang, topicId) {
         meaning: str(`Its meaning in ${note}.`),
         pos: str(`Its part of speech in ${note}.`),
       }, ['word'], 'Optional: the word the answer is formed from, shown above the sentence.'),
-      task, hint, translation: translation('the full sentence (with the gap filled)'), words: words('sentence'),
+      task, ...register, hint, translation: translation('the full sentence (with the gap filled)'), words: words('sentence'),
     }, ['sentence'], `What the learner sees: a ${course} sentence with one gap to fill.`);
   } else {
     prompt = obj({

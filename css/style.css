@@ -278,6 +278,13 @@ dialog#dlg-stats { width: min(840px, calc(100vw - 32px)); }
 }
 .form-chip.ghost { background: transparent; border: 1px dashed var(--accent); font-weight: 600; }
 .form-chip.tiny { font-size: .75rem; padding: 0 8px; vertical-align: middle; }
+.task-chips { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+/* register (普通形 / 禮貌): a separate, quieter label beside the task chip */
+.register-chip {
+  display: inline-block; border: 1px solid var(--line); color: var(--text); background: var(--surface-2);
+  border-radius: 6px; padding: 3px 10px; font-weight: 700; font-size: .9rem;
+}
+.register-chip.tiny { font-size: .72rem; padding: 0 6px; margin-right: 4px; vertical-align: middle; }
 .translation { font-size: 1.1rem; margin: 0 0 8px; color: var(--text); }
 ruby rt { font-size: .5em; color: var(--muted); font-weight: 400; }
 .no-furigana ruby rt { visibility: hidden; }

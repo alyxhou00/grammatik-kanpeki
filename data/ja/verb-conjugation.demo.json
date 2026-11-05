@@ -20,6 +20,7 @@
       "prompt": {
         "base": { "word": "{食|た}べる", "meaning": "吃", "pos": "動詞" },
         "task": "ない形（否定）",
+        "register": "plain",
         "sentence": "{朝|あさ}ごはんはあまり___。",
         "translation": {
           "zh-Hant": "我不太吃早餐。"
@@ -132,6 +133,7 @@
       "prompt": {
         "base": { "word": "{行|い}く", "meaning": "去", "pos": "動詞" },
         "task": "た形（過去）",
+        "register": "plain",
         "sentence": "{昨日|きのう}、{友達|ともだち}と{映画館|えいがかん}に___。",
         "translation": {
           "zh-Hant": "昨天和朋友去了電影院。"
@@ -192,7 +194,8 @@
       },
       "prompt": {
         "base": { "word": "{来|く}る", "meaning": "來", "pos": "動詞" },
-        "task": "ます形（禮貌）",
+        "task": "ます形",
+        "register": "polite",
         "sentence": "{明日|あした}、{先生|せんせい}が{学校|がっこう}に___。",
         "translation": {
           "zh-Hant": "明天老師會來學校。"
@@ -254,6 +257,7 @@
       "prompt": {
         "base": { "word": "する", "meaning": "做", "pos": "動詞" },
         "task": "ている形（正在）",
+        "register": "plain",
         "sentence": "{弟|おとうと}は{今|いま}、{宿題|しゅくだい}を___。",
         "translation": {
           "zh-Hant": "弟弟現在正在寫作業。"
@@ -313,6 +317,7 @@
       "prompt": {
         "base": { "word": "{見|み}る", "meaning": "看", "pos": "動詞" },
         "task": "たい形（想做）",
+        "register": "plain",
         "sentence": "{週末|しゅうまつ}、{新|あたら}しい{映画|えいが}を___。",
         "translation": {
           "zh-Hant": "週末想看新的電影。"
@@ -367,7 +372,8 @@
       },
       "prompt": {
         "base": { "word": "{書|か}く", "meaning": "寫", "pos": "動詞" },
-        "task": "ました形（禮貌・過去）",
+        "task": "ました形（過去）",
+        "register": "polite",
         "sentence": "{昨日|きのう}、{母|はは}に{手紙|てがみ}を___。",
         "translation": {
           "zh-Hant": "昨天寫了一封信給媽媽。"
@@ -424,6 +430,7 @@
       "prompt": {
         "base": { "word": "{帰|かえ}る", "meaning": "回去；回家", "pos": "動詞" },
         "task": "ない形（否定）",
+        "register": "plain",
         "sentence": "{今日|きょう}は{家|いえ}に___。",
         "translation": {
           "zh-Hant": "今天不回家。"
@@ -480,6 +487,7 @@
       "prompt": {
         "base": { "word": "{起|お}きる", "meaning": "起床", "pos": "動詞" },
         "task": "た形（過去）",
+        "register": "plain",
         "sentence": "{今朝|けさ}は{六時|ろくじ}に___。",
         "translation": {
           "zh-Hant": "今天早上六點起床了。"
@@ -587,6 +595,7 @@
       "prompt": {
         "base": { "word": "{買|か}う", "meaning": "買", "pos": "動詞" },
         "task": "なかった形（過去否定）",
+        "register": "plain",
         "sentence": "{昨日|きのう}は{何|なに}も___。",
         "translation": {
           "zh-Hant": "昨天什麼都沒買。"
@@ -642,7 +651,8 @@
       },
       "prompt": {
         "base": { "word": "{話|はな}す", "meaning": "說；講", "pos": "動詞" },
-        "task": "ません形（禮貌・否定）",
+        "task": "ません形（否定）",
+        "register": "polite",
         "sentence": "{父|ちち}はあまり{英語|えいご}を___。",
         "translation": {
           "zh-Hant": "爸爸不太說英文。"
@@ -698,6 +708,7 @@
       "prompt": {
         "base": { "word": "{遊|あそ}ぶ", "meaning": "玩", "pos": "動詞" },
         "task": "意向形（一起～吧）",
+        "register": "plain",
         "sentence": "{週末|しゅうまつ}、{公園|こうえん}で___！",
         "translation": {
           "zh-Hant": "週末一起在公園玩吧！"
@@ -749,6 +760,7 @@
       "prompt": {
         "base": { "word": "{読|よ}む", "meaning": "讀；看（書）", "pos": "動詞" },
         "task": "ている形（正在）",
+        "register": "plain",
         "sentence": "{姉|あね}は{部屋|へや}で{本|ほん}を___。",
         "translation": {
           "zh-Hant": "姊姊正在房間裡看書。"
@@ -809,6 +821,7 @@
       "prompt": {
         "base": { "word": "{泳|およ}ぐ", "meaning": "游泳", "pos": "動詞" },
         "task": "た形（過去）",
+        "register": "plain",
         "sentence": "{夏休|なつやす}みに{海|うみ}で___。",
         "translation": {
           "zh-Hant": "暑假在海裡游了泳。"
@@ -864,7 +877,8 @@
       },
       "prompt": {
         "base": { "word": "{寝|ね}る", "meaning": "睡覺", "pos": "動詞" },
-        "task": "ましょう形（禮貌的「～吧」）",
+        "task": "ましょう形（～吧）",
+        "register": "polite",
         "sentence": "もう{遅|おそ}いから、___。",
         "translation": {
           "zh-Hant": "已經很晚了，我們睡覺吧。"
@@ -920,6 +934,7 @@
       "prompt": {
         "base": { "word": "{会|あ}う", "meaning": "見面", "pos": "動詞" },
         "task": "たい形（想做）",
+        "register": "plain",
         "sentence": "{早|はや}く{家族|かぞく}に___。",
         "translation": {
           "zh-Hant": "好想快點見到家人。"

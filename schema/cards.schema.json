@@ -75,6 +75,7 @@
         "translation": { "$ref": "#/$defs/localized", "description": "Translation of the sentence. Japanese shows zh-Hant right away; German hides each translation behind a click." },
         "hint": { "$ref": "#/$defs/localized", "description": "Optional tip, hidden until clicked." },
         "task": { "$ref": "#/$defs/localized", "description": "What to do, shown as a chip, e.g. ない形（否定）or Dativ Plural." },
+        "register": { "type": "string", "description": "Which register the answer is in, shown as its own label beside the task. One of the course's registers (Japanese: plain 普通形, polite 禮貌); set only when the answer could be in either." },
         "words": {
           "description": "Hoverable words of the card's sentence (rewrite: source, cloze: sentence, flip: example), in order.",
           "type": "array",

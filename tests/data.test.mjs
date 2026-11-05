@@ -30,10 +30,11 @@ for (const [lang, L] of Object.entries(LANGS)) {
   const keysOf = (o, p = '') => Object.entries(o).flatMap(([k, v]) =>
     v && typeof v === 'object' && !Array.isArray(v) ? keysOf(v, `${p}${k}.`) : [`${p}${k}`]).sort();
   const [first, ...rest] = Object.keys(LANGS);
-  // facetLabels only names the facets a course's own topics use.
+  // facetLabels only names the facets a course's own topics use; registers only the course's own registers.
   const uiKeys = (lang) => keysOf(UI[lang]).filter((k) => !k.startsWith('facetLabels.'));
+  const courseKeys = (lang) => keysOf(LANGS[lang]).filter((k) => !k.startsWith('registers.'));
   for (const lang of rest) {
-    assert.deepEqual(keysOf(LANGS[lang]), keysOf(LANGS[first]), `${lang}: same course settings as ${first}`);
+    assert.deepEqual(courseKeys(lang), courseKeys(first), `${lang}: same course settings as ${first}`);
     assert.deepEqual(uiKeys(lang), uiKeys(first), `${lang}: same UI strings as ${first}`);
   }
   for (const lang of Object.keys(LANGS)) {

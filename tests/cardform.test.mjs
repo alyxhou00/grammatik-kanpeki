@@ -17,6 +17,7 @@ const newId = (lang, topic) => `${lang}-${topic}-u1`;
     sentence: '{毎朝|まいあさ}パンを___。',
     baseWord: '{食|た}べる', baseMeaning: '吃', basePos: '動詞',
     task: 'ます形',
+    register: 'polite',
     accepted: '{食|た}べます\n',
     acceptable: [{ text: 'taberu', note: '要用禮貌形。' }, { text: '', note: 'empty rows are dropped' }],
     mistakes: [],
@@ -32,7 +33,7 @@ const newId = (lang, topic) => `${lang}-${topic}-u1`;
     tags: ['ます形', '下一段'],
     prompt: {
       sentence: '{毎朝|まいあさ}パンを___。', base: { word: '{食|た}べる', meaning: '吃', pos: '動詞' },
-      task: { 'zh-Hant': 'ます形' }, translation: { 'zh-Hant': '每天早上吃麵包。' },
+      task: { 'zh-Hant': 'ます形' }, register: 'polite', translation: { 'zh-Hant': '每天早上吃麵包。' },
     },
     answer: { accepted: ['{食|た}べます'], acceptable: [{ text: 'たべる', note: '要用禮貌形。' }] },
     meta: { verbClass: 'shimo-ichidan' },
@@ -42,6 +43,11 @@ const newId = (lang, topic) => `${lang}-${topic}-u1`;
   assert.equal(checkAnswer(c, 'たべる').verdict, 'acceptable', 'romaji rows are stored as kana');
   assert.deepEqual(missingFurigana(v, 'ja'), []);
   assert.deepEqual(missingFurigana({ ...v, accepted: '食べます' }, 'ja'), ['食べます']);
+  assert.equal(valuesFromCard(c).register, 'polite');
+  const reg = (extra) => cardFromValues({ ...v, ...extra }, { lang: 'ja', newId, today }).prompt.register;
+  assert.equal(reg({ register: '' }), undefined, 'no register chosen');
+  assert.equal(reg({ register: 'x' }), undefined, 'only known registers');
+  assert.equal(reg({ topic: 'vocab', word: '{犬|いぬ}' }), undefined, 'not on word cards');
 }
 
 // ---------- required fields ----------

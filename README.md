@@ -165,6 +165,7 @@ Fields every type understands:
 - `prompt.translation`: Japanese shows the Chinese translation right away; German hides each translation behind a click.
 - `prompt.hint`: a tip, hidden until clicked.
 - `prompt.task`: the target as a chip, for example `ない形（否定）`.
+- `prompt.register`: which politeness the answer is in, shown as its own label beside the task (Japanese: `plain` 普通形, `polite` 禮貌). It is always visible, even while the task chip is hidden. Set it only when the blank could be filled in either register (食べない／食べません). Leave it out when the form in the blank looks the same in both (飲んで before ください). The answer in the other register goes into `acceptable` with a note. A course lists its registers in `registers` in `js/topics.js`. If it also sets `politeAnswer` (a regex for polite endings), the card check flags a card whose answers include a polite form but which has no `register`.
 - `prompt.words`: hoverable words.
 - `explanation`: shown after answering, with a tab for each language the card has.
 - `meta`: values that the topic names in its `facets` show as chips. One example is `verbClass` (`godan`, `kami-ichidan`, `shimo-ichidan`, `irregular`).

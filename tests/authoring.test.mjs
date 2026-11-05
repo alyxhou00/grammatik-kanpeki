@@ -58,10 +58,33 @@ for (const c of bundled) {
   has('cards[0].answer.mistakes[0]: "note" is missing');
   has('cards[0].meta.verbClass: must be one of');
   assert.ok(checkSchema(s, fileOf('ja', 'particles', [])).some((e) => e.startsWith('topic:')), 'a file for another topic fails');
+  // The register is its own field: one of the course's registers, and German has none.
+  assert.deepEqual(s.properties.cards.items.properties.prompt.properties.register.enum, ['plain', 'polite']);
+  assert.equal(authoringSchema('de', 'deklination').properties.cards.items.properties.prompt.properties.register, undefined);
   // German has no furigana rule, and the word list takes meanings, not sentences.
   const de = authoringSchema('de', 'vocab');
   assert.deepEqual(checkSchema(de, fileOf('de', 'vocab', [{ prompt: { word: 'die Bank', pos: 'Nomen' }, answer: { accepted: ['Geldinstitut'] } }])), []);
   assert.ok(checkSchema(de, fileOf('de', 'vocab', [{ prompt: { word: 'die Bank' }, answer: { accepted: ['x'], mistakes: [] } }])).some((e) => e.includes('mistakes: unknown field')));
+}
+
+// ---------- the card check makes sure a card says which register it wants ----------
+
+{
+  const plain = bundled.find((c) => c.id === 'ja-vc-demo-001'); // 食べない, with 食べません as "correct but not ideal"
+  const polite = bundled.find((c) => c.id === 'ja-vc-demo-004'); // 来ます
+  const fixed = bundled.find((c) => c.id === 'ja-vc-demo-002'); // 飲んで before ください: same in both registers
+  const withReg = (c, register) => ({ ...c, prompt: { ...c.prompt, register } });
+  const problems = (c) => cardProblems(c).join('\n');
+  assert.equal(plain.prompt.register, 'plain');
+  assert.equal(polite.prompt.register, 'polite');
+  assert.equal(fixed.prompt.register, undefined);
+  assert.match(problems(withReg(plain, undefined)), /set prompt.register/);
+  assert.match(problems(withReg(polite, undefined)), /set prompt.register/);
+  assert.match(problems(withReg(plain, 'polite')), /"polite" but an accepted answer is not/);
+  assert.match(problems(withReg(polite, 'plain')), /"plain" but an accepted answer is polite/);
+  assert.match(problems(withReg(plain, 'formal')), /not one of: plain, polite/);
+  const de = bundled.find((c) => c.language === 'de');
+  assert.match(problems(withReg(de, 'plain')), /none in this course/);
 }
 
 // ---------- ids: stable, and distinct within a file ----------
