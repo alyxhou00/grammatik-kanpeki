@@ -166,8 +166,19 @@ export const LANGS = {
         about: 'Fill in one particle (は, が, を, に, で, へ, と, も, から, まで …) in a JLPT N5 sentence. If two particles are both right, put both in accepted, or the less natural one in acceptable with a note. Notes explain the difference in Traditional Chinese.',
       },
       {
-        id: 'counters', label: '數字・助數詞', type: 'cloze', labels: { placeholder: '輸入讀音，例如 さんぼん／sanbon' },
-        about: 'Fill in a number with its counter (本, 枚, 匹, 人, つ, 回 …) with the correct reading, e.g. {三本|さんぼん}. Mistakes are the regular-looking readings that are wrong (さんほん, いちほん).',
+        id: 'counters', label: '數字・助數詞', type: 'cloze',
+        labels: { base: '數字＋助數詞', showTask: '顯示是哪一種助數詞', placeholder: '輸入讀音，例如 さんぼん／sanbon' },
+        // Label style: the counter or number group with its trap in （）. One id per counter or rule.
+        forms: {
+          'yon-nana-kyuu': '4・7・9 的讀法（よん・なな・きゅう）',
+          tens: '十位數（じゅう・にじゅう）', hyaku: '百（ひゃく・びゃく・ぴゃく）', sen: '千（せん・ぜん）', man: '万（いちまん）',
+          tsu: '～つ（ひとつ・ふたつ…）', nin: '～人（ひとり・ふたり・よにん）', sai: '～歳（いっさい・はたち）',
+          nensei: '～年生（よねんせい）', hon: '～本（いっぽん・さんぼん）', mai: '～枚（まい）', ko: '～個（いっこ）',
+          hiki: '～匹（いっぴき・さんびき）', kai: '～回（いっかい）', 'kai-floor': '～階（さんがい）',
+          ji: '～時（よじ・しちじ・くじ）', fun: '～分（いっぷん・さんぷん）',
+          nichi: '～日（ついたち・ふつか…）', gatsu: '～月（しがつ・しちがつ）', en: '～円（よえん）', nan: '何＋助數詞（なん・なに）',
+        },
+        about: 'Fill in the reading of a number, or of a number with its counter (本, 枚, 匹, 人, つ, 回 …). prompt.base.word shows the number and the counter with only the counter read, e.g. 3{本|ほん}; the answer is the whole reading (さんぼん), written {三本|さんぼん}. A plain number goes in base as digits. The sentence only gives context. Mistakes are the regular-looking readings that are wrong (さんほん, いちほん, しにん). Notes explain the sound change in Traditional Chinese. Use the same form id for every card about one counter.',
       },
       {
         id: 'vocab', label: '我的單字本', group: 'vocab', type: 'flip',

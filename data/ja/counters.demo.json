@@ -1,0 +1,2735 @@
+{
+  "format": "grammatik-kanpeki.cards",
+  "version": 2,
+  "cards": [
+    {
+      "id": "ja-ct-001",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "yon-nana-kyuu"
+      },
+      "prompt": {
+        "sentence": "いち、に、さん、___、ご。",
+        "translation": {
+          "zh-Hant": "1、2、3、4、5。"
+        },
+        "task": "4・7・9 的讀法（よん・なな・きゅう）",
+        "base": {
+          "word": "4",
+          "meaning": "數字 4",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "よん"
+        ],
+        "acceptable": [
+          {
+            "text": "し",
+            "note": "數數字時也可以念「し」，但「よん」比較自然。"
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "よ",
+            "note": "單獨數數字不念「よ」，要念「よん」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "數數字時 4 念「よん」。「し」和「死」同音，日常會避開。"
+      }
+    },
+    {
+      "id": "ja-ct-002",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "yon-nana-kyuu"
+      },
+      "prompt": {
+        "sentence": "いち、に、さん、し、ご、ろく、___、はち。",
+        "translation": {
+          "zh-Hant": "1、2、3、4、5、6、7、8。"
+        },
+        "task": "4・7・9 的讀法（よん・なな・きゅう）",
+        "base": {
+          "word": "7",
+          "meaning": "數字 7",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "なな"
+        ],
+        "acceptable": [
+          {
+            "text": "しち",
+            "note": "「しち」也對，但數數字時「なな」比較常用，也不會和「いち」搞混。"
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "ななつ",
+            "note": "「ななつ」是數東西的訓讀（七個），數數字時不加「つ」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "7 念「なな」或「しち」。「しち」聽起來像「いち」，電話裡容易搞混，所以常念「なな」。"
+      }
+    },
+    {
+      "id": "ja-ct-003",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "yon-nana-kyuu"
+      },
+      "prompt": {
+        "sentence": "はち、___、じゅう。",
+        "translation": {
+          "zh-Hant": "8、9、10。"
+        },
+        "task": "4・7・9 的讀法（よん・なな・きゅう）",
+        "base": {
+          "word": "9",
+          "meaning": "數字 9",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "きゅう"
+        ],
+        "acceptable": [
+          {
+            "text": "く",
+            "note": "「く」也對，但數數字時「きゅう」比較自然（「く」和「苦」同音）。"
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "ここのつ",
+            "note": "「ここのつ」是數東西的訓讀（九個）。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "9 念「きゅう」或「く」。月份和幾點才會固定念「く」（九月・九時）。"
+      }
+    },
+    {
+      "id": "ja-ct-004",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "tens"
+      },
+      "prompt": {
+        "sentence": "{今日|きょう}の{気温|きおん}は___{度|ど}です。",
+        "translation": {
+          "zh-Hant": "今天的氣溫是 12 度。"
+        },
+        "task": "十位數（じゅう・にじゅう）",
+        "base": {
+          "word": "12",
+          "meaning": "十二",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{十二|じゅうに}"
+        ],
+        "mistakes": [
+          {
+            "text": "いちじゅうに",
+            "note": "十位數的 1 不念：10 是「じゅう」，不是「いちじゅう」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "12 ＝ 10＋2 ＝「じゅう」＋「に」。10 前面的 1 不念。"
+      }
+    },
+    {
+      "id": "ja-ct-005",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "tens"
+      },
+      "prompt": {
+        "sentence": "{熱|ねつ}が___{度|ど}もあります。",
+        "translation": {
+          "zh-Hant": "發燒到 40 度了。"
+        },
+        "task": "十位數（じゅう・にじゅう）",
+        "base": {
+          "word": "40",
+          "meaning": "四十",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{四十|よんじゅう}"
+        ],
+        "acceptable": [
+          {
+            "text": "しじゅう",
+            "note": "文法上不算錯，但日常很少聽到，一般念「よんじゅう」。"
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "よじゅう",
+            "note": "4 在十位數念「よん」，不念「よ」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "40 念「よんじゅう」。70 念「ななじゅう」、90 念「きゅうじゅう」。"
+      }
+    },
+    {
+      "id": "ja-ct-006",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "tens"
+      },
+      "prompt": {
+        "sentence": "{今|いま}、{気温|きおん}が___{度|ど}です。",
+        "translation": {
+          "zh-Hant": "現在氣溫 21 度。"
+        },
+        "task": "十位數（じゅう・にじゅう）",
+        "base": {
+          "word": "21",
+          "meaning": "二十一",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{二十一|にじゅういち}"
+        ],
+        "mistakes": [
+          {
+            "text": "にいちじゅう",
+            "note": "幾十幾要「幾＋じゅう＋個位」：にじゅう＋いち。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "21 ＝ 2×10＋1 ＝「にじゅう」＋「いち」。"
+      }
+    },
+    {
+      "id": "ja-ct-007",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞",
+        "變音"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "hyaku"
+      },
+      "prompt": {
+        "sentence": "このノートは___{円|えん}です。",
+        "translation": {
+          "zh-Hant": "這本筆記本三百日圓。"
+        },
+        "task": "百（ひゃく・びゃく・ぴゃく）",
+        "base": {
+          "word": "300",
+          "meaning": "三百",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{三百|さんびゃく}"
+        ],
+        "mistakes": [
+          {
+            "text": "さんひゃく",
+            "note": "3 的後面「ひゃく」要變濁音：さんびゃく。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "百：300 さんびゃく、600 ろっぴゃく、800 はっぴゃく 會變音，其他不變。"
+      }
+    },
+    {
+      "id": "ja-ct-008",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞",
+        "變音"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "hyaku"
+      },
+      "prompt": {
+        "sentence": "この{本|ほん}は___{円|えん}です。",
+        "translation": {
+          "zh-Hant": "這本書六百日圓。"
+        },
+        "task": "百（ひゃく・びゃく・ぴゃく）",
+        "base": {
+          "word": "600",
+          "meaning": "六百",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{六百|ろっぴゃく}"
+        ],
+        "mistakes": [
+          {
+            "text": "ろくひゃく",
+            "note": "6 後面的「ひゃく」要變：ろく→ろっ＋ぴゃく。"
+          },
+          {
+            "text": "ろっひゃく",
+            "note": "促音後面的「ひゃく」要變半濁音「ぴゃく」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "600 念「ろっぴゃく」（促音＋半濁音）。"
+      }
+    },
+    {
+      "id": "ja-ct-009",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞",
+        "變音"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "hyaku"
+      },
+      "prompt": {
+        "sentence": "このお{弁当|べんとう}は___{円|えん}です。",
+        "translation": {
+          "zh-Hant": "這個便當八百日圓。"
+        },
+        "task": "百（ひゃく・びゃく・ぴゃく）",
+        "base": {
+          "word": "800",
+          "meaning": "八百",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{八百|はっぴゃく}"
+        ],
+        "acceptable": [
+          {
+            "text": "はちひゃく",
+            "note": "偶爾聽得到，但標準讀法是「はっぴゃく」。"
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "はっひゃく",
+            "note": "促音後面的「ひゃく」要變半濁音「ぴゃく」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "800 念「はっぴゃく」。"
+      }
+    },
+    {
+      "id": "ja-ct-010",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞",
+        "變音"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "sen"
+      },
+      "prompt": {
+        "sentence": "このシャツは___{円|えん}です。",
+        "translation": {
+          "zh-Hant": "這件襯衫三千日圓。"
+        },
+        "task": "千（せん・ぜん）",
+        "base": {
+          "word": "3000",
+          "meaning": "三千",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{三千|さんぜん}"
+        ],
+        "mistakes": [
+          {
+            "text": "さんせん",
+            "note": "3 後面的「せん」要變濁音：さんぜん。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "千：3000 さんぜん、8000 はっせん 會變音。"
+      }
+    },
+    {
+      "id": "ja-ct-011",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞",
+        "變音"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "sen"
+      },
+      "prompt": {
+        "sentence": "この{傘|かさ}は___{円|えん}です。",
+        "translation": {
+          "zh-Hant": "這把傘八千日圓。"
+        },
+        "task": "千（せん・ぜん）",
+        "base": {
+          "word": "8000",
+          "meaning": "八千",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{八千|はっせん}"
+        ],
+        "acceptable": [
+          {
+            "text": "はちせん",
+            "note": "偶爾聽得到，但標準讀法是「はっせん」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "8000 念「はっせん」（促音）。"
+      }
+    },
+    {
+      "id": "ja-ct-012",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞",
+        "變音"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "sen"
+      },
+      "prompt": {
+        "sentence": "この{時計|とけい}は___{円|えん}です。",
+        "translation": {
+          "zh-Hant": "這支手錶一千日圓。"
+        },
+        "task": "千（せん・ぜん）",
+        "base": {
+          "word": "1000",
+          "meaning": "千",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{千|せん}"
+        ],
+        "acceptable": [
+          {
+            "text": "いっせん",
+            "note": "強調「剛好 1000」時可以念，但一般只念「せん」。"
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "いちせん",
+            "note": "千前面的 1 通常不念。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "1000 通常只念「せん」，不加「いち」。"
+      }
+    },
+    {
+      "id": "ja-ct-013",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "man"
+      },
+      "prompt": {
+        "sentence": "このゲームは___{円|えん}です。",
+        "translation": {
+          "zh-Hant": "這個遊戲一萬日圓。"
+        },
+        "task": "万（いちまん）",
+        "base": {
+          "word": "10000",
+          "meaning": "一萬",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{一万|いちまん}"
+        ],
+        "mistakes": [
+          {
+            "text": "まん",
+            "note": "万 前面的「いち」一定要念：十・百・千可以省略 1，万 不行。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "10000 念「いちまん」。万・億・兆 前面的 1 要念。"
+      }
+    },
+    {
+      "id": "ja-ct-014",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "man"
+      },
+      "prompt": {
+        "sentence": "この{自転車|じてんしゃ}は___{円|えん}です。",
+        "translation": {
+          "zh-Hant": "這輛腳踏車十二萬日圓。"
+        },
+        "task": "万（いちまん）",
+        "base": {
+          "word": "120000",
+          "meaning": "十二萬",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{十二万|じゅうにまん}"
+        ],
+        "mistakes": [
+          {
+            "text": "いちじゅうにまん",
+            "note": "10 前面的 1 不念。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "120000 ＝ 12 万 ＝「じゅうに」＋「まん」。每四位數換一個單位。"
+      }
+    },
+    {
+      "id": "ja-ct-015",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "man"
+      },
+      "prompt": {
+        "sentence": "この{財布|さいふ}は___{円|えん}です。",
+        "translation": {
+          "zh-Hant": "這個錢包兩萬五千日圓。"
+        },
+        "task": "万（いちまん）",
+        "base": {
+          "word": "25000",
+          "meaning": "兩萬五千",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{二万五千|にまんごせん}"
+        ],
+        "mistakes": [
+          {
+            "text": "にまんごぜん",
+            "note": "5 不是 3，「せん」不變濁音。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "25000 ＝ 2 万＋5 千 ＝「にまん」＋「ごせん」。"
+      }
+    },
+    {
+      "id": "ja-ct-016",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "tsu"
+      },
+      "prompt": {
+        "sentence": "{卵|たまご}を___ください。",
+        "translation": {
+          "zh-Hant": "請給我四顆蛋。"
+        },
+        "task": "～つ（ひとつ・ふたつ…）",
+        "base": {
+          "word": "4つ",
+          "meaning": "四個",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{四|よっ}つ"
+        ],
+        "mistakes": [
+          {
+            "text": "よんつ",
+            "note": "4 個是「よっつ」，不是「よんつ」。"
+          },
+          {
+            "text": "しつ",
+            "note": "4 個是「よっつ」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "訓讀：ひとつ、ふたつ、みっつ、よっつ、いつつ、むっつ、ななつ、やっつ、ここのつ、とお。"
+      }
+    },
+    {
+      "id": "ja-ct-017",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "tsu"
+      },
+      "prompt": {
+        "sentence": "りんごを___{買|か}いました。",
+        "translation": {
+          "zh-Hant": "我買了六顆蘋果。"
+        },
+        "task": "～つ（ひとつ・ふたつ…）",
+        "base": {
+          "word": "6つ",
+          "meaning": "六個",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{六|むっ}つ"
+        ],
+        "mistakes": [
+          {
+            "text": "ろくつ",
+            "note": "訓讀的 6 個是「むっつ」。"
+          },
+          {
+            "text": "むつ",
+            "note": "要有促音：むっつ。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "6 個是「むっつ」。"
+      }
+    },
+    {
+      "id": "ja-ct-018",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞",
+        "訓讀"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "tsu"
+      },
+      "prompt": {
+        "sentence": "{指|ゆび}は{全部|ぜんぶ}で___あります。",
+        "translation": {
+          "zh-Hant": "手指全部有十根。"
+        },
+        "task": "～つ（ひとつ・ふたつ…）",
+        "base": {
+          "word": "10",
+          "meaning": "十個",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{十|とお}"
+        ],
+        "mistakes": [
+          {
+            "text": "とおつ",
+            "note": "10 個是「とお」，不加「つ」。"
+          },
+          {
+            "text": "じゅうつ",
+            "note": "10 個的訓讀是「とお」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "10 個是「とお」，唯一不帶「つ」的。"
+      }
+    },
+    {
+      "id": "ja-ct-019",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "tsu"
+      },
+      "prompt": {
+        "sentence": "これを___ください。",
+        "translation": {
+          "zh-Hant": "這個請給我兩個。"
+        },
+        "task": "～つ（ひとつ・ふたつ…）",
+        "base": {
+          "word": "2つ",
+          "meaning": "兩個",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{二|ふた}つ"
+        ],
+        "mistakes": [
+          {
+            "text": "ふたり",
+            "note": "「ふたり」是兩個「人」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "2 個是「ふたつ」。"
+      }
+    },
+    {
+      "id": "ja-ct-020",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "nin"
+      },
+      "prompt": {
+        "sentence": "{教室|きょうしつ}に{先生|せんせい}が___います。",
+        "translation": {
+          "zh-Hant": "教室裡有一位老師。"
+        },
+        "task": "～人（ひとり・ふたり・よにん）",
+        "base": {
+          "word": "1{人|にん}",
+          "meaning": "一個人",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{一人|ひとり}"
+        ],
+        "mistakes": [
+          {
+            "text": "いちにん",
+            "note": "1 人要念「ひとり」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "1 人＝ひとり、2 人＝ふたり，是訓讀的特例。"
+      }
+    },
+    {
+      "id": "ja-ct-021",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "nin"
+      },
+      "prompt": {
+        "sentence": "{教室|きょうしつ}に{学生|がくせい}が___います。",
+        "translation": {
+          "zh-Hant": "教室裡有兩個學生。"
+        },
+        "task": "～人（ひとり・ふたり・よにん）",
+        "base": {
+          "word": "2{人|にん}",
+          "meaning": "兩個人",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{二人|ふたり}"
+        ],
+        "mistakes": [
+          {
+            "text": "ににん",
+            "note": "2 人要念「ふたり」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "2 人＝ふたり。"
+      }
+    },
+    {
+      "id": "ja-ct-022",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "nin"
+      },
+      "prompt": {
+        "sentence": "{家族|かぞく}は___です。",
+        "translation": {
+          "zh-Hant": "我家有四個人。"
+        },
+        "task": "～人（ひとり・ふたり・よにん）",
+        "base": {
+          "word": "4{人|にん}",
+          "meaning": "四個人",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{四人|よにん}"
+        ],
+        "mistakes": [
+          {
+            "text": "よんにん",
+            "note": "4 人念「よにん」。"
+          },
+          {
+            "text": "しにん",
+            "note": "「しにん」聽起來像「死人」，4 人要念「よにん」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "4 人念「よにん」。"
+      }
+    },
+    {
+      "id": "ja-ct-023",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "nin"
+      },
+      "prompt": {
+        "sentence": "クラスに{男|おとこ}の{子|こ}が___います。",
+        "translation": {
+          "zh-Hant": "班上有七個男生。"
+        },
+        "task": "～人（ひとり・ふたり・よにん）",
+        "base": {
+          "word": "7{人|にん}",
+          "meaning": "七個人",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{七人|ななにん}"
+        ],
+        "acceptable": [
+          {
+            "text": "しちにん",
+            "note": "「しちにん」也對。"
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "ななひと",
+            "note": "3 人以後是「數字＋にん」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "7 人念「ななにん」或「しちにん」。"
+      }
+    },
+    {
+      "id": "ja-ct-024",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "nin"
+      },
+      "prompt": {
+        "sentence": "このクラスは___です。",
+        "translation": {
+          "zh-Hant": "這個班有十四個人。"
+        },
+        "task": "～人（ひとり・ふたり・よにん）",
+        "base": {
+          "word": "14{人|にん}",
+          "meaning": "十四個人",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{十四人|じゅうよにん}"
+        ],
+        "mistakes": [
+          {
+            "text": "じゅうしにん",
+            "note": "個位數是 4 時要念「よにん」：じゅうよにん。"
+          },
+          {
+            "text": "じゅうよんにん",
+            "note": "「にん」前面的 4 念「よ」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "14 人念「じゅうよにん」，24 人念「にじゅうよにん」。"
+      }
+    },
+    {
+      "id": "ja-ct-025",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "sai"
+      },
+      "prompt": {
+        "sentence": "{弟|おとうと}は___です。",
+        "translation": {
+          "zh-Hant": "弟弟一歲。"
+        },
+        "task": "～歳（いっさい・はたち）",
+        "base": {
+          "word": "1{歳|さい}",
+          "meaning": "一歲",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{一歳|いっさい}"
+        ],
+        "mistakes": [
+          {
+            "text": "いちさい",
+            "note": "1 歲要變促音：いっさい。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "1 歲念「いっさい」，8 歲「はっさい」，10 歲「じゅっさい」。"
+      }
+    },
+    {
+      "id": "ja-ct-026",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "sai"
+      },
+      "prompt": {
+        "sentence": "{妹|いもうと}は___です。",
+        "translation": {
+          "zh-Hant": "妹妹八歲。"
+        },
+        "task": "～歳（いっさい・はたち）",
+        "base": {
+          "word": "8{歳|さい}",
+          "meaning": "八歲",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{八歳|はっさい}"
+        ],
+        "mistakes": [
+          {
+            "text": "はちさい",
+            "note": "8 歲要變促音：はっさい。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "8 歲念「はっさい」。"
+      }
+    },
+    {
+      "id": "ja-ct-027",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "sai"
+      },
+      "prompt": {
+        "sentence": "{息子|むすこ}は___になりました。",
+        "translation": {
+          "zh-Hant": "兒子十歲了。"
+        },
+        "task": "～歳（いっさい・はたち）",
+        "base": {
+          "word": "10{歳|さい}",
+          "meaning": "十歲",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{十歳|じゅっさい}"
+        ],
+        "acceptable": [
+          {
+            "text": "じっさい",
+            "note": "「じっさい」也可以。"
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "じゅうさい",
+            "note": "10 歲要變促音：じゅっさい。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "10 歲念「じゅっさい」。"
+      }
+    },
+    {
+      "id": "ja-ct-028",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞",
+        "特例"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "sai"
+      },
+      "prompt": {
+        "sentence": "{来月|らいげつ}、___になります。",
+        "translation": {
+          "zh-Hant": "下個月就滿二十歲了。"
+        },
+        "task": "～歳（いっさい・はたち）",
+        "base": {
+          "word": "20{歳|さい}",
+          "meaning": "二十歲",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "はたち"
+        ],
+        "acceptable": [
+          {
+            "text": "にじゅっさい",
+            "note": "文法上可以，但一般 20 歲念「はたち」。"
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "にじゅうさい",
+            "note": "20 歲是特殊讀法「はたち」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "20 歲念「はたち」，是特例。21 歲以後恢復規則（にじゅういっさい）。"
+      }
+    },
+    {
+      "id": "ja-ct-029",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞",
+        "特例"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "nensei"
+      },
+      "prompt": {
+        "sentence": "{弟|おとうと}は{小学|しょうがく}___です。",
+        "translation": {
+          "zh-Hant": "弟弟是小學四年級生。"
+        },
+        "task": "～年生（よねんせい）",
+        "base": {
+          "word": "4{年生|ねんせい}",
+          "meaning": "四年級生",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{四年生|よねんせい}"
+        ],
+        "mistakes": [
+          {
+            "text": "よんねんせい",
+            "note": "4 年生念「よねんせい」。"
+          },
+          {
+            "text": "しねんせい",
+            "note": "4 年生念「よねんせい」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "4 年生念「よねんせい」。4 年（四年間）也念「よねん」。"
+      }
+    },
+    {
+      "id": "ja-ct-030",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞",
+        "特例"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "nensei"
+      },
+      "prompt": {
+        "sentence": "{私|わたし}は{大学|だいがく}___です。",
+        "translation": {
+          "zh-Hant": "我是大學四年級生。"
+        },
+        "task": "～年生（よねんせい）",
+        "base": {
+          "word": "4{年生|ねんせい}",
+          "meaning": "四年級生",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{四年生|よねんせい}"
+        ],
+        "mistakes": [
+          {
+            "text": "よんねんせい",
+            "note": "4 年生念「よねんせい」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "大學、高中、國中、小學都用同一個說法。"
+      }
+    },
+    {
+      "id": "ja-ct-031",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞",
+        "變音"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "hon"
+      },
+      "prompt": {
+        "sentence": "{鉛筆|えんぴつ}を___ください。",
+        "translation": {
+          "zh-Hant": "請給我一枝鉛筆。"
+        },
+        "task": "～本（いっぽん・さんぼん）",
+        "base": {
+          "word": "1{本|ほん}",
+          "meaning": "一枝（細長的東西）",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{一本|いっぽん}"
+        ],
+        "mistakes": [
+          {
+            "text": "いちほん",
+            "note": "1 本要變促音＋半濁音：いっぽん。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "本：1・6・8・10 念「ぽん」，3 和「何」念「ぼん」，其他念「ほん」。"
+      }
+    },
+    {
+      "id": "ja-ct-032",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞",
+        "變音"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "hon"
+      },
+      "prompt": {
+        "sentence": "ビールを___ください。",
+        "translation": {
+          "zh-Hant": "請給我三瓶啤酒。"
+        },
+        "task": "～本（いっぽん・さんぼん）",
+        "base": {
+          "word": "3{本|ほん}",
+          "meaning": "三瓶（細長的東西）",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{三本|さんぼん}"
+        ],
+        "mistakes": [
+          {
+            "text": "さんほん",
+            "note": "3 本要變濁音：さんぼん。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "3 本念「さんぼん」。"
+      }
+    },
+    {
+      "id": "ja-ct-033",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞",
+        "變音"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "hon"
+      },
+      "prompt": {
+        "sentence": "{傘|かさ}が___あります。",
+        "translation": {
+          "zh-Hant": "有六把傘。"
+        },
+        "task": "～本（いっぽん・さんぼん）",
+        "base": {
+          "word": "6{本|ほん}",
+          "meaning": "六枝（細長的東西）",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{六本|ろっぽん}"
+        ],
+        "mistakes": [
+          {
+            "text": "ろくほん",
+            "note": "6 本要變：ろっぽん。"
+          },
+          {
+            "text": "ろっほん",
+            "note": "促音後面的「ほん」要變半濁音「ぽん」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "6 本念「ろっぽん」。"
+      }
+    },
+    {
+      "id": "ja-ct-034",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞",
+        "變音"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "hon"
+      },
+      "prompt": {
+        "sentence": "ペンを___{買|か}いました。",
+        "translation": {
+          "zh-Hant": "我買了八枝筆。"
+        },
+        "task": "～本（いっぽん・さんぼん）",
+        "base": {
+          "word": "8{本|ほん}",
+          "meaning": "八枝（細長的東西）",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{八本|はっぽん}"
+        ],
+        "mistakes": [
+          {
+            "text": "はちほん",
+            "note": "8 本要變：はっぽん。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "8 本念「はっぽん」。"
+      }
+    },
+    {
+      "id": "ja-ct-035",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "mai"
+      },
+      "prompt": {
+        "sentence": "{切符|きっぷ}を___{買|か}いました。",
+        "translation": {
+          "zh-Hant": "我買了兩張車票。"
+        },
+        "task": "～枚（まい）",
+        "base": {
+          "word": "2{枚|まい}",
+          "meaning": "兩張（薄的東西）",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{二枚|にまい}"
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "枚完全規則，數字照平常讀法，沒有變音。"
+      }
+    },
+    {
+      "id": "ja-ct-036",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "mai"
+      },
+      "prompt": {
+        "sentence": "{紙|かみ}を___ください。",
+        "translation": {
+          "zh-Hant": "請給我六張紙。"
+        },
+        "task": "～枚（まい）",
+        "base": {
+          "word": "6{枚|まい}",
+          "meaning": "六張（薄的東西）",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{六枚|ろくまい}"
+        ],
+        "mistakes": [
+          {
+            "text": "ろっまい",
+            "note": "枚不會變音，6 念「ろく」：ろくまい。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "枚（ま行）不變音：ろくまい、はちまい、じゅうまい。"
+      }
+    },
+    {
+      "id": "ja-ct-037",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞",
+        "變音"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "ko"
+      },
+      "prompt": {
+        "sentence": "ケーキを___{買|か}いました。",
+        "translation": {
+          "zh-Hant": "我買了六個蛋糕。"
+        },
+        "task": "～個（いっこ）",
+        "base": {
+          "word": "6{個|こ}",
+          "meaning": "六個（一般的小東西）",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{六個|ろっこ}"
+        ],
+        "mistakes": [
+          {
+            "text": "ろくこ",
+            "note": "6 個要變促音：ろっこ。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "個：1・6・8・10 念「っこ」。"
+      }
+    },
+    {
+      "id": "ja-ct-038",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞",
+        "變音"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "ko"
+      },
+      "prompt": {
+        "sentence": "りんごを___{食|た}べました。",
+        "translation": {
+          "zh-Hant": "我吃了十顆蘋果。"
+        },
+        "task": "～個（いっこ）",
+        "base": {
+          "word": "10{個|こ}",
+          "meaning": "十個（一般的小東西）",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{十個|じゅっこ}"
+        ],
+        "acceptable": [
+          {
+            "text": "じっこ",
+            "note": "「じっこ」也可以。"
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "じゅうこ",
+            "note": "10 個要變促音：じゅっこ。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "10 個念「じゅっこ」。"
+      }
+    },
+    {
+      "id": "ja-ct-039",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞",
+        "變音"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "hiki"
+      },
+      "prompt": {
+        "sentence": "{犬|いぬ}を___{飼|か}っています。",
+        "translation": {
+          "zh-Hant": "我養了一隻狗。"
+        },
+        "task": "～匹（いっぴき・さんびき）",
+        "base": {
+          "word": "1{匹|ひき}",
+          "meaning": "一隻（小動物）",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{一匹|いっぴき}"
+        ],
+        "mistakes": [
+          {
+            "text": "いちひき",
+            "note": "1 匹要變促音＋半濁音：いっぴき。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "匹：1・6・8・10 念「ぴき」，3 和「何」念「びき」。"
+      }
+    },
+    {
+      "id": "ja-ct-040",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞",
+        "變音"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "hiki"
+      },
+      "prompt": {
+        "sentence": "{猫|ねこ}が___います。",
+        "translation": {
+          "zh-Hant": "有三隻貓。"
+        },
+        "task": "～匹（いっぴき・さんびき）",
+        "base": {
+          "word": "3{匹|ひき}",
+          "meaning": "三隻（小動物）",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{三匹|さんびき}"
+        ],
+        "mistakes": [
+          {
+            "text": "さんひき",
+            "note": "3 匹要變濁音：さんびき。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "3 匹念「さんびき」。"
+      }
+    },
+    {
+      "id": "ja-ct-041",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞",
+        "變音"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "hiki"
+      },
+      "prompt": {
+        "sentence": "{池|いけ}に{魚|さかな}が___います。",
+        "translation": {
+          "zh-Hant": "池裡有六條魚。"
+        },
+        "task": "～匹（いっぴき・さんびき）",
+        "base": {
+          "word": "6{匹|ひき}",
+          "meaning": "六隻（小動物）",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{六匹|ろっぴき}"
+        ],
+        "mistakes": [
+          {
+            "text": "ろくひき",
+            "note": "6 匹要變：ろっぴき。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "6 匹念「ろっぴき」。"
+      }
+    },
+    {
+      "id": "ja-ct-042",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞",
+        "變音"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "kai"
+      },
+      "prompt": {
+        "sentence": "{一日|いちにち}に___{薬|くすり}を{飲|の}みます。",
+        "translation": {
+          "zh-Hant": "一天吃三次藥。"
+        },
+        "task": "～回（いっかい）",
+        "base": {
+          "word": "3{回|かい}",
+          "meaning": "三次",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{三回|さんかい}"
+        ],
+        "mistakes": [
+          {
+            "text": "さんがい",
+            "note": "「さんがい」是 3 樓（階）。回不變濁音。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "回：1・6・8・10 變促音（いっかい、ろっかい、はっかい、じゅっかい），3 不變。"
+      }
+    },
+    {
+      "id": "ja-ct-043",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞",
+        "變音"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "kai"
+      },
+      "prompt": {
+        "sentence": "{週|しゅう}に___{泳|およ}ぎます。",
+        "translation": {
+          "zh-Hant": "我一週游六次泳。"
+        },
+        "task": "～回（いっかい）",
+        "base": {
+          "word": "6{回|かい}",
+          "meaning": "六次",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{六回|ろっかい}"
+        ],
+        "mistakes": [
+          {
+            "text": "ろくかい",
+            "note": "6 回要變促音：ろっかい。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "6 回念「ろっかい」。"
+      }
+    },
+    {
+      "id": "ja-ct-044",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞",
+        "變音"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "kai-floor"
+      },
+      "prompt": {
+        "sentence": "トイレは___です。",
+        "translation": {
+          "zh-Hant": "廁所在三樓。"
+        },
+        "task": "～階（さんがい）",
+        "base": {
+          "word": "3{階|かい}",
+          "meaning": "三樓",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{三階|さんがい}"
+        ],
+        "acceptable": [
+          {
+            "text": "さんかい",
+            "note": "也有人這樣念，但標準讀法是「さんがい」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "階：3 樓念「さんがい」（濁音），「幾樓」是「なんがい」。"
+      }
+    },
+    {
+      "id": "ja-ct-045",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞",
+        "變音"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "kai-floor"
+      },
+      "prompt": {
+        "sentence": "{事務所|じむしょ}は___にあります。",
+        "translation": {
+          "zh-Hant": "辦公室在六樓。"
+        },
+        "task": "～階（さんがい）",
+        "base": {
+          "word": "6{階|かい}",
+          "meaning": "六樓",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{六階|ろっかい}"
+        ],
+        "acceptable": [
+          {
+            "text": "ろくかい",
+            "note": "也有人這樣念，但標準讀法是「ろっかい」。"
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "ろっがい",
+            "note": "6 樓是「ろっかい」，不變濁音。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "6 樓念「ろっかい」。"
+      }
+    },
+    {
+      "id": "ja-ct-046",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "ji"
+      },
+      "prompt": {
+        "sentence": "{会議|かいぎ}は___からです。",
+        "translation": {
+          "zh-Hant": "會議從四點開始。"
+        },
+        "task": "～時（よじ・しちじ・くじ）",
+        "base": {
+          "word": "4{時|じ}",
+          "meaning": "四點",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{四時|よじ}"
+        ],
+        "mistakes": [
+          {
+            "text": "よんじ",
+            "note": "4 點念「よじ」。"
+          },
+          {
+            "text": "しじ",
+            "note": "4 點念「よじ」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "時：4 點念「よじ」，7 點念「しちじ」，9 點念「くじ」。"
+      }
+    },
+    {
+      "id": "ja-ct-047",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "ji"
+      },
+      "prompt": {
+        "sentence": "{毎朝|まいあさ}、___に{起|お}きます。",
+        "translation": {
+          "zh-Hant": "我每天早上七點起床。"
+        },
+        "task": "～時（よじ・しちじ・くじ）",
+        "base": {
+          "word": "7{時|じ}",
+          "meaning": "七點",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{七時|しちじ}"
+        ],
+        "mistakes": [
+          {
+            "text": "ななじ",
+            "note": "7 點念「しちじ」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "7 點念「しちじ」。"
+      }
+    },
+    {
+      "id": "ja-ct-048",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "ji"
+      },
+      "prompt": {
+        "sentence": "___に{寝|ね}ます。",
+        "translation": {
+          "zh-Hant": "我九點睡覺。"
+        },
+        "task": "～時（よじ・しちじ・くじ）",
+        "base": {
+          "word": "9{時|じ}",
+          "meaning": "九點",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{九時|くじ}"
+        ],
+        "mistakes": [
+          {
+            "text": "きゅうじ",
+            "note": "9 點念「くじ」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "9 點念「くじ」。"
+      }
+    },
+    {
+      "id": "ja-ct-049",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞",
+        "變音"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "fun"
+      },
+      "prompt": {
+        "sentence": "___{待|ま}ってください。",
+        "translation": {
+          "zh-Hant": "請等三分鐘。"
+        },
+        "task": "～分（いっぷん・さんぷん）",
+        "base": {
+          "word": "3{分|ふん}",
+          "meaning": "三分鐘",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{三分|さんぷん}"
+        ],
+        "mistakes": [
+          {
+            "text": "さんふん",
+            "note": "3 分要變半濁音：さんぷん。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "分：1・3・4・6・8・10 念「ぷん」，其他念「ふん」。"
+      }
+    },
+    {
+      "id": "ja-ct-050",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞",
+        "變音"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "fun"
+      },
+      "prompt": {
+        "sentence": "{駅|えき}まで___です。",
+        "translation": {
+          "zh-Hant": "到車站四分鐘。"
+        },
+        "task": "～分（いっぷん・さんぷん）",
+        "base": {
+          "word": "4{分|ふん}",
+          "meaning": "四分鐘",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{四分|よんぷん}"
+        ],
+        "mistakes": [
+          {
+            "text": "よんふん",
+            "note": "4 分也要變半濁音：よんぷん。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "4 分念「よんぷん」。"
+      }
+    },
+    {
+      "id": "ja-ct-051",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞",
+        "變音"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "fun"
+      },
+      "prompt": {
+        "sentence": "{電車|でんしゃ}は___{遅|おく}れています。",
+        "translation": {
+          "zh-Hant": "電車誤點了十分鐘。"
+        },
+        "task": "～分（いっぷん・さんぷん）",
+        "base": {
+          "word": "10{分|ふん}",
+          "meaning": "十分鐘",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{十分|じゅっぷん}"
+        ],
+        "acceptable": [
+          {
+            "text": "じっぷん",
+            "note": "「じっぷん」也可以。"
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "じゅうふん",
+            "note": "10 分要變促音＋半濁音：じゅっぷん。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "10 分念「じゅっぷん」。"
+      }
+    },
+    {
+      "id": "ja-ct-052",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞",
+        "特例"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "nichi"
+      },
+      "prompt": {
+        "sentence": "{今日|きょう}は{五月|ごがつ}___です。",
+        "translation": {
+          "zh-Hant": "今天是五月一號。"
+        },
+        "task": "～日（ついたち・ふつか…）",
+        "base": {
+          "word": "1{日|にち}",
+          "meaning": "一號",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{一日|ついたち}"
+        ],
+        "mistakes": [
+          {
+            "text": "いちにち",
+            "note": "「いちにち」是「一整天」。1 號念「ついたち」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "日期 1～10 號是訓讀：ついたち、ふつか、みっか、よっか、いつか、むいか、なのか、ようか、ここのか、とおか。"
+      }
+    },
+    {
+      "id": "ja-ct-053",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞",
+        "特例"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "nichi"
+      },
+      "prompt": {
+        "sentence": "{今日|きょう}は{五月|ごがつ}___です。",
+        "translation": {
+          "zh-Hant": "今天是五月四號。"
+        },
+        "task": "～日（ついたち・ふつか…）",
+        "base": {
+          "word": "4{日|にち}",
+          "meaning": "四號",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{四日|よっか}"
+        ],
+        "mistakes": [
+          {
+            "text": "よんにち",
+            "note": "4 號念「よっか」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "4 號念「よっか」。14 號、24 號也念「…よっか」。"
+      }
+    },
+    {
+      "id": "ja-ct-054",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞",
+        "特例"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "nichi"
+      },
+      "prompt": {
+        "sentence": "{七夕|たなばた}は{七月|しちがつ}___です。",
+        "translation": {
+          "zh-Hant": "七夕是七月七號。"
+        },
+        "task": "～日（ついたち・ふつか…）",
+        "base": {
+          "word": "7{日|にち}",
+          "meaning": "七號",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{七日|なのか}"
+        ],
+        "mistakes": [
+          {
+            "text": "しちにち",
+            "note": "7 號念「なのか」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "7 號念「なのか」。"
+      }
+    },
+    {
+      "id": "ja-ct-055",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞",
+        "特例"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "nichi"
+      },
+      "prompt": {
+        "sentence": "{試験|しけん}は{三月|さんがつ}___です。",
+        "translation": {
+          "zh-Hant": "考試在三月十四號。"
+        },
+        "task": "～日（ついたち・ふつか…）",
+        "base": {
+          "word": "14{日|にち}",
+          "meaning": "十四號",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{十四日|じゅうよっか}"
+        ],
+        "mistakes": [
+          {
+            "text": "じゅうよんにち",
+            "note": "14 號念「じゅうよっか」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "14 號、24 號念「じゅうよっか」「にじゅうよっか」，11 號以後才回到「にち」。"
+      }
+    },
+    {
+      "id": "ja-ct-056",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞",
+        "特例"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "nichi"
+      },
+      "prompt": {
+        "sentence": "{今日|きょう}は{十二月|じゅうにがつ}___です。",
+        "translation": {
+          "zh-Hant": "今天是十二月二十號。"
+        },
+        "task": "～日（ついたち・ふつか…）",
+        "base": {
+          "word": "20{日|にち}",
+          "meaning": "二十號",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{二十日|はつか}"
+        ],
+        "mistakes": [
+          {
+            "text": "にじゅうにち",
+            "note": "20 號念「はつか」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "20 號念「はつか」，是特例。"
+      }
+    },
+    {
+      "id": "ja-ct-057",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "gatsu"
+      },
+      "prompt": {
+        "sentence": "___に{学校|がっこう}が{始|はじ}まります。",
+        "translation": {
+          "zh-Hant": "學校在四月開學。"
+        },
+        "task": "～月（しがつ・しちがつ）",
+        "base": {
+          "word": "4{月|がつ}",
+          "meaning": "四月",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{四月|しがつ}"
+        ],
+        "mistakes": [
+          {
+            "text": "よんがつ",
+            "note": "4 月念「しがつ」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "月：4 月「しがつ」、7 月「しちがつ」、9 月「くがつ」。"
+      }
+    },
+    {
+      "id": "ja-ct-058",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "gatsu"
+      },
+      "prompt": {
+        "sentence": "___に{旅行|りょこう}します。",
+        "translation": {
+          "zh-Hant": "我七月要去旅行。"
+        },
+        "task": "～月（しがつ・しちがつ）",
+        "base": {
+          "word": "7{月|がつ}",
+          "meaning": "七月",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{七月|しちがつ}"
+        ],
+        "mistakes": [
+          {
+            "text": "なながつ",
+            "note": "7 月念「しちがつ」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "7 月念「しちがつ」。"
+      }
+    },
+    {
+      "id": "ja-ct-059",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "gatsu"
+      },
+      "prompt": {
+        "sentence": "___は{涼|すず}しいです。",
+        "translation": {
+          "zh-Hant": "九月很涼爽。"
+        },
+        "task": "～月（しがつ・しちがつ）",
+        "base": {
+          "word": "9{月|がつ}",
+          "meaning": "九月",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{九月|くがつ}"
+        ],
+        "mistakes": [
+          {
+            "text": "きゅうがつ",
+            "note": "9 月念「くがつ」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "9 月念「くがつ」。"
+      }
+    },
+    {
+      "id": "ja-ct-060",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "en"
+      },
+      "prompt": {
+        "sentence": "このあめは___です。",
+        "translation": {
+          "zh-Hant": "這顆糖是四日圓。"
+        },
+        "task": "～円（よえん）",
+        "base": {
+          "word": "4{円|えん}",
+          "meaning": "四日圓",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{四円|よえん}"
+        ],
+        "mistakes": [
+          {
+            "text": "よんえん",
+            "note": "4 円念「よえん」。"
+          },
+          {
+            "text": "しえん",
+            "note": "4 円念「よえん」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "円：4 円念「よえん」。"
+      }
+    },
+    {
+      "id": "ja-ct-061",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "en"
+      },
+      "prompt": {
+        "sentence": "この{駄菓子|だがし}は___です。",
+        "translation": {
+          "zh-Hant": "這個零食是十四日圓。"
+        },
+        "task": "～円（よえん）",
+        "base": {
+          "word": "14{円|えん}",
+          "meaning": "十四日圓",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{十四円|じゅうよえん}"
+        ],
+        "acceptable": [
+          {
+            "text": "じゅうよんえん",
+            "note": "也有人這樣念，但標準是「じゅうよえん」。"
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "じゅうしえん",
+            "note": "4 円念「よえん」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "14 円念「じゅうよえん」。"
+      }
+    },
+    {
+      "id": "ja-ct-062",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "en"
+      },
+      "prompt": {
+        "sentence": "この{切手|きって}は___です。",
+        "translation": {
+          "zh-Hant": "這張郵票是七日圓。"
+        },
+        "task": "～円（よえん）",
+        "base": {
+          "word": "7{円|えん}",
+          "meaning": "七日圓",
+          "pos": "數詞"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "{七円|ななえん}"
+        ],
+        "acceptable": [
+          {
+            "text": "しちえん",
+            "note": "「しちえん」也有人念，但「ななえん」較常見。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "7 円念「ななえん」。"
+      }
+    },
+    {
+      "id": "ja-ct-063",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "nan"
+      },
+      "prompt": {
+        "sentence": "ご{家族|かぞく}は___ですか。",
+        "translation": {
+          "zh-Hant": "你家有幾個人？"
+        },
+        "task": "何＋助數詞（なん・なに）"
+      },
+      "answer": {
+        "accepted": [
+          "{何人|なんにん}"
+        ],
+        "mistakes": [
+          {
+            "text": "なにひと",
+            "note": "問人數要念「なんにん」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "何＋助數詞念「なん」：なんにん、なんじ、なんぼん、なんがつ。"
+      }
+    },
+    {
+      "id": "ja-ct-064",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞",
+        "特例"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "nan"
+      },
+      "prompt": {
+        "sentence": "あの{人|ひと}は___ですか。",
+        "translation": {
+          "zh-Hant": "那個人是哪一國人？"
+        },
+        "task": "何＋助數詞（なん・なに）"
+      },
+      "answer": {
+        "accepted": [
+          "{何人|なにじん}"
+        ],
+        "mistakes": [
+          {
+            "text": "なんにん",
+            "note": "「なんにん」是「幾個人」，問國籍要念「なにじん」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "「何人」有兩種讀法：なんにん（幾個人）和なにじん（哪一國人）。"
+      }
+    },
+    {
+      "id": "ja-ct-065",
+      "language": "ja",
+      "topic": "counters",
+      "source": "demo-counters",
+      "level": "N5",
+      "tags": [
+        "助數詞"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "form": "nan"
+      },
+      "prompt": {
+        "sentence": "{今|いま}、___ですか。",
+        "translation": {
+          "zh-Hant": "現在幾點？"
+        },
+        "task": "何＋助數詞（なん・なに）"
+      },
+      "answer": {
+        "accepted": [
+          "{何時|なんじ}"
+        ],
+        "mistakes": [
+          {
+            "text": "なにじ",
+            "note": "何＋助數詞念「なん」：なんじ。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "「何時」念「なんじ」。"
+      }
+    }
+  ]
+}

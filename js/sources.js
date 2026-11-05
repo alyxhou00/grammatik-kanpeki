@@ -14,6 +14,7 @@ export const SOURCES = {
   demo: { name: { de: 'Beispielkarten', 'zh-Hant': '範例卡片', en: 'Demo cards' } },
   demo2: { name: { de: 'Beispielkarten, Teil 2', 'zh-Hant': '範例卡片（第二組）', en: 'Demo cards, set 2' } },
   demo3: { name: { de: 'Beispielkarten, Teil 3', 'zh-Hant': '範例卡片（第三組）', en: 'Demo cards, set 3' } },
+  'demo-counters': { name: { de: 'Beispielkarten: Zahlen und Zählwörter', 'zh-Hant': '範例卡片：數字・助數詞', en: 'Demo cards: numbers and counters' } },
   ktxc1kb: { name: 'Kontext C1 Kursbuch' },
 };
 

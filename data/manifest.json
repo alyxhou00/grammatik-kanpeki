@@ -2,6 +2,7 @@
   "description": "Card files bundled with the app. Every file uses the grammatik-kanpeki.cards format (see schema/cards.schema.json).",
   "files": [
     "de/nominalisierung.demo.json",
+    "ja/counters.demo.json",
     "ja/verb-conjugation.demo.json",
     "ja/verb-conjugation.demo2.json",
     "ja/verb-conjugation.demo3.json"
