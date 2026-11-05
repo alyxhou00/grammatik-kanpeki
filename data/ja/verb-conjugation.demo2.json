@@ -19,7 +19,8 @@
       },
       "prompt": {
         "base": { "word": "{勉強|べんきょう}する", "meaning": "念書；學習", "pos": "動詞" },
-        "task": "ませんでした形（禮貌・過去否定）",
+        "task": "ませんでした形（過去否定）",
+        "register": "polite",
         "sentence": "{昨日|きのう}は{全然|ぜんぜん}___。",
         "translation": {
           "zh-Hant": "昨天完全沒有念書。"
@@ -535,7 +536,8 @@
       },
       "prompt": {
         "base": { "word": "{住|す}む", "meaning": "住", "pos": "動詞" },
-        "task": "ています形（狀態・禮貌）",
+        "task": "ています形（狀態）",
+        "register": "polite",
         "sentence": "{姉|あね}は{東京|とうきょう}に___。",
         "translation": {
           "zh-Hant": "我姊姊住在東京。"
@@ -591,7 +593,8 @@
       },
       "prompt": {
         "base": { "word": "{知|し}る", "meaning": "知道；認識", "pos": "動詞" },
-        "task": "ています形（狀態・禮貌）",
+        "task": "ています形（狀態）",
+        "register": "polite",
         "sentence": "あの{人|ひと}の{名前|なまえ}を___か。",
         "translation": {
           "zh-Hant": "你知道那個人的名字嗎？"
@@ -651,6 +654,7 @@
       "prompt": {
         "base": { "word": "{入|はい}る", "meaning": "進入；（お風呂に入る）泡澡", "pos": "動詞" },
         "task": "ない形（否定）",
+        "register": "plain",
         "sentence": "{今日|きょう}はお{風呂|ふろ}に___。",
         "translation": {
           "zh-Hant": "今天不泡澡。"
@@ -706,7 +710,8 @@
       },
       "prompt": {
         "base": { "word": "{走|はし}る", "meaning": "跑", "pos": "動詞" },
-        "task": "ます形（禮貌）",
+        "task": "ます形",
+        "register": "polite",
         "sentence": "{毎朝|まいあさ}、{公園|こうえん}を___。",
         "translation": {
           "zh-Hant": "我每天早上在公園跑步。"
@@ -763,6 +768,7 @@
       "prompt": {
         "base": { "word": "{作|つく}る", "meaning": "做；製作", "pos": "動詞" },
         "task": "意向形（一起～吧）",
+        "register": "plain",
         "sentence": "{一緒|いっしょ}に{晩|ばん}ご{飯|はん}を___！",
         "translation": {
           "zh-Hant": "一起做晚餐吧！"
@@ -812,7 +818,8 @@
       },
       "prompt": {
         "base": { "word": "{会|あ}う", "meaning": "見面", "pos": "動詞" },
-        "task": "ましょう形（禮貌的「～吧」）",
+        "task": "ましょう形（～吧）",
+        "register": "polite",
         "sentence": "じゃ、{三時|さんじ}に{駅|えき}で___。",
         "translation": {
           "zh-Hant": "那麼，三點在車站見吧。"
@@ -868,6 +875,7 @@
       "prompt": {
         "base": { "word": "{行|い}く", "meaning": "去", "pos": "動詞" },
         "task": "たい形（想做）",
+        "register": "plain",
         "sentence": "いつか{日本|にほん}へ___。",
         "translation": {
           "zh-Hant": "總有一天想去日本。"
@@ -978,7 +986,8 @@
       },
       "prompt": {
         "base": { "word": "{話|はな}す", "meaning": "說；講", "pos": "動詞" },
-        "task": "可能形（會、能夠）・禮貌",
+        "task": "可能形（會、能夠）",
+        "register": "polite",
         "sentence": "{日本語|にほんご}が{少|すこ}し___。",
         "translation": {
           "zh-Hant": "我會說一點日文。"
@@ -1039,6 +1048,7 @@
       "prompt": {
         "base": { "word": "{行|い}く", "meaning": "去", "pos": "動詞" },
         "task": "なかった形（過去否定）",
+        "register": "plain",
         "sentence": "{昨日|きのう}は{雨|あめ}で、どこにも___。",
         "translation": {
           "zh-Hant": "昨天下雨，哪裡都沒去。"
@@ -1093,7 +1103,8 @@
       },
       "prompt": {
         "base": { "word": "{見|み}る", "meaning": "看", "pos": "動詞" },
-        "task": "ません形（禮貌・否定）",
+        "task": "ません形（否定）",
+        "register": "polite",
         "sentence": "{朝|あさ}はテレビを___。",
         "translation": {
           "zh-Hant": "我早上不看電視。"
@@ -1144,6 +1155,7 @@
       "prompt": {
         "base": { "word": "{掃除|そうじ}する", "meaning": "打掃", "pos": "動詞" },
         "task": "た形（過去）",
+        "register": "plain",
         "sentence": "{昨日|きのう}、{部屋|へや}を___。",
         "translation": {
           "zh-Hant": "昨天打掃了房間。"
@@ -1253,6 +1265,7 @@
       "prompt": {
         "base": { "word": "{着|き}る", "meaning": "穿（上半身的衣服）", "pos": "動詞" },
         "task": "ている形（穿著・狀態）",
+        "register": "plain",
         "sentence": "{田中|たなか}さんは{赤|あか}いセーターを___。",
         "translation": {
           "zh-Hant": "田中さん穿著紅色毛衣。"

@@ -7,6 +7,7 @@
 //   baseWord, baseMeaning, basePos  cloze: optional word to start from
 //   pos, example                    flip: part of speech and example sentence
 //   task, hint                      prompt.task, prompt.hint (in the course's note language)
+//   register                        prompt.register ('' for none; courses with registers)
 //   accepted                        one answer per line (flip: one meaning per line)
 //   acceptable, mistakes            [{ text, note }]
 //   translation, explanation        { [lang]: text }  (flip: translation is the example's)
@@ -44,7 +45,7 @@ const lines = (s) => String(s ?? '').split('\n').map((x) => x.trim()).filter(Boo
 export function emptyValues(lang, topic) {
   return {
     topic, source: '', sentence: '', word: '', baseWord: '', baseMeaning: '', basePos: '', pos: '', example: '',
-    task: '', hint: '', accepted: '', acceptable: [], mistakes: [], translation: {}, explanation: {}, meta: {},
+    task: '', register: '', hint: '', accepted: '', acceptable: [], mistakes: [], translation: {}, explanation: {}, meta: {},
     level: '', tags: '', cardSource: '',
   };
 }
@@ -67,6 +68,7 @@ export function valuesFromCard(card) {
     pos: p.pos || '',
     example: p.example || '',
     task: locObj(p.task, lang)[noteLang] || '',
+    register: p.register || '',
     hint: locObj(p.hint, lang)[noteLang] || '',
     accepted: (a.accepted || []).join('\n'),
     acceptable: (a.acceptable || []).map((x) => ({ text: x.text, note: locObj(x.note, lang)[noteLang] || '' })),
@@ -155,6 +157,7 @@ export function cardFromValues(values, { lang, existing = null, newId, today = n
   const keepOthers = (old, text) => compactLoc({ ...locObj(old, lang), [noteLang]: text });
   setOrDelete(p, 'task', keepOthers(existing?.prompt?.task, values.task));
   setOrDelete(p, 'hint', keepOthers(existing?.prompt?.hint, values.hint));
+  setOrDelete(p, 'register', type !== 'flip' && values.register in LANGS[lang].registers ? values.register : '');
   const tr = compactLoc(values.translation);
   if (type === 'flip') {
     delete p.translation;

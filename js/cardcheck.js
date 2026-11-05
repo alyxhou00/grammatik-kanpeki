@@ -4,7 +4,7 @@
 import { validateCard } from './store.js';
 import { checkAnswer } from './check.js';
 import { wordSegments, toSurface, toKana } from './text.js';
-import { facetsOf, typeOf, usesRuby } from './topics.js';
+import { LANGS, facetsOf, typeOf, usesRuby } from './topics.js';
 import { sentenceOf, vocabCardFrom } from './cardtypes.js';
 
 export const KANJI = /[一-鿿々]/;
@@ -53,6 +53,18 @@ export function cardProblems(card) {
   for (const [key, names] of Object.entries(facetsOf(card.language, card.topic))) {
     const v = card.meta?.[key];
     if (v !== undefined && !(v in names)) out.push(`meta.${key} "${v}" is not one of: ${Object.keys(names).join(', ')}`);
+  }
+
+  // Register: a known one, and set whenever an answer could be in either register.
+  const L = LANGS[card.language];
+  const reg = card.prompt.register;
+  if (reg !== undefined && !(reg in L.registers)) out.push(`prompt.register "${reg}" is not one of: ${Object.keys(L.registers).join(', ') || '(none in this course)'}`);
+  if (L.politeAnswer && typeOf(card) !== 'flip') {
+    const polite = (x) => new RegExp(L.politeAnswer).test(toSurface(x).trim());
+    const answers = [...a.accepted, ...(a.acceptable || []).map((x) => x.text)];
+    if (reg === undefined && answers.some(polite)) out.push(`some answers are polite: set prompt.register (${Object.keys(L.registers).join(' or ')})`);
+    if (reg === 'polite' && !a.accepted.every(polite)) out.push('prompt.register is "polite" but an accepted answer is not');
+    if (reg === 'plain' && a.accepted.some(polite)) out.push('prompt.register is "plain" but an accepted answer is polite');
   }
 
   // Furigana: every kanji has a reading, or kana answers are not recognized.

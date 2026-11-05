@@ -4,7 +4,7 @@
 //   cloze    fill the blank (___) in prompt.sentence, optionally from a base word, e.g. 動詞變化, 助詞
 //   flip     classic Anki card: see the front, recall the back, grade yourself (word list)
 //
-// Shared by every type: prompt.words (hoverable words), prompt.hint, prompt.translation, prompt.task,
+// Shared by every type: prompt.words (hoverable words), prompt.hint, prompt.translation, prompt.task, prompt.register,
 // card.explanation (tabs for each language it has) and chips for card.meta values named in the topic's facets.
 // Sentences and words get a speaker button when the browser has a voice for the course (ctx.speak).
 // A word shown on its own (word card, dictionary form) gets its pitch accent when the course has the data (js/pitch.js).
@@ -166,6 +166,19 @@ function taskChip(card, ctx) {
     : `<button type="button" class="form-chip ghost" data-action="show-form">${esc(ctx.labels.showTask)}</button>`;
 }
 
+/** The register label (e.g. 普通形 or 禮貌): which politeness the answer is in. Always shown, as the task alone cannot say. */
+function registerChip(card, ctx, cls = '') {
+  const r = card.prompt.register;
+  if (!r) return '';
+  return `<span class="register-chip${cls}" data-register="${esc(r)}">${esc(ctx.L.registers[r] || r)}</span>`;
+}
+
+/** Register label and task chip side by side. */
+function taskChips(card, ctx) {
+  const chips = registerChip(card, ctx) + taskChip(card, ctx);
+  return chips ? `<div class="task-chips">${chips}</div>` : '';
+}
+
 const noteHTML = (note, lang) => (note ? `<p class="note" lang="${lang}">${esc(loc(note, [lang]))}</p>` : '');
 
 /** The learner's answer as typed (in a course with romaji input, romaji is also shown as kana). */
@@ -197,7 +210,7 @@ export const CARD_RENDERERS = {
       const p = card.prompt;
       return `<div class="eyebrow">${esc(ctx.labels.source)}</div>
         <p class="${sentenceClass(card)}" lang="${card.language}">${sentenceHTML(p.source, null, p.words || [])}${speakButton(ctx, p.source, card.language, { main: true })}</p>
-        ${p.task ? `<div class="task-row">${taskChip(card, ctx)}</div>` : ''}
+        ${p.task || p.register ? `<div class="task-row">${taskChips(card, ctx)}</div>` : ''}
         ${aidsBlock(card, ctx)}`;
     },
     input(card, ctx) {
@@ -252,7 +265,7 @@ export const CARD_RENDERERS = {
             ${p.base.meaning ? `<div class="meaning" lang="${ctx.L.noteLang}">${esc(p.base.meaning)}</div>` : ''}
           </div>`
         : '';
-      const task = taskChip(card, ctx);
+      const task = taskChips(card, ctx);
       // The filled-in answer is hoverable as the base word (e.g. 食べない → 食べる).
       // Read aloud, the sentence has a pause for the blank until the answer is shown, then the answer in it.
       const fillWord = p.base?.meaning ? { text: p.base.word, meaning: p.base.meaning, pos: p.base.pos } : null;
@@ -280,7 +293,7 @@ export const CARD_RENDERERS = {
       const task = loc(p.task, [ctx.L.noteLang]);
       const head = p.base?.word ? `<span lang="${lang}">${rubyHTML(p.base.word)}</span> ` : '';
       const tr = loc(p.translation, [ctx.L.noteLang]);
-      return `<div class="sum-main">${head}${task ? `<span class="form-chip tiny">${esc(task)}</span>` : ''}${!head && !task ? `<span lang="${lang}">${sentenceHTML(p.sentence, card.answer.accepted[0])}</span>` : ''}</div>
+      return `<div class="sum-main">${head}${registerChip(card, ctx, ' tiny')}${task ? `<span class="form-chip tiny">${esc(task)}</span>` : ''}${!head && !task ? `<span lang="${lang}">${sentenceHTML(p.sentence, card.answer.accepted[0])}</span>` : ''}</div>
         <div class="sum-sub">${head || task ? `<span lang="${lang}">${sentenceHTML(p.sentence, card.answer.accepted[0])}</span> ` : ''}${tr ? `<span class="muted">${esc(tr)}</span>` : ''}</div>`;
     },
   },

@@ -43,6 +43,10 @@ export const LANG_FIELDS = {
   sentenceClass: 'string', // extra class on prompt sentences ('' for none)
   speech: 'object', // read aloud (js/speech.js): { locale: BCP 47 tag that picks the voice, rate: default speed }
   pitch: 'string', // folder of pitch-accent data drawn over single words (js/pitch.js), '' for none
+  registers: 'object', // politeness levels a task can ask for, shown as a label next to the task:
+  //                    { plain: '…', polite: '…' } (card.prompt.register), {} for none
+  politeAnswer: 'string', // regex source: an answer in the polite register ends like this ('' for none).
+  //                    js/cardcheck.js uses it to make sure such cards say which register they want
   topics: 'object', // the decks, see above
 };
 
@@ -65,6 +69,8 @@ export const LANGS = {
     sentenceClass: '',
     speech: { locale: 'de-DE', rate: 1 },
     pitch: '',
+    registers: {},
+    politeAnswer: '',
     topics: [
       {
         id: 'nominalisierung', label: 'Nominalisierung', type: 'rewrite',
@@ -114,6 +120,10 @@ export const LANGS = {
     sentenceClass: 'ja',
     speech: { locale: 'ja-JP', rate: 0.85 },
     pitch: 'data/pitch/ja',
+    // Set only when the blank itself can be plain or polite (食べない／食べません); not on forms that look
+    // the same either way (飲んで before ください).
+    registers: { plain: '普通形', polite: '禮貌' },
+    politeAnswer: '(?:ます|ました|ません|ませんでした|ましょう|です)$',
     topics: [
       {
         id: 'verb-conjugation', label: '動詞變化', type: 'cloze',
@@ -124,13 +134,13 @@ export const LANGS = {
             'shimo-ichidan': '下一段動詞（第二類）', irregular: '不規則動詞（第三類）',
           },
         },
-        about: 'Conjugate a JLPT N5 verb into the form the task names (ない形, て形, た形, ます形 …) to fill the blank in a short sentence. base is the dictionary form with its Chinese meaning; meta.verbClass is its class. Typical mistakes: the wrong verb class (食べらない), the wrong て-form sound change (飲みて instead of 飲んで).',
+        about: 'Conjugate a JLPT N5 verb into the form the task names (ない形, て形, た形, ます形 …) to fill the blank in a short sentence. When the blank could be filled in either register (食べない／食べません), prompt.register says which one; the other goes into acceptable with a note. base is the dictionary form with its Chinese meaning; meta.verbClass is its class. Typical mistakes: the wrong verb class (食べらない), the wrong て-form sound change (飲みて instead of 飲んで).',
       },
       {
         id: 'adjective-conjugation', label: '形容詞變化', type: 'cloze',
         labels: { base: '辭書形', showTask: '顯示要變成哪一種形', placeholder: '輸入形容詞變化，例如 たかくない／高くない／takakunai' },
         facets: { adjClass: { i: 'い形容詞', na: 'な形容詞' } },
-        about: 'Conjugate a JLPT N5 adjective into the form the task names (negative, past, て-form, adverb …) to fill the blank. base is the dictionary form; meta.adjClass is "i" or "na". Typical mistakes: treating a な-adjective like an い-adjective (きれくない), いい → いくない instead of よくない.',
+        about: 'Conjugate a JLPT N5 adjective into the form the task names (negative, past, て-form, adverb …) to fill the blank. When the blank could be filled in either register (高くない／高くないです), prompt.register says which one. base is the dictionary form; meta.adjClass is "i" or "na". Typical mistakes: treating a な-adjective like an い-adjective (きれくない), いい → いくない instead of よくない.',
       },
       {
         id: 'particles', label: '助詞', type: 'cloze', labels: { placeholder: '輸入助詞，例如 で／de' },
