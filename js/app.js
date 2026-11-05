@@ -24,7 +24,7 @@ const ICON = {
   flame: '<svg class="flame" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12.6 2.2c.4 3-1.1 4.7-2.6 6.3C8.5 10.1 7 11.7 7 14.3a5 5 0 0 0 10 0c0-1.6-.6-2.9-1.4-3.9-.2 1.2-.8 2-1.7 2.4.5-2.9-.2-6.9-1.3-10.6Z"/></svg>',
 };
 
-const state = { lang: 'de', topic: 'nominalisierung', view: 'learn', guideAt: '', sessions: {}, loadError: false, flash: '', menuOpen: false };
+const state = { lang: 'de', topic: 'nominalisierung', view: 'learn', guideAt: '', guideReturn: null, restoreScroll: null, sessions: {}, loadError: false, flash: '', menuOpen: false };
 
 const t = () => UI[state.lang];
 const settings = () => store.getSettings();
@@ -86,7 +86,12 @@ function parseHash() {
 function go(lang, topic, view, at = '') {
   location.hash = `#/${lang}/${topic}/${view}${at ? `/${encodeURIComponent(at)}` : ''}`;
 }
-window.addEventListener('hashchange', () => { parseHash(); try { localStorage.setItem('gk.route', location.hash); } catch {} render(); });
+window.addEventListener('hashchange', () => {
+  parseHash();
+  if (state.view !== 'guide') state.guideReturn = null; // left the guide some other way: no way back to offer
+  try { localStorage.setItem('gk.route', location.hash); } catch {}
+  render();
+});
 
 // ---------- mobile topic menu ----------
 
@@ -473,6 +478,7 @@ function render() {
     main.innerHTML = banner + renderOverview();
   }
   markSavedWords();
+  if (state.restoreScroll != null) { window.scrollTo(0, state.restoreScroll); state.restoreScroll = null; }
 }
 
 function renderOverview() {
@@ -669,18 +675,61 @@ function renderGuide() {
     const cls = `panel g-topic${depth ? ' sub' : ''}`;
     if (!g) return `<section class="${cls} soon">${head}<p class="hint">${esc(T.guide.soon)}</p></section>`;
     const labels = formsOf(lang, tp.id);
-    const sections = g.sections.map((s) => `<section class="g-section">
-        <h3 id="guide-${anchorOf(tp.id, s.id)}" tabindex="-1">${esc(s.title)}</h3>
+    // Each chapter folds (a <details>); which ones are folded is kept in the settings.
+    const folded = settings().guideFolded;
+    const sections = g.sections.map((s) => {
+      const anchor = anchorOf(tp.id, s.id);
+      return `<details class="g-section" data-guide-section="${lang}/${anchor}" ${folded.includes(`${lang}/${anchor}`) ? '' : 'open'}>
+        <summary><h3 id="guide-${anchor}" tabindex="-1">${esc(s.title)}</h3></summary>
+        <div class="g-section-body">
         ${s.body || ''}
         ${(s.items || []).map((it) => `<div class="g-item" id="guide-${anchorOf(tp.id, s.id, it.form || it.id)}" tabindex="-1">
           <h4>${it.form ? `<span class="form-chip">${esc(labels[it.form] || it.form)}</span>` : `<span lang="ja">${esc(it.title)}</span>`}</h4>${it.body}</div>`).join('')}
-      </section>`).join('');
+        </div>
+      </details>`;
+    }).join('');
     return `<section class="${cls}">${head}${g.intro ? `<div class="g-intro">${g.intro}</div>` : ''}${sections}</section>`;
   }).join('');
+  const back = state.guideReturn
+    ? `<button type="button" class="btn primary guide-back" data-action="guide-return">← ${esc(state.guideReturn.label)}</button>`
+    : '';
   return `<div class="guide" lang="${LANGS[lang].noteLang}">
-    <nav class="guide-toc" aria-label="${esc(T.guide.toc)}"><div class="side-title">${esc(T.guide.toc)}</div><ol>${toc}</ol></nav>
+    <nav class="guide-toc" aria-label="${esc(T.guide.toc)}">
+      <div class="toc-head"><span class="side-title">${esc(T.guide.toc)}</span>
+        <span class="toc-fold"><button type="button" class="link" data-action="guide-fold" data-open="0">${esc(T.guide.foldAll)}</button>
+        <button type="button" class="link" data-action="guide-fold" data-open="1">${esc(T.guide.unfoldAll)}</button></span></div>
+      <ol>${toc}</ol></nav>
     <div class="guide-body">${guideRuby(body)}</div>
+    ${back}
   </div>`;
+}
+
+/** Fold or unfold every chapter of the guide. */
+function foldGuide(open) {
+  const all = [...document.querySelectorAll('details[data-guide-section]')];
+  const keys = all.map((d) => d.dataset.guideSection);
+  const rest = settings().guideFolded.filter((k) => !keys.includes(k));
+  store.setSettings({ guideFolded: open ? rest : [...rest, ...keys] });
+  for (const d of all) d.open = open;
+}
+
+/** Open the guide at a place, remembering where we came from (the card being answered, or the card list). */
+function openGuide(anchor) {
+  const T = t();
+  if (state.view !== 'guide') {
+    const fromCard = state.view === 'learn' && !!session()?.current;
+    state.guideReturn = { hash: location.hash, scroll: scrollY, label: fromCard ? T.guide.backToCard : T.guide.backToList };
+  }
+  go(state.lang, state.topic, 'guide', anchor);
+}
+
+/** Back to the card (or the card list) the guide was opened from, at the same scroll position. */
+function returnFromGuide() {
+  const r = state.guideReturn;
+  if (!r) return;
+  state.guideReturn = null;
+  state.restoreScroll = r.scroll;
+  location.hash = r.hash;
 }
 
 /** Scroll to the place the URL names (a card's form, a section), else to the current topic. */
@@ -688,6 +737,9 @@ function afterGuideRender() {
   const at = state.guideAt || (guideOf(state.lang, state.topic) ? anchorOf(state.topic) : '');
   const el = at && document.getElementById(`guide-${at}`);
   if (!el) { window.scrollTo(0, 0); return; }
+  // A place inside a folded chapter unfolds it.
+  const chapter = el.closest('details[data-guide-section]');
+  if (chapter && !chapter.open) chapter.open = true;
   el.scrollIntoView({ block: 'start' });
   el.focus({ preventScroll: true });
   if (state.guideAt) el.classList.add('g-target'); // brief highlight of the place a card linked to
@@ -1215,7 +1267,9 @@ document.addEventListener('click', (e) => {
   if (a === 'add-card') { setMenu(false); return openCardForm(); }
   if (a === 'edit-card') return openCardForm(el.dataset.id);
   // The guide opens on the current topic, so a session in progress is still there on "Learn".
-  if (a === 'open-guide') { setMenu(false); return go(state.lang, state.topic, 'guide', el.dataset.anchor || ''); }
+  if (a === 'open-guide') { setMenu(false); return openGuide(el.dataset.anchor || ''); }
+  if (a === 'guide-return') return returnFromGuide();
+  if (a === 'guide-fold') return foldGuide(el.dataset.open === '1');
   if (a === 'practice') return go(state.lang, el.dataset.id, 'learn');
   if (a === 'close-card-form') { $('#dlg-card').close(); return; }
   if (a === 'add-row') {
@@ -1340,6 +1394,14 @@ document.addEventListener('change', (e) => {
   }
 });
 
+// Remember which chapters of the grammar guide are folded.
+document.addEventListener('toggle', (e) => {
+  const key = e.target.dataset?.guideSection;
+  if (!key) return;
+  const rest = settings().guideFolded.filter((k) => k !== key);
+  store.setSettings({ guideFolded: e.target.open ? rest : [...rest, key] });
+}, true);
+
 // Keep <details> hint state across re-renders.
 document.addEventListener('toggle', (e) => {
   const d = e.target;
@@ -1369,6 +1431,8 @@ document.addEventListener('keydown', (e) => {
     return;
   }
   if (state.menuOpen && e.key === 'Escape') { setMenu(false); $('#btn-menu').focus(); return; }
+  // Esc in the guide goes back to the card it was opened from.
+  if (state.view === 'guide' && state.guideReturn && e.key === 'Escape' && !popWord && !document.querySelector('dialog[open]')) { returnFromGuide(); return; }
   if (popWord && e.key === 'Escape') { const w = popWord; hidePop(); w.focus(); return; }
   const word = e.target.closest?.('.word[data-word]');
   if (word && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); showPop(word); return; }

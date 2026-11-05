@@ -61,9 +61,10 @@ let studyLog = read(K.log, {});
 // collapsed: sidebar topics whose sub-topics are folded away ("de/deklination").
 // speech: per course { voice (voiceURI, '' = automatic), rate (unset = the course's default) }.
 // weekStart: first day of the week in the study history heatmap, 1 = Monday, 0 = Sunday.
+// guideFolded: chapters of the grammar guide that are folded away ("ja/verb-conjugation--te").
 const DEFAULT_SETTINGS = {
   newPerDay: DEFAULTS.newPerDay, reviewsPerDay: DEFAULTS.reviewsPerDay, furigana: true, showForm: true,
-  explainLang: { de: 'de', ja: 'zh-Hant' }, theme: 'system', collapsed: [], speech: {}, weekStart: 1,
+  explainLang: { de: 'de', ja: 'zh-Hant' }, theme: 'system', collapsed: [], speech: {}, weekStart: 1, guideFolded: [],
 };
 function loadSettings() {
   const saved = read(K.settings, {});

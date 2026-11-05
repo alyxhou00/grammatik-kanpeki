@@ -19,7 +19,7 @@ Topics can have sub-topics; a parent deck studies the cards of all its sub-topic
 - **Add / edit cards:** the form next to Learn / Cards. Japanese furigana is written `{漢字|かんじ}`.
 - **Read aloud:** speaker buttons use the browser's Web Speech API (voice and speed per course in the settings). Buttons stay hidden if the OS has no voice for the course.
 - **Pitch accent:** Japanese words get pitch marks from [Kanjium](https://github.com/mifunetoshiro/kanjium) data (CC BY-SA 4.0), converted by `tools/pitch.mjs` into `data/pitch/ja/` (see the README there).
-- **Grammar guide:** the third tab (文法說明 / Erklärungen) explains the course's grammar, split by topic. After answering, and in the card list (book icon), a card links to the entry for its form. 動詞變化 shows every form with タピる (五段) and 食べる (一段) side by side; other topics are marked as coming. Content is in `js/grammar.js`: every form in a topic's `forms` registry needs one entry (`node tests/grammar.test.mjs`).
+- **Grammar guide:** the third tab (文法說明 / Erklärungen) explains the course's grammar, split by topic. After answering, and in the card list (book icon), a card links to the entry for its form; a back button (or Esc) returns to that card. Chapters fold, and the guide remembers which are folded. 動詞變化 shows every form with タピる (五段) and 食べる (一段) side by side; other topics are marked as coming. Content is in `js/grammar.js`: every form in a topic's `forms` registry needs one entry (`node tests/grammar.test.mjs`).
 - **Streak and history:** the flame in the top bar opens a streak summary and a 12-month heatmap, counted per day and course.
 
 ## Run it

@@ -506,7 +506,10 @@ dialog.dlg-wide { width: min(660px, calc(100vw - 32px)); }
 .guide { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 20px; align-items: start; }
 .guide-toc { position: sticky; top: 76px; max-height: calc(100vh - 96px); overflow-y: auto; font-size: .88rem; }
 .guide-toc ol { list-style: none; margin: 0; padding: 0; }
-.guide-toc .side-title { padding: 0 0 8px; }
+.guide-toc .side-title { padding: 0; }
+.toc-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 2px 8px; margin-bottom: 8px; }
+.toc-fold { display: inline-flex; gap: 6px; }
+.toc-fold .link { padding: 0; font-size: .78rem; font-weight: 600; }
 .guide-toc a { color: var(--muted); text-decoration: none; display: block; padding: 3px 0; }
 .guide-toc a:hover { color: var(--accent); }
 .toc-topic { margin-bottom: 10px; }
@@ -524,8 +527,19 @@ dialog.dlg-wide { width: min(660px, calc(100vw - 32px)); }
 .g-topic-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 .g-topic-head h2 { margin: 0; font-size: 1.3rem; }
 .g-intro { margin-top: 10px; }
-.g-section { border-top: 1px solid var(--line); margin-top: 24px; padding-top: 18px; }
-.g-section h3 { margin: 0 0 10px; font-size: 1.12rem; }
+/* chapters fold: the heading is the <summary>, with a caret */
+.g-section { border-top: 1px solid var(--line); margin-top: 20px; padding-top: 14px; }
+.g-section > summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 8px; border-radius: 8px; margin: 0 -6px; padding: 2px 6px; }
+.g-section > summary::-webkit-details-marker { display: none; }
+.g-section > summary:hover { background: var(--surface-2); }
+.g-section > summary::before {
+  content: ""; flex-shrink: 0; width: 7px; height: 7px; margin: 0 3px;
+  border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted);
+  transform: rotate(-45deg); transition: transform .15s;
+}
+.g-section[open] > summary::before { transform: rotate(45deg); }
+.g-section h3 { margin: 0; font-size: 1.12rem; }
+.g-section-body { padding-top: 10px; }
 .g-section h4 { margin: 18px 0 8px; font-size: 1rem; }
 .g-section p { margin: 0 0 10px; }
 .g-item { border-radius: 10px; padding: 2px 12px 4px; margin: 10px -12px 0; transition: background-color .6s; }
@@ -539,16 +553,28 @@ dialog.dlg-wide { width: min(660px, calc(100vw - 32px)); }
 .g-warn { background: var(--warn-soft); border-radius: 8px; padding: 8px 12px; font-size: .95rem; }
 .g-table-wrap { overflow-x: auto; margin: 0 0 12px; }
 .g-table { border-collapse: collapse; width: 100%; font-size: .95rem; }
-.g-table th, .g-table td { border-bottom: 1px solid var(--line); padding: 6px 10px; text-align: left; vertical-align: top; }
-.g-table th { font-size: .8rem; color: var(--muted); font-weight: 700; }
-.g-table td[lang="ja"] { line-height: 1.9; white-space: nowrap; }
+/* Cells wrap (Japanese can break between any two kana), so a table fits its panel; labels and headers stay whole. */
+.g-table th, .g-table td { border-bottom: 1px solid var(--line); padding: 6px 10px; text-align: left; vertical-align: top; min-width: 3em; }
+.g-table th { font-size: .8rem; color: var(--muted); font-weight: 700; white-space: nowrap; }
+.g-table td:first-child { white-space: nowrap; }
+.g-table td[lang="ja"] { line-height: 1.9; }
+.g-sub { display: block; white-space: normal; font-size: .76rem; color: var(--muted); }
+/* back to the card the guide was opened from */
+.guide-back { position: fixed; right: 24px; bottom: 24px; z-index: 10; box-shadow: var(--shadow), 0 4px 14px rgba(0, 0, 0, .18); }
+.guide:has(.guide-back) .guide-body { padding-bottom: 72px; }
 .guide-link { margin: 14px 0 0; }
 .guide-link .link { display: inline-flex; align-items: center; gap: 6px; padding: 4px 0; }
 @media (max-width: 1000px) {
   .guide { grid-template-columns: minmax(0, 1fr); }
+  .guide-back { right: 16px; bottom: 16px; }
   .guide-toc { position: static; max-height: none; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; }
   .guide-toc > ol { columns: 2 180px; column-gap: 20px; }
   .toc-topic { break-inside: avoid; }
+}
+@media (max-width: 640px) {
+  .g-table { font-size: .86rem; }
+  .g-table th, .g-table td { padding: 6px 5px; min-width: 0; }
+  .g-table th { white-space: normal; }
 }
 @media (prefers-reduced-motion: reduce) {
   .g-target { animation: none; background-color: var(--accent-soft); }
