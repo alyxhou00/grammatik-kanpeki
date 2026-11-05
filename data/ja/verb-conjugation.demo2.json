@@ -527,16 +527,16 @@
       "level": "N5",
       "tags": [
         "五段",
-        "ています形"
+        "ている形"
       ],
       "createdAt": "2026-11-03",
       "meta": {
         "verbClass": "godan",
-        "form": "teiru"
+        "form": "teiru-state"
       },
       "prompt": {
         "base": { "word": "{住|す}む", "meaning": "住", "pos": "動詞" },
-        "task": "ています形（狀態）",
+        "task": "ている形（狀態）",
         "register": "polite",
         "sentence": "{姉|あね}は{東京|とうきょう}に___。",
         "translation": {
@@ -584,16 +584,16 @@
       "level": "N5",
       "tags": [
         "五段",
-        "ています形"
+        "ている形"
       ],
       "createdAt": "2026-11-03",
       "meta": {
         "verbClass": "godan",
-        "form": "teiru"
+        "form": "teiru-state"
       },
       "prompt": {
         "base": { "word": "{知|し}る", "meaning": "知道；認識", "pos": "動詞" },
-        "task": "ています形（狀態）",
+        "task": "ている形（狀態）",
         "register": "polite",
         "sentence": "あの{人|ひと}の{名前|なまえ}を___か。",
         "translation": {
@@ -767,7 +767,7 @@
       },
       "prompt": {
         "base": { "word": "{作|つく}る", "meaning": "做；製作", "pos": "動詞" },
-        "task": "意向形（一起～吧）",
+        "task": "意向形（一起…吧）",
         "register": "plain",
         "sentence": "{一緒|いっしょ}に{晩|ばん}ご{飯|はん}を___！",
         "translation": {
@@ -818,7 +818,7 @@
       },
       "prompt": {
         "base": { "word": "{会|あ}う", "meaning": "見面", "pos": "動詞" },
-        "task": "ましょう形（～吧）",
+        "task": "ましょう形（…吧）",
         "register": "polite",
         "sentence": "じゃ、{三時|さんじ}に{駅|えき}で___。",
         "translation": {
@@ -922,16 +922,16 @@
       "level": "N5",
       "tags": [
         "不規則",
-        "て形 ＋ ください"
+        "てください"
       ],
       "createdAt": "2026-11-03",
       "meta": {
         "verbClass": "irregular",
-        "form": "te"
+        "form": "te-kudasai"
       },
       "prompt": {
         "base": { "word": "{来|く}る", "meaning": "來", "pos": "動詞" },
-        "task": "て形 ＋ ください",
+        "task": "てください（請…）",
         "sentence": "{明日|あした}は{八時|はちじ}に___ください。",
         "translation": {
           "zh-Hant": "明天請八點來。"
@@ -1260,11 +1260,11 @@
       "createdAt": "2026-11-03",
       "meta": {
         "verbClass": "kami-ichidan",
-        "form": "teiru"
+        "form": "teiru-state"
       },
       "prompt": {
         "base": { "word": "{着|き}る", "meaning": "穿（上半身的衣服）", "pos": "動詞" },
-        "task": "ている形（穿著・狀態）",
+        "task": "ている形（狀態）",
         "register": "plain",
         "sentence": "{田中|たなか}さんは{赤|あか}いセーターを___。",
         "translation": {

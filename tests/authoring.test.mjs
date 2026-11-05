@@ -2,7 +2,7 @@
 // Run: node tests/authoring.test.mjs
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { LANGS, topicType } from '../js/topics.js';
+import { LANGS, topicType, formsOf } from '../js/topics.js';
 import { AUTHORING_FORMAT, authoringSchema, checkSchema, cardsFromAuthoring, toAuthoring } from '../js/authoring.js';
 import { cardProblems } from '../js/cardcheck.js';
 import { parseImport } from '../js/store.js';
@@ -85,6 +85,42 @@ for (const c of bundled) {
   assert.match(problems(withReg(plain, 'formal')), /not one of: plain, polite/);
   const de = bundled.find((c) => c.language === 'de');
   assert.match(problems(withReg(de, 'plain')), /none in this course/);
+}
+
+// ---------- the form registry: one label per form, and the task is that label ----------
+
+{
+  const forms = formsOf('ja', 'verb-conjugation');
+  const labels = Object.values(forms);
+  assert.equal(new Set(labels).size, labels.length, 'two forms never share a label');
+  for (const [id, label] of Object.entries(forms)) {
+    assert.match(id, /^[a-z]+(-[a-z]+)*$/, `form id "${id}" is lowercase-and-dashes`);
+    assert.doesNotMatch(label.replace(/^～/, ''), /～/, `${id}: glosses use … (～ only marks a bare suffix at the start)`);
+    assert.doesNotMatch(label, /[ ＋+]/, `${id}: a label is one pattern or one form name, not "form ＋ word"`);
+    assert.match(label, /^[^（）]+(（[^（）]+）)?$/, `${id}: label is a name with at most one （gloss）`);
+  }
+  assert.deepEqual(formsOf('ja', 'particles'), {}, 'topics without a registry have none');
+  const used = new Set(bundled.filter((c) => c.topic === 'verb-conjugation').map((c) => c.meta.form));
+  assert.deepEqual(Object.keys(forms).filter((f) => !used.has(f)), [], 'every registered form has a bundled card');
+
+  const card = bundled.find((c) => c.id === 'ja-vc-demo2-006'); // てはいけない
+  const problems = (c) => cardProblems(c).join('\n');
+  assert.deepEqual(cardProblems(card), []);
+  assert.match(problems({ ...card, prompt: { ...card.prompt, task: 'てはいけない（不可以…）。' } }), /not the label of form "te-wa-ikenai": it must be "てはいけない（不可以…）"/);
+  assert.match(problems({ ...card, prompt: { ...card.prompt, task: undefined } }), /prompt\.task is missing/);
+  assert.match(problems({ ...card, meta: { ...card.meta, form: 'te' } }), /not the label of form "te"/);
+  assert.match(problems({ ...card, meta: { ...card.meta, form: 'tehaikanai' } }), /meta\.form "tehaikanai" is not one of: nai,/);
+  assert.match(problems({ ...card, meta: { verbClass: 'godan' } }), /meta\.form is missing/);
+
+  // Authors name the form; the schema lists the registry, and the label comes from it.
+  const s = authoringSchema('ja', 'verb-conjugation').properties.cards.items;
+  assert.deepEqual(s.properties.meta.properties.form.enum, Object.keys(forms));
+  assert.ok(s.properties.meta.required.includes('form'));
+  const written = { prompt: { sentence: '{窓|まど}を___もいいですか。', task: 'whatever' }, answer: { accepted: ['{開|あ}けて'] }, meta: { verbClass: 'shimo-ichidan', form: 'te-mo-ii' } };
+  const file = fileOf('ja', 'verb-conjugation', [written]);
+  assert.deepEqual(checkSchema(authoringSchema('ja', 'verb-conjugation'), file), []);
+  assert.equal(cardsFromAuthoring(file)[0].prompt.task, forms['te-mo-ii'], 'the registry wins over a task the author wrote');
+  assert.equal(cardsFromAuthoring(fileOf('ja', 'verb-conjugation', [{ ...written, prompt: { sentence: written.prompt.sentence } }]))[0].prompt.task, forms['te-mo-ii']);
 }
 
 // ---------- ids: stable, and distinct within a file ----------

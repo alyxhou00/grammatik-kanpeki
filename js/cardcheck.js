@@ -4,7 +4,7 @@
 import { validateCard } from './store.js';
 import { checkAnswer } from './check.js';
 import { wordSegments, toSurface, toKana } from './text.js';
-import { LANGS, facetsOf, typeOf, usesRuby } from './topics.js';
+import { LANGS, facetsOf, formsOf, typeOf, usesRuby } from './topics.js';
 import { sentenceOf, vocabCardFrom } from './cardtypes.js';
 
 export const KANJI = /[一-鿿々]/;
@@ -53,6 +53,17 @@ export function cardProblems(card) {
   for (const [key, names] of Object.entries(facetsOf(card.language, card.topic))) {
     const v = card.meta?.[key];
     if (v !== undefined && !(v in names)) out.push(`meta.${key} "${v}" is not one of: ${Object.keys(names).join(', ')}`);
+  }
+
+  // Form registry: a topic that has one names the form in meta.form, and the task is that form's label.
+  const forms = formsOf(card.language, card.topic);
+  if (Object.keys(forms).length && typeOf(card) !== 'flip') {
+    const form = card.meta?.form;
+    const task = card.prompt.task;
+    const written = typeof task === 'string' ? task : task?.[LANGS[card.language].noteLang];
+    if (form === undefined) out.push(`meta.form is missing (one of: ${Object.keys(forms).join(', ')})`);
+    else if (!(form in forms)) out.push(`meta.form "${form}" is not one of: ${Object.keys(forms).join(', ')}`);
+    else if (written !== forms[form]) out.push(`prompt.task ${written === undefined ? 'is missing' : `"${written}" is not the label of form "${form}"`}: it must be "${forms[form]}"`);
   }
 
   // Register: a known one, and set whenever an answer could be in either register.
