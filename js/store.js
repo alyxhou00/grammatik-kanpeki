@@ -100,8 +100,9 @@ export function cardsFor(lang, topic) {
 }
 export const getCard = (id) => (hidden.has(id) ? null : userCards[id] || bundled.get(id) || null);
 
-/** Demo sources: "demo", "demo2", "demo3", …, optionally with a suffix: "demo-n5", "demo2-b1". Not "demographie". */
-export const isDemoSource = (source) => /^demo\d*(-[\w-]+)?$/.test(source || '');
+/** Demo sources: "demo", "demo2", "demo3", "demo1.5", …, optionally with a suffix: "demo-n5", "demo2-b1".
+ *  Not "demographie", "demo1." or "demo.5". */
+export const isDemoSource = (source) => /^demo(\d+(\.\d+)?)?(-[\w-]+)?$/.test(source || '');
 
 /** A demo card ships with the app with a demo source. It stays one after the user edits it;
  *  cards the user adds, imports or saves from a word list do not count, even if copied from a demo card. */

@@ -1,0 +1,1745 @@
+{
+  "format": "grammatik-kanpeki.cards",
+  "version": 2,
+  "cards": [
+    {
+      "id": "ja-vc-demo3-001",
+      "language": "ja",
+      "topic": "verb-conjugation",
+      "source": "demo3",
+      "level": "N5",
+      "tags": [
+        "一段",
+        "ます形"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "verbClass": "shimo-ichidan",
+        "form": "masu"
+      },
+      "prompt": {
+        "base": {
+          "word": "{食|た}べる",
+          "meaning": "吃",
+          "pos": "動詞"
+        },
+        "task": "ます形（禮貌）",
+        "sentence": "{毎朝|まいあさ}、パンを___。",
+        "translation": {
+          "zh-Hant": "每天早上吃麵包。"
+        },
+        "words": [
+          {
+            "text": "{毎朝|まいあさ}",
+            "meaning": "每天早上",
+            "pos": "名詞"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "{食|た}べます"
+        ],
+        "acceptable": [
+          {
+            "text": "{食|た}べる",
+            "note": "文法正確，但這題要禮貌形（ます形）。"
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "{食|た}べります",
+            "note": "一段動詞直接去掉「る」再加「ます」，不會變成「り」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "食べる是一段動詞（第二類）：去掉「る」＋ます → 食べます。一段動詞的變化最簡單，所有形都是「去る＋語尾」。"
+      }
+    },
+    {
+      "id": "ja-vc-demo3-002",
+      "language": "ja",
+      "topic": "verb-conjugation",
+      "source": "demo3",
+      "level": "N5",
+      "tags": [
+        "一段",
+        "ます形"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "verbClass": "kami-ichidan",
+        "form": "masu"
+      },
+      "prompt": {
+        "base": {
+          "word": "{起|お}きる",
+          "meaning": "起床",
+          "pos": "動詞"
+        },
+        "task": "ます形（禮貌）",
+        "sentence": "{毎日|まいにち}、{七時|しちじ}に___。",
+        "translation": {
+          "zh-Hant": "每天七點起床。"
+        },
+        "words": [
+          {
+            "text": "{毎日|まいにち}",
+            "meaning": "每天",
+            "pos": "名詞"
+          },
+          {
+            "text": "{七時|しちじ}",
+            "meaning": "七點",
+            "pos": "名詞"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "{起|お}きます"
+        ],
+        "acceptable": [
+          {
+            "text": "{起|お}きる",
+            "note": "文法正確，但這題要禮貌形（ます形）。"
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "{起|お}きるます",
+            "note": "「ます」不能接在辭書形後面，要先去掉「る」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "起きる是一段動詞：起き＋ます → 起きます。"
+      }
+    },
+    {
+      "id": "ja-vc-demo3-003",
+      "language": "ja",
+      "topic": "verb-conjugation",
+      "source": "demo3",
+      "level": "N5",
+      "tags": [
+        "一段",
+        "ます形"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "verbClass": "kami-ichidan",
+        "form": "masu"
+      },
+      "prompt": {
+        "base": {
+          "word": "いる",
+          "meaning": "（人、動物）在",
+          "pos": "動詞"
+        },
+        "task": "ます形（禮貌）",
+        "sentence": "{田中|たなか}さんは{今|いま}、{会議室|かいぎしつ}に___。",
+        "translation": {
+          "zh-Hant": "田中先生現在在會議室。"
+        },
+        "words": [
+          {
+            "text": "{今|いま}",
+            "meaning": "現在",
+            "pos": "名詞"
+          },
+          {
+            "text": "{会議室|かいぎしつ}",
+            "meaning": "會議室",
+            "pos": "名詞"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "います"
+        ],
+        "acceptable": [
+          {
+            "text": "いる",
+            "note": "文法正確，但這題要禮貌形（ます形）。"
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "あります",
+            "note": "「ある／あります」用於物品；人和動物的存在用「いる／います」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "いる是一段動詞：い＋ます → います。主語是人（田中さん），所以用いる，不用ある。"
+      }
+    },
+    {
+      "id": "ja-vc-demo3-004",
+      "language": "ja",
+      "topic": "verb-conjugation",
+      "source": "demo3",
+      "level": "N5",
+      "tags": [
+        "不規則",
+        "ます形"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "verbClass": "irregular",
+        "form": "masu"
+      },
+      "prompt": {
+        "base": {
+          "word": "する",
+          "meaning": "做",
+          "pos": "動詞"
+        },
+        "task": "ます形（禮貌）",
+        "sentence": "{毎晩|まいばん}、{日本語|にほんご}の{勉強|べんきょう}を___。",
+        "translation": {
+          "zh-Hant": "每天晚上都念日文。"
+        },
+        "words": [
+          {
+            "text": "{毎晩|まいばん}",
+            "meaning": "每天晚上",
+            "pos": "名詞"
+          },
+          {
+            "text": "{日本語|にほんご}",
+            "meaning": "日文",
+            "pos": "名詞"
+          },
+          {
+            "text": "{勉強|べんきょう}",
+            "meaning": "念書；學習",
+            "pos": "名詞"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "します"
+        ],
+        "acceptable": [
+          {
+            "text": "する",
+            "note": "文法正確，但這題要禮貌形（ます形）。"
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "すます",
+            "note": "する是不規則動詞，ます形是「します」，不是「す＋ます」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "する是不規則動詞（第三類），要直接背：する → します → しません → しました。"
+      }
+    },
+    {
+      "id": "ja-vc-demo3-005",
+      "language": "ja",
+      "topic": "verb-conjugation",
+      "source": "demo3",
+      "level": "N5",
+      "tags": [
+        "五段",
+        "ます形"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "verbClass": "godan",
+        "form": "masu"
+      },
+      "prompt": {
+        "base": {
+          "word": "{飲|の}む",
+          "meaning": "喝",
+          "pos": "動詞"
+        },
+        "task": "ます形（禮貌）",
+        "sentence": "{毎朝|まいあさ}、コーヒーを___。",
+        "translation": {
+          "zh-Hant": "每天早上喝咖啡。"
+        },
+        "words": [
+          {
+            "text": "{毎朝|まいあさ}",
+            "meaning": "每天早上",
+            "pos": "名詞"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "{飲|の}みます"
+        ],
+        "acceptable": [
+          {
+            "text": "{飲|の}む",
+            "note": "文法正確，但這題要禮貌形（ます形）。"
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "{飲|の}むます",
+            "note": "五段動詞要先把字尾改成い段（む → み），再加「ます」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "飲む是五段動詞（第一類）：字尾う段改成い段 む → み，再加ます → 飲みます。"
+      }
+    },
+    {
+      "id": "ja-vc-demo3-006",
+      "language": "ja",
+      "topic": "verb-conjugation",
+      "source": "demo3",
+      "level": "N5",
+      "tags": [
+        "五段",
+        "ます形"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "verbClass": "godan",
+        "form": "masu"
+      },
+      "prompt": {
+        "base": {
+          "word": "{帰|かえ}る",
+          "meaning": "回去；回家",
+          "pos": "動詞"
+        },
+        "task": "ます形（禮貌）",
+        "sentence": "{毎日|まいにち}、{六時|ろくじ}に{家|いえ}へ___。",
+        "translation": {
+          "zh-Hant": "每天六點回家。"
+        },
+        "words": [
+          {
+            "text": "{毎日|まいにち}",
+            "meaning": "每天",
+            "pos": "名詞"
+          },
+          {
+            "text": "{六時|ろくじ}",
+            "meaning": "六點",
+            "pos": "名詞"
+          },
+          {
+            "text": "{家|いえ}",
+            "meaning": "家",
+            "pos": "名詞"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "{帰|かえ}ります"
+        ],
+        "acceptable": [
+          {
+            "text": "{帰|かえ}る",
+            "note": "文法正確，但這題要禮貌形（ます形）。"
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "{帰|かえ}ます",
+            "note": "「帰る」看起來像一段動詞，其實是五段：る → り＋ます。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "帰る是偽裝成一段的五段動詞（同類：走る、入る、知る）。ます形：る → り＋ます → 帰ります。"
+      }
+    },
+    {
+      "id": "ja-vc-demo3-007",
+      "language": "ja",
+      "topic": "verb-conjugation",
+      "source": "demo3",
+      "level": "N5",
+      "tags": [
+        "一段",
+        "ました形"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "verbClass": "kami-ichidan",
+        "form": "mashita"
+      },
+      "prompt": {
+        "base": {
+          "word": "{見|み}る",
+          "meaning": "看",
+          "pos": "動詞"
+        },
+        "task": "ました形（禮貌・過去）",
+        "sentence": "{昨日|きのう}、テレビでサッカーを___。",
+        "translation": {
+          "zh-Hant": "昨天在電視上看了足球。"
+        },
+        "words": [
+          {
+            "text": "{昨日|きのう}",
+            "meaning": "昨天",
+            "pos": "名詞"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "{見|み}ました"
+        ],
+        "acceptable": [
+          {
+            "text": "{見|み}た",
+            "note": "文法正確，但這題要禮貌形（ます形）。"
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "{見|み}りました",
+            "note": "一段動詞直接去掉「る」再加「ました」，不會變成「り」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "見る是一段動詞：見＋ました → 見ました。"
+      }
+    },
+    {
+      "id": "ja-vc-demo3-008",
+      "language": "ja",
+      "topic": "verb-conjugation",
+      "source": "demo3",
+      "level": "N5",
+      "tags": [
+        "一段",
+        "ました形"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "verbClass": "kami-ichidan",
+        "form": "mashita"
+      },
+      "prompt": {
+        "base": {
+          "word": "{借|か}りる",
+          "meaning": "借（入）",
+          "pos": "動詞"
+        },
+        "task": "ました形（禮貌・過去）",
+        "sentence": "{図書館|としょかん}で{本|ほん}を___。",
+        "translation": {
+          "zh-Hant": "在圖書館借了書。"
+        },
+        "words": [
+          {
+            "text": "{図書館|としょかん}",
+            "meaning": "圖書館",
+            "pos": "名詞"
+          },
+          {
+            "text": "{本|ほん}",
+            "meaning": "書",
+            "pos": "名詞"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "{借|か}りました"
+        ],
+        "acceptable": [
+          {
+            "text": "{借|か}りた",
+            "note": "文法正確，但這題要禮貌形（ます形）。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "借りる是一段動詞：借り＋ました → 借りました。注意「借りる」是向別人借入，借出給別人是「貸す」。"
+      }
+    },
+    {
+      "id": "ja-vc-demo3-009",
+      "language": "ja",
+      "topic": "verb-conjugation",
+      "source": "demo3",
+      "level": "N5",
+      "tags": [
+        "五段",
+        "ました形"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "verbClass": "godan",
+        "form": "mashita"
+      },
+      "prompt": {
+        "base": {
+          "word": "{買|か}う",
+          "meaning": "買",
+          "pos": "動詞"
+        },
+        "task": "ました形（禮貌・過去）",
+        "sentence": "デパートで{靴|くつ}を___。",
+        "translation": {
+          "zh-Hant": "在百貨公司買了鞋子。"
+        },
+        "words": [
+          {
+            "text": "{靴|くつ}",
+            "meaning": "鞋子",
+            "pos": "名詞"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "{買|か}いました"
+        ],
+        "acceptable": [
+          {
+            "text": "{買|か}った",
+            "note": "文法正確，但這題要禮貌形（ます形）。"
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "{買|か}わました",
+            "note": "ます形用い段：買う → 買い＋ました。「わ」只出現在ない形（買わない）。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "買う是五段動詞：う → い＋ました → 買いました。"
+      }
+    },
+    {
+      "id": "ja-vc-demo3-010",
+      "language": "ja",
+      "topic": "verb-conjugation",
+      "source": "demo3",
+      "level": "N5",
+      "tags": [
+        "不規則",
+        "ました形"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "verbClass": "irregular",
+        "form": "mashita"
+      },
+      "prompt": {
+        "base": {
+          "word": "{勉強|べんきょう}する",
+          "meaning": "念書；學習",
+          "pos": "動詞"
+        },
+        "task": "ました形（禮貌・過去）",
+        "sentence": "{昨日|きのう}、{図書館|としょかん}で___。",
+        "translation": {
+          "zh-Hant": "昨天在圖書館念了書。"
+        },
+        "words": [
+          {
+            "text": "{昨日|きのう}",
+            "meaning": "昨天",
+            "pos": "名詞"
+          },
+          {
+            "text": "{図書館|としょかん}",
+            "meaning": "圖書館",
+            "pos": "名詞"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "{勉強|べんきょう}しました"
+        ],
+        "acceptable": [
+          {
+            "text": "{勉強|べんきょう}した",
+            "note": "文法正確，但這題要禮貌形（ます形）。"
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "{勉強|べんきょう}すました",
+            "note": "する的ます形是「します」，過去是「しました」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "「勉強する」是「名詞＋する」，只要變化「する」：します → しました。"
+      }
+    },
+    {
+      "id": "ja-vc-demo3-011",
+      "language": "ja",
+      "topic": "verb-conjugation",
+      "source": "demo3",
+      "level": "N5",
+      "tags": [
+        "五段",
+        "ません形"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "verbClass": "godan",
+        "form": "masen"
+      },
+      "prompt": {
+        "base": {
+          "word": "{行|い}く",
+          "meaning": "去",
+          "pos": "動詞"
+        },
+        "task": "ません形（禮貌・否定）",
+        "sentence": "{明日|あした}は{学校|がっこう}へ___。",
+        "translation": {
+          "zh-Hant": "明天不去學校。"
+        },
+        "words": [
+          {
+            "text": "{明日|あした}",
+            "meaning": "明天",
+            "pos": "名詞"
+          },
+          {
+            "text": "{学校|がっこう}",
+            "meaning": "學校",
+            "pos": "名詞"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "{行|い}きません"
+        ],
+        "acceptable": [
+          {
+            "text": "{行|い}かない",
+            "note": "文法正確，但這題要禮貌形（ません）。"
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "{行|い}かません",
+            "note": "「ません」接在ます形（い段）後面：行き＋ません，不是ない形的あ段。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "行く是五段動詞：く → き＋ません → 行きません。"
+      }
+    },
+    {
+      "id": "ja-vc-demo3-012",
+      "language": "ja",
+      "topic": "verb-conjugation",
+      "source": "demo3",
+      "level": "N5",
+      "tags": [
+        "五段",
+        "ません形"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "verbClass": "godan",
+        "form": "masen"
+      },
+      "prompt": {
+        "base": {
+          "word": "{分|わ}かる",
+          "meaning": "懂；明白",
+          "pos": "動詞"
+        },
+        "task": "ません形（禮貌・否定）",
+        "sentence": "すみません、よく___。",
+        "translation": {
+          "zh-Hant": "不好意思，我不太懂。"
+        },
+        "words": [
+          {
+            "text": "すみません",
+            "meaning": "對不起；不好意思",
+            "pos": "招呼語"
+          },
+          {
+            "text": "よく",
+            "meaning": "好好地；常常",
+            "pos": "副詞"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "{分|わ}かりません"
+        ],
+        "acceptable": [
+          {
+            "text": "{分|わ}からない",
+            "note": "文法正確，但這題要禮貌形（ません）。"
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "{分|わ}からません",
+            "note": "「ません」接在い段：分かり＋ません。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "分かる是五段動詞：る → り＋ません → 分かりません。「よく分かりません」是很常用的「我不太懂」。"
+      }
+    },
+    {
+      "id": "ja-vc-demo3-013",
+      "language": "ja",
+      "topic": "verb-conjugation",
+      "source": "demo3",
+      "level": "N5",
+      "tags": [
+        "一段",
+        "ません形"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "verbClass": "shimo-ichidan",
+        "form": "masen"
+      },
+      "prompt": {
+        "base": {
+          "word": "{覚|おぼ}える",
+          "meaning": "記住",
+          "pos": "動詞"
+        },
+        "task": "ません形（禮貌・否定）",
+        "sentence": "{人|ひと}の{名前|なまえ}がなかなか___。",
+        "translation": {
+          "zh-Hant": "總是記不住別人的名字。"
+        },
+        "words": [
+          {
+            "text": "{人|ひと}",
+            "meaning": "人；別人",
+            "pos": "名詞"
+          },
+          {
+            "text": "{名前|なまえ}",
+            "meaning": "名字",
+            "pos": "名詞"
+          },
+          {
+            "text": "なかなか",
+            "meaning": "怎麼也（不）…（後接否定）",
+            "pos": "副詞"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "{覚|おぼ}えません"
+        ],
+        "acceptable": [
+          {
+            "text": "{覚|おぼ}えない",
+            "note": "文法正確，但這題要禮貌形（ません）。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "覚える是一段動詞：覚え＋ません → 覚えません。"
+      }
+    },
+    {
+      "id": "ja-vc-demo3-014",
+      "language": "ja",
+      "topic": "verb-conjugation",
+      "source": "demo3",
+      "level": "N5",
+      "tags": [
+        "一段",
+        "なかった形"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "verbClass": "shimo-ichidan",
+        "form": "nakatta"
+      },
+      "prompt": {
+        "base": {
+          "word": "{食|た}べる",
+          "meaning": "吃",
+          "pos": "動詞"
+        },
+        "task": "なかった形（過去否定）",
+        "sentence": "{今朝|けさ}は{何|なに}も___。",
+        "translation": {
+          "zh-Hant": "今天早上什麼都沒吃。"
+        },
+        "words": [
+          {
+            "text": "{今朝|けさ}",
+            "meaning": "今天早上",
+            "pos": "名詞"
+          },
+          {
+            "text": "{何|なに}も",
+            "meaning": "什麼都（不）…（後接否定）",
+            "pos": "片語"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "{食|た}べなかった"
+        ],
+        "acceptable": [
+          {
+            "text": "{食|た}べませんでした",
+            "note": "文法正確，但這題要普通形（常體）。"
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "{食|た}べらなかった",
+            "note": "食べる是一段動詞，直接去掉「る」＋なかった，不用改成「ら」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "一段動詞：食べ＋なかった → 食べなかった。"
+      }
+    },
+    {
+      "id": "ja-vc-demo3-015",
+      "language": "ja",
+      "topic": "verb-conjugation",
+      "source": "demo3",
+      "level": "N5",
+      "tags": [
+        "不規則",
+        "ない形"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "verbClass": "irregular",
+        "form": "nai"
+      },
+      "prompt": {
+        "base": {
+          "word": "する",
+          "meaning": "做",
+          "pos": "動詞"
+        },
+        "task": "ない形（否定）",
+        "sentence": "{今日|きょう}は{何|なに}も___。",
+        "translation": {
+          "zh-Hant": "今天什麼都不做。"
+        },
+        "words": [
+          {
+            "text": "{今日|きょう}",
+            "meaning": "今天",
+            "pos": "名詞"
+          },
+          {
+            "text": "{何|なに}も",
+            "meaning": "什麼都（不）…（後接否定）",
+            "pos": "片語"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "しない"
+        ],
+        "acceptable": [
+          {
+            "text": "しません",
+            "note": "文法正確，但這題要普通形（常體）。"
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "さない",
+            "note": "する是不規則動詞，ない形是「しない」，不能像五段那樣改成あ段。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "する的ない形是しない（する → しない → しなかった）。"
+      }
+    },
+    {
+      "id": "ja-vc-demo3-016",
+      "language": "ja",
+      "topic": "verb-conjugation",
+      "source": "demo3",
+      "level": "N5",
+      "tags": [
+        "一段",
+        "ない形"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "verbClass": "kami-ichidan",
+        "form": "nai"
+      },
+      "prompt": {
+        "base": {
+          "word": "いる",
+          "meaning": "（人、動物）在",
+          "pos": "動詞"
+        },
+        "task": "ない形（否定）",
+        "sentence": "{家|いえ}には{誰|だれ}も___。",
+        "translation": {
+          "zh-Hant": "家裡一個人都沒有。"
+        },
+        "words": [
+          {
+            "text": "{家|いえ}",
+            "meaning": "家",
+            "pos": "名詞"
+          },
+          {
+            "text": "{誰|だれ}も",
+            "meaning": "誰都（不）…（後接否定）",
+            "pos": "片語"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "いない"
+        ],
+        "acceptable": [
+          {
+            "text": "いません",
+            "note": "文法正確，但這題要普通形（常體）。"
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "ない",
+            "note": "「ない」是「ある」的否定，用於物品；人用「いる」，否定是「いない」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "いる是一段動詞：い＋ない → いない。說「沒有人」要用いない。"
+      }
+    },
+    {
+      "id": "ja-vc-demo3-017",
+      "language": "ja",
+      "topic": "verb-conjugation",
+      "source": "demo3",
+      "level": "N5",
+      "tags": [
+        "不規則",
+        "ない形"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "verbClass": "irregular",
+        "form": "nai"
+      },
+      "prompt": {
+        "base": {
+          "word": "{来|く}る",
+          "meaning": "來",
+          "pos": "動詞"
+        },
+        "task": "ない形（否定）",
+        "sentence": "{田中|たなか}さんは{今日|きょう}、{学校|がっこう}に___。",
+        "translation": {
+          "zh-Hant": "田中同學今天不來學校。"
+        },
+        "words": [
+          {
+            "text": "{今日|きょう}",
+            "meaning": "今天",
+            "pos": "名詞"
+          },
+          {
+            "text": "{学校|がっこう}",
+            "meaning": "學校",
+            "pos": "名詞"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "{来|こ}ない"
+        ],
+        "acceptable": [
+          {
+            "text": "{来|き}ません",
+            "note": "文法正確，但這題要普通形（常體）。"
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "きない",
+            "note": "来る的ない形讀「こない」：く → こ，不是「きない」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "来る是不規則動詞，漢字不變但讀音會變：くる → こない → きます → きた。"
+      }
+    },
+    {
+      "id": "ja-vc-demo3-018",
+      "language": "ja",
+      "topic": "verb-conjugation",
+      "source": "demo3",
+      "level": "N5",
+      "tags": [
+        "一段",
+        "た形"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "verbClass": "shimo-ichidan",
+        "form": "ta"
+      },
+      "prompt": {
+        "base": {
+          "word": "{寝|ね}る",
+          "meaning": "睡覺",
+          "pos": "動詞"
+        },
+        "task": "た形（過去）",
+        "sentence": "{昨日|きのう}は{十一時|じゅういちじ}に___。",
+        "translation": {
+          "zh-Hant": "昨天十一點睡了。"
+        },
+        "words": [
+          {
+            "text": "{昨日|きのう}",
+            "meaning": "昨天",
+            "pos": "名詞"
+          },
+          {
+            "text": "{十一時|じゅういちじ}",
+            "meaning": "十一點",
+            "pos": "名詞"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "{寝|ね}た"
+        ],
+        "acceptable": [
+          {
+            "text": "{寝|ね}ました",
+            "note": "文法正確，但這題要普通形（常體）。"
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "{寝|ね}った",
+            "note": "寝る是一段動詞，去掉「る」直接加「た」；「寝った」是把它當成五段了。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "一段動詞的た形：寝＋た → 寝た。"
+      }
+    },
+    {
+      "id": "ja-vc-demo3-019",
+      "language": "ja",
+      "topic": "verb-conjugation",
+      "source": "demo3",
+      "level": "N5",
+      "tags": [
+        "一段",
+        "た形"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "verbClass": "shimo-ichidan",
+        "form": "ta"
+      },
+      "prompt": {
+        "base": {
+          "word": "{出|で}る",
+          "meaning": "出去；離開",
+          "pos": "動詞"
+        },
+        "task": "た形（過去）",
+        "sentence": "{今朝|けさ}は{八時|はちじ}に{家|いえ}を___。",
+        "translation": {
+          "zh-Hant": "今天早上八點出門了。"
+        },
+        "words": [
+          {
+            "text": "{今朝|けさ}",
+            "meaning": "今天早上",
+            "pos": "名詞"
+          },
+          {
+            "text": "{八時|はちじ}",
+            "meaning": "八點",
+            "pos": "名詞"
+          },
+          {
+            "text": "{家|いえ}",
+            "meaning": "家",
+            "pos": "名詞"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "{出|で}た"
+        ],
+        "acceptable": [
+          {
+            "text": "{出|で}ました",
+            "note": "文法正確，但這題要普通形（常體）。"
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "{出|で}った",
+            "note": "出る是一段動詞，去掉「る」直接加「た」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "出る是一段動詞：出＋た → 出た。「家を出る」是「出門」，離開的地方用「を」。"
+      }
+    },
+    {
+      "id": "ja-vc-demo3-020",
+      "language": "ja",
+      "topic": "verb-conjugation",
+      "source": "demo3",
+      "level": "N5",
+      "tags": [
+        "不規則",
+        "た形"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "verbClass": "irregular",
+        "form": "ta"
+      },
+      "prompt": {
+        "base": {
+          "word": "{来|く}る",
+          "meaning": "來",
+          "pos": "動詞"
+        },
+        "task": "た形（過去）",
+        "sentence": "{昨日|きのう}、{友達|ともだち}が{家|いえ}に___。",
+        "translation": {
+          "zh-Hant": "昨天朋友來我家了。"
+        },
+        "words": [
+          {
+            "text": "{昨日|きのう}",
+            "meaning": "昨天",
+            "pos": "名詞"
+          },
+          {
+            "text": "{友達|ともだち}",
+            "meaning": "朋友",
+            "pos": "名詞"
+          },
+          {
+            "text": "{家|いえ}",
+            "meaning": "家",
+            "pos": "名詞"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "{来|き}た"
+        ],
+        "acceptable": [
+          {
+            "text": "{来|き}ました",
+            "note": "文法正確，但這題要普通形（常體）。"
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "くた",
+            "note": "来る的た形讀「きた」：く → き。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "来る是不規則動詞：くる → きた（た形和ます形一樣讀「き」）。"
+      }
+    },
+    {
+      "id": "ja-vc-demo3-021",
+      "language": "ja",
+      "topic": "verb-conjugation",
+      "source": "demo3",
+      "level": "N5",
+      "tags": [
+        "一段",
+        "て形"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "verbClass": "shimo-ichidan",
+        "form": "te"
+      },
+      "prompt": {
+        "base": {
+          "word": "{教|おし}える",
+          "meaning": "教；告訴",
+          "pos": "動詞"
+        },
+        "task": "て形 ＋ ください",
+        "sentence": "{駅|えき}への{道|みち}を___ください。",
+        "translation": {
+          "zh-Hant": "請告訴我去車站的路。"
+        },
+        "words": [
+          {
+            "text": "{駅|えき}",
+            "meaning": "車站",
+            "pos": "名詞"
+          },
+          {
+            "text": "{道|みち}",
+            "meaning": "路",
+            "pos": "名詞"
+          },
+          {
+            "text": "ください",
+            "meaning": "請…（接在て形後面）",
+            "pos": "補助動詞"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "{教|おし}えて"
+        ],
+        "mistakes": [
+          {
+            "text": "{教|おし}えって",
+            "note": "一段動詞的て形只要把「る」換成「て」，不需要促音「っ」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "一段動詞的て形：教え＋て → 教えて。一段動詞沒有五段那些音便（っ、ん、い）。"
+      }
+    },
+    {
+      "id": "ja-vc-demo3-022",
+      "language": "ja",
+      "topic": "verb-conjugation",
+      "source": "demo3",
+      "level": "N5",
+      "tags": [
+        "一段",
+        "て形"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "verbClass": "kami-ichidan",
+        "form": "te"
+      },
+      "prompt": {
+        "base": {
+          "word": "{見|み}る",
+          "meaning": "看",
+          "pos": "動詞"
+        },
+        "task": "て形 ＋ ください",
+        "sentence": "この{写真|しゃしん}を___ください。",
+        "translation": {
+          "zh-Hant": "請看這張照片。"
+        },
+        "words": [
+          {
+            "text": "{写真|しゃしん}",
+            "meaning": "照片",
+            "pos": "名詞"
+          },
+          {
+            "text": "ください",
+            "meaning": "請…（接在て形後面）",
+            "pos": "補助動詞"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "{見|み}て"
+        ],
+        "mistakes": [
+          {
+            "text": "{見|み}って",
+            "note": "見る是一段動詞，て形是「見て」，沒有促音。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "見る是一段動詞：見＋て → 見て。"
+      }
+    },
+    {
+      "id": "ja-vc-demo3-023",
+      "language": "ja",
+      "topic": "verb-conjugation",
+      "source": "demo3",
+      "level": "N5",
+      "tags": [
+        "一段",
+        "て形"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "verbClass": "kami-ichidan",
+        "form": "te"
+      },
+      "prompt": {
+        "base": {
+          "word": "{降|お}りる",
+          "meaning": "下（車）",
+          "pos": "動詞"
+        },
+        "task": "て形 ＋ ください",
+        "sentence": "{次|つぎ}の{駅|えき}で___ください。",
+        "translation": {
+          "zh-Hant": "請在下一站下車。"
+        },
+        "words": [
+          {
+            "text": "{次|つぎ}",
+            "meaning": "下一個",
+            "pos": "名詞"
+          },
+          {
+            "text": "{駅|えき}",
+            "meaning": "車站",
+            "pos": "名詞"
+          },
+          {
+            "text": "ください",
+            "meaning": "請…（接在て形後面）",
+            "pos": "補助動詞"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "{降|お}りて"
+        ],
+        "mistakes": [
+          {
+            "text": "{降|お}りって",
+            "note": "降りる是一段動詞，て形是「降りて」，沒有促音。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "降りる是一段動詞：降り＋て → 降りて。"
+      }
+    },
+    {
+      "id": "ja-vc-demo3-024",
+      "language": "ja",
+      "topic": "verb-conjugation",
+      "source": "demo3",
+      "level": "N5",
+      "tags": [
+        "不規則",
+        "て形"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "verbClass": "irregular",
+        "form": "te"
+      },
+      "prompt": {
+        "base": {
+          "word": "{電話|でんわ}する",
+          "meaning": "打電話",
+          "pos": "動詞"
+        },
+        "task": "て形 ＋ ください",
+        "sentence": "{後|あと}で___ください。",
+        "translation": {
+          "zh-Hant": "請待會兒打電話給我。"
+        },
+        "words": [
+          {
+            "text": "{後|あと}で",
+            "meaning": "待會兒；之後",
+            "pos": "副詞"
+          },
+          {
+            "text": "ください",
+            "meaning": "請…（接在て形後面）",
+            "pos": "補助動詞"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "{電話|でんわ}して"
+        ],
+        "mistakes": [
+          {
+            "text": "{電話|でんわ}しって",
+            "note": "する的て形是「して」，沒有促音。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "「電話する」只要變化「する」：する → して。"
+      }
+    },
+    {
+      "id": "ja-vc-demo3-025",
+      "language": "ja",
+      "topic": "verb-conjugation",
+      "source": "demo3",
+      "level": "N5",
+      "tags": [
+        "一段",
+        "ないでください"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "verbClass": "shimo-ichidan",
+        "form": "naide"
+      },
+      "prompt": {
+        "base": {
+          "word": "{忘|わす}れる",
+          "meaning": "忘記",
+          "pos": "動詞"
+        },
+        "task": "ないでください（請不要…）",
+        "sentence": "{傘|かさ}を___ください。",
+        "translation": {
+          "zh-Hant": "請不要忘了帶傘。"
+        },
+        "words": [
+          {
+            "text": "{傘|かさ}",
+            "meaning": "傘",
+            "pos": "名詞"
+          },
+          {
+            "text": "ください",
+            "meaning": "請…（接在て形後面）",
+            "pos": "補助動詞"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "{忘|わす}れないで"
+        ],
+        "mistakes": [
+          {
+            "text": "{忘|わす}れらないで",
+            "note": "忘れる是一段動詞：忘れ＋ないで，不用改成「ら」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "「ないでください」接在ない形後面：忘れない → 忘れないでください。"
+      }
+    },
+    {
+      "id": "ja-vc-demo3-026",
+      "language": "ja",
+      "topic": "verb-conjugation",
+      "source": "demo3",
+      "level": "N5",
+      "tags": [
+        "一段",
+        "たい形"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "verbClass": "shimo-ichidan",
+        "form": "tai"
+      },
+      "prompt": {
+        "base": {
+          "word": "{寝|ね}る",
+          "meaning": "睡覺",
+          "pos": "動詞"
+        },
+        "task": "たい形（想做）",
+        "sentence": "{今日|きょう}は{早|はや}く___。",
+        "translation": {
+          "zh-Hant": "今天想早點睡。"
+        },
+        "words": [
+          {
+            "text": "{今日|きょう}",
+            "meaning": "今天",
+            "pos": "名詞"
+          },
+          {
+            "text": "{早|はや}く",
+            "lemma": "{早|はや}い",
+            "meaning": "早的；快的（早く＝早點、快點）",
+            "pos": "い形容詞"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "{寝|ね}たい"
+        ],
+        "mistakes": [
+          {
+            "text": "{寝|ね}るたい",
+            "note": "「たい」接在ます形去掉ます的部分：寝ます → 寝たい。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "一段動詞：寝＋たい → 寝たい。"
+      }
+    },
+    {
+      "id": "ja-vc-demo3-027",
+      "language": "ja",
+      "topic": "verb-conjugation",
+      "source": "demo3",
+      "level": "N5",
+      "tags": [
+        "五段",
+        "たい形"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "verbClass": "godan",
+        "form": "tai"
+      },
+      "prompt": {
+        "base": {
+          "word": "{話|はな}す",
+          "meaning": "說；談",
+          "pos": "動詞"
+        },
+        "task": "たい形（想做）",
+        "sentence": "{先生|せんせい}と{日本語|にほんご}で___。",
+        "translation": {
+          "zh-Hant": "想跟老師用日文聊天。"
+        },
+        "words": [
+          {
+            "text": "{先生|せんせい}",
+            "meaning": "老師",
+            "pos": "名詞"
+          },
+          {
+            "text": "{日本語|にほんご}",
+            "meaning": "日文",
+            "pos": "名詞"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "{話|はな}したい"
+        ],
+        "mistakes": [
+          {
+            "text": "{話|はな}すたい",
+            "note": "「たい」接在ます形去掉ます的部分：話します → 話したい。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "話す是五段動詞：す → し＋たい → 話したい。"
+      }
+    },
+    {
+      "id": "ja-vc-demo3-028",
+      "language": "ja",
+      "topic": "verb-conjugation",
+      "source": "demo3",
+      "level": "N5",
+      "tags": [
+        "一段",
+        "たい形"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "verbClass": "kami-ichidan",
+        "form": "tai"
+      },
+      "prompt": {
+        "base": {
+          "word": "{着|き}る",
+          "meaning": "穿（上衣）",
+          "pos": "動詞"
+        },
+        "task": "たい形（想做）",
+        "sentence": "{明日|あした}は{新|あたら}しいシャツを___。",
+        "translation": {
+          "zh-Hant": "明天想穿新襯衫。"
+        },
+        "words": [
+          {
+            "text": "{明日|あした}",
+            "meaning": "明天",
+            "pos": "名詞"
+          },
+          {
+            "text": "{新|あたら}しい",
+            "meaning": "新的",
+            "pos": "い形容詞"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "{着|き}たい"
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "着る是一段動詞：着＋たい → 着たい。注意：上衣用「着る」，褲子、鞋子用「はく」。"
+      }
+    },
+    {
+      "id": "ja-vc-demo3-029",
+      "language": "ja",
+      "topic": "verb-conjugation",
+      "source": "demo3",
+      "level": "N5",
+      "tags": [
+        "一段",
+        "ましょう形"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "verbClass": "shimo-ichidan",
+        "form": "mashou"
+      },
+      "prompt": {
+        "base": {
+          "word": "{閉|し}める",
+          "meaning": "關（門、窗）",
+          "pos": "動詞"
+        },
+        "task": "ましょう形（禮貌的「～吧」）",
+        "sentence": "{寒|さむ}いですね。{窓|まど}を___か。",
+        "translation": {
+          "zh-Hant": "好冷喔。要不要把窗戶關起來？"
+        },
+        "words": [
+          {
+            "text": "{寒|さむ}い",
+            "meaning": "冷的",
+            "pos": "い形容詞"
+          },
+          {
+            "text": "{窓|まど}",
+            "meaning": "窗戶",
+            "pos": "名詞"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "{閉|し}めましょう"
+        ],
+        "mistakes": [
+          {
+            "text": "{閉|し}めりましょう",
+            "note": "一段動詞直接去掉「る」再加「ましょう」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "閉める是一段動詞：閉め＋ましょう → 閉めましょう。「～ましょうか」是提議「要不要我（們）…？」。"
+      }
+    },
+    {
+      "id": "ja-vc-demo3-030",
+      "language": "ja",
+      "topic": "verb-conjugation",
+      "source": "demo3",
+      "level": "N5",
+      "tags": [
+        "五段",
+        "ましょう形"
+      ],
+      "createdAt": "2026-11-05",
+      "meta": {
+        "verbClass": "godan",
+        "form": "mashou"
+      },
+      "prompt": {
+        "base": {
+          "word": "{休|やす}む",
+          "meaning": "休息",
+          "pos": "動詞"
+        },
+        "task": "ましょう形（禮貌的「～吧」）",
+        "sentence": "{疲|つか}れましたね。ちょっと___。",
+        "translation": {
+          "zh-Hant": "好累喔。稍微休息一下吧。"
+        },
+        "words": [
+          {
+            "text": "{疲|つか}れました",
+            "lemma": "{疲|つか}れる",
+            "meaning": "累；疲倦",
+            "pos": "動詞"
+          },
+          {
+            "text": "ちょっと",
+            "meaning": "稍微；一下",
+            "pos": "副詞"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "{休|やす}みましょう"
+        ],
+        "mistakes": [
+          {
+            "text": "{休|やす}むましょう",
+            "note": "五段動詞先把字尾改成い段（む → み），再加「ましょう」。"
+          }
+        ]
+      },
+      "explanation": {
+        "zh-Hant": "休む是五段動詞：む → み＋ましょう → 休みましょう。"
+      }
+    }
+  ]
+}
