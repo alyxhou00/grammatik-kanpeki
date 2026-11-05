@@ -8,7 +8,7 @@
 //
 // Everything comes from the topic's entry in js/topics.js, so a new topic works here as soon as it
 // is added there. Check what comes back with tools/validate.mjs.
-import { LANGS, topicOf, topicType, deckIds, usesRuby } from '../js/topics.js';
+import { LANGS, topicOf, topicType, deckIds, usesRuby, isRecall } from '../js/topics.js';
 import { authoringSchema, toAuthoring, AUTHORING_FORMAT } from '../js/authoring.js';
 import { toSurface } from '../js/text.js';
 import { bundledCards } from './bundled.mjs';
@@ -61,9 +61,13 @@ const lines = [
   'Rules:',
   `- Answer with one JSON object that follows the JSON Schema at the end, and nothing else: "format": "${AUTHORING_FORMAT}", "language": "${lang}", "topic": "${topic}", and the cards.`,
   '- Every field is described in the schema. Leave out optional fields you have nothing good for; do not add fields that are not in it.',
-  '- Each card practises one point. Vary the sentences, vocabulary and the forms asked for.',
-  '- Put every fully correct answer in answer.accepted, or a learner who types it is told they are wrong.',
-  '- A mistake must be a real typical error, never something that is also correct.',
+  ...(isRecall(type) ? [
+    '- Each card is worth learning on its own. Vary the vocabulary, grammar and situations.',
+  ] : [
+    '- Each card practises one point. Vary the sentences, vocabulary and the forms asked for.',
+    '- Put every fully correct answer in answer.accepted, or a learner who types it is told they are wrong.',
+    '- A mistake must be a real typical error, never something that is also correct.',
+  ]),
   ...(usesRuby(lang) ? ['- Furigana: write every kanji with its reading, {漢字|かんじ} (e.g. {食|た}べる, {朝|あさ}ごはん). Kana answers are only recognized through these readings, so get them right.'] : []),
   '',
 ];

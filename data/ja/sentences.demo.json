@@ -1,0 +1,76 @@
+{
+  "format": "grammatik-kanpeki.cards",
+  "version": 2,
+  "cards": [
+    {
+      "id": "ja-sentences-demo-001",
+      "language": "ja",
+      "topic": "sentences",
+      "source": "demo",
+      "level": "N4",
+      "tags": ["サボる", "なきゃ"],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "sentence": "{昨日|きのう}の{授業|じゅぎょう}をサボったから、{友達|ともだち}のノートを{借|か}りなきゃ。",
+        "words": [
+          { "text": "{授業|じゅぎょう}", "meaning": "上課、課", "pos": "名詞" },
+          { "text": "サボった", "lemma": "サボる", "meaning": "翹（課、班）；偷懶", "pos": "動詞" },
+          { "text": "ノート", "meaning": "筆記；筆記本", "pos": "名詞" },
+          { "text": "{借|か}りなきゃ", "lemma": "{借|か}りる", "meaning": "借（進來）", "pos": "動詞" }
+        ]
+      },
+      "answer": {
+        "accepted": ["因為昨天翹課，得跟同學借筆記才行。"]
+      },
+      "explanation": {
+        "zh-Hant": "「サボる」是口語，指翹課、翹班或偷懶不做該做的事（來自法語 sabotage）。「〜から」表示原因。「借りなきゃ」是「借りなければ（ならない）」的口語縮約：不借不行、得借。"
+      }
+    },
+    {
+      "id": "ja-sentences-demo-002",
+      "language": "ja",
+      "topic": "sentences",
+      "source": "demo",
+      "level": "N4",
+      "tags": ["サボる", "てる"],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "sentence": "{今日|きょう}は{疲|つか}れてるから、{仕事|しごと}サボって{早|はや}く{帰|かえ}りたい。",
+        "words": [
+          { "text": "{疲|つか}れてる", "lemma": "{疲|つか}れる", "meaning": "累、疲倦", "pos": "動詞" },
+          { "text": "{仕事|しごと}", "meaning": "工作", "pos": "名詞" },
+          { "text": "サボって", "lemma": "サボる", "meaning": "翹（課、班）；偷懶", "pos": "動詞" }
+        ]
+      },
+      "answer": {
+        "accepted": ["今天很累，想翹班早點回家。"]
+      },
+      "explanation": {
+        "zh-Hant": "「疲れてる」是「疲れている」省略「い」的口語說法，表示現在很累的狀態。「仕事サボって」口語裡省略了助詞「を」。「サボって」是て形，連接下一個動作；「帰りたい」是たい形：想回家。"
+      }
+    },
+    {
+      "id": "ja-sentences-demo-003",
+      "language": "ja",
+      "topic": "sentences",
+      "source": "demo",
+      "level": "N4",
+      "tags": ["サボる", "と（條件）", "受身形"],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "sentence": "{掃除|そうじ}{当番|とうばん}をサボると、{先生|せんせい}に{怒|おこ}られるよ。",
+        "words": [
+          { "text": "{掃除|そうじ}{当番|とうばん}", "meaning": "打掃值日（生）", "pos": "名詞" },
+          { "text": "サボる", "meaning": "翹（課、班）；偷懶", "pos": "動詞" },
+          { "text": "{怒|おこ}られる", "lemma": "{怒|おこ}る", "meaning": "生氣；罵（人）", "pos": "動詞" }
+        ]
+      },
+      "answer": {
+        "accepted": ["如果偷懶不做打掃值日，會被老師罵喔。"]
+      },
+      "explanation": {
+        "zh-Hant": "「辭書形＋と」表示條件：一…就會…。「怒られる」是「怒る」的被動形（受身形），「先生に怒られる」就是被老師罵，「に」標出做動作的人。句尾的「よ」是提醒對方。"
+      }
+    }
+  ]
+}

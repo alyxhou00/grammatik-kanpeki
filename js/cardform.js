@@ -3,19 +3,19 @@
 //
 // Form values (all strings unless noted):
 //   topic
-//   source | sentence | word        the type's main field (rewrite | cloze | flip)
+//   source | sentence | word        the type's main field (rewrite | cloze and sentence | flip)
 //   baseWord, baseMeaning, basePos  cloze: optional word to start from
 //   pos, example                    flip: part of speech and example sentence
 //   task, hint                      prompt.task, prompt.hint (in the course's note language)
 //   register                        prompt.register ('' for none; courses with registers)
-//   accepted                        one answer per line (flip: one meaning per line)
+//   accepted                        one answer per line (flip: one meaning per line; sentence: one translation per line)
 //   acceptable, mistakes            [{ text, note }]
 //   translation, explanation        { [lang]: text }  (flip: translation is the example's)
 //   meta                            { [facet]: value }
 //   level, tags (comma separated), cardSource
 //
 // Editing keeps every field the form does not show (prompt.words, meta.form, createdAt, …).
-import { LANGS, topicType, facetsOf } from './topics.js';
+import { LANGS, topicType, facetsOf, isRecall } from './topics.js';
 import { BLANK, toKana, isRomaji, romajiToHiragana } from './text.js';
 
 const KANJI = /[一-鿿々]/;
@@ -86,7 +86,7 @@ export function valuesFromCard(card) {
 export function formErrors(values, lang) {
   const type = topicType(lang, values.topic);
   const errs = {};
-  const main = type === 'rewrite' ? 'source' : type === 'cloze' ? 'sentence' : 'word';
+  const main = type === 'rewrite' ? 'source' : type === 'flip' ? 'word' : 'sentence';
   if (!values[main]?.trim()) errs[main] = 'required';
   else if (type === 'cloze' && values.sentence.split(BLANK).length !== 2) errs.sentence = 'blank';
   if (!lines(values.accepted).length) errs.accepted = 'required';
@@ -96,7 +96,9 @@ export function formErrors(values, lang) {
 /** Text with kanji but no furigana (courses with `ruby`): it shows without readings, and kana answers are not recognized. */
 export function missingFurigana(values, lang) {
   if (!LANGS[lang].ruby) return [];
-  const texts = [values.sentence, values.word, values.baseWord, values.example, ...lines(values.accepted)];
+  // Recall cards' answers are meanings and translations, written in the note language.
+  const answers = isRecall(topicType(lang, values.topic)) ? [] : lines(values.accepted);
+  const texts = [values.sentence, values.word, values.baseWord, values.example, ...answers];
   return texts.filter((x) => x && KANJI.test(toKana(x)));
 }
 
@@ -144,6 +146,7 @@ export function cardFromValues(values, { lang, existing = null, newId, today = n
   // Fields of other card types do not belong on this one (the topic may have changed).
   for (const k of ['source', 'sentence', 'base', 'word', 'pos', 'example', 'exampleTranslation']) delete p[k];
   if (type === 'rewrite') p.source = values.source.trim();
+  if (type === 'sentence') p.sentence = values.sentence.trim();
   if (type === 'cloze') {
     p.sentence = values.sentence.trim();
     const base = { word: values.baseWord.trim(), meaning: values.baseMeaning.trim(), pos: values.basePos.trim() };
@@ -157,7 +160,7 @@ export function cardFromValues(values, { lang, existing = null, newId, today = n
   const keepOthers = (old, text) => compactLoc({ ...locObj(old, lang), [noteLang]: text });
   setOrDelete(p, 'task', keepOthers(existing?.prompt?.task, values.task));
   setOrDelete(p, 'hint', keepOthers(existing?.prompt?.hint, values.hint));
-  setOrDelete(p, 'register', type !== 'flip' && values.register in LANGS[lang].registers ? values.register : '');
+  setOrDelete(p, 'register', !isRecall(type) && values.register in LANGS[lang].registers ? values.register : '');
   const tr = compactLoc(values.translation);
   if (type === 'flip') {
     delete p.translation;
@@ -169,7 +172,7 @@ export function cardFromValues(values, { lang, existing = null, newId, today = n
 
   card.answer = { accepted: lines(values.accepted).map((x) => answerText(x, lang)) };
   setOrDelete(card.answer, 'acceptable', withNotes(values.acceptable, lang, existing?.answer?.acceptable));
-  if (type !== 'flip') setOrDelete(card.answer, 'mistakes', withNotes(values.mistakes, lang, existing?.answer?.mistakes));
+  if (!isRecall(type)) setOrDelete(card.answer, 'mistakes', withNotes(values.mistakes, lang, existing?.answer?.mistakes));
 
   setOrDelete(card, 'explanation', compactLoc(values.explanation));
 

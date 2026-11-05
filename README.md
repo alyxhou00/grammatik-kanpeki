@@ -9,6 +9,7 @@ An Anki-style grammar trainer for German and Japanese that runs in the browser.
 - **Deutsch → Nominalisierung** (C1): rewrite a Verbalstil sentence in Nominalstil.
 - **日本語 → 動詞變化** (N5, explained in Traditional Chinese): fill the blank with the conjugated verb (kana, kanji, or romaji).
 - **Word list** (Meine Wortliste / 我的單字本): hover a word in a sentence to see its meaning and save it; the list is a deck of flip cards.
+- **Sentences** (Meine Beispielsätze / 我的例句本): whole sentences to learn. You see the sentence, recall what it means, and grade yourself. Add them with the card form, or many at once with Import (see "Writing many cards with an LLM").
 
 Topics can have sub-topics; a parent deck studies the cards of all its sub-topics. Topics set up but without cards yet: Partizipialkonstruktionen, Deklination, Verben mit Präpositionen, 形容詞變化, 助詞, 數字・助數詞.
 
@@ -44,7 +45,7 @@ Then open <http://localhost:8123>. To try a git worktree/branch, serve its folde
 ## Cards
 
 - **Format:** [`schema/cards.schema.json`](schema/cards.schema.json). Each card has `id`, `language`, `topic`, `source` (a code from `js/sources.js`), `level`, `tags`, `prompt`, `answer` (`accepted` / `acceptable` / `mistakes`) and `explanation`.
-- **Card types** (set per topic in `js/topics.js`): `rewrite` (rewrite the sentence), `cloze` (fill the `___`), `flip` (recall the back).
+- **Card types** (set per topic in `js/topics.js`): `rewrite` (rewrite the sentence), `cloze` (fill the `___`), `flip` (recall a word's meaning), `sentence` (recall a sentence's translation, kept in `answer.accepted`).
 - **Writing many cards with an LLM:** use the shorter authoring format. `node tools/schema.mjs ja particles --prompt --count 10` prints a prompt to paste into an LLM; `node tools/validate.mjs new-cards.json --out import.json` checks the result and writes an importable file. The app's Import also accepts authoring files directly. Always review generated cards, since a validator can't catch a wrong reading.
 
 ## Code layout

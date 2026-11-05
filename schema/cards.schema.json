@@ -77,7 +77,7 @@
         "task": { "$ref": "#/$defs/localized", "description": "What to do, shown as a chip, e.g. ない形（否定）or Dativ Plural." },
         "register": { "type": "string", "description": "Which register the answer is in, shown as its own label beside the task. One of the course's registers (Japanese: plain 普通形, polite 禮貌); set only when the answer could be in either." },
         "words": {
-          "description": "Hoverable words of the card's sentence (rewrite: source, cloze: sentence, flip: example), in order.",
+          "description": "Hoverable words of the card's sentence (rewrite: source, cloze and sentence: sentence, flip: example), in order.",
           "type": "array",
           "items": { "$ref": "#/$defs/word" }
         }
@@ -120,6 +120,14 @@
         "exampleTranslation": { "$ref": "#/$defs/localized" }
       }
     },
+    "sentencePrompt": {
+      "description": "Card type sentence: see a whole sentence, recall what it means, grade yourself (例句本). answer.accepted holds its translations.",
+      "type": "object",
+      "required": ["sentence"],
+      "properties": {
+        "sentence": { "type": "string", "description": "The sentence to learn, with furigana markup, no blank. Shown on the front." }
+      }
+    },
     "card": {
       "type": "object",
       "required": ["id", "language", "topic", "source", "prompt", "answer"],
@@ -129,9 +137,9 @@
         "topic": {
           "type": "string",
           "description": "Topic id from js/topics.js. Use the most specific topic (n-deklination, not deklination); parent decks include their sub-topics.",
-          "examples": ["nominalisierung", "partizipialkonstruktionen", "deklination", "n-deklination", "verben-mit-praepositionen", "verb-conjugation", "adjective-conjugation", "particles", "counters", "vocab"]
+          "examples": ["nominalisierung", "partizipialkonstruktionen", "deklination", "n-deklination", "verben-mit-praepositionen", "verb-conjugation", "adjective-conjugation", "particles", "counters", "vocab", "sentences"]
         },
-        "type": { "enum": ["rewrite", "cloze", "flip"], "description": "Optional. Normally the card type comes from the topic; set it only to draw this card differently." },
+        "type": { "enum": ["rewrite", "cloze", "flip", "sentence"], "description": "Optional. Normally the card type comes from the topic; set it only to draw this card differently." },
         "source": { "type": "string", "description": "Where the card came from, e.g. \"demo\", a book title, a URL." },
         "level": { "type": "string", "examples": ["C1", "N5"] },
         "tags": { "type": "array", "items": { "type": "string" } },
@@ -140,7 +148,7 @@
           "description": "Fields shown on the front. Which ones are required depends on the card type.",
           "allOf": [
             { "$ref": "#/$defs/promptCommon" },
-            { "anyOf": [{ "$ref": "#/$defs/rewritePrompt" }, { "$ref": "#/$defs/clozePrompt" }, { "$ref": "#/$defs/flipPrompt" }] }
+            { "anyOf": [{ "$ref": "#/$defs/rewritePrompt" }, { "$ref": "#/$defs/clozePrompt" }, { "$ref": "#/$defs/flipPrompt" }, { "$ref": "#/$defs/sentencePrompt" }] }
           ]
         },
         "answer": {
@@ -149,7 +157,7 @@
           "required": ["accepted"],
           "properties": {
             "accepted": {
-              "description": "Fully correct answers. The first one is the model answer. For flip cards, the meaning.",
+              "description": "Fully correct answers. The first one is the model answer. For flip cards, the meaning; for sentence cards, the translation.",
               "type": "array", "minItems": 1, "items": { "type": "string" }
             },
             "acceptable": {
@@ -175,7 +183,8 @@
       "allOf": [
         { "if": { "required": ["type"], "properties": { "type": { "const": "rewrite" } } }, "then": { "properties": { "prompt": { "$ref": "#/$defs/rewritePrompt" } } } },
         { "if": { "required": ["type"], "properties": { "type": { "const": "cloze" } } }, "then": { "properties": { "prompt": { "$ref": "#/$defs/clozePrompt" } } } },
-        { "if": { "required": ["type"], "properties": { "type": { "const": "flip" } } }, "then": { "properties": { "prompt": { "$ref": "#/$defs/flipPrompt" } } } }
+        { "if": { "required": ["type"], "properties": { "type": { "const": "flip" } } }, "then": { "properties": { "prompt": { "$ref": "#/$defs/flipPrompt" } } } },
+        { "if": { "required": ["type"], "properties": { "type": { "const": "sentence" } } }, "then": { "properties": { "prompt": { "$ref": "#/$defs/sentencePrompt" } } } }
       ]
     },
     "reviewState": {

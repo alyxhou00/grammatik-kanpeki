@@ -13,7 +13,7 @@
 //
 // Its JSON Schema is built from the topic's entry in js/topics.js (card type, facets, labels, about,
 // the course's languages), so adding or changing a topic needs nothing here. No DOM.
-import { LANGS, topicOf, topicType, facetsOf, formsOf, labelsOf, inherited, usesRuby } from './topics.js';
+import { LANGS, topicOf, topicType, facetsOf, formsOf, labelsOf, inherited, usesRuby, isRecall } from './topics.js';
 import { toSurface, shortHash } from './text.js';
 
 export const AUTHORING_FORMAT = 'grammatik-kanpeki.authoring';
@@ -48,7 +48,7 @@ export function authoringSchema(lang, topicId) {
   const labels = labelsOf(lang, topicId);
   const facets = facetsOf(lang, topicId);
   const formNames = formsOf(lang, topicId);
-  const forms = Object.keys(formNames).length && type !== 'flip' ? formNames : null;
+  const forms = Object.keys(formNames).length && !isRecall(type) ? formNames : null;
   const ruby = usesRuby(lang);
   const note = nameOf(L.noteLang);
   const course = nameOf(lang);
@@ -104,6 +104,11 @@ export function authoringSchema(lang, topicId) {
       }, ['word'], 'Optional: the word the answer is formed from, shown above the sentence.'),
       task, ...register, hint, translation: translation('the full sentence (with the gap filled)'), words: words('sentence'),
     }, ['sentence'], `What the learner sees: a ${course} sentence with one gap to fill.`);
+  } else if (type === 'sentence') {
+    prompt = obj({
+      sentence: text(`The ${course} sentence to learn, complete (no gap). Shown on the front.`),
+      words: words('sentence'),
+    }, ['sentence'], 'What the learner sees: one sentence; they recall what it means and grade themselves.');
   } else {
     prompt = obj({
       word: text(`The ${course} word or phrase, in its dictionary form. Shown on the front.`),
@@ -121,6 +126,10 @@ export function authoringSchema(lang, topicId) {
   const answer = type === 'flip'
     ? obj({
       accepted: list(str(`A meaning in ${note}.`), 'The meaning(s) of the word, the main one first.', { minItems: 1 }),
+    }, ['accepted'])
+    : type === 'sentence'
+    ? obj({
+      accepted: list(str(`A translation in ${note}.`), 'What the sentence means: its translation(s), the most natural one first.', { minItems: 1 }),
     }, ['accepted'])
     : obj({
       accepted: list(text('A fully correct answer.'), `Every fully correct answer${type === 'rewrite' ? ` (${labels.target || 'the rewritten sentence'})` : ''}, the most natural one first. A typed answer counts as correct when it matches one of these${ruby ? ' in kanji or in kana' : ''}${L.nearMatch ? '; a near miss (wrong capitalisation, a word off) is only "almost right"' : ''}.`, { minItems: 1 }),
@@ -211,7 +220,7 @@ export function checkSchema(schema, value, path = '') {
 
 // ---------- authoring cards ↔ full cards ----------
 
-const mainText = (type, p) => (type === 'rewrite' ? p.source : type === 'cloze' ? p.sentence : p.word);
+const mainText = (type, p) => (type === 'rewrite' ? p.source : type === 'flip' ? p.word : p.sentence);
 
 /**
  * Full cards from an authoring file (assumed to pass its schema). The id comes from the card's main

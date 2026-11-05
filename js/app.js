@@ -3,7 +3,7 @@ import { answer, preview, DEFAULTS, dayIndex, dayStartMs, isNew, isLearning, isR
 import { streaks, heatmap, countOn, langsOn, weekday } from './studylog.js';
 import { checkAnswer } from './check.js';
 import { UI } from './i18n.js';
-import { LANGS, topicOf, topicType, ancestry, childrenOf, groupOf, labelsOf, facetsOf, formsOf, vocabTopic } from './topics.js';
+import { LANGS, topicOf, topicType, ancestry, childrenOf, groupOf, labelsOf, facetsOf, formsOf, vocabTopic, isRecall } from './topics.js';
 import { rendererFor, savedWordIn, vocabCardFrom, speakButton } from './cardtypes.js';
 import * as speech from './speech.js';
 import * as pitch from './pitch.js';
@@ -498,7 +498,7 @@ function renderOverview() {
       <button class="btn" data-action="cram" ${c.total ? '' : 'disabled'}>${T.cram}</button>
       ${c.total ? '' : `<button class="btn primary" data-action="add-card">${esc(T.form.add)}</button>`}
     </div>
-    <p class="hint">${!c.total ? (groupOf(state.lang, state.topic) === 'vocab' ? T.vocabEmpty : T.emptyTopic) : any ? `${T.cram}: ${T.cramHint}` : T.nothingToday}</p>
+    <p class="hint">${!c.total ? ({ vocab: T.vocabEmpty, sentences: T.sentencesEmpty }[groupOf(state.lang, state.topic)] || T.emptyTopic) : any ? `${T.cram}: ${T.cramHint}` : T.nothingToday}</p>
   </section>`;
 }
 
@@ -1100,6 +1100,8 @@ function renderCardForm() {
           ${field('basePos', T.pos, v.basePos, { lang: L.noteLang })}
         </div>`
       + taskRow;
+  } else if (type === 'sentence') {
+    front = field('sentence', T.fullSentence, v.sentence, { rows: 2, lang, main: true, ruby: L.ruby, help: T.fullSentenceHelp });
   } else {
     front = `<div class="field-grid">
         ${field('word', T.word, v.word, { lang, main: true, ruby: L.ruby })}
@@ -1127,17 +1129,17 @@ function renderCardForm() {
       </section>
       <section>
         <h3>${esc(T.answer)}</h3>
-        ${field('accepted', type === 'flip' ? T.meanings : type === 'rewrite' ? labels.target : T.accepted, v.accepted, {
-          rows: type === 'rewrite' ? 3 : 2, lang: type === 'flip' ? L.noteLang : lang, ruby: L.ruby && type !== 'flip',
-          help: type === 'flip' ? T.meaningsHelp : T.acceptedHelp,
+        ${field('accepted', { flip: T.meanings, sentence: T.sentenceTranslations, rewrite: labels.target }[type] || T.accepted, v.accepted, {
+          rows: type === 'rewrite' ? 3 : 2, lang: isRecall(type) ? L.noteLang : lang, ruby: L.ruby && !isRecall(type),
+          help: { flip: T.meaningsHelp, sentence: T.sentenceTranslationsHelp }[type] || T.acceptedHelp,
         })}
-        ${answerRows('acceptable', T.acceptable)}
-        ${type === 'flip' ? '' : answerRows('mistakes', T.mistakes)}
+        ${type === 'sentence' ? '' : answerRows('acceptable', T.acceptable)}
+        ${isRecall(type) ? '' : answerRows('mistakes', T.mistakes)}
       </section>
       <section>
         <h3>${esc(T.helps)}</h3>
-        ${locFields('tr', type === 'flip' ? T.exampleTranslation : T.translation, langs.translation, v.translation)}
-        ${type === 'flip' ? '' : field('hint', T.hint, v.hint, { lang: L.noteLang })}
+        ${type === 'sentence' ? '' : locFields('tr', type === 'flip' ? T.exampleTranslation : T.translation, langs.translation, v.translation)}
+        ${isRecall(type) ? '' : field('hint', T.hint, v.hint, { lang: L.noteLang })}
         <details class="form-more" ${Object.values(v.explanation).some(Boolean) ? 'open' : ''}>
           <summary>${esc(T.explanation)}</summary>
           ${locFields('ex', t().explanation, langs.explanation, v.explanation, { rows: 3 })}
@@ -1194,7 +1196,7 @@ function warningsHTML(v) {
   const T = t().form;
   const lang = cardForm.lang;
   const type = topicType(lang, v.topic);
-  const own = toSurface(type === 'rewrite' ? v.source : type === 'cloze' ? v.sentence : v.word).trim();
+  const own = toSurface(type === 'rewrite' ? v.source : type === 'flip' ? v.word : v.sentence).trim();
   const out = [];
   if (own && store.allCards().some((c) => c.language === lang && c.id !== cardForm.id && mainText(c) === own)) out.push(T.dup);
   const noFuri = missingFurigana(v, lang);

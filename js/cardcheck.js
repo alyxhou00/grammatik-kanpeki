@@ -4,7 +4,7 @@
 import { validateCard } from './store.js';
 import { checkAnswer } from './check.js';
 import { wordSegments, toSurface, toKana } from './text.js';
-import { LANGS, facetsOf, formsOf, typeOf, usesRuby } from './topics.js';
+import { LANGS, facetsOf, formsOf, typeOf, usesRuby, isRecall } from './topics.js';
 import { sentenceOf, vocabCardFrom } from './cardtypes.js';
 
 export const KANJI = /[一-鿿々]/;
@@ -14,9 +14,10 @@ export function targetTexts(card) {
   const p = card.prompt || {};
   const a = card.answer || {};
   const flip = typeOf(card) === 'flip';
+  const recall = isRecall(typeOf(card)); // its answers are meanings or translations
   return [
     sentenceOf(card), p.base?.word, flip ? p.word : null,
-    ...(flip ? [] : [...(a.accepted || []), ...(a.acceptable || []).map((x) => x.text), ...(a.mistakes || []).map((x) => x.text)]),
+    ...(recall ? [] : [...(a.accepted || []), ...(a.acceptable || []).map((x) => x.text), ...(a.mistakes || []).map((x) => x.text)]),
     ...(p.words || []).flatMap((w) => [w.text, w.lemma]),
   ].filter(Boolean);
 }
@@ -57,7 +58,7 @@ export function cardProblems(card) {
 
   // Form registry: a topic that has one names the form in meta.form, and the task is that form's label.
   const forms = formsOf(card.language, card.topic);
-  if (Object.keys(forms).length && typeOf(card) !== 'flip') {
+  if (Object.keys(forms).length && !isRecall(typeOf(card))) {
     const form = card.meta?.form;
     const task = card.prompt.task;
     const written = typeof task === 'string' ? task : task?.[LANGS[card.language].noteLang];
@@ -70,7 +71,7 @@ export function cardProblems(card) {
   const L = LANGS[card.language];
   const reg = card.prompt.register;
   if (reg !== undefined && !(reg in L.registers)) out.push(`prompt.register "${reg}" is not one of: ${Object.keys(L.registers).join(', ') || '(none in this course)'}`);
-  if (L.politeAnswer && typeOf(card) !== 'flip') {
+  if (L.politeAnswer && !isRecall(typeOf(card))) {
     const polite = (x) => new RegExp(L.politeAnswer).test(toSurface(x).trim());
     const answers = [...a.accepted, ...(a.acceptable || []).map((x) => x.text)];
     if (reg === undefined && answers.some(polite)) out.push(`some answers are polite: set prompt.register (${Object.keys(L.registers).join(' or ')})`);

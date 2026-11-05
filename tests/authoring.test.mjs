@@ -21,7 +21,7 @@ for (const [lang, L] of Object.entries(LANGS)) {
     assert.deepEqual(JSON.parse(JSON.stringify(s)), s, `${lang}/${tp.id}: schema is plain JSON`);
     assert.equal(s.properties.topic.const, tp.id);
     const prompt = s.properties.cards.items.properties.prompt;
-    const main = { rewrite: 'source', cloze: 'sentence', flip: 'word' }[topicType(lang, tp.id)];
+    const main = { rewrite: 'source', cloze: 'sentence', flip: 'word', sentence: 'sentence' }[topicType(lang, tp.id)];
     assert.deepEqual(prompt.required, [main], `${lang}/${tp.id}: the card type decides the prompt`);
   }
 }

@@ -215,6 +215,7 @@ export function validateCard(c) {
   if (type === 'cloze' && !p.sentence) errs.push('prompt.sentence missing');
   if (type === 'cloze' && p.sentence && String(p.sentence).split('___').length !== 2) errs.push('prompt.sentence needs exactly one ___');
   if (type === 'flip' && !p.word) errs.push('prompt.word missing');
+  if (type === 'sentence' && !p.sentence) errs.push('prompt.sentence missing');
   if (p.words !== undefined && !Array.isArray(p.words)) errs.push('prompt.words must be a list');
   return errs;
 }

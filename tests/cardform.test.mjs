@@ -64,6 +64,20 @@ assert.deepEqual(formErrors({ ...emptyValues('ja', 'vocab'), word: '{犬|いぬ}
   assert.deepEqual(validateCard(c), []);
 }
 
+// ---------- sentence card: a whole sentence, translations as the answer ----------
+{
+  const v = { ...emptyValues('ja', 'sentences'), sentence: '{今日|きょう}は{暑|あつ}い。', accepted: '今天很熱。\n今天好熱。' };
+  assert.deepEqual(formErrors(v, 'ja'), {});
+  assert.deepEqual(formErrors({ ...v, sentence: ' ' }, 'ja'), { sentence: 'required' });
+  assert.deepEqual(missingFurigana(v, 'ja'), [], 'translations are Chinese, not text that needs furigana');
+  assert.deepEqual(missingFurigana({ ...v, sentence: '今日は暑い。' }, 'ja'), ['今日は暑い。']);
+  const c = cardFromValues({ ...v, register: 'plain', mistakes: [{ text: 'x', note: 'y' }] }, { lang: 'ja', newId, today });
+  assert.deepEqual(c.prompt, { sentence: '{今日|きょう}は{暑|あつ}い。' }, 'no register on sentence cards');
+  assert.deepEqual(c.answer, { accepted: ['今天很熱。', '今天好熱。'] }, 'no mistakes on sentence cards');
+  assert.deepEqual(validateCard(c), []);
+  assert.equal(valuesFromCard(c).sentence, v.sentence);
+}
+
 // ---------- editing keeps what the form does not show ----------
 const root = new URL('../data/', import.meta.url);
 const manifest = JSON.parse(fs.readFileSync(new URL('manifest.json', root), 'utf8'));
@@ -106,4 +120,4 @@ for (const file of manifest.files) {
   assert.equal(makeId('de', 'nominalisierung', (id) => taken.has(id), 0), 'de-nominalisierung-u2');
 }
 
-console.log(`ok - card form: new cards, required fields, flip, ${roundTrips} bundled cards survive an unchanged edit, ids`);
+console.log(`ok - card form: new cards, required fields, flip, sentence, ${roundTrips} bundled cards survive an unchanged edit, ids`);

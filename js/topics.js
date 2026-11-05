@@ -12,8 +12,8 @@
 //   id       unique within the language, used in the URL and in card.topic
 //   label    sidebar name
 //   parent   id of the parent topic (optional)
-//   group    sidebar section: 'grammar' | 'vocab' (inherited from the parent; default 'grammar')
-//   type     'rewrite' | 'cloze' | 'flip' (inherited from the parent)
+//   group    sidebar section: 'grammar' | 'vocab' | 'sentences' (inherited from the parent; default 'grammar')
+//   type     'rewrite' | 'cloze' | 'flip' | 'sentence' (inherited from the parent)
 //   labels   per-type labels, e.g. { source: 'Verbalstil', target: 'Nominalstil' } (merged with the parent's)
 //   facets   names for card.meta values, shown as chips on the back: { verbClass: { godan: '…' } }
 //   forms    the topic's registry of task labels: { 'te-kudasai': 'てください（請…）' }. A card says which one it
@@ -25,7 +25,11 @@
 
 import { normalizeDe, normalizeJa } from './text.js';
 
-export const CARD_TYPES = ['rewrite', 'cloze', 'flip'];
+export const CARD_TYPES = ['rewrite', 'cloze', 'flip', 'sentence'];
+
+/** Card types you recall and grade yourself (no typed answer): answer.accepted holds meanings or translations. */
+export const RECALL_TYPES = ['flip', 'sentence'];
+export const isRecall = (type) => RECALL_TYPES.includes(type);
 
 /** The course fields and their types. */
 export const LANG_FIELDS = {
@@ -104,6 +108,10 @@ export const LANGS = {
         id: 'vocab', label: 'Meine Wortliste', group: 'vocab', type: 'flip',
         about: 'Word list: one German word or phrase per card in its dictionary form (nouns with article, e.g. "die Bedienungsanleitung"; verbs with the object or preposition that belongs to them, e.g. "einer Sache vorbeugen"). accepted holds its meaning as a short German paraphrase; example is a sentence that uses it.',
       },
+      {
+        id: 'sentences', label: 'Meine Beispielsätze', group: 'sentences', type: 'sentence',
+        about: 'Sentences to learn as a whole: one natural German sentence per card, shown on the front; the learner recalls what it means and grades themselves. accepted holds its meaning as a German paraphrase (the clearest one first). words are the words in it worth saving to the word list; the explanation points out the expression or grammar that makes the sentence worth learning.',
+      },
     ],
   },
   ja: {
@@ -172,6 +180,10 @@ export const LANGS = {
       {
         id: 'vocab', label: '我的單字本', group: 'vocab', type: 'flip',
         about: 'Word list: one Japanese word per card in its dictionary form with furigana, e.g. {食|た}べる. accepted holds its meaning in Traditional Chinese; example is a JLPT N5 sentence that uses it, with exampleTranslation in Traditional Chinese.',
+      },
+      {
+        id: 'sentences', label: '我的例句本', group: 'sentences', type: 'sentence',
+        about: 'Sentences to learn as a whole: one natural Japanese sentence per card with furigana, shown on the front; the learner recalls what it means and grades themselves. accepted holds its translation in Traditional Chinese (the most natural one first; more lines for other good translations). words are the words in it a learner may not know, with their dictionary form in lemma; the explanation, in Traditional Chinese, points out the colloquial forms and grammar in it (e.g. なきゃ = なければ, てる = ている).',
       },
     ],
   },

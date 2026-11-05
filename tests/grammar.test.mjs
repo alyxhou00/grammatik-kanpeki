@@ -32,8 +32,8 @@ test('every course has a guide entry, and every guide belongs to a grammar topic
   }
 });
 
-test('the word lists are not in the guide', () => {
-  for (const lang of Object.keys(LANGS)) assert.ok(!guideTopics(lang).some((x) => x.topic.id === 'vocab'), lang);
+test('the word lists and sentence decks are not in the guide', () => {
+  for (const lang of Object.keys(LANGS)) assert.ok(!guideTopics(lang).some((x) => ['vocab', 'sentences'].includes(x.topic.id)), lang);
 });
 
 test('section ids are unique within a topic, item ids within a section, and every item has a form or an id and title', () => {
@@ -89,6 +89,7 @@ test('a card without a form links to its topic; a topic without a guide gives no
   assert.equal(guideAnchor({ language: 'ja', topic: 'verb-conjugation', meta: {} }).anchor, 'verb-conjugation');
   assert.equal(guideAnchor({ language: 'ja', topic: 'verb-conjugation', meta: { form: 'nope' } }).anchor, 'verb-conjugation');
   assert.equal(guideAnchor({ language: 'ja', topic: 'vocab' }), null);
+  assert.equal(guideAnchor({ language: 'ja', topic: 'sentences' }), null);
   assert.equal(guideAnchor({ language: 'xx', topic: 'a' }), null);
 });
 

@@ -4,6 +4,7 @@
     "de/nominalisierung.demo.json",
     "ja/verb-conjugation.demo.json",
     "ja/verb-conjugation.demo2.json",
-    "ja/verb-conjugation.demo3.json"
+    "ja/verb-conjugation.demo3.json",
+    "ja/sentences.demo.json"
   ]
 }

@@ -3,6 +3,7 @@
 //   rewrite  rewrite a whole sentence (prompt.source → typed sentence), e.g. Nominalisierung
 //   cloze    fill the blank (___) in prompt.sentence, optionally from a base word, e.g. 動詞變化, 助詞
 //   flip     classic Anki card: see the front, recall the back, grade yourself (word list)
+//   sentence a whole sentence on the front, recall its translation, grade yourself (例句本)
 //
 // Shared by every type: prompt.words (hoverable words), prompt.hint, prompt.translation, prompt.task, prompt.register,
 // card.explanation (tabs for each language it has) and chips for card.meta values named in the topic's facets.
@@ -46,7 +47,7 @@ export function savedWordIn(cards, word) {
 export function sentenceOf(card) {
   const p = card?.prompt || {};
   const type = typeOf(card);
-  return type === 'rewrite' ? p.source : type === 'cloze' ? p.sentence : p.example;
+  return type === 'rewrite' ? p.source : type === 'flip' ? p.example : p.sentence;
 }
 
 /** The full sentence of a card (blank filled with the model answer), used as a word's example. */
@@ -55,7 +56,8 @@ export function exampleOf(card) {
   const text = sentenceOf(card);
   if (!text) return null;
   const full = typeOf(card) === 'cloze' ? text.replace(BLANK, card.answer.accepted[0]) : text;
-  return { text: full, translation: typeOf(card) === 'flip' ? p.exampleTranslation : p.translation };
+  const type = typeOf(card);
+  return { text: full, translation: type === 'flip' ? p.exampleTranslation : type === 'sentence' ? card.answer.accepted[0] : p.translation };
 }
 
 /** Build a word-list card from a hovered word and the card it came from. */
@@ -333,6 +335,31 @@ export const CARD_RENDERERS = {
       const p = card.prompt;
       return `<div class="sum-main"><span lang="${card.language}" class="sum-word">${rubyHTML(p.word)}</span> ${p.pos ? `<span class="form-chip tiny">${esc(p.pos)}</span>` : ''}</div>
         <div class="sum-sub" lang="${ctx.L.noteLang}">${esc(card.answer.accepted.join('；'))}</div>`;
+    },
+  },
+
+  // A sentence to learn as a whole: read it (or listen), recall what it means, grade yourself.
+  // answer.accepted holds its translations in the note language, the main one first.
+  sentence: {
+    flip: true,
+    front(card, ctx) {
+      const p = card.prompt;
+      return `<div class="eyebrow">${ctx.t.sentenceFront}</div>
+        <p class="${sentenceClass(card)}" lang="${card.language}">${sentenceHTML(p.sentence, null, p.words || [])}${speakButton(ctx, p.sentence, card.language, { main: true })}</p>
+        ${ctx.revealed ? '' : `<p class="hint">${ctx.t.sentencePeek}</p>`}`;
+    },
+    input() { return ''; },
+    back(card, result, input, ctx) {
+      const [main, ...more] = card.answer.accepted;
+      return `
+        <div class="answer-row"><div class="label">${ctx.t.translation}</div>
+          <p class="val big sentence-translation" lang="${ctx.L.noteLang}">${esc(main)}</p>
+          ${more.map((x) => `<p class="val muted" lang="${ctx.L.noteLang}">${esc(x)}</p>`).join('')}</div>
+        ${explanationBlock(card, ctx)}`;
+    },
+    summary(card, ctx) {
+      return `<div class="sum-main"><span lang="${card.language}">${sentenceHTML(card.prompt.sentence)}</span></div>
+        <div class="sum-sub" lang="${ctx.L.noteLang}">${esc(card.answer.accepted[0])}</div>`;
     },
   },
 };
