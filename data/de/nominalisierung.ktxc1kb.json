@@ -1,0 +1,1616 @@
+{
+  "format": "grammatik-kanpeki.cards",
+  "version": 2,
+  "cards": [
+    {
+      "id": "de-nom-ktxc1kb-001",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "ktxc1kb",
+      "level": "C1",
+      "tags": [
+        "Regel 1",
+        "Subjekt",
+        "Genitiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "die Energiepreise steigen",
+        "task": "Ausdruck im Nominalstil",
+        "hint": "Regel 1: Subjekt + Verb → Nomen + Nomen (Gen.)",
+        "translation": {
+          "en": "energy prices rise",
+          "zh-Hant": "能源價格上漲"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "der Anstieg der Energiepreise",
+          "der Energiepreisanstieg"
+        ],
+        "acceptable": [
+          {
+            "text": "das Steigen der Energiepreise",
+            "note": "Korrekt, aber der substantivierte Infinitiv wirkt schwächer. Zu »steigen« gibt es das Nomen »der Anstieg«."
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "der Anstieg die Energiepreise",
+            "note": "Das Subjekt wird zum Genitivattribut: der Anstieg der Energiepreise."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "Das Subjekt des Aktivsatzes wird zum Genitivattribut, das Verb zum Nomen: steigen → der Anstieg.",
+        "en": "The subject of the active clause becomes a genitive attribute and the verb a noun: steigen → der Anstieg.",
+        "zh-Hant": "主動句的主詞變成 Genitiv 修飾語，動詞變成名詞：steigen → der Anstieg。"
+      }
+    },
+    {
+      "id": "de-nom-ktxc1kb-002",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "ktxc1kb",
+      "level": "C1",
+      "tags": [
+        "Regel 1",
+        "Subjekt",
+        "reflexiv",
+        "Genitiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "die Interessen ändern sich",
+        "task": "Ausdruck im Nominalstil",
+        "hint": "Regel 1: Subjekt + reflexives Verb → Nomen + Nomen (Gen.)",
+        "translation": {
+          "en": "interests change",
+          "zh-Hant": "興趣（利益）改變"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Änderung der Interessen"
+        ],
+        "acceptable": [
+          {
+            "text": "die Veränderung der Interessen",
+            "note": "Korrekt; »Veränderung« gehört eigentlich zu »sich verändern«. Zu »sich ändern« passt »die Änderung«."
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "die Änderung sich der Interessen",
+            "note": "Das Reflexivpronomen fällt im Nominalstil weg."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "Bei reflexiven Verben fällt »sich« weg; das Subjekt wird zum Genitivattribut: sich ändern → die Änderung.",
+        "en": "With reflexive verbs, \"sich\" disappears; the subject becomes a genitive attribute: sich ändern → die Änderung.",
+        "zh-Hant": "反身動詞名詞化時 sich 會消失；主詞變成 Genitiv 修飾語：sich ändern → die Änderung。"
+      }
+    },
+    {
+      "id": "de-nom-ktxc1kb-003",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "ktxc1kb",
+      "level": "C1",
+      "tags": [
+        "Regel 2",
+        "Akkusativergänzung",
+        "Genitiv",
+        "Adjektiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "alternative Energien fördern",
+        "task": "Ausdruck im Nominalstil",
+        "hint": "Regel 2: Verb + Akkusativergänzung → Nomen + Nomen (Gen.)",
+        "translation": {
+          "en": "to promote alternative energies",
+          "zh-Hant": "推動替代能源"
+        },
+        "words": [
+          {
+            "text": "fördern",
+            "meaning": "unterstützen, damit sich etwas entwickelt",
+            "pos": "Verb"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "die Förderung alternativer Energien"
+        ],
+        "acceptable": [
+          {
+            "text": "die Förderung von alternativen Energien",
+            "note": "Verständlich, aber »von« ist hier unnötig: Das Adjektiv zeigt den Genitiv (alternativer), also bleibt der Genitiv."
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "die Förderung alternativen Energien",
+            "note": "Ohne Artikel trägt das Adjektiv die starke Genitivendung: alternativer Energien."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "Die Akkusativergänzung wird zum Genitivattribut. Ohne Artikel, aber mit Adjektiv bleibt der Genitiv möglich – das Adjektiv bekommt die starke Endung: alternativer Energien.",
+        "en": "The accusative object becomes a genitive attribute. With no article but an adjective, the genitive still works; the adjective takes the strong ending: alternativer Energien.",
+        "zh-Hant": "Akkusativ 受詞變成 Genitiv 修飾語。沒有冠詞但有形容詞時仍可用 Genitiv，形容詞用強變化詞尾：alternativer Energien。"
+      }
+    },
+    {
+      "id": "de-nom-ktxc1kb-004",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "ktxc1kb",
+      "level": "C1",
+      "tags": [
+        "Regel 3",
+        "Passiv",
+        "Genitiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "die Wärme wird genutzt",
+        "task": "Ausdruck im Nominalstil",
+        "hint": "Regel 3: Subjekt im Passivsatz + Verb → Nomen + Nomen (Gen.)",
+        "translation": {
+          "en": "the heat is used",
+          "zh-Hant": "熱能被利用"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Nutzung der Wärme"
+        ],
+        "acceptable": [
+          {
+            "text": "das Nutzen der Wärme",
+            "note": "Korrekt gebildet, aber »die Nutzung« ist das übliche Verbalnomen. (»der Nutzen« bedeutet etwas anderes: Vorteil.)"
+          }
+        ]
+      },
+      "explanation": {
+        "de": "Das Passiv verschwindet: Das Subjekt des Passivsatzes wird zum Genitivattribut. nutzen → die Nutzung.",
+        "en": "The passive disappears: the subject of the passive clause becomes a genitive attribute. nutzen → die Nutzung.",
+        "zh-Hant": "被動態消失：被動句的主詞變成 Genitiv 修飾語。nutzen → die Nutzung。"
+      }
+    },
+    {
+      "id": "de-nom-ktxc1kb-005",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "ktxc1kb",
+      "level": "C1",
+      "tags": [
+        "Regel 2",
+        "Regel 4",
+        "durch",
+        "Genitiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Wärmepumpen unterstützen die Leistung",
+        "task": "Ausdruck im Nominalstil",
+        "hint": "Regel 2 + 4: Akkusativergänzung → Gen.; handelnde Person/Sache → durch + Akk.",
+        "translation": {
+          "en": "heat pumps support the output",
+          "zh-Hant": "熱泵輔助（提升）效能"
+        },
+        "words": [
+          {
+            "text": "Wärmepumpen",
+            "lemma": "die Wärmepumpe",
+            "meaning": "Gerät, das Wärme aus Luft, Wasser oder Boden zum Heizen nutzt",
+            "pos": "Nomen"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "die Unterstützung der Leistung durch Wärmepumpen"
+        ],
+        "mistakes": [
+          {
+            "text": "die Unterstützung der Leistung von Wärmepumpen",
+            "note": "»von Wärmepumpen« klingt wie »die Leistung der Wärmepumpen«. Wer etwas tut, steht im Nominalstil mit »durch«."
+          },
+          {
+            "text": "die Unterstützung der Leistung durch den Wärmepumpen",
+            "note": "»durch« verlangt den Akkusativ; hier ohne Artikel: durch Wärmepumpen."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "Die Akkusativergänzung (die Leistung) wird zum Genitivattribut, das Subjekt (Wärmepumpen) – wer handelt – steht mit »durch« + Akkusativ.",
+        "en": "The accusative object (die Leistung) becomes a genitive attribute; the subject (Wärmepumpen), the one acting, follows \"durch\" + accusative.",
+        "zh-Hant": "Akkusativ 受詞（die Leistung）變成 Genitiv 修飾語；主詞（Wärmepumpen）是動作的執行者，用 durch＋Akkusativ 表示。"
+      }
+    },
+    {
+      "id": "de-nom-ktxc1kb-006",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "ktxc1kb",
+      "level": "C1",
+      "tags": [
+        "Regel 4",
+        "durch",
+        "von + Dativ",
+        "Nomen ohne Artikel"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Erdwärme beheizt Wasser",
+        "task": "Ausdruck im Nominalstil",
+        "hint": "Nomen ohne Artikel → von + Dativ; handelnde Sache → durch",
+        "translation": {
+          "en": "geothermal energy heats water",
+          "zh-Hant": "地熱加熱水"
+        },
+        "words": [
+          {
+            "text": "Erdwärme",
+            "lemma": "die Erdwärme",
+            "meaning": "Wärme aus dem Inneren der Erde, als Energiequelle genutzt",
+            "pos": "Nomen"
+          },
+          {
+            "text": "beheizt",
+            "lemma": "beheizen",
+            "meaning": "mit Wärme versorgen, warm machen",
+            "pos": "Verb"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "das Beheizen von Wasser durch Erdwärme"
+        ],
+        "acceptable": [
+          {
+            "text": "das Beheizen des Wassers durch Erdwärme",
+            "note": "Grammatisch korrekt, aber »des Wassers« meint ein bestimmtes Wasser. Im Ausgangssatz steht »Wasser« ohne Artikel: von Wasser."
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "das Beheizen Wassers durch Erdwärme",
+            "note": "Ohne Artikel und ohne Adjektiv ist der Genitiv nicht erkennbar. Dann steht »von« + Dativ: von Wasser."
+          },
+          {
+            "text": "das Beheizen von Wasser von Erdwärme",
+            "note": "Wer oder was etwas tut, steht im Nominalstil mit »durch«: durch Erdwärme."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "»Wasser« steht ohne Artikel, ohne Adjektiv und ohne Zahlwort – statt des Genitivs nimmt man »von« + Dativ. Die handelnde Sache (Erdwärme) steht mit »durch«.",
+        "en": "\"Wasser\" has no article, adjective or number, so instead of the genitive you use \"von\" + dative. The thing doing the action (Erdwärme) follows \"durch\".",
+        "zh-Hant": "Wasser 沒有冠詞、形容詞或數詞，所以不用 Genitiv，改用 von＋Dativ。執行動作的 Erdwärme 用 durch 表示。"
+      }
+    },
+    {
+      "id": "de-nom-ktxc1kb-007",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "ktxc1kb",
+      "level": "C1",
+      "tags": [
+        "Nomen ohne Artikel",
+        "von + Dativ"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Erdwärme einsetzen",
+        "task": "Ausdruck im Nominalstil",
+        "hint": "Nomen ohne Artikel → von + Dativ",
+        "translation": {
+          "en": "to use geothermal energy",
+          "zh-Hant": "使用地熱"
+        },
+        "words": [
+          {
+            "text": "Erdwärme",
+            "lemma": "die Erdwärme",
+            "meaning": "Wärme aus dem Inneren der Erde, als Energiequelle genutzt",
+            "pos": "Nomen"
+          },
+          {
+            "text": "einsetzen",
+            "meaning": "für einen Zweck verwenden",
+            "pos": "Verb"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "der Einsatz von Erdwärme"
+        ],
+        "acceptable": [
+          {
+            "text": "der Einsatz der Erdwärme",
+            "note": "Möglich, aber der Artikel fehlt im Ausgangsausdruck. Die Regel: Nomen ohne Artikel → von + Dativ."
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "der Einsatz Erdwärme",
+            "note": "Ohne Artikel ist der Genitiv nicht erkennbar: der Einsatz von Erdwärme."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "Steht das Nomen ohne Artikel, ohne vorangestelltes Adjektiv oder Zahlwort, verwendet man statt des Genitivs »von« + Dativ.",
+        "en": "When the noun has no article, preceding adjective or number, use \"von\" + dative instead of the genitive.",
+        "zh-Hant": "名詞前沒有冠詞、形容詞或數詞時，不用 Genitiv，改用 von＋Dativ。"
+      }
+    },
+    {
+      "id": "de-nom-ktxc1kb-008",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "ktxc1kb",
+      "level": "C1",
+      "tags": [
+        "Regel 5",
+        "Präposition",
+        "durch"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Traceless investiert in den Ausbau der Produktion.",
+        "task": "Ausdruck im Nominalstil",
+        "hint": "Regel 5: Verb + Präposition → Nomen + Präposition",
+        "translation": {
+          "en": "Traceless is investing in expanding production.",
+          "zh-Hant": "traceless 投資擴大生產。"
+        },
+        "words": [
+          {
+            "text": "Ausbau",
+            "lemma": "der Ausbau",
+            "meaning": "Vergrößerung, Erweiterung",
+            "pos": "Nomen"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "die Investition in den Ausbau der Produktion durch traceless",
+          "die Investition von traceless in den Ausbau der Produktion"
+        ],
+        "mistakes": [
+          {
+            "text": "die Investition für den Ausbau der Produktion durch traceless",
+            "note": "Die Präposition bleibt: investieren in → die Investition in."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "Die Präposition des Verbs bleibt beim Nomen: investieren in → die Investition in. Wer investiert, steht mit »durch« (oder »von«).",
+        "en": "The verb's preposition stays with the noun: investieren in → die Investition in. The investor follows \"durch\" (or \"von\").",
+        "zh-Hant": "動詞搭配的介系詞保留在名詞後：investieren in → die Investition in。投資者用 durch（或 von）表示。"
+      }
+    },
+    {
+      "id": "de-nom-ktxc1kb-009",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "ktxc1kb",
+      "level": "C1",
+      "tags": [
+        "Regel 5",
+        "Präposition",
+        "Genitiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Viele Unternehmen interessieren sich für traceless.",
+        "task": "Ausdruck im Nominalstil",
+        "hint": "Regel 5 – Achtung: Die Präposition ändert sich!",
+        "translation": {
+          "en": "Many companies are interested in traceless.",
+          "zh-Hant": "許多公司對 traceless 感興趣。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "das Interesse vieler Unternehmen an traceless"
+        ],
+        "acceptable": [
+          {
+            "text": "das Interesse von vielen Unternehmen an traceless",
+            "note": "Verständlich, aber mit Zahlwort (viele) ist der Genitiv erkennbar: vieler Unternehmen."
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "das Interesse vieler Unternehmen für traceless",
+            "note": "Hier ändert sich die Präposition: sich interessieren für → das Interesse an."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "Verb und Nomen haben oft dieselbe Präposition, aber nicht immer: sich interessieren für → das Interesse an. Das Subjekt mit Zahlwort wird zum Genitiv: vieler Unternehmen.",
+        "en": "Verb and noun often share a preposition, but not always: sich interessieren für → das Interesse an. The subject with \"viele\" becomes a genitive: vieler Unternehmen.",
+        "zh-Hant": "動詞和名詞的介系詞通常相同，但不一定：sich interessieren für → das Interesse an。帶數量詞的主詞變成 Genitiv：vieler Unternehmen。"
+      }
+    },
+    {
+      "id": "de-nom-ktxc1kb-010",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "ktxc1kb",
+      "level": "C1",
+      "tags": [
+        "Regel 6",
+        "Dativergänzung",
+        "Präposition"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Das Material ähnelt klassischem Kunststoff.",
+        "task": "Ausdruck im Nominalstil",
+        "hint": "Regel 6: Verb + Dativergänzung → Nomen + Präposition + Nomen",
+        "translation": {
+          "en": "The material resembles conventional plastic.",
+          "zh-Hant": "這種材料和傳統塑膠很像。"
+        },
+        "words": [
+          {
+            "text": "ähnelt",
+            "lemma": "ähneln",
+            "meaning": "fast gleich sein wie jemand oder etwas",
+            "pos": "Verb"
+          },
+          {
+            "text": "Kunststoff",
+            "lemma": "der Kunststoff",
+            "meaning": "künstlich hergestelltes Material, Plastik",
+            "pos": "Nomen"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "die Ähnlichkeit des Materials mit klassischem Kunststoff"
+        ],
+        "acceptable": [
+          {
+            "text": "die Ähnlichkeit des Materials zu klassischem Kunststoff",
+            "note": "Verbreitet, aber die Standardverbindung ist »Ähnlichkeit mit«."
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "die Ähnlichkeit des Materials klassischen Kunststoffs",
+            "note": "Eine Dativergänzung wird nicht zum Genitiv, sondern zu Präposition + Nomen: mit klassischem Kunststoff."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "Die Dativergänzung wird nicht zum Genitivattribut, sondern bekommt eine Präposition: ähneln + Dat. → die Ähnlichkeit mit. Das Subjekt wird zum Genitiv: des Materials.",
+        "en": "The dative object does not become a genitive; it gets a preposition: ähneln + dat. → die Ähnlichkeit mit. The subject becomes a genitive: des Materials.",
+        "zh-Hant": "Dativ 受詞不會變成 Genitiv，而是改用介系詞：ähneln＋Dativ → die Ähnlichkeit mit。主詞變成 Genitiv：des Materials。"
+      }
+    },
+    {
+      "id": "de-nom-ktxc1kb-011",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "ktxc1kb",
+      "level": "C1",
+      "tags": [
+        "Regel 6",
+        "Dativergänzung",
+        "Verneinung",
+        "kein"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "… schadet der Umwelt nicht",
+        "task": "Ausdruck im Nominalstil",
+        "hint": "Regel 6 + Verneinung: nicht → kein",
+        "translation": {
+          "en": "… does not harm the environment",
+          "zh-Hant": "……不會危害環境"
+        },
+        "words": [
+          {
+            "text": "schadet",
+            "lemma": "schaden",
+            "meaning": "einen Nachteil, Verlust oder Schaden verursachen",
+            "pos": "Verb"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "kein Schaden für die Umwelt"
+        ],
+        "mistakes": [
+          {
+            "text": "nicht Schaden für die Umwelt",
+            "note": "Ein Nomen verneint man mit »kein«: kein Schaden."
+          },
+          {
+            "text": "kein Schaden der Umwelt",
+            "note": "Eine Dativergänzung wird nicht zum Genitiv, sondern zu Präposition + Nomen: für die Umwelt."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "Verneinung: nicht → kein. Die Dativergänzung (der Umwelt) wird zu »für« + Akkusativ: kein Schaden für die Umwelt.",
+        "en": "Negation: nicht → kein. The dative object (der Umwelt) becomes \"für\" + accusative: kein Schaden für die Umwelt.",
+        "zh-Hant": "否定：nicht → kein。Dativ 受詞（der Umwelt）改成 für＋Akkusativ：kein Schaden für die Umwelt。"
+      }
+    },
+    {
+      "id": "de-nom-ktxc1kb-012",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "ktxc1kb",
+      "level": "C1",
+      "tags": [
+        "Regel 7",
+        "Adverb",
+        "Adjektiv",
+        "Passiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Die Emissionen werden deutlich reduziert.",
+        "task": "Ausdruck im Nominalstil",
+        "hint": "Regel 7: Adverb → Adjektiv vor dem Nomen",
+        "translation": {
+          "en": "Emissions are reduced significantly.",
+          "zh-Hant": "排放量明顯減少。"
+        },
+        "words": [
+          {
+            "text": "Emissionen",
+            "lemma": "die Emission",
+            "meaning": "Abgabe von Schadstoffen in die Luft",
+            "pos": "Nomen"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "die deutliche Reduktion der Emissionen",
+          "die deutliche Reduzierung der Emissionen"
+        ],
+        "mistakes": [
+          {
+            "text": "die deutlich Reduktion der Emissionen",
+            "note": "Vor dem Nomen wird das Adverb zum Adjektiv und bekommt eine Endung: die deutliche Reduktion."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "Das Adverb wird zum Adjektiv vor dem Nomen und dekliniert: deutlich → die deutliche Reduktion. Das Subjekt des Passivsatzes wird Genitivattribut.",
+        "en": "The adverb becomes an adjective before the noun and takes an ending: deutlich → die deutliche Reduktion. The passive subject becomes a genitive attribute.",
+        "zh-Hant": "副詞變成名詞前的形容詞，要加詞尾：deutlich → die deutliche Reduktion。被動句的主詞變成 Genitiv 修飾語。"
+      }
+    },
+    {
+      "id": "de-nom-ktxc1kb-013",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "ktxc1kb",
+      "level": "C1",
+      "tags": [
+        "Regel 8",
+        "Infinitivsatz",
+        "von + Dativ",
+        "Nomen ohne Artikel"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Es ist das Ziel der Firma, Plastik zu ersetzen.",
+        "hint": "Regel 8: Infinitivsatz → Nomen + Nomen; Plastik ohne Artikel → von",
+        "translation": {
+          "en": "The company's goal is to replace plastic.",
+          "zh-Hant": "公司的目標是取代塑膠。"
+        },
+        "words": [
+          {
+            "text": "ersetzen",
+            "meaning": "an die Stelle von etwas anderem setzen",
+            "pos": "Verb"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "Ziel der Firma ist der Ersatz von Plastik.",
+          "Das Ziel der Firma ist der Ersatz von Plastik."
+        ],
+        "acceptable": [
+          {
+            "text": "Ziel der Firma ist die Ersetzung von Plastik.",
+            "note": "Korrekt, aber »der Ersatz« ist das gebräuchlichere Nomen zu »ersetzen«."
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "Ziel der Firma ist der Ersatz Plastiks.",
+            "note": "Plastik steht ohne Artikel: von + Dativ (der Ersatz von Plastik)."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "Der Infinitivsatz wird zu einem Nomen: Plastik zu ersetzen → der Ersatz von Plastik. »Plastik« hat keinen Artikel, darum »von« + Dativ.",
+        "en": "The infinitive clause becomes a noun phrase: Plastik zu ersetzen → der Ersatz von Plastik. \"Plastik\" has no article, so \"von\" + dative.",
+        "zh-Hant": "不定式子句變成名詞片語：Plastik zu ersetzen → der Ersatz von Plastik。Plastik 沒有冠詞，所以用 von＋Dativ。"
+      }
+    },
+    {
+      "id": "de-nom-ktxc1kb-014",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "ktxc1kb",
+      "level": "C1",
+      "tags": [
+        "Regel 8",
+        "dass-Satz",
+        "Präposition",
+        "reflexiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Anne Lamp ist davon überzeugt, dass sich die Preise angleichen werden.",
+        "hint": "Regel 8: dass-Satz → Nomen + Nomen (Gen.); davon … → von + Nomen",
+        "translation": {
+          "en": "Anne Lamp is convinced that prices will even out.",
+          "zh-Hant": "Anne Lamp 深信價格會趨於一致。"
+        },
+        "words": [
+          {
+            "text": "angleichen",
+            "lemma": "sich angleichen",
+            "meaning": "sich einander anpassen, gleich werden",
+            "pos": "Verb"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "Anne Lamp ist von der Angleichung der Preise überzeugt.",
+          "Anne Lamp ist von einer Angleichung der Preise überzeugt."
+        ],
+        "acceptable": [
+          {
+            "text": "Anne Lamp ist von der Angleichung von den Preisen überzeugt.",
+            "note": "Verständlich, aber »die Preise« hat einen Artikel – dann steht der Genitiv: der Preise."
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "Anne Lamp ist davon überzeugt, die Angleichung der Preise.",
+            "note": "Das Korrelat »davon« wird zur Präposition »von« vor dem Nomen; der Nebensatz verschwindet."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "Der dass-Satz wird zum Nomen: sich die Preise angleichen → die Angleichung der Preise. Das Korrelat »davon« wird zur Präposition: von der Angleichung.",
+        "en": "The dass-clause becomes a noun phrase: die Preise gleichen sich an → die Angleichung der Preise. The placeholder \"davon\" becomes the preposition: von der Angleichung.",
+        "zh-Hant": "dass 子句變成名詞片語：die Preise gleichen sich an → die Angleichung der Preise。前指詞 davon 變成介系詞：von der Angleichung。"
+      }
+    },
+    {
+      "id": "de-nom-ktxc1kb-015",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "ktxc1kb",
+      "level": "C1",
+      "tags": [
+        "Possessivartikel",
+        "Präposition"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "er engagiert sich für den Umweltschutz",
+        "task": "Ausdruck im Nominalstil",
+        "hint": "Personalpronomen → Possessivartikel",
+        "translation": {
+          "en": "he is committed to environmental protection",
+          "zh-Hant": "他致力於環境保護"
+        },
+        "words": [
+          {
+            "text": "engagiert",
+            "lemma": "sich engagieren",
+            "meaning": "sich aktiv für etwas einsetzen",
+            "pos": "Verb"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "sein Engagement für den Umweltschutz"
+        ],
+        "acceptable": [
+          {
+            "text": "das Engagement von ihm für den Umweltschutz",
+            "note": "Verständlich, aber umständlich. Ein Personalpronomen wird zum Possessivartikel: sein Engagement."
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "ihr Engagement für den Umweltschutz",
+            "note": "»er« → »sein«. »ihr« gehört zu »sie«."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "Ein Personalpronomen als Subjekt wird zum Possessivartikel: er → sein Engagement. Die Präposition »für« bleibt.",
+        "en": "A personal pronoun as subject becomes a possessive: er → sein Engagement. The preposition \"für\" stays.",
+        "zh-Hant": "當主詞的人稱代名詞變成物主冠詞：er → sein Engagement。介系詞 für 保留。"
+      }
+    },
+    {
+      "id": "de-nom-ktxc1kb-016",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "ktxc1kb",
+      "level": "C1",
+      "tags": [
+        "Übung c",
+        "Regel 2",
+        "Regel 4",
+        "durch",
+        "Genitiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Erdwärme reduziert den Energieverbrauch",
+        "task": "Ausdruck im Nominalstil",
+        "hint": "Regel 2 + 4",
+        "translation": {
+          "en": "geothermal energy reduces energy consumption",
+          "zh-Hant": "地熱降低能源消耗"
+        },
+        "words": [
+          {
+            "text": "Erdwärme",
+            "lemma": "die Erdwärme",
+            "meaning": "Wärme aus dem Inneren der Erde, als Energiequelle genutzt",
+            "pos": "Nomen"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "die Reduktion des Energieverbrauchs durch Erdwärme",
+          "die Reduzierung des Energieverbrauchs durch Erdwärme"
+        ],
+        "mistakes": [
+          {
+            "text": "die Reduktion des Energieverbrauch durch Erdwärme",
+            "note": "Das Genitiv-s fehlt: des Energieverbrauchs."
+          },
+          {
+            "text": "die Reduktion des Energieverbrauchs von Erdwärme",
+            "note": "Wer oder was etwas tut, steht mit »durch«: durch Erdwärme."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "Akkusativergänzung → Genitiv (des Energieverbrauchs); Subjekt → durch + Akkusativ (durch Erdwärme). reduzieren → die Reduktion / Reduzierung.",
+        "en": "Accusative object → genitive (des Energieverbrauchs); subject → durch + accusative (durch Erdwärme). reduzieren → die Reduktion / Reduzierung.",
+        "zh-Hant": "Akkusativ 受詞 → Genitiv（des Energieverbrauchs）；主詞 → durch＋Akkusativ（durch Erdwärme）。reduzieren → die Reduktion／Reduzierung。"
+      }
+    },
+    {
+      "id": "de-nom-ktxc1kb-017",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "ktxc1kb",
+      "level": "C1",
+      "tags": [
+        "Übung c",
+        "Regel 1",
+        "von + Dativ",
+        "Nomen ohne Artikel"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Gase entstehen",
+        "task": "Ausdruck im Nominalstil",
+        "hint": "Regel 1 – Nomen ohne Artikel!",
+        "translation": {
+          "en": "gases form",
+          "zh-Hant": "產生氣體"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Entstehung von Gasen"
+        ],
+        "acceptable": [
+          {
+            "text": "das Entstehen von Gasen",
+            "note": "Korrekt, aber »die Entstehung« ist das übliche Verbalnomen."
+          },
+          {
+            "text": "die Entstehung der Gase",
+            "note": "Grammatisch korrekt, aber mit Artikel meint man bestimmte Gase. Im Ausgangsausdruck steht kein Artikel: von Gasen."
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "die Entstehung Gase",
+            "note": "Ohne Artikel ist der Genitiv nicht erkennbar: von + Dativ, die Entstehung von Gasen."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "»Gase« steht ohne Artikel und ohne Adjektiv – statt des Genitivs: von + Dativ (von Gasen, Dativ Plural mit -n).",
+        "en": "\"Gase\" has no article or adjective, so instead of the genitive: von + dative (von Gasen, dative plural with -n).",
+        "zh-Hant": "Gase 沒有冠詞也沒有形容詞，所以不用 Genitiv，改用 von＋Dativ（von Gasen，Dativ 複數加 -n）。"
+      }
+    },
+    {
+      "id": "de-nom-ktxc1kb-018",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "ktxc1kb",
+      "level": "C1",
+      "tags": [
+        "Übung c",
+        "Regel 1",
+        "reflexiv",
+        "Genitiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "das Wasser bewegt sich",
+        "task": "Ausdruck im Nominalstil",
+        "hint": "Regel 1",
+        "translation": {
+          "en": "the water moves",
+          "zh-Hant": "水在流動"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Bewegung des Wassers"
+        ],
+        "acceptable": [
+          {
+            "text": "die Bewegung von dem Wasser",
+            "note": "Umgangssprachlich. »das Wasser« hat einen Artikel, also Genitiv: des Wassers."
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "die Bewegung des Wasser",
+            "note": "Das Genitiv-s fehlt: des Wassers."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "»sich« fällt weg, das Subjekt wird zum Genitivattribut: sich bewegen → die Bewegung des Wassers.",
+        "en": "\"sich\" disappears and the subject becomes a genitive attribute: sich bewegen → die Bewegung des Wassers.",
+        "zh-Hant": "sich 消失，主詞變成 Genitiv 修飾語：sich bewegen → die Bewegung des Wassers。"
+      }
+    },
+    {
+      "id": "de-nom-ktxc1kb-019",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "ktxc1kb",
+      "level": "C1",
+      "tags": [
+        "Übung c",
+        "Regel 2",
+        "Regel 4",
+        "durch",
+        "Adjektiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Verbraucher nutzen erneuerbare Energien",
+        "task": "Ausdruck im Nominalstil",
+        "hint": "Regel 2 + 4",
+        "translation": {
+          "en": "consumers use renewable energies",
+          "zh-Hant": "消費者使用再生能源"
+        },
+        "words": [
+          {
+            "text": "Verbraucher",
+            "lemma": "der Verbraucher",
+            "meaning": "Person, die Waren oder Energie kauft und verbraucht",
+            "pos": "Nomen"
+          },
+          {
+            "text": "erneuerbare",
+            "lemma": "erneuerbar",
+            "meaning": "sich auf natürliche Weise wieder bildend (Wind, Sonne …)",
+            "pos": "Adjektiv"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "die Nutzung erneuerbarer Energien durch Verbraucher"
+        ],
+        "acceptable": [
+          {
+            "text": "die Nutzung von erneuerbaren Energien durch Verbraucher",
+            "note": "Verständlich, aber unnötig: Das Adjektiv zeigt den Genitiv (erneuerbarer Energien)."
+          },
+          {
+            "text": "die Nutzung erneuerbarer Energien von Verbrauchern",
+            "note": "Möglich, aber nach der Regel steht die handelnde Person mit »durch«."
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "die Nutzung erneuerbaren Energien durch Verbraucher",
+            "note": "Ohne Artikel braucht das Adjektiv die starke Genitivendung: erneuerbarer Energien."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "Akkusativergänzung → Genitiv; mit Adjektiv ohne Artikel: starke Endung (erneuerbarer Energien). Subjekt → durch + Akkusativ (durch Verbraucher).",
+        "en": "Accusative object → genitive; an adjective without an article takes the strong ending (erneuerbarer Energien). Subject → durch + accusative (durch Verbraucher).",
+        "zh-Hant": "Akkusativ 受詞 → Genitiv；沒有冠詞的形容詞用強變化詞尾（erneuerbarer Energien）。主詞 → durch＋Akkusativ（durch Verbraucher）。"
+      }
+    },
+    {
+      "id": "de-nom-ktxc1kb-020",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "ktxc1kb",
+      "level": "C1",
+      "tags": [
+        "Übung c",
+        "Regel 3",
+        "Passiv",
+        "von + Dativ",
+        "Nomen ohne Artikel"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Häuser werden erwärmt",
+        "task": "Ausdruck im Nominalstil",
+        "hint": "Regel 3 – Nomen ohne Artikel!",
+        "translation": {
+          "en": "houses are heated",
+          "zh-Hant": "房屋被加熱"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Erwärmung von Häusern"
+        ],
+        "acceptable": [
+          {
+            "text": "das Erwärmen von Häusern",
+            "note": "Korrekt, aber »die Erwärmung« ist das übliche Verbalnomen."
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "die Erwärmung Häuser",
+            "note": "Ohne Artikel ist der Genitiv nicht erkennbar: von + Dativ, von Häusern."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "Das Subjekt des Passivsatzes steht ohne Artikel – darum »von« + Dativ statt Genitiv: die Erwärmung von Häusern.",
+        "en": "The passive subject has no article, so \"von\" + dative instead of the genitive: die Erwärmung von Häusern.",
+        "zh-Hant": "被動句的主詞沒有冠詞，所以不用 Genitiv，改用 von＋Dativ：die Erwärmung von Häusern。"
+      }
+    },
+    {
+      "id": "de-nom-ktxc1kb-021",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "ktxc1kb",
+      "level": "C1",
+      "tags": [
+        "Übung c",
+        "Regel 2",
+        "Regel 4",
+        "durch",
+        "von + Dativ"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Sonnenenergie erwärmt Wasser",
+        "task": "Ausdruck im Nominalstil",
+        "hint": "Regel 2 + 4 – Nomen ohne Artikel!",
+        "translation": {
+          "en": "solar energy heats water",
+          "zh-Hant": "太陽能加熱水"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Erwärmung von Wasser durch Sonnenenergie"
+        ],
+        "acceptable": [
+          {
+            "text": "das Erwärmen von Wasser durch Sonnenenergie",
+            "note": "Korrekt, aber »die Erwärmung« ist das übliche Verbalnomen."
+          },
+          {
+            "text": "die Erwärmung des Wassers durch Sonnenenergie",
+            "note": "Grammatisch korrekt, aber »des Wassers« meint bestimmtes Wasser. Ohne Artikel: von Wasser."
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "die Erwärmung von Wasser von Sonnenenergie",
+            "note": "Wer oder was etwas tut, steht mit »durch«: durch Sonnenenergie."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "Akkusativergänzung ohne Artikel → von + Dativ (von Wasser); Subjekt → durch + Akkusativ (durch Sonnenenergie).",
+        "en": "Accusative object without article → von + dative (von Wasser); subject → durch + accusative (durch Sonnenenergie).",
+        "zh-Hant": "沒有冠詞的 Akkusativ 受詞 → von＋Dativ（von Wasser）；主詞 → durch＋Akkusativ（durch Sonnenenergie）。"
+      }
+    },
+    {
+      "id": "de-nom-ktxc1kb-022",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "ktxc1kb",
+      "level": "C1",
+      "tags": [
+        "Übung b",
+        "Präposition",
+        "Adjektiv",
+        "von + Dativ"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Plastik wirkt sich negativ auf die Umwelt aus.",
+        "task": "Ein großer Nachteil ist …",
+        "translation": {
+          "en": "Plastic has a negative effect on the environment.",
+          "zh-Hant": "塑膠對環境有負面影響。"
+        },
+        "words": [
+          {
+            "text": "wirkt",
+            "lemma": "sich auswirken auf",
+            "meaning": "eine Folge für etwas haben",
+            "pos": "Verb"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "Ein großer Nachteil ist die negative Auswirkung von Plastik auf die Umwelt."
+        ],
+        "mistakes": [
+          {
+            "text": "Ein großer Nachteil ist die negative Auswirkung Plastiks auf die Umwelt.",
+            "note": "Plastik steht ohne Artikel: von + Dativ (von Plastik)."
+          },
+          {
+            "text": "Ein großer Nachteil ist die negative Auswirkung von Plastik für die Umwelt.",
+            "note": "Die Präposition bleibt: sich auswirken auf → die Auswirkung auf."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "sich auswirken auf → die Auswirkung auf; das Adverb »negativ« wird zum Adjektiv (die negative Auswirkung). »Plastik« ohne Artikel → von Plastik.",
+        "en": "sich auswirken auf → die Auswirkung auf; the adverb \"negativ\" becomes an adjective (die negative Auswirkung). \"Plastik\" without article → von Plastik.",
+        "zh-Hant": "sich auswirken auf → die Auswirkung auf；副詞 negativ 變成形容詞（die negative Auswirkung）。Plastik 沒有冠詞 → von Plastik。"
+      }
+    },
+    {
+      "id": "de-nom-ktxc1kb-023",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "ktxc1kb",
+      "level": "C1",
+      "tags": [
+        "Übung b",
+        "Präposition",
+        "Genitiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Lamp suchte nach einem alternativen Verfahren.",
+        "task": "Lamps … war schnell erfolgreich.",
+        "translation": {
+          "en": "Lamp searched for an alternative process.",
+          "zh-Hant": "Lamp 尋找一種替代的製程。"
+        },
+        "words": [
+          {
+            "text": "Verfahren",
+            "lemma": "das Verfahren",
+            "meaning": "Methode, wie man etwas herstellt oder macht",
+            "pos": "Nomen"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "Lamps Suche nach einem alternativen Verfahren war schnell erfolgreich."
+        ],
+        "mistakes": [
+          {
+            "text": "Lamps Suche eines alternativen Verfahrens war schnell erfolgreich.",
+            "note": "Die Präposition bleibt: suchen nach → die Suche nach."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "suchen nach → die Suche nach; die Präposition bleibt. Das Subjekt (ein Name) steht als vorangestellter Genitiv: Lamps Suche.",
+        "en": "suchen nach → die Suche nach; the preposition stays. The subject (a name) comes first as a genitive: Lamps Suche.",
+        "zh-Hant": "suchen nach → die Suche nach，介系詞保留。主詞是人名，放在前面當 Genitiv：Lamps Suche。"
+      }
+    },
+    {
+      "id": "de-nom-ktxc1kb-024",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "ktxc1kb",
+      "level": "C1",
+      "tags": [
+        "Übung b",
+        "Adverb",
+        "Adjektiv",
+        "von + Dativ"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Man verwendet ausschließlich Naturstoffe.",
+        "task": "… ist schon seit 100 Jahren bekannt.",
+        "translation": {
+          "en": "Only natural materials are used.",
+          "zh-Hant": "只使用天然材料。"
+        },
+        "words": [
+          {
+            "text": "ausschließlich",
+            "meaning": "nur, ohne etwas anderes",
+            "pos": "Adverb"
+          },
+          {
+            "text": "Naturstoffe",
+            "lemma": "der Naturstoff",
+            "meaning": "Stoff, der in der Natur vorkommt",
+            "pos": "Nomen"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "Die ausschließliche Verwendung von Naturstoffen ist schon seit 100 Jahren bekannt."
+        ],
+        "acceptable": [
+          {
+            "text": "Die Verwendung von ausschließlich Naturstoffen ist schon seit 100 Jahren bekannt.",
+            "note": "Verständlich, aber im Nominalstil wird das Adverb zum Adjektiv: die ausschließliche Verwendung."
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "Die ausschließliche Verwendung Naturstoffe ist schon seit 100 Jahren bekannt.",
+            "note": "Naturstoffe ohne Artikel: von + Dativ (von Naturstoffen)."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "»man« fällt weg. Das Adverb wird zum Adjektiv (die ausschließliche Verwendung); die Akkusativergänzung ohne Artikel → von + Dativ (von Naturstoffen).",
+        "en": "\"man\" disappears. The adverb becomes an adjective (die ausschließliche Verwendung); the accusative object without article → von + dative (von Naturstoffen).",
+        "zh-Hant": "man 直接省略。副詞變成形容詞（die ausschließliche Verwendung）；沒有冠詞的 Akkusativ 受詞 → von＋Dativ（von Naturstoffen）。"
+      }
+    },
+    {
+      "id": "de-nom-ktxc1kb-025",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "ktxc1kb",
+      "level": "C1",
+      "tags": [
+        "Übung b",
+        "Adverb",
+        "Adjektiv",
+        "Genitiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Das Material zerfällt in der Natur komplett.",
+        "task": "… dauert nur wenige Wochen.",
+        "translation": {
+          "en": "The material breaks down completely in nature.",
+          "zh-Hant": "這種材料在自然中會完全分解。"
+        },
+        "words": [
+          {
+            "text": "zerfällt",
+            "lemma": "zerfallen",
+            "meaning": "in kleine Teile auseinanderfallen, sich auflösen",
+            "pos": "Verb"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "Der komplette Zerfall des Materials in der Natur dauert nur wenige Wochen.",
+          "Der vollständige Zerfall des Materials in der Natur dauert nur wenige Wochen."
+        ],
+        "mistakes": [
+          {
+            "text": "Der komplett Zerfall des Materials in der Natur dauert nur wenige Wochen.",
+            "note": "Vor dem Nomen wird das Adverb zum Adjektiv mit Endung: der komplette Zerfall."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "zerfallen → der Zerfall; das Subjekt wird Genitivattribut (des Materials), das Adverb zum Adjektiv (der komplette Zerfall). »in der Natur« bleibt.",
+        "en": "zerfallen → der Zerfall; the subject becomes a genitive (des Materials), the adverb an adjective (der komplette Zerfall). \"in der Natur\" stays.",
+        "zh-Hant": "zerfallen → der Zerfall；主詞變成 Genitiv（des Materials），副詞變成形容詞（der komplette Zerfall）。in der Natur 保留不變。"
+      }
+    },
+    {
+      "id": "de-nom-ktxc1kb-026",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "ktxc1kb",
+      "level": "C1",
+      "tags": [
+        "Übung b",
+        "Regel 6",
+        "Dativergänzung",
+        "Präposition"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "So ein Produkt nutzt der Umwelt.",
+        "task": "Das Unternehmen betont besonders …",
+        "translation": {
+          "en": "A product like this benefits the environment.",
+          "zh-Hant": "這樣的產品對環境有益。"
+        },
+        "words": [
+          {
+            "text": "nutzt",
+            "lemma": "nutzen",
+            "meaning": "(+ Dativ) einen Vorteil bringen",
+            "pos": "Verb"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "Das Unternehmen betont besonders den Nutzen eines solchen Produkts für die Umwelt.",
+          "Das Unternehmen betont besonders den Nutzen eines solchen Produktes für die Umwelt.",
+          "Das Unternehmen betont besonders den Umweltnutzen eines solchen Produkts."
+        ],
+        "acceptable": [
+          {
+            "text": "Das Unternehmen betont besonders den Nutzen so eines Produkts für die Umwelt.",
+            "note": "»so ein« ist umgangssprachlich; im Nominalstil schreibt man »eines solchen Produkts«."
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "Das Unternehmen betont besonders die Nutzung eines solchen Produkts für die Umwelt.",
+            "note": "»nutzen« + Dativ heißt »Vorteil bringen« → der Nutzen. »Die Nutzung« heißt »das Benutzen«."
+          },
+          {
+            "text": "Das Unternehmen betont besonders den Nutzen eines solchen Produkts der Umwelt.",
+            "note": "Die Dativergänzung wird zu Präposition + Nomen: für die Umwelt."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "jemandem nutzen (Vorteil bringen) → der Nutzen für. Die Dativergänzung wird zu »für« + Akkusativ, das Subjekt zum Genitiv: eines solchen Produkts.",
+        "en": "jemandem nutzen (to benefit) → der Nutzen für. The dative object becomes \"für\" + accusative, the subject a genitive: eines solchen Produkts.",
+        "zh-Hant": "jemandem nutzen（對…有益）→ der Nutzen für。Dativ 受詞改成 für＋Akkusativ，主詞變成 Genitiv：eines solchen Produkts。注意不是 die Nutzung（使用）。"
+      }
+    },
+    {
+      "id": "de-nom-ktxc1kb-027",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "ktxc1kb",
+      "level": "C1",
+      "tags": [
+        "Übung b",
+        "Präposition",
+        "Genitiv",
+        "durch"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Das Unternehmen hofft auf schnellen Erfolg.",
+        "task": "Das Team ist durch … hoch motiviert.",
+        "translation": {
+          "en": "The company is hoping for quick success.",
+          "zh-Hant": "公司希望能很快成功。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Das Team ist durch die Hoffnung des Unternehmens auf schnellen Erfolg hoch motiviert.",
+          "Das Team ist durch die Hoffnung auf schnellen Erfolg hoch motiviert."
+        ],
+        "mistakes": [
+          {
+            "text": "Das Team ist durch die Hoffnung des Unternehmens auf schnellem Erfolg hoch motiviert.",
+            "note": "»hoffen auf« / »die Hoffnung auf« verlangt den Akkusativ: auf schnellen Erfolg."
+          },
+          {
+            "text": "Das Team ist durch die Hoffnung des Unternehmens für schnellen Erfolg hoch motiviert.",
+            "note": "Die Präposition bleibt: hoffen auf → die Hoffnung auf."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "hoffen auf → die Hoffnung auf (+ Akkusativ). Das Subjekt wird zum Genitiv: die Hoffnung des Unternehmens.",
+        "en": "hoffen auf → die Hoffnung auf (+ accusative). The subject becomes a genitive: die Hoffnung des Unternehmens.",
+        "zh-Hant": "hoffen auf → die Hoffnung auf（＋Akkusativ）。主詞變成 Genitiv：die Hoffnung des Unternehmens。"
+      }
+    },
+    {
+      "id": "de-nom-ktxc1kb-028",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "ktxc1kb",
+      "level": "C1",
+      "tags": [
+        "Übung d",
+        "dass-Satz",
+        "Passiv",
+        "Präposition",
+        "Adjektiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "In diesem Projekt geht es darum, dass alternative Lösungen entwickelt werden.",
+        "translation": {
+          "en": "This project is about developing alternative solutions.",
+          "zh-Hant": "這個計畫的重點是開發替代方案。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "In diesem Projekt geht es um die Entwicklung alternativer Lösungen."
+        ],
+        "acceptable": [
+          {
+            "text": "In diesem Projekt geht es um die Entwicklung von alternativen Lösungen.",
+            "note": "Verständlich, aber das Adjektiv zeigt den Genitiv: alternativer Lösungen."
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "In diesem Projekt geht es darum, die Entwicklung alternativer Lösungen.",
+            "note": "»darum« wird zur Präposition »um« vor dem Nomen; Komma und Nebensatz fallen weg."
+          },
+          {
+            "text": "In diesem Projekt geht es um die Entwicklung alternativen Lösungen.",
+            "note": "Ohne Artikel braucht das Adjektiv die starke Genitivendung: alternativer Lösungen."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "es geht darum, dass … → es geht um + Nomen. Das Subjekt des Passivsatzes wird Genitivattribut: die Entwicklung alternativer Lösungen.",
+        "en": "es geht darum, dass … → es geht um + noun. The passive subject becomes a genitive attribute: die Entwicklung alternativer Lösungen.",
+        "zh-Hant": "es geht darum, dass … → es geht um＋名詞。被動句的主詞變成 Genitiv 修飾語：die Entwicklung alternativer Lösungen。"
+      }
+    },
+    {
+      "id": "de-nom-ktxc1kb-029",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "ktxc1kb",
+      "level": "C1",
+      "tags": [
+        "Übung d",
+        "dass-Satz",
+        "Passiv",
+        "Präposition"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Das Forscherteam hofft darauf, dass die Forschungsgelder erhöht werden.",
+        "translation": {
+          "en": "The research team hopes the research funding will be increased.",
+          "zh-Hant": "研究團隊希望研究經費能增加。"
+        },
+        "words": [
+          {
+            "text": "Forschungsgelder",
+            "lemma": "die Forschungsgelder",
+            "meaning": "Geld, mit dem Forschung bezahlt wird",
+            "pos": "Nomen"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "Das Forscherteam hofft auf eine Erhöhung der Forschungsgelder.",
+          "Das Forscherteam hofft auf die Erhöhung der Forschungsgelder."
+        ],
+        "acceptable": [
+          {
+            "text": "Das Forscherteam hofft auf eine Erhöhung von den Forschungsgeldern.",
+            "note": "Umgangssprachlich. »die Forschungsgelder« hat einen Artikel, also Genitiv: der Forschungsgelder."
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "Das Forscherteam hofft darauf, eine Erhöhung der Forschungsgelder.",
+            "note": "»darauf« wird zur Präposition »auf« vor dem Nomen; der Nebensatz verschwindet."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "hoffen darauf, dass … → hoffen auf + Nomen (Akkusativ). Das Passiv-Subjekt wird Genitivattribut: die Erhöhung der Forschungsgelder.",
+        "en": "hoffen darauf, dass … → hoffen auf + noun (accusative). The passive subject becomes a genitive attribute: die Erhöhung der Forschungsgelder.",
+        "zh-Hant": "hoffen darauf, dass … → hoffen auf＋名詞（Akkusativ）。被動句的主詞變成 Genitiv 修飾語：die Erhöhung der Forschungsgelder。"
+      }
+    },
+    {
+      "id": "de-nom-ktxc1kb-030",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "ktxc1kb",
+      "level": "C1",
+      "tags": [
+        "Übung d",
+        "Infinitivsatz",
+        "reflexiv",
+        "Adverb",
+        "Adjektiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Bei der Arbeit ist es wichtig, sich im Team ausreichend abzustimmen.",
+        "translation": {
+          "en": "At work it is important to coordinate enough within the team.",
+          "zh-Hant": "工作時，團隊內部充分協調很重要。"
+        },
+        "words": [
+          {
+            "text": "ausreichend",
+            "meaning": "so viel wie nötig, genug",
+            "pos": "Adjektiv"
+          },
+          {
+            "text": "abzustimmen",
+            "lemma": "sich abstimmen",
+            "meaning": "sich miteinander besprechen und einigen",
+            "pos": "Verb"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "Bei der Arbeit ist eine ausreichende Abstimmung im Team wichtig.",
+          "Bei der Arbeit ist die ausreichende Abstimmung im Team wichtig.",
+          "Wichtig bei der Arbeit ist eine ausreichende Abstimmung im Team."
+        ],
+        "mistakes": [
+          {
+            "text": "Bei der Arbeit ist es wichtig, eine ausreichende Abstimmung im Team.",
+            "note": "Der Infinitivsatz wird zum Subjekt; das Platzhalter-»es« und das Komma fallen weg."
+          },
+          {
+            "text": "Bei der Arbeit ist eine ausreichend Abstimmung im Team wichtig.",
+            "note": "Vor dem Nomen wird das Adverb zum Adjektiv mit Endung: eine ausreichende Abstimmung."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "Der Infinitivsatz wird zum Subjekt, »es« fällt weg. sich abstimmen → die Abstimmung; das Adverb wird zum Adjektiv: eine ausreichende Abstimmung.",
+        "en": "The infinitive clause becomes the subject and \"es\" disappears. sich abstimmen → die Abstimmung; the adverb becomes an adjective: eine ausreichende Abstimmung.",
+        "zh-Hant": "不定式子句變成主詞，es 省略。sich abstimmen → die Abstimmung；副詞變成形容詞：eine ausreichende Abstimmung。"
+      }
+    },
+    {
+      "id": "de-nom-ktxc1kb-031",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "ktxc1kb",
+      "level": "C1",
+      "tags": [
+        "Übung d",
+        "Infinitivsatz",
+        "Adverb",
+        "Adjektiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Sie planen, gemeinsam im Projekt weiterzuarbeiten.",
+        "translation": {
+          "en": "They plan to keep working on the project together.",
+          "zh-Hant": "他們打算一起繼續進行這個計畫。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Sie planen die gemeinsame Weiterarbeit im Projekt.",
+          "Sie planen eine gemeinsame Weiterarbeit im Projekt.",
+          "Sie planen die gemeinsame Fortsetzung der Arbeit im Projekt."
+        ],
+        "mistakes": [
+          {
+            "text": "Sie planen, die gemeinsame Weiterarbeit im Projekt.",
+            "note": "Der Infinitivsatz wird zum Akkusativobjekt; das Komma fällt weg."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "Der Infinitivsatz wird zum Akkusativobjekt: weiterarbeiten → die Weiterarbeit. Das Adverb wird zum Adjektiv: die gemeinsame Weiterarbeit.",
+        "en": "The infinitive clause becomes the accusative object: weiterarbeiten → die Weiterarbeit. The adverb becomes an adjective: die gemeinsame Weiterarbeit.",
+        "zh-Hant": "不定式子句變成 Akkusativ 受詞：weiterarbeiten → die Weiterarbeit。副詞變成形容詞：die gemeinsame Weiterarbeit。"
+      }
+    },
+    {
+      "id": "de-nom-ktxc1kb-032",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "ktxc1kb",
+      "level": "C1",
+      "tags": [
+        "Übung d",
+        "dass-Satz",
+        "Possessivartikel",
+        "Präposition",
+        "Adjektiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "In ihrem Artikel berichten sie, dass sie sich intensiv mit Expert*innen austauschen.",
+        "translation": {
+          "en": "In their article they report that they exchange ideas intensively with experts.",
+          "zh-Hant": "他們在文章中提到，他們和專家密切交流。"
+        },
+        "words": [
+          {
+            "text": "austauschen",
+            "lemma": "sich austauschen",
+            "meaning": "miteinander über Ideen, Erfahrungen sprechen",
+            "pos": "Verb"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "In ihrem Artikel berichten sie von ihrem intensiven Austausch mit Expert*innen.",
+          "In ihrem Artikel berichten sie über ihren intensiven Austausch mit Expert*innen.",
+          "In ihrem Artikel berichten sie von einem intensiven Austausch mit Expert*innen.",
+          "In ihrem Artikel berichten sie über einen intensiven Austausch mit Expert*innen."
+        ],
+        "mistakes": [
+          {
+            "text": "In ihrem Artikel berichten sie, ihren intensiven Austausch mit Expert*innen.",
+            "note": "berichten, dass … → berichten von / über + Nomen; Komma und Nebensatz fallen weg."
+          },
+          {
+            "text": "In ihrem Artikel berichten sie von ihrem intensiv Austausch mit Expert*innen.",
+            "note": "Vor dem Nomen wird das Adverb zum Adjektiv mit Endung: ihrem intensiven Austausch."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "berichten, dass … → berichten von (+ Dat.) / über (+ Akk.). Das Personalpronomen wird zum Possessivartikel (sie → ihr Austausch), das Adverb zum Adjektiv; »mit« bleibt.",
+        "en": "berichten, dass … → berichten von (+ dat.) / über (+ acc.). The pronoun becomes a possessive (sie → ihr Austausch), the adverb an adjective; \"mit\" stays.",
+        "zh-Hant": "berichten, dass … → berichten von（＋Dativ）／über（＋Akkusativ）。人稱代名詞變成物主冠詞（sie → ihr Austausch），副詞變成形容詞；介系詞 mit 保留。"
+      }
+    }
+  ]
+}

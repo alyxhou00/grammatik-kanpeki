@@ -1,0 +1,3661 @@
+{
+  "format": "grammatik-kanpeki.cards",
+  "version": 2,
+  "cards": [
+    {
+      "id": "de-nom-aspekteneuc1-001",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "kausal",
+        "durch",
+        "wegen",
+        "Genitiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Die Arbeitslosigkeit nimmt in den nächsten Jahren zu. Dadurch erhöhen sich die Sozialausgaben des Staates enorm.",
+        "task": "Durch / Wegen … erhöhen sich …",
+        "translation": {
+          "en": "Unemployment will rise in the coming years. As a result, state social spending will increase enormously.",
+          "zh-Hant": "未來幾年失業率上升，國家的社會支出因此大幅增加。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Durch die Zunahme der Arbeitslosigkeit in den nächsten Jahren erhöhen sich die Sozialausgaben des Staates enorm.",
+          "Wegen der Zunahme der Arbeitslosigkeit in den nächsten Jahren erhöhen sich die Sozialausgaben des Staates enorm.",
+          "Aufgrund der Zunahme der Arbeitslosigkeit in den nächsten Jahren erhöhen sich die Sozialausgaben des Staates enorm.",
+          "Wegen der zunehmenden Arbeitslosigkeit in den nächsten Jahren erhöhen sich die Sozialausgaben des Staates enorm.",
+          "Aufgrund der zunehmenden Arbeitslosigkeit in den nächsten Jahren erhöhen sich die Sozialausgaben des Staates enorm.",
+          "Durch die zunehmende Arbeitslosigkeit in den nächsten Jahren erhöhen sich die Sozialausgaben des Staates enorm."
+        ]
+      },
+      "explanation": {
+        "de": "Die Ursache wird zur Präpositionalgruppe: zunehmen → die Zunahme; das Subjekt wird Genitiv (der Arbeitslosigkeit). »Dadurch« fällt weg.",
+        "en": "The cause becomes a prepositional phrase: zunehmen → die Zunahme; the subject becomes a genitive (der Arbeitslosigkeit). \"Dadurch\" disappears.",
+        "zh-Hant": "原因改成介系詞片語：zunehmen → die Zunahme；主詞變成 Genitiv（der Arbeitslosigkeit）。Dadurch 省略。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-002",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "kausal",
+        "durch",
+        "wegen",
+        "Adjektiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Die Sozialausgaben des Staates erhöhen sich enorm. Dadurch steigen die Steuern.",
+        "task": "Durch / Wegen … steigen die Steuern.",
+        "translation": {
+          "en": "State social spending increases enormously. As a result, taxes rise.",
+          "zh-Hant": "國家的社會支出大幅增加，稅金因此上漲。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Durch die enorme Erhöhung der Sozialausgaben des Staates steigen die Steuern.",
+          "Wegen der enormen Erhöhung der Sozialausgaben des Staates steigen die Steuern.",
+          "Aufgrund der enormen Erhöhung der Sozialausgaben des Staates steigen die Steuern."
+        ],
+        "mistakes": [
+          {
+            "text": "Durch die enorm Erhöhung der Sozialausgaben des Staates steigen die Steuern.",
+            "note": "Vor dem Nomen wird das Adverb zum Adjektiv mit Endung: die enorme Erhöhung."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "sich erhöhen → die Erhöhung; das Adverb »enorm« wird zum Adjektiv (die enorme Erhöhung); das Subjekt wird Genitiv (der Sozialausgaben des Staates).",
+        "en": "sich erhöhen → die Erhöhung; the adverb \"enorm\" becomes an adjective (die enorme Erhöhung); the subject becomes a genitive (der Sozialausgaben des Staates).",
+        "zh-Hant": "sich erhöhen → die Erhöhung；副詞 enorm 變成形容詞（die enorme Erhöhung）；主詞變成 Genitiv（der Sozialausgaben des Staates）。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-003",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "kausal",
+        "durch",
+        "wegen"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Die Steuern steigen. Dadurch werden die Leute unzufriedener.",
+        "task": "Durch / Wegen … werden die Leute unzufriedener.",
+        "translation": {
+          "en": "Taxes rise. As a result, people become more dissatisfied.",
+          "zh-Hant": "稅金上漲，人們因此更加不滿。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Wegen des Anstiegs der Steuern werden die Leute unzufriedener.",
+          "Aufgrund des Anstiegs der Steuern werden die Leute unzufriedener.",
+          "Durch den Anstieg der Steuern werden die Leute unzufriedener.",
+          "Wegen der steigenden Steuern werden die Leute unzufriedener.",
+          "Aufgrund der steigenden Steuern werden die Leute unzufriedener.",
+          "Durch die steigenden Steuern werden die Leute unzufriedener."
+        ],
+        "mistakes": [
+          {
+            "text": "Wegen den Anstieg der Steuern werden die Leute unzufriedener.",
+            "note": "»wegen« verlangt den Genitiv: wegen des Anstiegs. (»durch« dagegen den Akkusativ: durch den Anstieg.)"
+          }
+        ]
+      },
+      "explanation": {
+        "de": "steigen → der Anstieg. Achten Sie auf den Kasus: durch + Akkusativ (durch den Anstieg), wegen / aufgrund + Genitiv (wegen des Anstiegs).",
+        "en": "steigen → der Anstieg. Mind the case: durch + accusative (durch den Anstieg), wegen / aufgrund + genitive (wegen des Anstiegs).",
+        "zh-Hant": "steigen → der Anstieg。注意格位：durch＋Akkusativ（durch den Anstieg），wegen／aufgrund＋Genitiv（wegen des Anstiegs）。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-004",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "kausal",
+        "wegen",
+        "Kompositum"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Für mich ist Globalisierung ein Vorteil, weil man unbegrenzt reisen kann.",
+        "translation": {
+          "en": "For me, globalisation is an advantage because you can travel without limits.",
+          "zh-Hant": "對我來說，全球化是一個優點，因為可以無限制地旅行。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Für mich ist Globalisierung ein Vorteil wegen der unbegrenzten Reisemöglichkeiten.",
+          "Für mich ist Globalisierung wegen der unbegrenzten Reisemöglichkeiten ein Vorteil."
+        ]
+      },
+      "explanation": {
+        "de": "weil → wegen + Genitiv. »reisen können« wird zum Kompositum »die Reisemöglichkeiten«; »unbegrenzt« wird zum Adjektiv.",
+        "en": "weil → wegen + genitive. \"reisen können\" becomes the compound \"die Reisemöglichkeiten\"; \"unbegrenzt\" becomes an adjective.",
+        "zh-Hant": "weil → wegen＋Genitiv。reisen können 變成複合詞 die Reisemöglichkeiten；unbegrenzt 變成形容詞。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-005",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "kausal",
+        "wegen",
+        "reflexiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Für mich ist Globalisierung ein Vorteil, weil sich die eigenen Berufsmöglichkeiten verbessern.",
+        "translation": {
+          "en": "For me, globalisation is an advantage because one's own career opportunities improve.",
+          "zh-Hant": "對我來說，全球化是一個優點，因為自己的職涯機會變好了。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Für mich ist Globalisierung ein Vorteil wegen der Verbesserung der eigenen Berufsmöglichkeiten.",
+          "Für mich ist Globalisierung wegen der Verbesserung der eigenen Berufsmöglichkeiten ein Vorteil."
+        ]
+      },
+      "explanation": {
+        "de": "weil → wegen + Genitiv; sich verbessern → die Verbesserung; das Subjekt wird Genitiv: der eigenen Berufsmöglichkeiten.",
+        "en": "weil → wegen + genitive; sich verbessern → die Verbesserung; the subject becomes a genitive: der eigenen Berufsmöglichkeiten.",
+        "zh-Hant": "weil → wegen＋Genitiv；sich verbessern → die Verbesserung；主詞變成 Genitiv：der eigenen Berufsmöglichkeiten。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-006",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "kausal",
+        "wegen",
+        "Präposition"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Für mich ist Globalisierung ein Vorteil, weil man weltweit mit anderen Firmen Kontakt aufnehmen kann.",
+        "translation": {
+          "en": "For me, globalisation is an advantage because you can make contact with other companies worldwide.",
+          "zh-Hant": "對我來說，全球化是一個優點，因為可以和世界各地的其他公司建立聯繫。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Für mich ist Globalisierung ein Vorteil wegen der weltweiten Kontaktaufnahme mit anderen Firmen.",
+          "Für mich ist Globalisierung wegen der weltweiten Kontaktaufnahme mit anderen Firmen ein Vorteil."
+        ]
+      },
+      "explanation": {
+        "de": "Kontakt aufnehmen → die Kontaktaufnahme (Kompositum); weltweit → weltweite; »mit anderen Firmen« bleibt.",
+        "en": "Kontakt aufnehmen → die Kontaktaufnahme (compound); weltweit → weltweite; \"mit anderen Firmen\" stays.",
+        "zh-Hant": "Kontakt aufnehmen → die Kontaktaufnahme（複合詞）；weltweit → weltweite；mit anderen Firmen 保留。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-007",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "kausal",
+        "wegen",
+        "Passiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Für mich ist Globalisierung ein Nachteil, weil die Umwelt verschmutzt wird.",
+        "translation": {
+          "en": "For me, globalisation is a disadvantage because the environment gets polluted.",
+          "zh-Hant": "對我來說，全球化是一個缺點，因為環境受到污染。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Für mich ist Globalisierung ein Nachteil wegen der Verschmutzung der Umwelt.",
+          "Für mich ist Globalisierung ein Nachteil wegen der Umweltverschmutzung.",
+          "Für mich ist Globalisierung wegen der Verschmutzung der Umwelt ein Nachteil.",
+          "Für mich ist Globalisierung wegen der Umweltverschmutzung ein Nachteil."
+        ]
+      },
+      "explanation": {
+        "de": "weil → wegen + Genitiv; das Passiv-Subjekt wird Genitiv: die Verschmutzung der Umwelt, kürzer: die Umweltverschmutzung.",
+        "en": "weil → wegen + genitive; the passive subject becomes a genitive: die Verschmutzung der Umwelt, shorter: die Umweltverschmutzung.",
+        "zh-Hant": "weil → wegen＋Genitiv；被動句主詞變成 Genitiv：die Verschmutzung der Umwelt，更精簡：die Umweltverschmutzung。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-008",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "kausal",
+        "wegen",
+        "Genitiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Für mich ist Globalisierung ein Nachteil, weil viele Firmen in Billiglohnländer abwandern.",
+        "translation": {
+          "en": "For me, globalisation is a disadvantage because many companies move to low-wage countries.",
+          "zh-Hant": "對我來說，全球化是一個缺點，因為很多公司外移到低工資國家。"
+        },
+        "words": [
+          {
+            "text": "abwandern",
+            "meaning": "an einen anderen Ort weggehen",
+            "pos": "Verb"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "Für mich ist Globalisierung ein Nachteil wegen der Abwanderung vieler Firmen in Billiglohnländer.",
+          "Für mich ist Globalisierung wegen der Abwanderung vieler Firmen in Billiglohnländer ein Nachteil."
+        ],
+        "mistakes": [
+          {
+            "text": "Für mich ist Globalisierung ein Nachteil wegen der Abwanderung viele Firmen in Billiglohnländer.",
+            "note": "Genitiv Plural ohne Artikel: vieler Firmen."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "abwandern → die Abwanderung; »viele Firmen« wird Genitiv: vieler Firmen.",
+        "en": "abwandern → die Abwanderung; \"viele Firmen\" becomes a genitive: vieler Firmen.",
+        "zh-Hant": "abwandern → die Abwanderung；viele Firmen 變成 Genitiv：vieler Firmen。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-009",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "kausal",
+        "wegen",
+        "Passiv",
+        "Adjektiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Für mich ist Globalisierung ein Nachteil, weil grundlegende Arbeitsrechte missachtet werden.",
+        "translation": {
+          "en": "For me, globalisation is a disadvantage because basic labour rights are disregarded.",
+          "zh-Hant": "對我來說，全球化是一個缺點，因為基本勞工權利遭到漠視。"
+        },
+        "words": [
+          {
+            "text": "missachtet",
+            "lemma": "missachten",
+            "meaning": "nicht beachten, nicht respektieren",
+            "pos": "Verb"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "Für mich ist Globalisierung ein Nachteil wegen der Missachtung grundlegender Arbeitsrechte.",
+          "Für mich ist Globalisierung wegen der Missachtung grundlegender Arbeitsrechte ein Nachteil."
+        ],
+        "acceptable": [
+          {
+            "text": "Für mich ist Globalisierung ein Nachteil wegen der Missachtung von grundlegenden Arbeitsrechten.",
+            "note": "Verständlich, aber das Adjektiv zeigt den Genitiv: grundlegender Arbeitsrechte."
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "Für mich ist Globalisierung ein Nachteil wegen des Missachtens von grundlegender Arbeitsrechte.",
+            "note": "Zwei Fehler: Zu »missachten« gibt es »die Missachtung«, und nach »von« steht der Dativ (von grundlegenden Arbeitsrechten) – besser ganz ohne »von«: grundlegender Arbeitsrechte."
+          },
+          {
+            "text": "Für mich ist Globalisierung ein Nachteil wegen der Missachtung grundlegenden Arbeitsrechte.",
+            "note": "Ohne Artikel braucht das Adjektiv die starke Genitivendung: grundlegender."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "missachten → die Missachtung; das Passiv-Subjekt wird Genitiv. Ohne Artikel, aber mit Adjektiv: starke Endung (grundlegender Arbeitsrechte), kein »von« nötig.",
+        "en": "missachten → die Missachtung; the passive subject becomes a genitive. With no article but an adjective: strong ending (grundlegender Arbeitsrechte), no \"von\" needed.",
+        "zh-Hant": "missachten → die Missachtung；被動句主詞變成 Genitiv。沒有冠詞但有形容詞時用強變化詞尾（grundlegender Arbeitsrechte），不需要 von。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-010",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "kausal",
+        "wegen",
+        "Partizip I"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Viele Firmen werden kritisiert, weil ihnen die soziale Verantwortung fehlt.",
+        "hint": "Verb im Nebensatz → Partizip I als Adjektiv",
+        "translation": {
+          "en": "Many companies are criticised because they lack social responsibility.",
+          "zh-Hant": "很多公司因為缺乏社會責任而受到批評。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Viele Firmen werden wegen der ihnen fehlenden sozialen Verantwortung kritisiert.",
+          "Wegen der ihnen fehlenden sozialen Verantwortung werden viele Firmen kritisiert."
+        ],
+        "acceptable": [
+          {
+            "text": "Viele Firmen werden wegen ihrer fehlenden sozialen Verantwortung kritisiert.",
+            "note": "Korrekt und idiomatisch. Die Buchlösung behält »ihnen« aus dem Nebensatz: der ihnen fehlenden sozialen Verantwortung."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "Das Verb des Nebensatzes wird zum Partizip I vor dem Nomen: fehlt → die fehlende Verantwortung. Ergänzungen (ihnen) stehen vor dem Partizip.",
+        "en": "The clause verb becomes a present participle before the noun: fehlt → die fehlende Verantwortung. Objects (ihnen) go before the participle.",
+        "zh-Hant": "子句的動詞變成名詞前的第一分詞：fehlt → die fehlende Verantwortung。受詞（ihnen）放在分詞前面。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-011",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "kausal",
+        "wegen",
+        "Partizip I"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Kleinere Firmen gehen oft pleite, weil die Preise ständig fallen.",
+        "hint": "Verb im Nebensatz → Partizip I als Adjektiv",
+        "translation": {
+          "en": "Smaller companies often go bankrupt because prices keep falling.",
+          "zh-Hant": "小公司常常因為價格不斷下跌而倒閉。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Kleinere Firmen gehen oft wegen ständig fallender Preise pleite.",
+          "Wegen ständig fallender Preise gehen kleinere Firmen oft pleite."
+        ],
+        "mistakes": [
+          {
+            "text": "Kleinere Firmen gehen oft wegen ständig fallenden Preise pleite.",
+            "note": "Ohne Artikel braucht das Partizip die starke Genitivendung: fallender Preise."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "fallen → fallend (Partizip I); ohne Artikel im Genitiv Plural: ständig fallender Preise. Das Adverb »ständig« bleibt ohne Endung vor dem Partizip.",
+        "en": "fallen → fallend (present participle); without an article, genitive plural: ständig fallender Preise. The adverb \"ständig\" stays without an ending.",
+        "zh-Hant": "fallen → fallend（第一分詞）；沒有冠詞的 Genitiv 複數：ständig fallender Preise。副詞 ständig 放在分詞前，不加詞尾。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-012",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "kausal",
+        "wegen",
+        "Partizip I"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Manche Firmen geraten in Schwierigkeiten, weil die Produktionskosten steigen.",
+        "hint": "Verb im Nebensatz → Partizip I als Adjektiv",
+        "translation": {
+          "en": "Some companies get into difficulties because production costs are rising.",
+          "zh-Hant": "有些公司因為生產成本上升而陷入困境。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Wegen steigender Produktionskosten geraten manche Firmen in Schwierigkeiten.",
+          "Manche Firmen geraten wegen steigender Produktionskosten in Schwierigkeiten."
+        ]
+      },
+      "explanation": {
+        "de": "steigen → steigend; ohne Artikel im Genitiv Plural: steigender Produktionskosten.",
+        "en": "steigen → steigend; without an article, genitive plural: steigender Produktionskosten.",
+        "zh-Hant": "steigen → steigend；沒有冠詞的 Genitiv 複數：steigender Produktionskosten。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-013",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "kausal",
+        "wegen",
+        "Partizip I"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Die Firmen versuchen immer billiger zu produzieren, weil die Konkurrenz immer größer wird.",
+        "hint": "werden → werdend (Partizip I)",
+        "translation": {
+          "en": "Companies try to produce ever more cheaply because competition is getting ever stronger.",
+          "zh-Hant": "因為競爭越來越激烈，公司試圖用越來越低的成本生產。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Wegen der immer größer werdenden Konkurrenz versuchen die Firmen immer billiger zu produzieren.",
+          "Die Firmen versuchen wegen der immer größer werdenden Konkurrenz immer billiger zu produzieren."
+        ],
+        "acceptable": [
+          {
+            "text": "Wegen der immer größeren Konkurrenz versuchen die Firmen immer billiger zu produzieren.",
+            "note": "Korrekt, aber der Vorgang (»wird größer«) geht verloren. Mit Partizip: die immer größer werdende Konkurrenz."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "»größer werden« → das Partizip »größer werdend«: die immer größer werdende Konkurrenz. So bleibt der Vorgang erhalten.",
+        "en": "\"größer werden\" → the participle \"größer werdend\": die immer größer werdende Konkurrenz. That keeps the sense of a process.",
+        "zh-Hant": "größer werden → 分詞 größer werdend：die immer größer werdende Konkurrenz，這樣能保留「正在變化」的意思。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-014",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "kausal",
+        "wegen",
+        "Partizip I"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Es fehlen Arbeitskräfte, weil die Gesellschaft schnell altert.",
+        "hint": "Verb im Nebensatz → Partizip I als Adjektiv",
+        "translation": {
+          "en": "There is a shortage of workers because society is ageing quickly.",
+          "zh-Hant": "因為社會快速老化，勞動力不足。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Wegen der schnell alternden Gesellschaft fehlen Arbeitskräfte."
+        ],
+        "mistakes": [
+          {
+            "text": "Wegen der schnell altenden Gesellschaft fehlen Arbeitskräfte.",
+            "note": "Das Partizip I von »altern« ist »alternd«: der schnell alternden Gesellschaft."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "altern → alternd; die Gesellschaft wird Genitiv: der schnell alternden Gesellschaft. »Es« fällt weg, weil »Arbeitskräfte« ins Vorfeld rücken kann.",
+        "en": "altern → alternd; die Gesellschaft becomes a genitive: der schnell alternden Gesellschaft. \"Es\" disappears.",
+        "zh-Hant": "altern → alternd；die Gesellschaft 變成 Genitiv：der schnell alternden Gesellschaft。句首的 es 省略。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-015",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "temporal",
+        "nach",
+        "Adjektiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Der technische Fortschritt entwickelte sich im 19. Jahrhundert rasant. Danach konnten die Betriebe ihre Produktion steigern.",
+        "translation": {
+          "en": "Technical progress developed rapidly in the 19th century. After that, businesses were able to increase their production.",
+          "zh-Hant": "19 世紀技術快速進步，之後工廠得以提高產量。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Nach der rasanten Entwicklung des technischen Fortschritts im 19. Jahrhundert konnten die Betriebe ihre Produktion steigern."
+        ],
+        "acceptable": [
+          {
+            "text": "Nachdem sich der technische Fortschritt im 19. Jahrhundert rasant entwickelt hatte, konnten die Betriebe ihre Produktion steigern.",
+            "note": "Korrekt verbunden, aber noch Verbalstil (Nebensatz mit »nachdem«)."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "»Danach« → nach + Dativ. sich entwickeln → die Entwicklung; rasant → die rasante Entwicklung; das Subjekt wird Genitiv.",
+        "en": "\"Danach\" → nach + dative. sich entwickeln → die Entwicklung; rasant → die rasante Entwicklung; the subject becomes a genitive.",
+        "zh-Hant": "Danach → nach＋Dativ。sich entwickeln → die Entwicklung；rasant → die rasante Entwicklung；主詞變成 Genitiv。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-016",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "temporal",
+        "vor",
+        "durch"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Neue Maschinen erleichterten die Arbeit. Vorher mussten die Arbeiter vieles mühevoll mit der Hand machen.",
+        "translation": {
+          "en": "New machines made work easier. Before that, workers had to do a lot laboriously by hand.",
+          "zh-Hant": "新機器讓工作變輕鬆。在那之前，工人必須費力地用手做很多事。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Vor der Erleichterung der Arbeit durch neue Maschinen mussten die Arbeiter vieles mühevoll mit der Hand machen."
+        ]
+      },
+      "explanation": {
+        "de": "»Vorher« → vor + Dativ. erleichtern → die Erleichterung; Akkusativobjekt → Genitiv (der Arbeit); Subjekt → durch neue Maschinen.",
+        "en": "\"Vorher\" → vor + dative. erleichtern → die Erleichterung; object → genitive (der Arbeit); subject → durch neue Maschinen.",
+        "zh-Hant": "Vorher → vor＋Dativ。erleichtern → die Erleichterung；受詞 → Genitiv（der Arbeit）；主詞 → durch neue Maschinen。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-017",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "temporal",
+        "bei",
+        "Passiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Immer neuere Maschinen wurden in der Produktion eingesetzt. Dabei entwickelten sich auch neue Wirtschaftszweige.",
+        "translation": {
+          "en": "Ever newer machines were used in production. In the process, new branches of industry also developed.",
+          "zh-Hant": "生產中使用越來越新的機器，同時也發展出新的產業。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Beim Einsatz immer neuerer Maschinen in der Produktion entwickelten sich auch neue Wirtschaftszweige.",
+          "Während des Einsatzes immer neuerer Maschinen in der Produktion entwickelten sich auch neue Wirtschaftszweige."
+        ],
+        "mistakes": [
+          {
+            "text": "Beim Einsatz immer neueren Maschinen in der Produktion entwickelten sich auch neue Wirtschaftszweige.",
+            "note": "Genitiv Plural ohne Artikel: immer neuerer Maschinen."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "»Dabei« (gleichzeitig) → bei + Dativ (beim) oder während + Genitiv. einsetzen → der Einsatz; das Passiv-Subjekt wird Genitiv: immer neuerer Maschinen.",
+        "en": "\"Dabei\" (at the same time) → bei + dative (beim) or während + genitive. einsetzen → der Einsatz; the passive subject becomes a genitive: immer neuerer Maschinen.",
+        "zh-Hant": "Dabei（同時）→ bei＋Dativ（beim）或 während＋Genitiv。einsetzen → der Einsatz；被動句主詞變成 Genitiv：immer neuerer Maschinen。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-018",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "temporal",
+        "nach",
+        "Adjektiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Die Produktion stieg immer stärker an und die Konkurrenz wurde größer. Danach wurden die Produkte immer billiger.",
+        "translation": {
+          "en": "Production rose ever more sharply and competition grew. After that, products became ever cheaper.",
+          "zh-Hant": "產量增加得越來越快，競爭也變大，之後產品就越來越便宜。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Nach dem immer stärkeren Anstieg der Produktion und der Vergrößerung der Konkurrenz wurden die Produkte immer billiger.",
+          "Nach dem immer stärkeren Anstieg der Produktion und dem Wachstum der Konkurrenz wurden die Produkte immer billiger.",
+          "Nach dem immer stärkeren Anstieg der Produktion und der Zunahme der Konkurrenz wurden die Produkte immer billiger."
+        ]
+      },
+      "explanation": {
+        "de": "»Danach« → nach + Dativ. ansteigen → der Anstieg (immer stärker → immer stärkeren); größer werden → die Vergrößerung / die Zunahme / das Wachstum.",
+        "en": "\"Danach\" → nach + dative. ansteigen → der Anstieg (immer stärker → immer stärkeren); größer werden → die Vergrößerung / die Zunahme / das Wachstum.",
+        "zh-Hant": "Danach → nach＋Dativ。ansteigen → der Anstieg（immer stärker → immer stärkeren）；größer werden → die Vergrößerung／die Zunahme／das Wachstum。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-019",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "temporal",
+        "nach",
+        "Genitiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Große Firmen wanderten ab. Danach stiegen die Arbeitslosenzahlen schnell.",
+        "translation": {
+          "en": "Large companies moved away. After that, unemployment figures rose quickly.",
+          "zh-Hant": "大公司外移，之後失業人數迅速增加。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Nach der Abwanderung großer Firmen stiegen die Arbeitslosenzahlen schnell."
+        ],
+        "mistakes": [
+          {
+            "text": "Nach der Abwanderung großen Firmen stiegen die Arbeitslosenzahlen schnell.",
+            "note": "Genitiv Plural ohne Artikel: großer Firmen."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "»Danach« → nach + Dativ; abwandern → die Abwanderung; große Firmen → großer Firmen (Genitiv).",
+        "en": "\"Danach\" → nach + dative; abwandern → die Abwanderung; große Firmen → großer Firmen (genitive).",
+        "zh-Hant": "Danach → nach＋Dativ；abwandern → die Abwanderung；große Firmen → großer Firmen（Genitiv）。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-020",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "temporal",
+        "seit"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Der Dienstleistungssektor nahm zu. Seitdem nahmen die Arbeitslosenzahlen wieder ab.",
+        "translation": {
+          "en": "The service sector grew. Since then, unemployment figures have fallen again.",
+          "zh-Hant": "服務業成長，從那之後失業人數又下降了。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Seit der Zunahme des Dienstleistungssektors nahmen die Arbeitslosenzahlen wieder ab.",
+          "Seit dem Wachstum des Dienstleistungssektors nahmen die Arbeitslosenzahlen wieder ab."
+        ]
+      },
+      "explanation": {
+        "de": "»Seitdem« → seit + Dativ; zunehmen → die Zunahme; das Subjekt wird Genitiv: des Dienstleistungssektors.",
+        "en": "\"Seitdem\" → seit + dative; zunehmen → die Zunahme; the subject becomes a genitive: des Dienstleistungssektors.",
+        "zh-Hant": "Seitdem → seit＋Dativ；zunehmen → die Zunahme；主詞變成 Genitiv：des Dienstleistungssektors。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-021",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 6a",
+        "temporal",
+        "nach",
+        "Possessivartikel"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Nachdem er die Ausbildung beendet hatte",
+        "task": "Satzanfang im Nominalstil",
+        "translation": {
+          "en": "After he had finished his training",
+          "zh-Hant": "他完成職業訓練之後"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Nach der Beendigung seiner Ausbildung",
+          "Nach Beendigung seiner Ausbildung"
+        ],
+        "acceptable": [
+          {
+            "text": "Nach dem Ende seiner Ausbildung",
+            "note": "Idiomatisch und richtig. Die direkte Nominalisierung von »beenden« ist aber »die Beendigung«."
+          },
+          {
+            "text": "Nach dem Abschluss seiner Ausbildung",
+            "note": "Idiomatisch, aber ein anderes Verb (abschließen). Zu »beenden«: die Beendigung."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "nachdem → nach + Dativ; beenden → die Beendigung; er → seiner Ausbildung (Possessivartikel im Genitiv).",
+        "en": "nachdem → nach + dative; beenden → die Beendigung; er → seiner Ausbildung (possessive in the genitive).",
+        "zh-Hant": "nachdem → nach＋Dativ；beenden → die Beendigung；er → seiner Ausbildung（Genitiv 物主冠詞）。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-022",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 6a",
+        "temporal",
+        "vor",
+        "substantivierter Infinitiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Bevor er aß",
+        "task": "Satzanfang im Nominalstil",
+        "translation": {
+          "en": "Before he ate",
+          "zh-Hant": "他吃飯之前"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Vor dem Essen"
+        ],
+        "acceptable": [
+          {
+            "text": "Vor seinem Essen",
+            "note": "Möglich, aber unüblich; »vor dem Essen« ist die feste Wendung."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "bevor → vor + Dativ; essen → das Essen (substantivierter Infinitiv).",
+        "en": "bevor → vor + dative; essen → das Essen (nominalised infinitive).",
+        "zh-Hant": "bevor → vor＋Dativ；essen → das Essen（名詞化不定式）。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-023",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 6a",
+        "temporal",
+        "bei",
+        "Possessivartikel"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Als er versuchte",
+        "task": "Satzanfang im Nominalstil",
+        "translation": {
+          "en": "When he tried",
+          "zh-Hant": "他嘗試的時候"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Bei seinem Versuch"
+        ]
+      },
+      "explanation": {
+        "de": "als (einmalig, gleichzeitig) → bei + Dativ; versuchen → der Versuch; er → sein.",
+        "en": "als (once, at the same time) → bei + dative; versuchen → der Versuch; er → sein.",
+        "zh-Hant": "als（一次性、同時）→ bei＋Dativ；versuchen → der Versuch；er → sein。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-024",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 6a",
+        "temporal",
+        "bis"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Bis der Zug ankam",
+        "task": "Satzanfang im Nominalstil",
+        "translation": {
+          "en": "Until the train arrived",
+          "zh-Hant": "直到火車抵達"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Bis zur Ankunft des Zuges",
+          "Bis zur Ankunft des Zugs"
+        ]
+      },
+      "explanation": {
+        "de": "bis (Konjunktion) → bis zu + Dativ (zur); ankommen → die Ankunft; der Zug → des Zuges.",
+        "en": "bis (conjunction) → bis zu + dative (zur); ankommen → die Ankunft; der Zug → des Zuges.",
+        "zh-Hant": "bis（連接詞）→ bis zu＋Dativ（zur）；ankommen → die Ankunft；der Zug → des Zuges。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-025",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 6a",
+        "temporal",
+        "vor"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Bevor es regnete",
+        "task": "Satzanfang im Nominalstil",
+        "translation": {
+          "en": "Before it rained",
+          "zh-Hant": "下雨之前"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Vor dem Regen"
+        ]
+      },
+      "explanation": {
+        "de": "bevor → vor + Dativ; es regnet → der Regen (Wetterverben werden zum Nomen).",
+        "en": "bevor → vor + dative; es regnet → der Regen (weather verbs become nouns).",
+        "zh-Hant": "bevor → vor＋Dativ；es regnet → der Regen（天氣動詞變成名詞）。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-026",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 6a",
+        "temporal",
+        "während",
+        "Possessivartikel"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Während sie arbeitete",
+        "task": "Satzanfang im Nominalstil",
+        "translation": {
+          "en": "While she was working",
+          "zh-Hant": "她工作的時候"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Während ihrer Arbeit"
+        ]
+      },
+      "explanation": {
+        "de": "während (Konjunktion) → während + Genitiv; arbeiten → die Arbeit; sie → ihrer Arbeit.",
+        "en": "während (conjunction) → während + genitive; arbeiten → die Arbeit; sie → ihrer Arbeit.",
+        "zh-Hant": "während（連接詞）→ während＋Genitiv；arbeiten → die Arbeit；sie → ihrer Arbeit。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-027",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 6a",
+        "temporal",
+        "vor"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Bevor er das Praktikum begann",
+        "task": "Satzanfang im Nominalstil",
+        "translation": {
+          "en": "Before he started the internship",
+          "zh-Hant": "他開始實習之前"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Vor dem Beginn des Praktikums",
+          "Vor Beginn des Praktikums",
+          "Vor dem Beginn seines Praktikums",
+          "Vor Beginn seines Praktikums"
+        ]
+      },
+      "explanation": {
+        "de": "bevor → vor + Dativ; beginnen → der Beginn; das Praktikum → des Praktikums.",
+        "en": "bevor → vor + dative; beginnen → der Beginn; das Praktikum → des Praktikums.",
+        "zh-Hant": "bevor → vor＋Dativ；beginnen → der Beginn；das Praktikum → des Praktikums。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-028",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 6a",
+        "temporal",
+        "bei",
+        "Präposition"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Als er in die Firma eintrat",
+        "task": "Satzanfang im Nominalstil",
+        "translation": {
+          "en": "When he joined the company",
+          "zh-Hant": "他進公司的時候"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Beim Eintritt in die Firma",
+          "Bei seinem Eintritt in die Firma"
+        ]
+      },
+      "explanation": {
+        "de": "als → bei + Dativ (beim); eintreten in → der Eintritt in.",
+        "en": "als → bei + dative (beim); eintreten in → der Eintritt in.",
+        "zh-Hant": "als → bei＋Dativ（beim）；eintreten in → der Eintritt in。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-029",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 6a",
+        "temporal",
+        "nach",
+        "Possessivartikel"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Nachdem sie das Studium abgeschlossen hatte",
+        "task": "Satzanfang im Nominalstil",
+        "translation": {
+          "en": "After she had completed her studies",
+          "zh-Hant": "她完成學業之後"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Nach dem Abschluss ihres Studiums",
+          "Nach Abschluss ihres Studiums",
+          "Nach dem Abschluss des Studiums",
+          "Nach Abschluss des Studiums"
+        ],
+        "mistakes": [
+          {
+            "text": "Nach ihrem Abschluss des Studiums",
+            "note": "Nur ein Begleiter pro Nomen: Der Possessivartikel gehört zum Studium – nach dem Abschluss ihres Studiums."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "nachdem → nach + Dativ; abschließen → der Abschluss; sie → ihres Studiums (Possessivartikel beim Genitivattribut).",
+        "en": "nachdem → nach + dative; abschließen → der Abschluss; sie → ihres Studiums (possessive on the genitive attribute).",
+        "zh-Hant": "nachdem → nach＋Dativ；abschließen → der Abschluss；sie → ihres Studiums（物主冠詞放在 Genitiv 修飾語上）。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-030",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 6a",
+        "temporal",
+        "bis",
+        "substantivierter Infinitiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Bis er das Rentenalter erreichte",
+        "task": "Satzanfang im Nominalstil",
+        "translation": {
+          "en": "Until he reached retirement age",
+          "zh-Hant": "直到他達到退休年齡"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Bis zum Erreichen des Rentenalters",
+          "Bis zum Erreichen seines Rentenalters"
+        ]
+      },
+      "explanation": {
+        "de": "bis → bis zu + Dativ (zum); erreichen → das Erreichen (substantivierter Infinitiv); das Rentenalter → des Rentenalters.",
+        "en": "bis → bis zu + dative (zum); erreichen → das Erreichen (nominalised infinitive); das Rentenalter → des Rentenalters.",
+        "zh-Hant": "bis → bis zu＋Dativ（zum）；erreichen → das Erreichen（名詞化不定式）；das Rentenalter → des Rentenalters。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-031",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 6a",
+        "temporal",
+        "seit",
+        "Passiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Seitdem er aus dem Krankenhaus entlassen ist",
+        "task": "Satzanfang im Nominalstil",
+        "translation": {
+          "en": "Since he was discharged from hospital",
+          "zh-Hant": "他出院以來"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Seit seiner Entlassung aus dem Krankenhaus",
+          "Seit der Entlassung aus dem Krankenhaus"
+        ],
+        "mistakes": [
+          {
+            "text": "Seit dem Entlass aus dem Krankenhaus",
+            "note": "Das Wort »der Entlass« gibt es nicht. entlassen → die Entlassung."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "seitdem → seit + Dativ; entlassen → die Entlassung; er → seiner Entlassung.",
+        "en": "seitdem → seit + dative; entlassen → die Entlassung; er → seiner Entlassung.",
+        "zh-Hant": "seitdem → seit＋Dativ；entlassen → die Entlassung；er → seiner Entlassung。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-032",
+      "language": "de",
+      "topic": "nominalisierung-praepositionen",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 4a",
+        "Präposition",
+        "Akkusativ"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "über etwas berichten",
+        "translation": {
+          "en": "to report on something",
+          "zh-Hant": "報導某事"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "der Bericht über etwas"
+        ],
+        "acceptable": [
+          {
+            "text": "der Bericht von etwas",
+            "note": "Möglich (berichten von + Dativ), aber üblicher ist »der Bericht über«."
+          }
+        ],
+        "mistakes": [
+          {
+            "text": "der Bericht auf etwas",
+            "note": "»berichten« verbindet sich mit »über« (+ Akk.) oder »von« (+ Dat.), nicht mit »auf«."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "berichten über + Akkusativ / von + Dativ → der Bericht über + Akkusativ.",
+        "en": "berichten über + accusative / von + dative → der Bericht über + accusative.",
+        "zh-Hant": "berichten über＋Akkusativ／von＋Dativ → der Bericht über＋Akkusativ。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-033",
+      "language": "de",
+      "topic": "nominalisierung-praepositionen",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 4a",
+        "Präposition",
+        "Akkusativ"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "auf etwas reagieren",
+        "translation": {
+          "en": "to react to something",
+          "zh-Hant": "對某事做出反應"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Reaktion auf etwas"
+        ]
+      },
+      "explanation": {
+        "de": "reagieren auf + Akkusativ → die Reaktion auf + Akkusativ.",
+        "en": "reagieren auf + accusative → die Reaktion auf + accusative.",
+        "zh-Hant": "reagieren auf＋Akkusativ → die Reaktion auf＋Akkusativ。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-034",
+      "language": "de",
+      "topic": "nominalisierung-praepositionen",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 4a",
+        "Präposition",
+        "Akkusativ"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "auf etwas hinweisen",
+        "translation": {
+          "en": "to point something out",
+          "zh-Hant": "指出某事"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "der Hinweis auf etwas"
+        ]
+      },
+      "explanation": {
+        "de": "hinweisen auf + Akkusativ → der Hinweis auf + Akkusativ.",
+        "en": "hinweisen auf + accusative → der Hinweis auf + accusative.",
+        "zh-Hant": "hinweisen auf＋Akkusativ → der Hinweis auf＋Akkusativ。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-035",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 5",
+        "Possessivartikel",
+        "Adjektiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Wir kommunizieren gut miteinander.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "We communicate well with each other.",
+          "zh-Hant": "我們彼此溝通良好。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "unsere gute Kommunikation",
+          "unsere gute Kommunikation miteinander"
+        ],
+        "acceptable": [
+          {
+            "text": "unsere Kommunikation",
+            "note": "Richtig, aber das Adverb »gut« fehlt: unsere gute Kommunikation."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "wir → unsere; kommunizieren → die Kommunikation; gut → die gute Kommunikation.",
+        "en": "wir → unsere; kommunizieren → die Kommunikation; gut → die gute Kommunikation.",
+        "zh-Hant": "wir → unsere；kommunizieren → die Kommunikation；gut → die gute Kommunikation。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-036",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 5",
+        "Possessivartikel"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Er unterrichtet an einer Hochschule.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "He teaches at a university.",
+          "zh-Hant": "他在大學任教。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "sein Unterricht an einer Hochschule",
+          "sein Unterricht"
+        ]
+      },
+      "explanation": {
+        "de": "er → sein; unterrichten → der Unterricht. Die Ortsangabe kann bleiben: an einer Hochschule.",
+        "en": "er → sein; unterrichten → der Unterricht. The place phrase can stay: an einer Hochschule.",
+        "zh-Hant": "er → sein；unterrichten → der Unterricht。地點說明可以保留：an einer Hochschule。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-037",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 5",
+        "Possessivartikel",
+        "Adjektiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Ihr präsentiert interessant.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "You (all) give an interesting presentation.",
+          "zh-Hant": "你們的報告很有趣。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "eure interessante Präsentation"
+        ],
+        "acceptable": [
+          {
+            "text": "eure Präsentation",
+            "note": "Richtig, aber das Adverb »interessant« fehlt: eure interessante Präsentation."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "ihr → eure; präsentieren → die Präsentation; interessant → die interessante Präsentation.",
+        "en": "ihr → eure; präsentieren → die Präsentation; interessant → die interessante Präsentation.",
+        "zh-Hant": "ihr → eure；präsentieren → die Präsentation；interessant → die interessante Präsentation。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-038",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 5",
+        "Possessivartikel",
+        "Präposition"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Wir sprachen über die Ausstellung.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "We talked about the exhibition.",
+          "zh-Hant": "我們談論了這個展覽。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "unser Gespräch über die Ausstellung"
+        ],
+        "acceptable": [
+          {
+            "text": "unser Gespräch",
+            "note": "Richtig, aber »über die Ausstellung« gehört dazu: unser Gespräch über die Ausstellung."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "wir → unser; sprechen über → das Gespräch über.",
+        "en": "wir → unser; sprechen über → das Gespräch über.",
+        "zh-Hant": "wir → unser；sprechen über → das Gespräch über。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-039",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 5",
+        "Possessivartikel",
+        "Adjektiv",
+        "substantivierter Infinitiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Sie lernen schnell.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "They learn quickly.",
+          "zh-Hant": "他們學得很快。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "ihr schnelles Lernen",
+          "Ihr schnelles Lernen"
+        ],
+        "acceptable": [
+          {
+            "text": "ihr Lernen",
+            "note": "Richtig, aber das Adverb »schnell« fehlt: ihr schnelles Lernen."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "sie (Plural) → ihr (bei Sie: Ihr); lernen → das Lernen (neutral); schnell → ihr schnelles Lernen.",
+        "en": "sie (plural) → ihr (formal Sie: Ihr); lernen → das Lernen (neuter); schnell → ihr schnelles Lernen.",
+        "zh-Hant": "sie（複數）→ ihr（敬稱 Sie → Ihr）；lernen → das Lernen（中性）；schnell → ihr schnelles Lernen。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-040",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 5",
+        "Possessivartikel",
+        "Adjektiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Danke, Sie haben uns gut beraten, Herr Bach.",
+        "task": "Danke für …, Herr Bach.",
+        "translation": {
+          "en": "Thank you, you advised us well, Mr Bach.",
+          "zh-Hant": "Bach 先生，謝謝您給我們很好的建議。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Danke für Ihre gute Beratung, Herr Bach."
+        ],
+        "mistakes": [
+          {
+            "text": "Danke für ihre gute Beratung, Herr Bach.",
+            "note": "Höflichkeitsform: Sie → Ihre (großgeschrieben)."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "Sie (Höflichkeitsform) → Ihre (groß); beraten → die Beratung; gut → Ihre gute Beratung.",
+        "en": "Sie (formal) → Ihre (capitalised); beraten → die Beratung; gut → Ihre gute Beratung.",
+        "zh-Hant": "Sie（敬稱）→ Ihre（大寫）；beraten → die Beratung；gut → Ihre gute Beratung。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-041",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 6",
+        "durch",
+        "Adjektiv",
+        "reflexiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Kinder eignen sich eine andere Sprache schnell an.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "Children pick up another language quickly.",
+          "zh-Hant": "孩子很快就能學會另一種語言。"
+        },
+        "words": [
+          {
+            "text": "eignen",
+            "lemma": "sich etwas aneignen",
+            "meaning": "etwas lernen und für sich nutzbar machen",
+            "pos": "Verb"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "die schnelle Aneignung einer anderen Sprache durch Kinder"
+        ]
+      },
+      "explanation": {
+        "de": "sich aneignen → die Aneignung; schnell → die schnelle Aneignung; Akkusativobjekt → Genitiv; Subjekt → durch Kinder.",
+        "en": "sich aneignen → die Aneignung; schnell → die schnelle Aneignung; object → genitive; subject → durch Kinder.",
+        "zh-Hant": "sich aneignen → die Aneignung；schnell → die schnelle Aneignung；受詞 → Genitiv；主詞 → durch Kinder。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-042",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 6",
+        "Passiv",
+        "von + Dativ"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "In der Schule werden Fremdsprachen vermittelt.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "Foreign languages are taught at school.",
+          "zh-Hant": "學校教授外語。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Vermittlung von Fremdsprachen in der Schule"
+        ],
+        "acceptable": [
+          {
+            "text": "die Vermittlung der Fremdsprachen in der Schule",
+            "note": "Grammatisch korrekt, meint aber bestimmte Fremdsprachen. Im Satz steht kein Artikel: von Fremdsprachen."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "vermitteln → die Vermittlung. »Fremdsprachen« ohne Artikel → von + Dativ.",
+        "en": "vermitteln → die Vermittlung. \"Fremdsprachen\" without an article → von + dative.",
+        "zh-Hant": "vermitteln → die Vermittlung。Fremdsprachen 沒有冠詞 → von＋Dativ。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-043",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 6",
+        "Passiv",
+        "Adjektiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Die Muttersprache wird mühelos erworben.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "The native language is acquired effortlessly.",
+          "zh-Hant": "母語是毫不費力地習得的。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "der mühelose Erwerb der Muttersprache"
+        ],
+        "acceptable": [
+          {
+            "text": "der Erwerb der Muttersprache ist mühelos",
+            "note": "Ein richtiger Satz, aber keine Nominalform: Das Adverb wird zum Adjektiv vor dem Nomen – der mühelose Erwerb."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "erwerben → der Erwerb; mühelos → der mühelose Erwerb; das Passiv-Subjekt wird Genitiv.",
+        "en": "erwerben → der Erwerb; mühelos → der mühelose Erwerb; the passive subject becomes a genitive.",
+        "zh-Hant": "erwerben → der Erwerb；mühelos → der mühelose Erwerb；被動句主詞變成 Genitiv。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-044",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 6",
+        "von + Dativ",
+        "Adjektiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Im Kindesalter lernt man Sprachen leicht.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "In childhood, languages are learned easily.",
+          "zh-Hant": "小時候學語言很容易。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "das leichte Lernen von Sprachen im Kindesalter"
+        ],
+        "mistakes": [
+          {
+            "text": "das Lernen der Sprachen im Kindesalter",
+            "note": "Zwei Punkte: Das Adverb »leicht« fehlt (das leichte Lernen), und »Sprachen« ohne Artikel → von Sprachen."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "»man« fällt weg; lernen → das Lernen; leicht → das leichte Lernen; Sprachen ohne Artikel → von Sprachen.",
+        "en": "\"man\" disappears; lernen → das Lernen; leicht → das leichte Lernen; Sprachen without article → von Sprachen.",
+        "zh-Hant": "man 省略；lernen → das Lernen；leicht → das leichte Lernen；Sprachen 沒有冠詞 → von Sprachen。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-045",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 6",
+        "reflexiv",
+        "durch"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Durch viel Übung reduzieren sich die Fehler.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "With a lot of practice, mistakes decrease.",
+          "zh-Hant": "多加練習，錯誤就會減少。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Reduktion der Fehler durch viel Übung",
+          "die Reduzierung der Fehler durch viel Übung"
+        ]
+      },
+      "explanation": {
+        "de": "sich reduzieren → die Reduktion; das Subjekt wird Genitiv (der Fehler); »durch viel Übung« bleibt.",
+        "en": "sich reduzieren → die Reduktion; the subject becomes a genitive (der Fehler); \"durch viel Übung\" stays.",
+        "zh-Hant": "sich reduzieren → die Reduktion；主詞變成 Genitiv（der Fehler）；durch viel Übung 保留。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-046",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 6",
+        "Passiv",
+        "durch"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Die Sprachkenntnisse von Schülern werden durch mehr Sprachkontakte verbessert.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "Pupils' language skills are improved through more language contact.",
+          "zh-Hant": "學生的語言能力透過更多語言接觸而提升。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Verbesserung der Sprachkenntnisse von Schülern durch mehr Sprachkontakte"
+        ]
+      },
+      "explanation": {
+        "de": "verbessern → die Verbesserung; das Passiv-Subjekt wird Genitiv (der Sprachkenntnisse von Schülern); »durch mehr Sprachkontakte« bleibt.",
+        "en": "verbessern → die Verbesserung; the passive subject becomes a genitive (der Sprachkenntnisse von Schülern); \"durch mehr Sprachkontakte\" stays.",
+        "zh-Hant": "verbessern → die Verbesserung；被動句主詞變成 Genitiv（der Sprachkenntnisse von Schülern）；durch mehr Sprachkontakte 保留。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-047",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 6",
+        "durch",
+        "Adjektiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Die Forscher beobachten den Spracherwerb genau.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "The researchers observe language acquisition closely.",
+          "zh-Hant": "研究人員仔細觀察語言習得。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die genaue Beobachtung des Spracherwerbs durch die Forscher"
+        ]
+      },
+      "explanation": {
+        "de": "beobachten → die Beobachtung; genau → die genaue Beobachtung; Akkusativobjekt → Genitiv (des Spracherwerbs); Subjekt → durch die Forscher.",
+        "en": "beobachten → die Beobachtung; genau → die genaue Beobachtung; object → genitive (des Spracherwerbs); subject → durch die Forscher.",
+        "zh-Hant": "beobachten → die Beobachtung；genau → die genaue Beobachtung；受詞 → Genitiv（des Spracherwerbs）；主詞 → durch die Forscher。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-048",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 6",
+        "Passiv",
+        "von + Dativ"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Es wurden Unterschiede beim frühen und späten Lernen entdeckt.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "Differences between early and late learning were discovered.",
+          "zh-Hant": "發現了早期學習和晚期學習之間的差異。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Entdeckung von Unterschieden beim frühen und späten Lernen"
+        ],
+        "mistakes": [
+          {
+            "text": "die Entdeckung Unterschiede beim frühen und späten Lernen",
+            "note": "»Unterschiede« ohne Artikel → von + Dativ: von Unterschieden."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "»es« fällt weg; entdecken → die Entdeckung; Unterschiede ohne Artikel → von Unterschieden.",
+        "en": "\"es\" disappears; entdecken → die Entdeckung; Unterschiede without article → von Unterschieden.",
+        "zh-Hant": "es 省略；entdecken → die Entdeckung；Unterschiede 沒有冠詞 → von Unterschieden。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-049",
+      "language": "de",
+      "topic": "nominalisierung-wortbildung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 1a",
+        "Wortbildung"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "erwerben",
+        "translation": {
+          "en": "to acquire",
+          "zh-Hant": "習得"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "der Erwerb"
+        ]
+      },
+      "explanation": {
+        "de": "erwerben → der Erwerb (Infinitiv ohne Endung).",
+        "en": "erwerben → der Erwerb (infinitive without ending).",
+        "zh-Hant": "erwerben → der Erwerb（去掉詞尾的不定式）。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-050",
+      "language": "de",
+      "topic": "nominalisierung-wortbildung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 1a",
+        "Wortbildung"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "kennen",
+        "translation": {
+          "en": "to know",
+          "zh-Hant": "認識、了解"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Kenntnis",
+          "die Kenntnisse"
+        ]
+      },
+      "explanation": {
+        "de": "kennen → die Kenntnis (-nis), meist Plural: die Kenntnisse.",
+        "en": "kennen → die Kenntnis (-nis), usually plural: die Kenntnisse.",
+        "zh-Hant": "kennen → die Kenntnis（-nis），多用複數 die Kenntnisse。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-051",
+      "language": "de",
+      "topic": "nominalisierung-wortbildung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 1a",
+        "Wortbildung"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "vermitteln",
+        "translation": {
+          "en": "to impart, to convey",
+          "zh-Hant": "傳授、傳達"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Vermittlung"
+        ]
+      },
+      "explanation": {
+        "de": "vermitteln → die Vermittlung (-ung).",
+        "en": "vermitteln → die Vermittlung (-ung).",
+        "zh-Hant": "vermitteln → die Vermittlung（-ung）。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-052",
+      "language": "de",
+      "topic": "nominalisierung-wortbildung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 1a",
+        "Wortbildung"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "sprechen",
+        "translation": {
+          "en": "to speak",
+          "zh-Hant": "說"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "das Sprechen",
+          "das Gespräch"
+        ],
+        "acceptable": [
+          {
+            "text": "die Sprache",
+            "note": "Verwandt, aber »die Sprache« ist das System. Die Handlung: das Sprechen / das Gespräch."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "sprechen → das Sprechen (Infinitiv) oder das Gespräch (Unterhaltung). »die Sprache« ist verwandt, meint aber das System, nicht die Handlung.",
+        "en": "sprechen → das Sprechen (infinitive) or das Gespräch (conversation). \"die Sprache\" is related but means the language system, not the action.",
+        "zh-Hant": "sprechen → das Sprechen（不定式）或 das Gespräch（談話）。die Sprache 是同源字，但指語言本身，不是說話這個動作。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-053",
+      "language": "de",
+      "topic": "nominalisierung-wortbildung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 1a",
+        "Wortbildung"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "teilnehmen",
+        "translation": {
+          "en": "to take part",
+          "zh-Hant": "參加"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Teilnahme"
+        ]
+      },
+      "explanation": {
+        "de": "teilnehmen → die Teilnahme (nehmen → -nahme).",
+        "en": "teilnehmen → die Teilnahme (nehmen → -nahme).",
+        "zh-Hant": "teilnehmen → die Teilnahme（nehmen → -nahme）。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-054",
+      "language": "de",
+      "topic": "nominalisierung-wortbildung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 1a",
+        "Wortbildung"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "kommunizieren",
+        "translation": {
+          "en": "to communicate",
+          "zh-Hant": "溝通"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Kommunikation"
+        ]
+      },
+      "explanation": {
+        "de": "kommunizieren → die Kommunikation (-ieren → -ation).",
+        "en": "kommunizieren → die Kommunikation (-ieren → -ation).",
+        "zh-Hant": "kommunizieren → die Kommunikation（-ieren → -ation）。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-055",
+      "language": "de",
+      "topic": "nominalisierung-wortbildung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 1a",
+        "Wortbildung"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "sich auseinandersetzen",
+        "translation": {
+          "en": "to engage with, to grapple with",
+          "zh-Hant": "探討、面對"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Auseinandersetzung"
+        ]
+      },
+      "explanation": {
+        "de": "sich auseinandersetzen → die Auseinandersetzung (-ung).",
+        "en": "sich auseinandersetzen → die Auseinandersetzung (-ung).",
+        "zh-Hant": "sich auseinandersetzen → die Auseinandersetzung（-ung）。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-056",
+      "language": "de",
+      "topic": "nominalisierung-wortbildung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 1a",
+        "Wortbildung"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "motivieren",
+        "translation": {
+          "en": "to motivate",
+          "zh-Hant": "激勵"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Motivation"
+        ]
+      },
+      "explanation": {
+        "de": "motivieren → die Motivation (-ieren → -ation).",
+        "en": "motivieren → die Motivation (-ieren → -ation).",
+        "zh-Hant": "motivieren → die Motivation（-ieren → -ation）。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-057",
+      "language": "de",
+      "topic": "nominalisierung-wortbildung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 1a",
+        "Wortbildung"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "zweifeln",
+        "translation": {
+          "en": "to doubt",
+          "zh-Hant": "懷疑"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "der Zweifel"
+        ]
+      },
+      "explanation": {
+        "de": "zweifeln → der Zweifel (Infinitiv ohne Endung).",
+        "en": "zweifeln → der Zweifel (infinitive without ending).",
+        "zh-Hant": "zweifeln → der Zweifel（去掉詞尾的不定式）。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-058",
+      "language": "de",
+      "topic": "nominalisierung-wortbildung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 1a",
+        "Wortbildung"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "darstellen",
+        "translation": {
+          "en": "to depict, to present",
+          "zh-Hant": "呈現、描述"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Darstellung"
+        ]
+      },
+      "explanation": {
+        "de": "darstellen → die Darstellung (-ung).",
+        "en": "darstellen → die Darstellung (-ung).",
+        "zh-Hant": "darstellen → die Darstellung（-ung）。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-059",
+      "language": "de",
+      "topic": "nominalisierung-wortbildung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 1b",
+        "Wortbildung",
+        "Adjektiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "vollständig",
+        "task": "Nomen zum Adjektiv",
+        "translation": {
+          "en": "complete",
+          "zh-Hant": "完整的"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Vollständigkeit"
+        ]
+      },
+      "explanation": {
+        "de": "vollständig → die Vollständigkeit (-ig → -keit). Nomen aus Adjektiven bezeichnen eine Eigenschaft; -heit, -keit und -igkeit sind immer feminin.",
+        "en": "vollständig → die Vollständigkeit (-ig → -keit). Nouns from adjectives name a quality; -heit, -keit and -igkeit are always feminine.",
+        "zh-Hant": "vollständig → die Vollständigkeit（-ig → -keit）。由形容詞變來的名詞表示性質；-heit、-keit、-igkeit 一律是陰性。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-060",
+      "language": "de",
+      "topic": "nominalisierung-wortbildung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 1b",
+        "Wortbildung",
+        "Adjektiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "klar",
+        "task": "Nomen zum Adjektiv",
+        "translation": {
+          "en": "clear",
+          "zh-Hant": "清楚的"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Klarheit"
+        ]
+      },
+      "explanation": {
+        "de": "klar → die Klarheit (-heit). Nomen aus Adjektiven bezeichnen eine Eigenschaft; -heit, -keit und -igkeit sind immer feminin.",
+        "en": "klar → die Klarheit (-heit). Nouns from adjectives name a quality; -heit, -keit and -igkeit are always feminine.",
+        "zh-Hant": "klar → die Klarheit（-heit）。由形容詞變來的名詞表示性質；-heit、-keit、-igkeit 一律是陰性。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-061",
+      "language": "de",
+      "topic": "nominalisierung-wortbildung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 1b",
+        "Wortbildung",
+        "Adjektiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "intelligent",
+        "task": "Nomen zum Adjektiv",
+        "translation": {
+          "en": "intelligent",
+          "zh-Hant": "聰明的"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Intelligenz"
+        ]
+      },
+      "explanation": {
+        "de": "intelligent → die Intelligenz (-ent → -enz). Nomen aus Adjektiven bezeichnen eine Eigenschaft; -heit, -keit und -igkeit sind immer feminin.",
+        "en": "intelligent → die Intelligenz (-ent → -enz). Nouns from adjectives name a quality; -heit, -keit and -igkeit are always feminine.",
+        "zh-Hant": "intelligent → die Intelligenz（-ent → -enz）。由形容詞變來的名詞表示性質；-heit、-keit、-igkeit 一律是陰性。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-062",
+      "language": "de",
+      "topic": "nominalisierung-wortbildung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 1b",
+        "Wortbildung",
+        "Adjektiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "stark",
+        "task": "Nomen zum Adjektiv",
+        "translation": {
+          "en": "strong",
+          "zh-Hant": "強的"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Stärke"
+        ]
+      },
+      "explanation": {
+        "de": "stark → die Stärke (Umlaut + -e). Nomen aus Adjektiven bezeichnen eine Eigenschaft; -heit, -keit und -igkeit sind immer feminin.",
+        "en": "stark → die Stärke (Umlaut + -e). Nouns from adjectives name a quality; -heit, -keit and -igkeit are always feminine.",
+        "zh-Hant": "stark → die Stärke（Umlaut + -e）。由形容詞變來的名詞表示性質；-heit、-keit、-igkeit 一律是陰性。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-063",
+      "language": "de",
+      "topic": "nominalisierung-wortbildung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 1b",
+        "Wortbildung",
+        "Adjektiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "mutig",
+        "task": "Nomen zum Adjektiv",
+        "translation": {
+          "en": "brave",
+          "zh-Hant": "勇敢的"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "der Mut"
+        ]
+      },
+      "explanation": {
+        "de": "mutig → der Mut (-ig fällt weg: der Mut). Nomen aus Adjektiven bezeichnen eine Eigenschaft; -heit, -keit und -igkeit sind immer feminin.",
+        "en": "mutig → der Mut (-ig fällt weg: der Mut). Nouns from adjectives name a quality; -heit, -keit and -igkeit are always feminine.",
+        "zh-Hant": "mutig → der Mut（-ig fällt weg: der Mut）。由形容詞變來的名詞表示性質；-heit、-keit、-igkeit 一律是陰性。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-064",
+      "language": "de",
+      "topic": "nominalisierung-wortbildung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 1b",
+        "Wortbildung",
+        "Adjektiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "schnell",
+        "task": "Nomen zum Adjektiv",
+        "translation": {
+          "en": "fast",
+          "zh-Hant": "快的"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Schnelligkeit"
+        ]
+      },
+      "explanation": {
+        "de": "schnell → die Schnelligkeit (-igkeit). Nomen aus Adjektiven bezeichnen eine Eigenschaft; -heit, -keit und -igkeit sind immer feminin.",
+        "en": "schnell → die Schnelligkeit (-igkeit). Nouns from adjectives name a quality; -heit, -keit and -igkeit are always feminine.",
+        "zh-Hant": "schnell → die Schnelligkeit（-igkeit）。由形容詞變來的名詞表示性質；-heit、-keit、-igkeit 一律是陰性。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-065",
+      "language": "de",
+      "topic": "nominalisierung-wortbildung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 1b",
+        "Wortbildung",
+        "Adjektiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "alt",
+        "task": "Nomen zum Adjektiv",
+        "translation": {
+          "en": "old",
+          "zh-Hant": "老的"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "das Alter"
+        ]
+      },
+      "explanation": {
+        "de": "alt → das Alter (das Alter (unregelmäßig)). Nomen aus Adjektiven bezeichnen eine Eigenschaft; -heit, -keit und -igkeit sind immer feminin.",
+        "en": "alt → das Alter (das Alter (unregelmäßig)). Nouns from adjectives name a quality; -heit, -keit and -igkeit are always feminine.",
+        "zh-Hant": "alt → das Alter（das Alter (unregelmäßig)）。由形容詞變來的名詞表示性質；-heit、-keit、-igkeit 一律是陰性。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-066",
+      "language": "de",
+      "topic": "nominalisierung-wortbildung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 1b",
+        "Wortbildung",
+        "Adjektiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "selten",
+        "task": "Nomen zum Adjektiv",
+        "translation": {
+          "en": "rare",
+          "zh-Hant": "罕見的"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Seltenheit"
+        ]
+      },
+      "explanation": {
+        "de": "selten → die Seltenheit (-heit). Nomen aus Adjektiven bezeichnen eine Eigenschaft; -heit, -keit und -igkeit sind immer feminin.",
+        "en": "selten → die Seltenheit (-heit). Nouns from adjectives name a quality; -heit, -keit and -igkeit are always feminine.",
+        "zh-Hant": "selten → die Seltenheit（-heit）。由形容詞變來的名詞表示性質；-heit、-keit、-igkeit 一律是陰性。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-067",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 2",
+        "Präposition",
+        "Funktionsverbgefüge"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Die Wissenschaft unterscheidet zwischen dem Lernen und dem Erwerb einer Sprache.",
+        "task": "Es gibt …",
+        "translation": {
+          "en": "Science distinguishes between learning and acquiring a language.",
+          "zh-Hant": "學界區分語言的「學習」與「習得」。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Es gibt eine Unterscheidung zwischen dem Lernen und dem Erwerb einer Sprache."
+        ]
+      },
+      "explanation": {
+        "de": "unterscheiden zwischen → die Unterscheidung zwischen; »es gibt« macht daraus eine Feststellung ohne handelnde Person.",
+        "en": "unterscheiden zwischen → die Unterscheidung zwischen; \"es gibt\" turns it into a statement with no actor.",
+        "zh-Hant": "unterscheiden zwischen → die Unterscheidung zwischen；用 es gibt 變成沒有行為者的陳述。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-068",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 2",
+        "Präposition"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Die Forscher können auf die Frage nach dem Zusammenhang zwischen Alter und Spracherwerb noch nicht antworten.",
+        "task": "Die Antworten … stehen teilweise noch aus.",
+        "translation": {
+          "en": "Researchers cannot yet answer the question of how age and language acquisition are related.",
+          "zh-Hant": "研究人員還無法回答年齡與語言習得之間的關係。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Die Antworten auf die Frage nach dem Zusammenhang zwischen Alter und Spracherwerb stehen teilweise noch aus."
+        ]
+      },
+      "explanation": {
+        "de": "antworten auf → die Antwort auf; »noch nicht« → noch ausstehen (Funktionsverb).",
+        "en": "antworten auf → die Antwort auf; \"noch nicht\" → noch ausstehen (light verb).",
+        "zh-Hant": "antworten auf → die Antwort auf；noch nicht → noch ausstehen（功能動詞）。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-069",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 2",
+        "Präposition",
+        "Passiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Auch in Zukunft wird weiter über das optimale Lernen einer Sprache diskutiert.",
+        "task": "Die Diskussion … wird weiter fortgesetzt.",
+        "translation": {
+          "en": "The discussion about the best way to learn a language will continue in the future.",
+          "zh-Hant": "未來仍會繼續討論學習語言的最佳方式。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Die Diskussion über das optimale Lernen einer Sprache wird weiter fortgesetzt."
+        ]
+      },
+      "explanation": {
+        "de": "diskutieren über → die Diskussion über; das Weiter-Diskutieren wird zu »fortsetzen«.",
+        "en": "diskutieren über → die Diskussion über; continuing becomes \"fortsetzen\".",
+        "zh-Hant": "diskutieren über → die Diskussion über；「繼續討論」改用 fortsetzen。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-070",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 2",
+        "Präposition",
+        "Possessivartikel"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Die Fachdisziplinen forschen weiterhin zu diesem Thema.",
+        "task": "Die Fachdisziplinen treiben … weiter voran.",
+        "translation": {
+          "en": "The disciplines continue to research this topic.",
+          "zh-Hant": "各學科持續研究這個主題。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Die Fachdisziplinen treiben ihre Forschungen zu diesem Thema weiter voran.",
+          "Die Fachdisziplinen treiben ihre Forschung zu diesem Thema weiter voran."
+        ]
+      },
+      "explanation": {
+        "de": "forschen zu → die Forschung(en) zu; das Subjekt bleibt, darum Possessivartikel: ihre Forschungen. »etwas vorantreiben« = weitermachen.",
+        "en": "forschen zu → die Forschung(en) zu; the subject stays, hence the possessive: ihre Forschungen. \"etwas vorantreiben\" = to push forward.",
+        "zh-Hant": "forschen zu → die Forschung(en) zu；主詞保留，所以用物主冠詞：ihre Forschungen。etwas vorantreiben＝推進。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-071",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 2",
+        "Präposition",
+        "Possessivartikel"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Wir wissen immer noch wenig über die Funktionen der Sprache.",
+        "task": "… ist immer noch gering.",
+        "translation": {
+          "en": "We still know little about the functions of language.",
+          "zh-Hant": "我們對語言的功能所知仍然很少。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Unser Wissen über die Funktionen der Sprache ist immer noch gering."
+        ]
+      },
+      "explanation": {
+        "de": "wir → unser; wissen über → das Wissen über; »wenig« wird zum Prädikat: … ist gering.",
+        "en": "wir → unser; wissen über → das Wissen über; \"wenig\" becomes the predicate: … ist gering.",
+        "zh-Hant": "wir → unser；wissen über → das Wissen über；wenig 變成述語：… ist gering。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-072",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 3a",
+        "Verbalisieren (umgekehrt)"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "eine Sprache schnell erlernen",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "to learn a language quickly",
+          "zh-Hant": "快速學會一種語言"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "das schnelle Erlernen einer Sprache"
+        ]
+      },
+      "explanation": {
+        "de": "erlernen → das Erlernen; schnell → das schnelle Erlernen; Akkusativobjekt → Genitiv.",
+        "en": "erlernen → das Erlernen; schnell → das schnelle Erlernen; object → genitive.",
+        "zh-Hant": "erlernen → das Erlernen；schnell → das schnelle Erlernen；受詞 → Genitiv。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-073",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 3a",
+        "Verbalisieren (umgekehrt)"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "die Grammatik gut kennen",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "to know the grammar well",
+          "zh-Hant": "熟悉文法"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die guten Kenntnisse der Grammatik",
+          "gute Kenntnisse der Grammatik"
+        ]
+      },
+      "explanation": {
+        "de": "kennen → die Kenntnisse (Plural); gut → die guten Kenntnisse; die Grammatik → der Grammatik.",
+        "en": "kennen → die Kenntnisse (plural); gut → die guten Kenntnisse; die Grammatik → der Grammatik.",
+        "zh-Hant": "kennen → die Kenntnisse（複數）；gut → die guten Kenntnisse；die Grammatik → der Grammatik。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-074",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 3a",
+        "Verbalisieren (umgekehrt)"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "soziale Kontakte aufrechterhalten",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "to maintain social contacts",
+          "zh-Hant": "維持社交聯繫"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Aufrechterhaltung sozialer Kontakte"
+        ]
+      },
+      "explanation": {
+        "de": "aufrechterhalten → die Aufrechterhaltung; soziale Kontakte (ohne Artikel, mit Adjektiv) → Genitiv: sozialer Kontakte.",
+        "en": "aufrechterhalten → die Aufrechterhaltung; soziale Kontakte (no article, with adjective) → genitive: sozialer Kontakte.",
+        "zh-Hant": "aufrechterhalten → die Aufrechterhaltung；soziale Kontakte（沒有冠詞但有形容詞）→ Genitiv：sozialer Kontakte。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-075",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 3a",
+        "Verbalisieren (umgekehrt)"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "die ersten Fehler korrigieren",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "to correct the first mistakes",
+          "zh-Hant": "改正最初的錯誤"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Korrektur der ersten Fehler"
+        ]
+      },
+      "explanation": {
+        "de": "korrigieren → die Korrektur; die ersten Fehler → der ersten Fehler (Genitiv Plural).",
+        "en": "korrigieren → die Korrektur; die ersten Fehler → der ersten Fehler (genitive plural).",
+        "zh-Hant": "korrigieren → die Korrektur；die ersten Fehler → der ersten Fehler（Genitiv 複數）。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-076",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 3a",
+        "Verbalisieren (umgekehrt)"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "die Sätze klar aufbauen",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "to structure the sentences clearly",
+          "zh-Hant": "清楚地組織句子"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "der klare Aufbau der Sätze"
+        ]
+      },
+      "explanation": {
+        "de": "aufbauen → der Aufbau; klar → der klare Aufbau; die Sätze → der Sätze.",
+        "en": "aufbauen → der Aufbau; klar → der klare Aufbau; die Sätze → der Sätze.",
+        "zh-Hant": "aufbauen → der Aufbau；klar → der klare Aufbau；die Sätze → der Sätze。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-077",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 3a",
+        "Verbalisieren (umgekehrt)"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "eine erfolgreiche Kommunikation führen",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "to communicate successfully",
+          "zh-Hant": "進行成功的溝通"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "das Führen einer erfolgreichen Kommunikation"
+        ]
+      },
+      "explanation": {
+        "de": "führen → das Führen (substantivierter Infinitiv); eine erfolgreiche Kommunikation → einer erfolgreichen Kommunikation.",
+        "en": "führen → das Führen (nominalised infinitive); eine erfolgreiche Kommunikation → einer erfolgreichen Kommunikation.",
+        "zh-Hant": "führen → das Führen（名詞化不定式）；eine erfolgreiche Kommunikation → einer erfolgreichen Kommunikation。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-078",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 3b",
+        "Adjektiv",
+        "Genitiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Das Lernen ist leicht.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "Learning is easy.",
+          "zh-Hant": "學習很容易。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Leichtigkeit des Lernens"
+        ]
+      },
+      "explanation": {
+        "de": "Aus »X ist + Adjektiv« wird »Nomen zum Adjektiv + Genitiv«: leicht → die Leichtigkeit; das Subjekt wird Genitivattribut.",
+        "en": "\"X ist + adjective\" becomes \"noun from the adjective + genitive\": leicht → die Leichtigkeit; the subject becomes a genitive attribute.",
+        "zh-Hant": "「X ist＋形容詞」變成「形容詞的名詞＋Genitiv」：leicht → die Leichtigkeit；主詞變成 Genitiv 修飾語。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-079",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 3b",
+        "Adjektiv",
+        "Genitiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Die Forschung ist aktuell.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "The research is current.",
+          "zh-Hant": "這項研究很新。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Aktualität der Forschung"
+        ]
+      },
+      "explanation": {
+        "de": "Aus »X ist + Adjektiv« wird »Nomen zum Adjektiv + Genitiv«: aktuell → die Aktualität; das Subjekt wird Genitivattribut.",
+        "en": "\"X ist + adjective\" becomes \"noun from the adjective + genitive\": aktuell → die Aktualität; the subject becomes a genitive attribute.",
+        "zh-Hant": "「X ist＋形容詞」變成「形容詞的名詞＋Genitiv」：aktuell → die Aktualität；主詞變成 Genitiv 修飾語。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-080",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 3b",
+        "Adjektiv",
+        "Genitiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Die Aussprache ist korrekt.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "The pronunciation is correct.",
+          "zh-Hant": "發音正確。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Korrektheit der Aussprache"
+        ]
+      },
+      "explanation": {
+        "de": "Aus »X ist + Adjektiv« wird »Nomen zum Adjektiv + Genitiv«: korrekt → die Korrektheit; das Subjekt wird Genitivattribut.",
+        "en": "\"X ist + adjective\" becomes \"noun from the adjective + genitive\": korrekt → die Korrektheit; the subject becomes a genitive attribute.",
+        "zh-Hant": "「X ist＋形容詞」變成「形容詞的名詞＋Genitiv」：korrekt → die Korrektheit；主詞變成 Genitiv 修飾語。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-081",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 3b",
+        "Adjektiv",
+        "Genitiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Die Grammatik ist schwierig.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "The grammar is difficult.",
+          "zh-Hant": "文法很難。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Schwierigkeit der Grammatik"
+        ]
+      },
+      "explanation": {
+        "de": "Aus »X ist + Adjektiv« wird »Nomen zum Adjektiv + Genitiv«: schwierig → die Schwierigkeit; das Subjekt wird Genitivattribut.",
+        "en": "\"X ist + adjective\" becomes \"noun from the adjective + genitive\": schwierig → die Schwierigkeit; the subject becomes a genitive attribute.",
+        "zh-Hant": "「X ist＋形容詞」變成「形容詞的名詞＋Genitiv」：schwierig → die Schwierigkeit；主詞變成 Genitiv 修飾語。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-082",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Übungsbuch",
+        "Übung 3b",
+        "Adjektiv",
+        "Genitiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Der Spracherwerb verläuft unterschiedlich.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "Language acquisition varies.",
+          "zh-Hant": "語言習得的過程各有不同。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "die Unterschiede des Spracherwerbs",
+          "die Unterschiedlichkeit des Spracherwerbs"
+        ]
+      },
+      "explanation": {
+        "de": "Aus »X ist + Adjektiv« wird »Nomen zum Adjektiv + Genitiv«: unterschiedlich → die Unterschiede / die Unterschiedlichkeit; das Subjekt wird Genitivattribut.",
+        "en": "\"X ist + adjective\" becomes \"noun from the adjective + genitive\": unterschiedlich → die Unterschiede / die Unterschiedlichkeit; the subject becomes a genitive attribute.",
+        "zh-Hant": "「X ist＋形容詞」變成「形容詞的名詞＋Genitiv」：unterschiedlich → die Unterschiede / die Unterschiedlichkeit；主詞變成 Genitiv 修飾語。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-083",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Kursbuch",
+        "modal",
+        "durch"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Dadurch, dass der technische Fortschritt zunimmt",
+        "task": "Satzanfang im Nominalstil",
+        "translation": {
+          "en": "Because technical progress is increasing",
+          "zh-Hant": "由於技術進步不斷增加"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Durch die Zunahme des technischen Fortschritts",
+          "Durch den zunehmenden technischen Fortschritt"
+        ]
+      },
+      "explanation": {
+        "de": "»dadurch, dass« (modal) → durch + Akkusativ; zunehmen → die Zunahme; das Subjekt wird Genitiv.",
+        "en": "\"dadurch, dass\" (means) → durch + accusative; zunehmen → die Zunahme; the subject becomes a genitive.",
+        "zh-Hant": "dadurch, dass（表示方式）→ durch＋Akkusativ；zunehmen → die Zunahme；主詞變成 Genitiv。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-084",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Kursbuch",
+        "kausal",
+        "wegen",
+        "Adjektiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Weil die Konkurrenz stark ist",
+        "task": "Satzanfang im Nominalstil",
+        "translation": {
+          "en": "Because competition is strong",
+          "zh-Hant": "因為競爭激烈"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Wegen der starken Konkurrenz",
+          "Aufgrund der starken Konkurrenz"
+        ],
+        "acceptable": [
+          {
+            "text": "Wegen der Stärke der Konkurrenz",
+            "note": "Möglich, aber umständlich: Das Adjektiv steht einfach vor dem Nomen – wegen der starken Konkurrenz."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "weil / da → wegen + Genitiv; »die Konkurrenz ist stark« → die starke Konkurrenz.",
+        "en": "weil / da → wegen + genitive; \"die Konkurrenz ist stark\" → die starke Konkurrenz.",
+        "zh-Hant": "weil／da → wegen＋Genitiv；die Konkurrenz ist stark → die starke Konkurrenz。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-085",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Kursbuch",
+        "modal",
+        "durch",
+        "von + Dativ"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Indem sie Produktionsstätten ins Ausland verlegen",
+        "task": "Satzanfang im Nominalstil",
+        "translation": {
+          "en": "By moving production sites abroad",
+          "zh-Hant": "透過把生產基地移到國外"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Durch die Verlegung von Produktionsstätten ins Ausland"
+        ],
+        "acceptable": [
+          {
+            "text": "Durch die Verlegung von Produktionsstätten",
+            "note": "Richtig gebildet, aber »ins Ausland« gehört dazu."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "indem → durch + Akkusativ; verlegen → die Verlegung; Produktionsstätten ohne Artikel → von + Dativ.",
+        "en": "indem → durch + accusative; verlegen → die Verlegung; Produktionsstätten without article → von + dative.",
+        "zh-Hant": "indem → durch＋Akkusativ；verlegen → die Verlegung；Produktionsstätten 沒有冠詞 → von＋Dativ。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-086",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Kursbuch",
+        "modal",
+        "durch",
+        "Adjektiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Indem Waren viel preiswerter transportiert werden können und die Kommunikationswege günstiger und vielfältiger werden, sind globale Einkäufe möglich.",
+        "translation": {
+          "en": "Because goods can be transported much more cheaply and communication channels are becoming cheaper and more varied, global shopping is possible.",
+          "zh-Hant": "由於貨物運輸便宜很多，溝通管道也變得更便宜、更多元，全球購物成為可能。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Durch den viel preiswerteren Transport von Waren und die günstigeren und vielfältigeren Kommunikationswege sind globale Einkäufe möglich.",
+          "Durch den viel preiswerteren Transport von Waren und durch günstigere und vielfältigere Kommunikationswege sind globale Einkäufe möglich.",
+          "Durch den viel preiswerteren Warentransport und die günstigeren und vielfältigeren Kommunikationswege sind globale Einkäufe möglich."
+        ]
+      },
+      "explanation": {
+        "de": "indem → durch + Akkusativ. transportieren → der Transport (preiswerter → den preiswerteren Transport); Waren ohne Artikel → von Waren. »günstiger werden« → die günstigeren Kommunikationswege.",
+        "en": "indem → durch + accusative. transportieren → der Transport (preiswerter → den preiswerteren Transport); Waren without article → von Waren. \"günstiger werden\" → die günstigeren Kommunikationswege.",
+        "zh-Hant": "indem → durch＋Akkusativ。transportieren → der Transport（preiswerter → den preiswerteren Transport）；Waren 沒有冠詞 → von Waren。günstiger werden → die günstigeren Kommunikationswege。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-087",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Kursbuch",
+        "kausal",
+        "durch",
+        "Adjektiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Weil man im Internet grenzenlos einkaufen kann, ist man als Konsument nicht mehr nur auf die Produkte aus seinem eigenen Land angewiesen.",
+        "translation": {
+          "en": "Because you can shop online without limits, as a consumer you no longer depend only on products from your own country.",
+          "zh-Hant": "因為可以在網路上無國界購物，消費者不再只能依賴本國的產品。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Durch das grenzenlose Einkaufen im Internet ist man als Konsument nicht mehr nur auf die Produkte aus seinem eigenen Land angewiesen."
+        ],
+        "acceptable": [
+          {
+            "text": "Wegen des grenzenlosen Einkaufens im Internet ist man als Konsument nicht mehr nur auf die Produkte aus seinem eigenen Land angewiesen.",
+            "note": "Korrekt. Der Text verwendet »durch«, weil das Einkaufen das Mittel ist."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "einkaufen → das Einkaufen; grenzenlos → das grenzenlose Einkaufen. Kausal geht »wegen«, der Text nimmt »durch« (Mittel).",
+        "en": "einkaufen → das Einkaufen; grenzenlos → das grenzenlose Einkaufen. \"wegen\" works for the cause; the text uses \"durch\" (means).",
+        "zh-Hant": "einkaufen → das Einkaufen；grenzenlos → das grenzenlose Einkaufen。表示原因可用 wegen，原文用 durch（表示方法）。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-088",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Kursbuch",
+        "kausal",
+        "durch",
+        "Adjektiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Weil die Preise transparent sind, ist der Preisdruck für alle Produzenten besonders hoch.",
+        "translation": {
+          "en": "Because prices are transparent, price pressure on all producers is especially high.",
+          "zh-Hant": "因為價格透明，所有生產者的價格壓力都特別大。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Durch die Transparenz der Preise ist der Preisdruck für alle Produzenten besonders hoch.",
+          "Wegen der Transparenz der Preise ist der Preisdruck für alle Produzenten besonders hoch.",
+          "Aufgrund der Transparenz der Preise ist der Preisdruck für alle Produzenten besonders hoch."
+        ]
+      },
+      "explanation": {
+        "de": "»die Preise sind transparent« → die Transparenz der Preise (Nomen zum Adjektiv + Genitiv). weil → wegen / aufgrund / durch.",
+        "en": "\"die Preise sind transparent\" → die Transparenz der Preise (noun from the adjective + genitive). weil → wegen / aufgrund / durch.",
+        "zh-Hant": "die Preise sind transparent → die Transparenz der Preise（形容詞的名詞＋Genitiv）。weil → wegen／aufgrund／durch。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-089",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Kursbuch",
+        "kausal",
+        "wegen",
+        "Passiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Weil die Produktion ins Ausland verlagert wird, verlieren in den Industrieländern Menschen mit geringen Qualifikationen ihre bisherige Arbeit.",
+        "translation": {
+          "en": "Because production is moved abroad, people with few qualifications in industrialised countries lose the jobs they had.",
+          "zh-Hant": "因為生產移往國外，工業國家中低技能的人失去了原本的工作。"
+        },
+        "words": [
+          {
+            "text": "verlagert",
+            "lemma": "verlagern",
+            "meaning": "an einen anderen Ort bringen",
+            "pos": "Verb"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "Wegen der Verlagerung der Produktion ins Ausland verlieren in den Industrieländern Menschen mit geringen Qualifikationen ihre bisherige Arbeit.",
+          "Aufgrund der Verlagerung der Produktion ins Ausland verlieren in den Industrieländern Menschen mit geringen Qualifikationen ihre bisherige Arbeit."
+        ]
+      },
+      "explanation": {
+        "de": "weil → wegen + Genitiv; verlagern → die Verlagerung; das Passiv-Subjekt wird Genitiv (der Produktion).",
+        "en": "weil → wegen + genitive; verlagern → die Verlagerung; the passive subject becomes a genitive (der Produktion).",
+        "zh-Hant": "weil → wegen＋Genitiv；verlagern → die Verlagerung；被動句主詞變成 Genitiv（der Produktion）。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-090",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Kursbuch",
+        "temporal",
+        "seit",
+        "Passiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Seitdem die Steinkohle entdeckt wurde, hat das Ruhrgebiet eine rasante Entwicklung genommen.",
+        "translation": {
+          "en": "Since hard coal was discovered, the Ruhr area has developed rapidly.",
+          "zh-Hant": "自從發現了硬煤，魯爾區就快速發展。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Seit der Entdeckung der Steinkohle hat das Ruhrgebiet eine rasante Entwicklung genommen."
+        ]
+      },
+      "explanation": {
+        "de": "seitdem → seit + Dativ; entdecken → die Entdeckung; das Passiv-Subjekt wird Genitiv.",
+        "en": "seitdem → seit + dative; entdecken → die Entdeckung; the passive subject becomes a genitive.",
+        "zh-Hant": "seitdem → seit＋Dativ；entdecken → die Entdeckung；被動句主詞變成 Genitiv。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-091",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Kursbuch",
+        "temporal",
+        "nach"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Nachdem der Krieg zu Ende gegangen war, stieg die Bevölkerungszahl bis 1950 rasch an.",
+        "translation": {
+          "en": "After the war had ended, the population rose rapidly until 1950.",
+          "zh-Hant": "戰爭結束後，人口數到 1950 年前迅速增加。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Nach dem Ende des Krieges stieg die Bevölkerungszahl bis 1950 rasch an.",
+          "Nach dem Ende des Kriegs stieg die Bevölkerungszahl bis 1950 rasch an.",
+          "Nach Kriegsende stieg die Bevölkerungszahl bis 1950 rasch an."
+        ]
+      },
+      "explanation": {
+        "de": "nachdem → nach + Dativ; zu Ende gehen → das Ende; der Krieg → des Krieges (oder kurz: Kriegsende).",
+        "en": "nachdem → nach + dative; zu Ende gehen → das Ende; der Krieg → des Krieges (or short: Kriegsende).",
+        "zh-Hant": "nachdem → nach＋Dativ；zu Ende gehen → das Ende；der Krieg → des Krieges（或簡短的 Kriegsende）。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-092",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Kursbuch",
+        "temporal",
+        "bei",
+        "Passiv",
+        "Adjektiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Die Kohle spielte eine entscheidende Rolle, als die Bundesrepublik wirtschaftlich wieder aufgebaut wurde.",
+        "translation": {
+          "en": "Coal played a decisive role when West Germany's economy was rebuilt.",
+          "zh-Hant": "在聯邦德國經濟重建時，煤炭扮演了關鍵角色。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Die Kohle spielte beim wirtschaftlichen Wiederaufbau der Bundesrepublik eine entscheidende Rolle.",
+          "Beim wirtschaftlichen Wiederaufbau der Bundesrepublik spielte die Kohle eine entscheidende Rolle."
+        ]
+      },
+      "explanation": {
+        "de": "als → bei + Dativ (beim); wieder aufbauen → der Wiederaufbau; wirtschaftlich → wirtschaftlichen; das Passiv-Subjekt wird Genitiv.",
+        "en": "als → bei + dative (beim); wieder aufbauen → der Wiederaufbau; wirtschaftlich → wirtschaftlichen; the passive subject becomes a genitive.",
+        "zh-Hant": "als → bei＋Dativ（beim）；wieder aufbauen → der Wiederaufbau；wirtschaftlich → wirtschaftlichen；被動句主詞變成 Genitiv。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-093",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Kursbuch",
+        "temporal",
+        "bis",
+        "Adjektiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Bis der wirtschaftliche Abschwung begann, vergingen nur wenige Jahre.",
+        "translation": {
+          "en": "Only a few years passed before the economic downturn began.",
+          "zh-Hant": "沒過幾年，經濟就開始衰退。"
+        },
+        "words": [
+          {
+            "text": "Abschwung",
+            "lemma": "der Abschwung",
+            "meaning": "Phase, in der die Wirtschaft schwächer wird",
+            "pos": "Nomen"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "Bis zum Beginn des wirtschaftlichen Abschwungs vergingen nur wenige Jahre."
+        ]
+      },
+      "explanation": {
+        "de": "bis → bis zu + Dativ (zum); beginnen → der Beginn; der wirtschaftliche Abschwung → des wirtschaftlichen Abschwungs.",
+        "en": "bis → bis zu + dative (zum); beginnen → der Beginn; der wirtschaftliche Abschwung → des wirtschaftlichen Abschwungs.",
+        "zh-Hant": "bis → bis zu＋Dativ（zum）；beginnen → der Beginn；der wirtschaftliche Abschwung → des wirtschaftlichen Abschwungs。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-094",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Kursbuch",
+        "temporal",
+        "vor"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Bevor die Kohlekrise begann, arbeiteten die meisten Menschen in der Rohstoffverarbeitung.",
+        "translation": {
+          "en": "Before the coal crisis began, most people worked in raw-material processing.",
+          "zh-Hant": "煤炭危機開始之前，大部分人從事原料加工。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Vor dem Beginn der Kohlekrise arbeiteten die meisten Menschen in der Rohstoffverarbeitung.",
+          "Vor Beginn der Kohlekrise arbeiteten die meisten Menschen in der Rohstoffverarbeitung."
+        ]
+      },
+      "explanation": {
+        "de": "bevor → vor + Dativ; beginnen → der Beginn; die Kohlekrise → der Kohlekrise.",
+        "en": "bevor → vor + dative; beginnen → der Beginn; die Kohlekrise → der Kohlekrise.",
+        "zh-Hant": "bevor → vor＋Dativ；beginnen → der Beginn；die Kohlekrise → der Kohlekrise。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-095",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Kursbuch",
+        "temporal",
+        "während",
+        "Passiv",
+        "Kompositum"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Während Kohle gefördert wurde, wurde in den Zechen schwer gearbeitet.",
+        "translation": {
+          "en": "While coal was being mined, people worked hard in the pits.",
+          "zh-Hant": "開採煤礦期間，礦坑裡的工作非常辛苦。"
+        },
+        "words": [
+          {
+            "text": "gefördert",
+            "lemma": "fördern",
+            "meaning": "(Kohle, Erz, Öl) aus der Erde holen, abbauen",
+            "pos": "Verb"
+          },
+          {
+            "text": "Zechen",
+            "lemma": "die Zeche",
+            "meaning": "Bergwerk, in dem Kohle abgebaut wird",
+            "pos": "Nomen"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "Während der Kohleförderung wurde in den Zechen schwer gearbeitet."
+        ],
+        "acceptable": [
+          {
+            "text": "Während der Förderung von Kohle wurde in den Zechen schwer gearbeitet.",
+            "note": "Korrekt; das Kompositum »Kohleförderung« ist knapper."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "während → während + Genitiv. »fördern« heißt hier »aus der Erde holen« (nicht »unterstützen«): Kohle fördern → die Kohleförderung.",
+        "en": "während → während + genitive. \"fördern\" here means \"to extract\" (not \"to support\"): Kohle fördern → die Kohleförderung.",
+        "zh-Hant": "während → während＋Genitiv。這裡的 fördern 是「開採」，不是「支持」：Kohle fördern → die Kohleförderung。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-096",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Kursbuch",
+        "Präpositionalattribut",
+        "Funktionsverbgefüge"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Die Forschung beobachtet dabei den Spracherwerb und das Sprachenlernen.",
+        "task": "In der Forschung gibt es …",
+        "translation": {
+          "en": "Research observes language acquisition and language learning.",
+          "zh-Hant": "研究觀察語言習得與語言學習。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "In der Forschung gibt es Beobachtungen zum Spracherwerb und zum Sprachenlernen."
+        ],
+        "acceptable": [
+          {
+            "text": "In der Forschung gibt es Beobachtungen des Spracherwerbs und des Sprachenlernens.",
+            "note": "Grammatisch möglich; der Text nimmt ein Präpositionalattribut: Beobachtungen zum …"
+          }
+        ]
+      },
+      "explanation": {
+        "de": "Die Akkusativergänzung kann auch zum Präpositionalattribut werden: beobachten → Beobachtungen zum Spracherwerb.",
+        "en": "The accusative object can also become a prepositional attribute: beobachten → Beobachtungen zum Spracherwerb.",
+        "zh-Hant": "Akkusativ 受詞也可以變成介系詞修飾語：beobachten → Beobachtungen zum Spracherwerb。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-097",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Kursbuch",
+        "Possessivartikel",
+        "Relativsatz"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Sie erwerben auch Sprachregeln, die nur selten vorkommen.",
+        "task": "… umfasst auch Sprachregeln, deren Vorkommen selten ist.",
+        "translation": {
+          "en": "They also acquire language rules that occur only rarely.",
+          "zh-Hant": "他們也會習得很少出現的語言規則。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Ihr Erwerb umfasst auch Sprachregeln, deren Vorkommen selten ist."
+        ]
+      },
+      "explanation": {
+        "de": "Personalpronomen → Possessivartikel: sie erwerben → ihr Erwerb. Im Relativsatz: die … vorkommen → deren Vorkommen (Relativpronomen im Genitiv).",
+        "en": "Pronoun → possessive: sie erwerben → ihr Erwerb. In the relative clause: die … vorkommen → deren Vorkommen (relative pronoun in the genitive).",
+        "zh-Hant": "人稱代名詞 → 物主冠詞：sie erwerben → ihr Erwerb。關係子句中：die … vorkommen → deren Vorkommen（Genitiv 關係代名詞）。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-098",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Kursbuch",
+        "Präposition",
+        "Possessivartikel"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Sie weichen dabei von den Normen der Muttersprache ab.",
+        "task": "Ausdruck im Nominalstil",
+        "translation": {
+          "en": "In doing so they deviate from the norms of their native language.",
+          "zh-Hant": "他們在過程中會偏離母語的規範。"
+        },
+        "words": [
+          {
+            "text": "weichen",
+            "lemma": "abweichen von",
+            "meaning": "anders sein als die Regel",
+            "pos": "Verb"
+          }
+        ]
+      },
+      "answer": {
+        "accepted": [
+          "ihre Abweichungen von den Normen der Muttersprache",
+          "ihre Abweichung von den Normen der Muttersprache"
+        ]
+      },
+      "explanation": {
+        "de": "abweichen von → die Abweichung von (Präpositionalergänzung → Präpositionalattribut); sie → ihre.",
+        "en": "abweichen von → die Abweichung von (prepositional object → prepositional attribute); sie → ihre.",
+        "zh-Hant": "abweichen von → die Abweichung von（介系詞受詞 → 介系詞修飾語）；sie → ihre。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-099",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Kursbuch",
+        "Adverb",
+        "Adjektiv",
+        "Funktionsverbgefüge"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Bei Erwachsenen kann man jedoch allgemein feststellen, dass sie langsamer lernen.",
+        "task": "Bei Erwachsenen gibt es jedoch …",
+        "translation": {
+          "en": "In adults, however, it can generally be observed that they learn more slowly.",
+          "zh-Hant": "不過一般可以觀察到，成人學得比較慢。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Bei Erwachsenen gibt es jedoch die allgemeine Feststellung, dass sie langsamer lernen."
+        ],
+        "mistakes": [
+          {
+            "text": "Bei Erwachsenen gibt es jedoch die allgemein Feststellung, dass sie langsamer lernen.",
+            "note": "Vor dem Nomen wird das Adverb zum Adjektiv mit Endung: die allgemeine Feststellung."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "feststellen → die Feststellung; das Adverb »allgemein« wird zum Adjektiv: die allgemeine Feststellung.",
+        "en": "feststellen → die Feststellung; the adverb \"allgemein\" becomes an adjective: die allgemeine Feststellung.",
+        "zh-Hant": "feststellen → die Feststellung；副詞 allgemein 變成形容詞：die allgemeine Feststellung。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-100",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Kursbuch",
+        "Übung 3d",
+        "Präposition"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Wir interessieren uns für Kommunikation.",
+        "task": "Ab der Geburt haben wir …",
+        "translation": {
+          "en": "We are interested in communication.",
+          "zh-Hant": "我們對溝通很感興趣。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Ab der Geburt haben wir Interesse an Kommunikation.",
+          "Ab der Geburt haben wir ein Interesse an Kommunikation."
+        ],
+        "mistakes": [
+          {
+            "text": "Ab der Geburt haben wir Interesse für Kommunikation.",
+            "note": "Möglich, aber die übliche Verbindung ist »Interesse an«."
+          }
+        ]
+      },
+      "explanation": {
+        "de": "sich interessieren für → das Interesse an (die Präposition ändert sich).",
+        "en": "sich interessieren für → das Interesse an (the preposition changes).",
+        "zh-Hant": "sich interessieren für → das Interesse an（介系詞改變）。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-101",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Kursbuch",
+        "Übung 3d",
+        "Adverb",
+        "Adjektiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Es ist ausreichend bewiesen, dass Kinder Sprache schneller lernen.",
+        "task": "Es gibt …, dass Kinder Sprache schneller lernen.",
+        "translation": {
+          "en": "It has been sufficiently proven that children learn language faster.",
+          "zh-Hant": "已有充分證據顯示，兒童學語言比較快。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Es gibt ausreichende Beweise, dass Kinder Sprache schneller lernen.",
+          "Es gibt ausreichende Beweise dafür, dass Kinder Sprache schneller lernen."
+        ]
+      },
+      "explanation": {
+        "de": "beweisen → der Beweis (Plural: die Beweise); das Adverb »ausreichend« wird zum Adjektiv: ausreichende Beweise.",
+        "en": "beweisen → der Beweis (plural: die Beweise); the adverb \"ausreichend\" becomes an adjective: ausreichende Beweise.",
+        "zh-Hant": "beweisen → der Beweis（複數 die Beweise）；副詞 ausreichend 變成形容詞：ausreichende Beweise。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-102",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Kursbuch",
+        "Übung 3d",
+        "durch",
+        "von + Dativ"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Kinder lernen Laute und Silben.",
+        "task": "Kinder erweitern durch … ihren Wortschatz.",
+        "translation": {
+          "en": "Children learn sounds and syllables.",
+          "zh-Hant": "孩子學習語音和音節。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Kinder erweitern durch das Lernen von Lauten und Silben ihren Wortschatz."
+        ]
+      },
+      "explanation": {
+        "de": "lernen → das Lernen; Laute und Silben ohne Artikel → von Lauten und Silben.",
+        "en": "lernen → das Lernen; Laute und Silben without an article → von Lauten und Silben.",
+        "zh-Hant": "lernen → das Lernen；Laute und Silben 沒有冠詞 → von Lauten und Silben。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-103",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Kursbuch",
+        "Übung 3d",
+        "Adjektiv",
+        "reflexiv"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Kinder entwickeln sich schnell.",
+        "task": "Eltern beobachten …",
+        "translation": {
+          "en": "Children develop quickly.",
+          "zh-Hant": "孩子發展得很快。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Eltern beobachten die schnelle Entwicklung der Kinder.",
+          "Eltern beobachten die schnelle Entwicklung ihrer Kinder."
+        ]
+      },
+      "explanation": {
+        "de": "sich entwickeln → die Entwicklung; schnell → die schnelle Entwicklung; das Subjekt wird Genitiv (der Kinder).",
+        "en": "sich entwickeln → die Entwicklung; schnell → die schnelle Entwicklung; the subject becomes a genitive (der Kinder).",
+        "zh-Hant": "sich entwickeln → die Entwicklung；schnell → die schnelle Entwicklung；主詞變成 Genitiv（der Kinder）。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-104",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Kursbuch",
+        "Übung 3d",
+        "durch"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Kinder nehmen die Sprache wahr.",
+        "task": "… ist meist spielerisch.",
+        "translation": {
+          "en": "Children perceive language.",
+          "zh-Hant": "孩子感知語言。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Die Wahrnehmung der Sprache durch die Kinder ist meist spielerisch.",
+          "Die Wahrnehmung der Sprache durch Kinder ist meist spielerisch."
+        ]
+      },
+      "explanation": {
+        "de": "wahrnehmen → die Wahrnehmung; Akkusativobjekt → Genitiv (der Sprache); Subjekt → durch (die) Kinder.",
+        "en": "wahrnehmen → die Wahrnehmung; object → genitive (der Sprache); subject → durch (die) Kinder.",
+        "zh-Hant": "wahrnehmen → die Wahrnehmung；受詞 → Genitiv（der Sprache）；主詞 → durch (die) Kinder。"
+      }
+    },
+    {
+      "id": "de-nom-aspekteneuc1-105",
+      "language": "de",
+      "topic": "nominalisierung",
+      "source": "aspekteneuc1",
+      "level": "C1",
+      "tags": [
+        "Kursbuch",
+        "Übung 3d",
+        "Possessivartikel"
+      ],
+      "createdAt": "2026-11-05",
+      "prompt": {
+        "source": "Sie kommunizieren.",
+        "task": "… wird vom Umfeld geprägt.",
+        "translation": {
+          "en": "They communicate.",
+          "zh-Hant": "他們溝通。"
+        }
+      },
+      "answer": {
+        "accepted": [
+          "Ihre Kommunikation wird vom Umfeld geprägt."
+        ]
+      },
+      "explanation": {
+        "de": "sie → ihre; kommunizieren → die Kommunikation.",
+        "en": "sie → ihre; kommunizieren → die Kommunikation.",
+        "zh-Hant": "sie → ihre；kommunizieren → die Kommunikation。"
+      }
+    }
+  ]
+}

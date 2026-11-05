@@ -81,9 +81,20 @@ export const LANGS = {
     politeAnswer: '',
     topics: [
       {
-        id: 'nominalisierung', label: 'Nominalisierung', type: 'rewrite',
+        // ­: soft hyphen, so the label breaks well next to a three-digit card count.
+        id: 'nominalisierung', label: 'Nominali­sierung', type: 'rewrite',
         labels: { source: 'Verbalstil', target: 'Nominalstil', placeholder: 'Nominalstil eingeben …' },
         about: 'Rewrite a C1 sentence in Verbalstil (with a clause: wenn, weil, nachdem, obwohl, damit, indem …) into Nominalstil: one clause, the verb turned into a noun phrase (bei, wegen, nach, trotz, zur, durch …). accepted holds the most natural Nominalstil; acceptable holds correct but clumsier versions, e.g. with an unneeded article; mistakes holds typical wrong prepositions or case endings.',
+      },
+      {
+        id: 'nominalisierung-wortbildung', label: 'Wortbildung', parent: 'nominalisierung',
+        labels: { source: 'Verb / Adjektiv', target: 'Nomen', placeholder: 'Nomen mit Artikel eingeben …' },
+        about: 'Form the noun that belongs to a German verb or adjective, with its article: sich erwärmen → die Erwärmung, wachsen → das Wachstum, sagen → das Gesagte, nutzen → der/die Nutzende, klar → die Klarheit, intelligent → die Intelligenz. accepted holds every usual noun (-ung, -ion, -nis, -tum, the bare stem, a stem-vowel change, the nominalised infinitive or participle); acceptable holds correct but less usual ones, e.g. the nominalised infinitive where a -ung noun exists. The task can ask for one kind, e.g. "Nomen auf -nis" or "Nomen für Personen (aus dem Partizip I)".',
+      },
+      {
+        id: 'nominalisierung-praepositionen', label: 'Nomen mit Präpositionen', parent: 'nominalisierung',
+        labels: { source: 'Verb + Präposition', target: 'Nomen + Präposition', placeholder: 'Nomen mit Präposition eingeben …' },
+        about: 'Turn a verb with its preposition or object into the noun with the preposition it takes: auf etwas hoffen → die Hoffnung auf etwas, jemandem vertrauen → das Vertrauen in jemanden. Write placeholders (jemand, etwas, eine Sache) in the case the preposition needs, so the case shows. Often the preposition stays the same, but not always (sich interessieren für → das Interesse an); verbs with a dative object get one (zustimmen → die Zustimmung zu). The explanation names the case.',
       },
       {
         // \u00AD: soft hyphen, so the long word breaks well in the narrow sidebar.
